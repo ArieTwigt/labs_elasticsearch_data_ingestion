@@ -1,4 +1,4 @@
-# Lab 2 - Metricbeat
+# Metricbeat
 
 
 In the previous lab we have started Elasticsearch and Kibana. In this lab we will setup Metricbeat to send logs of our System  to Elasticsearch. When the log files are indexed in Elasticsearch, we can visualize these logs in a Dashboard using Kibana. 

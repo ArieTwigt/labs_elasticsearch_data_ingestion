@@ -1,4 +1,4 @@
-# Ingest Windows logs with Winlogbeat
+# Winlogbeat
 
 In this lab we will display Windows logs in our Kibana dashboard. The end results will look similar to the following screenshot:
 
@@ -128,3 +128,9 @@ Just like Metricbeat, we have the possiblity to discover the Windows logs provid
 
 
 ![Discover Windows Logs](img/screenshot_winlogbeat_discover.PNG)
+
+
+
+
+
+

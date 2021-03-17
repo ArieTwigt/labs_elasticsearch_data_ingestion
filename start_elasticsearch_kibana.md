@@ -1,4 +1,4 @@
-# Lab 1 - Elasticsearch and Kibana up and running
+# Elasticsearch and Kibana
 
 
 
