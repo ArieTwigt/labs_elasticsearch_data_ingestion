@@ -1,0 +1,311 @@
+<!DOCTYPE html>
+<html lang="" xml:lang="">
+<head>
+
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <title>1 Lab 1 - Elasticsearch and Kibana up and running | _main.utf8</title>
+  <meta name="description" content="" />
+  <meta name="generator" content="bookdown 0.21 and GitBook 2.6.7" />
+
+  <meta property="og:title" content="1 Lab 1 - Elasticsearch and Kibana up and running | _main.utf8" />
+  <meta property="og:type" content="book" />
+  
+  
+  
+  
+
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content="1 Lab 1 - Elasticsearch and Kibana up and running | _main.utf8" />
+  
+  
+  
+
+
+
+
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+  
+  
+
+<link rel="next" href="start-kibana.html"/>
+<script src="libs/jquery-2.2.3/jquery.min.js"></script>
+<link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-highlight.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-search.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-fontsettings.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-clipboard.css" rel="stylesheet" />
+
+
+
+
+
+
+
+
+
+
+
+<style type="text/css">
+a.sourceLine { display: inline-block; line-height: 1.25; }
+a.sourceLine { pointer-events: none; color: inherit; text-decoration: inherit; }
+a.sourceLine:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode { white-space: pre; position: relative; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+code.sourceCode { white-space: pre-wrap; }
+a.sourceLine { text-indent: -1em; padding-left: 1em; }
+}
+pre.numberSource a.sourceLine
+  { position: relative; left: -4em; }
+pre.numberSource a.sourceLine::before
+  { content: attr(data-line-number);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; pointer-events: all; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {  }
+@media screen {
+a.sourceLine::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+</style>
+
+</head>
+
+<body>
+
+
+
+  <div class="book without-animation with-summary font-size-2 font-family-1" data-basepath=".">
+
+    <div class="book-summary">
+      <nav role="navigation">
+
+<ul class="summary">
+<li class="chapter" data-level="1" data-path="lab-1-elasticsearch-and-kibana-up-and-running.html"><a href="lab-1-elasticsearch-and-kibana-up-and-running.html"><i class="fa fa-check"></i><b>1</b> Lab 1 - Elasticsearch and Kibana up and running</a><ul>
+<li class="chapter" data-level="1.1" data-path="lab-1-elasticsearch-and-kibana-up-and-running.html"><a href="lab-1-elasticsearch-and-kibana-up-and-running.html#software."><i class="fa fa-check"></i><b>1.1</b> Software.</a><ul>
+<li class="chapter" data-level="1.1.1" data-path="lab-1-elasticsearch-and-kibana-up-and-running.html"><a href="lab-1-elasticsearch-and-kibana-up-and-running.html#download-and-extract-the-software-in-your-home-directory"><i class="fa fa-check"></i><b>1.1.1</b> Download and extract the software in your Home Directory</a></li>
+</ul></li>
+<li class="chapter" data-level="1.2" data-path="lab-1-elasticsearch-and-kibana-up-and-running.html"><a href="lab-1-elasticsearch-and-kibana-up-and-running.html#starting-elasticsearch-from-the-command-line"><i class="fa fa-check"></i><b>1.2</b> Starting Elasticsearch from the Command Line</a></li>
+<li class="chapter" data-level="1.3" data-path="lab-1-elasticsearch-and-kibana-up-and-running.html"><a href="lab-1-elasticsearch-and-kibana-up-and-running.html#start-elasticsearch"><i class="fa fa-check"></i><b>1.3</b> Start Elasticsearch</a></li>
+</ul></li>
+<li class="chapter" data-level="2" data-path="start-kibana.html"><a href="start-kibana.html"><i class="fa fa-check"></i><b>2</b> Start Kibana</a></li>
+<li class="chapter" data-level="3" data-path="lab-2-metricbeat.html"><a href="lab-2-metricbeat.html"><i class="fa fa-check"></i><b>3</b> Lab 2 - Metricbeat</a><ul>
+<li class="chapter" data-level="3.1" data-path="lab-2-metricbeat.html"><a href="lab-2-metricbeat.html#setup-metricbeat-for-the-first-time"><i class="fa fa-check"></i><b>3.1</b> Setup Metricbeat for the first time</a></li>
+<li class="chapter" data-level="3.2" data-path="lab-2-metricbeat.html"><a href="lab-2-metricbeat.html#check-out-the-metrics-dashboard"><i class="fa fa-check"></i><b>3.2</b> Check out the Metrics Dashboard</a></li>
+<li class="chapter" data-level="3.3" data-path="lab-2-metricbeat.html"><a href="lab-2-metricbeat.html#enable-the-metrics-dashboard-in-kibana"><i class="fa fa-check"></i><b>3.3</b> Enable the Metrics Dashboard in Kibana</a></li>
+<li class="chapter" data-level="3.4" data-path="lab-2-metricbeat.html"><a href="lab-2-metricbeat.html#specify-index-patterns"><i class="fa fa-check"></i><b>3.4</b> Specify Index Patterns</a></li>
+<li class="chapter" data-level="3.5" data-path="lab-2-metricbeat.html"><a href="lab-2-metricbeat.html#checkout-our-metrics"><i class="fa fa-check"></i><b>3.5</b> Checkout our Metrics</a></li>
+<li class="chapter" data-level="3.6" data-path="lab-2-metricbeat.html"><a href="lab-2-metricbeat.html#check-out-our-metrics-in-the-dashboard"><i class="fa fa-check"></i><b>3.6</b> Check out our Metrics in the Dashboard</a></li>
+<li class="chapter" data-level="3.7" data-path="lab-2-metricbeat.html"><a href="lab-2-metricbeat.html#metrics-in-dashboard"><i class="fa fa-check"></i><b>3.7</b> Metrics in Dashboard</a></li>
+<li class="chapter" data-level="3.8" data-path="lab-2-metricbeat.html"><a href="lab-2-metricbeat.html#metrics-in-discover"><i class="fa fa-check"></i><b>3.8</b> Metrics in Discover</a></li>
+<li class="chapter" data-level="3.9" data-path="lab-2-metricbeat.html"><a href="lab-2-metricbeat.html#conclusion"><i class="fa fa-check"></i><b>3.9</b> Conclusion</a></li>
+</ul></li>
+<li class="chapter" data-level="4" data-path="ingest-windows-logs-with-winlogbeat.html"><a href="ingest-windows-logs-with-winlogbeat.html"><i class="fa fa-check"></i><b>4</b> Ingest Windows logs with Winlogbeat</a><ul>
+<li class="chapter" data-level="4.1" data-path="ingest-windows-logs-with-winlogbeat.html"><a href="ingest-windows-logs-with-winlogbeat.html#setup-winlogbeat"><i class="fa fa-check"></i><b>4.1</b> Setup Winlogbeat</a></li>
+<li class="chapter" data-level="4.2" data-path="ingest-windows-logs-with-winlogbeat.html"><a href="ingest-windows-logs-with-winlogbeat.html#initiate-the-windows-logs-dashboard-in-kibana"><i class="fa fa-check"></i><b>4.2</b> Initiate the Windows logs dashboard in Kibana</a></li>
+<li class="chapter" data-level="4.3" data-path="ingest-windows-logs-with-winlogbeat.html"><a href="ingest-windows-logs-with-winlogbeat.html#check-out-the-windows-logs-in-the-elasticsearch-index"><i class="fa fa-check"></i><b>4.3</b> Check out the Windows logs in the Elasticsearch index</a></li>
+<li class="chapter" data-level="4.4" data-path="ingest-windows-logs-with-winlogbeat.html"><a href="ingest-windows-logs-with-winlogbeat.html#index-patterns-en-discover"><i class="fa fa-check"></i><b>4.4</b> Index Patterns en Discover</a></li>
+</ul></li>
+</ul>
+
+      </nav>
+    </div>
+
+    <div class="book-body">
+      <div class="body-inner">
+        <div class="book-header" role="navigation">
+          <h1>
+            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./"></a>
+          </h1>
+        </div>
+
+        <div class="page-wrapper" tabindex="-1" role="main">
+          <div class="page-inner">
+
+            <section class="normal" id="section-">
+<!--bookdown:title:end-->
+<!--bookdown:title:start-->
+<div id="lab-1---elasticsearch-and-kibana-up-and-running" class="section level1">
+<h1><span class="header-section-number">1</span> Lab 1 - Elasticsearch and Kibana up and running</h1>
+<p>The goal of this chapter is to have our <strong>Elasticsearch</strong> instance up and running. Once we have started Elasticsearch we will be able to start <strong>Kibana</strong>. Most of our the labs will be executed using the Command Line (<em>CMD</em>, <em>Powershell</em>) and browsing through the interface in Kibana.</p>
+<div id="software." class="section level2">
+<h2><span class="header-section-number">1.1</span> Software.</h2>
+<div id="download-and-extract-the-software-in-your-home-directory" class="section level3">
+<h3><span class="header-section-number">1.1.1</span> Download and extract the software in your Home Directory</h3>
+<p>Make sure we have downloaded the required software:</p>
+<ul>
+<li><a href="https://www.elastic.co/downloads/elasticsearch">Elasticsearch</a></li>
+<li><a href="https://www.elastic.co/downloads/kibana">Kibana</a></li>
+<li><a href="https://www.elastic.co/downloads/past-releases/logstash-7-8-0">Logstash</a> version <strong><em>7.8.0</em></strong>
+<ul>
+<li>(Preferably Logstash version 7.11. However, this version has some issues. In that case, go for Logstash version 7.8.0)</li>
+</ul></li>
+<li><a href="https://www.elastic.co/downloads/beats/filebeat">Filebeat</a></li>
+<li><a href="https://www.elastic.co/downloads/beats/metricbeat">Metricbeat</a></li>
+<li><a href="https://www.elastic.co/downloads/beats/winlogbeat">Winlogbeat</a></li>
+</ul>
+<hr />
+<p>Make sure you save and extract the files in your <em>Home Directory</em>. This is the directory with your username that contains files like <em>Documents</em>, <em>Downloads</em>, <em>Pictures</em> etc. This directory is usually found in the path <code>My PC &gt; Users &gt; Arie</code> in which <code>Arie</code> is the name of my Home Directory.</p>
+<blockquote>
+<p>If you cannot see your Home Directory in your Explorer, enable Hidden Files</p>
+</blockquote>
+<p>Unzip each file. You will end up with the following files.</p>
+<div class="figure">
+<img src="img/mappen_elasticsearch.PNG" alt="Overview of the files in your Home Directory" />
+<p class="caption">Overview of the files in your Home Directory</p>
+</div>
+<p><strong><em>Notes:</em></strong></p>
+<blockquote>
+<p>To keep your Home Directory tidy, you can delete the zip/tar files since we do not need those anymore.</p>
+</blockquote>
+<blockquote>
+<p>In case you have downloaded Logstash 7.8.0, which is advised for these labs, you will have a directory <code>logstash-7.8.0</code> instead of <code>logstash-7.11.2</code> as shown in this screenshot.</p>
+</blockquote>
+</div>
+</div>
+<div id="starting-elasticsearch-from-the-command-line" class="section level2">
+<h2><span class="header-section-number">1.2</span> Starting Elasticsearch from the Command Line</h2>
+<p>Since we will use Elasticsearch from our own computer, we need to start Elasticsearch manually. We will use the Command Line to execute the script that starts Elasticsearch.</p>
+<p>In Windows, from the <strong>Start</strong> menu, open a Command Line window. To find the Command Line we can insert “<strong><em>CMD</em></strong>”.</p>
+<div class="figure">
+<img src="img/start_command_prompt_windows.jpg" alt="Start the Command Line (Command Prompt) in Windows" />
+<p class="caption">Start the Command Line (Command Prompt) in Windows</p>
+</div>
+<p>Navigate to the directory in wich Elasticsearch is located:</p>
+<pre class="bat"><code>cd elasticsearch-7.11.2-windows-x86_64/elasticsearch-7.11.2</code></pre>
+<p>Use the <code>dir</code> command to get an overview of the content contained in this directory. (<code>elasticsearch-7.11.2-windows-x86_64/elasticsearch-7.11.2</code>)</p>
+<pre class="bat"><code>dir</code></pre>
+<div class="figure">
+<img src="img/screenshot_command_line_dir_elasticsearch_directory.PNG" alt="Contents of the main elasticsearch directory" />
+<p class="caption">Contents of the main elasticsearch directory</p>
+</div>
+<blockquote>
+<p>Note that in this case we passed through another folder to get to the current folder</p>
+</blockquote>
+</div>
+<div id="start-elasticsearch" class="section level2">
+<h2><span class="header-section-number">1.3</span> Start Elasticsearch</h2>
+<p>Good. From this point we get an overview of all the elements included in our Elasticsearch installation. For now, we are only interested in starting Elasticsearch. The Elasticsourc program, binary, is located in the <code>bin</code> folder. We can start Elasticsearch with the following command:</p>
+<pre class="bat"><code>.\bin\elasticsearch</code></pre>
+<p>When Elasticsearch gets started, you will see a similar output as the following screenshot:</p>
+<div class="figure">
+<img src="img/screenshot_elastic_started.PNG" alt="Elasticsearch started" />
+<p class="caption">Elasticsearch started</p>
+</div>
+<p>The output from starting Elasticsearch will continue for a little while. For now it is not necessary yet to inspect these output messages:</p>
+<div class="figure">
+<img src="img/screenshot_elastic_started_2.PNG" alt="Output Elasticsearch pt.2" />
+<p class="caption">Output Elasticsearch pt.2</p>
+</div>
+<p>When the Elasticsearch stops generating output, when you see a message stating “Node started” (if you are able to find it), Elasticsearch is ready.</p>
+<p>A traditional way to find out if Elasticsearch is working, we can open our browser and navigate to <code>localhost:9200</code>.</p>
+<div class="figure">
+<img src="img/screenshot_elastic_localhost.PNG" alt="This message indicates Elasticsearch is succesfully started" />
+<p class="caption">This message indicates Elasticsearch is succesfully started</p>
+</div>
+<p>Now that our Elasticsearch instance is running, we can start Kibana to get a visual interface for everything we want to in Elasticsearch.</p>
+</div>
+</div>
+            </section>
+
+          </div>
+        </div>
+      </div>
+
+<a href="start-kibana.html" class="navigation navigation-next navigation-unique" aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+    </div>
+  </div>
+<script src="libs/gitbook-2.6.7/js/app.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/lunr.js"></script>
+<script src="libs/gitbook-2.6.7/js/clipboard.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-search.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-sharing.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-fontsettings.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-bookdown.js"></script>
+<script src="libs/gitbook-2.6.7/js/jquery.highlight.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-clipboard.js"></script>
+<script>
+gitbook.require(["gitbook"], function(gitbook) {
+gitbook.start({
+"sharing": {
+"github": false,
+"facebook": true,
+"twitter": true,
+"linkedin": false,
+"weibo": false,
+"instapaper": false,
+"vk": false,
+"all": ["facebook", "twitter", "linkedin", "weibo", "instapaper"]
+},
+"fontsettings": {
+"theme": "white",
+"family": "sans",
+"size": 2
+},
+"edit": {
+"link": null,
+"text": null
+},
+"history": {
+"link": null,
+"text": null
+},
+"view": {
+"link": null,
+"text": null
+},
+"download": null,
+"toc": {
+"collapse": "subsection"
+}
+});
+});
+</script>
+
+</body>
+
+</html>

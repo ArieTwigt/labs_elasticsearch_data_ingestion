@@ -1,0 +1,406 @@
+<!DOCTYPE html>
+<html lang="" xml:lang="">
+<head>
+
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <title>3 Lab 2 - Metricbeat | _main.utf8</title>
+  <meta name="description" content="" />
+  <meta name="generator" content="bookdown 0.21 and GitBook 2.6.7" />
+
+  <meta property="og:title" content="3 Lab 2 - Metricbeat | _main.utf8" />
+  <meta property="og:type" content="book" />
+  
+  
+  
+  
+
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content="3 Lab 2 - Metricbeat | _main.utf8" />
+  
+  
+  
+
+
+
+
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+  
+  
+<link rel="prev" href="start-kibana.html"/>
+<link rel="next" href="ingest-windows-logs-with-winlogbeat.html"/>
+<script src="libs/jquery-2.2.3/jquery.min.js"></script>
+<link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-highlight.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-search.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-fontsettings.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-clipboard.css" rel="stylesheet" />
+
+
+
+
+
+
+
+
+
+
+
+<style type="text/css">
+a.sourceLine { display: inline-block; line-height: 1.25; }
+a.sourceLine { pointer-events: none; color: inherit; text-decoration: inherit; }
+a.sourceLine:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode { white-space: pre; position: relative; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+code.sourceCode { white-space: pre-wrap; }
+a.sourceLine { text-indent: -1em; padding-left: 1em; }
+}
+pre.numberSource a.sourceLine
+  { position: relative; left: -4em; }
+pre.numberSource a.sourceLine::before
+  { content: attr(data-line-number);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; pointer-events: all; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {  }
+@media screen {
+a.sourceLine::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+</style>
+
+</head>
+
+<body>
+
+
+
+  <div class="book without-animation with-summary font-size-2 font-family-1" data-basepath=".">
+
+    <div class="book-summary">
+      <nav role="navigation">
+
+<ul class="summary">
+<li class="chapter" data-level="1" data-path="lab-1-elasticsearch-and-kibana-up-and-running.html"><a href="lab-1-elasticsearch-and-kibana-up-and-running.html"><i class="fa fa-check"></i><b>1</b> Lab 1 - Elasticsearch and Kibana up and running</a><ul>
+<li class="chapter" data-level="1.1" data-path="lab-1-elasticsearch-and-kibana-up-and-running.html"><a href="lab-1-elasticsearch-and-kibana-up-and-running.html#software."><i class="fa fa-check"></i><b>1.1</b> Software.</a><ul>
+<li class="chapter" data-level="1.1.1" data-path="lab-1-elasticsearch-and-kibana-up-and-running.html"><a href="lab-1-elasticsearch-and-kibana-up-and-running.html#download-and-extract-the-software-in-your-home-directory"><i class="fa fa-check"></i><b>1.1.1</b> Download and extract the software in your Home Directory</a></li>
+</ul></li>
+<li class="chapter" data-level="1.2" data-path="lab-1-elasticsearch-and-kibana-up-and-running.html"><a href="lab-1-elasticsearch-and-kibana-up-and-running.html#starting-elasticsearch-from-the-command-line"><i class="fa fa-check"></i><b>1.2</b> Starting Elasticsearch from the Command Line</a></li>
+<li class="chapter" data-level="1.3" data-path="lab-1-elasticsearch-and-kibana-up-and-running.html"><a href="lab-1-elasticsearch-and-kibana-up-and-running.html#start-elasticsearch"><i class="fa fa-check"></i><b>1.3</b> Start Elasticsearch</a></li>
+</ul></li>
+<li class="chapter" data-level="2" data-path="start-kibana.html"><a href="start-kibana.html"><i class="fa fa-check"></i><b>2</b> Start Kibana</a></li>
+<li class="chapter" data-level="3" data-path="lab-2-metricbeat.html"><a href="lab-2-metricbeat.html"><i class="fa fa-check"></i><b>3</b> Lab 2 - Metricbeat</a><ul>
+<li class="chapter" data-level="3.1" data-path="lab-2-metricbeat.html"><a href="lab-2-metricbeat.html#setup-metricbeat-for-the-first-time"><i class="fa fa-check"></i><b>3.1</b> Setup Metricbeat for the first time</a></li>
+<li class="chapter" data-level="3.2" data-path="lab-2-metricbeat.html"><a href="lab-2-metricbeat.html#check-out-the-metrics-dashboard"><i class="fa fa-check"></i><b>3.2</b> Check out the Metrics Dashboard</a></li>
+<li class="chapter" data-level="3.3" data-path="lab-2-metricbeat.html"><a href="lab-2-metricbeat.html#enable-the-metrics-dashboard-in-kibana"><i class="fa fa-check"></i><b>3.3</b> Enable the Metrics Dashboard in Kibana</a></li>
+<li class="chapter" data-level="3.4" data-path="lab-2-metricbeat.html"><a href="lab-2-metricbeat.html#specify-index-patterns"><i class="fa fa-check"></i><b>3.4</b> Specify Index Patterns</a></li>
+<li class="chapter" data-level="3.5" data-path="lab-2-metricbeat.html"><a href="lab-2-metricbeat.html#checkout-our-metrics"><i class="fa fa-check"></i><b>3.5</b> Checkout our Metrics</a></li>
+<li class="chapter" data-level="3.6" data-path="lab-2-metricbeat.html"><a href="lab-2-metricbeat.html#check-out-our-metrics-in-the-dashboard"><i class="fa fa-check"></i><b>3.6</b> Check out our Metrics in the Dashboard</a></li>
+<li class="chapter" data-level="3.7" data-path="lab-2-metricbeat.html"><a href="lab-2-metricbeat.html#metrics-in-dashboard"><i class="fa fa-check"></i><b>3.7</b> Metrics in Dashboard</a></li>
+<li class="chapter" data-level="3.8" data-path="lab-2-metricbeat.html"><a href="lab-2-metricbeat.html#metrics-in-discover"><i class="fa fa-check"></i><b>3.8</b> Metrics in Discover</a></li>
+<li class="chapter" data-level="3.9" data-path="lab-2-metricbeat.html"><a href="lab-2-metricbeat.html#conclusion"><i class="fa fa-check"></i><b>3.9</b> Conclusion</a></li>
+</ul></li>
+<li class="chapter" data-level="4" data-path="ingest-windows-logs-with-winlogbeat.html"><a href="ingest-windows-logs-with-winlogbeat.html"><i class="fa fa-check"></i><b>4</b> Ingest Windows logs with Winlogbeat</a><ul>
+<li class="chapter" data-level="4.1" data-path="ingest-windows-logs-with-winlogbeat.html"><a href="ingest-windows-logs-with-winlogbeat.html#setup-winlogbeat"><i class="fa fa-check"></i><b>4.1</b> Setup Winlogbeat</a></li>
+<li class="chapter" data-level="4.2" data-path="ingest-windows-logs-with-winlogbeat.html"><a href="ingest-windows-logs-with-winlogbeat.html#initiate-the-windows-logs-dashboard-in-kibana"><i class="fa fa-check"></i><b>4.2</b> Initiate the Windows logs dashboard in Kibana</a></li>
+<li class="chapter" data-level="4.3" data-path="ingest-windows-logs-with-winlogbeat.html"><a href="ingest-windows-logs-with-winlogbeat.html#check-out-the-windows-logs-in-the-elasticsearch-index"><i class="fa fa-check"></i><b>4.3</b> Check out the Windows logs in the Elasticsearch index</a></li>
+<li class="chapter" data-level="4.4" data-path="ingest-windows-logs-with-winlogbeat.html"><a href="ingest-windows-logs-with-winlogbeat.html#index-patterns-en-discover"><i class="fa fa-check"></i><b>4.4</b> Index Patterns en Discover</a></li>
+</ul></li>
+</ul>
+
+      </nav>
+    </div>
+
+    <div class="book-body">
+      <div class="body-inner">
+        <div class="book-header" role="navigation">
+          <h1>
+            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./"></a>
+          </h1>
+        </div>
+
+        <div class="page-wrapper" tabindex="-1" role="main">
+          <div class="page-inner">
+
+            <section class="normal" id="section-">
+<div id="lab-2---metricbeat" class="section level1">
+<h1><span class="header-section-number">3</span> Lab 2 - Metricbeat</h1>
+<p>In the previous lab we have started Elasticsearch and Kibana. In this lab we will setup Metricbeat to send logs of our System to Elasticsearch. When the log files are indexed in Elasticsearch, we can visualize these logs in a Dashboard using Kibana.</p>
+<div class="figure">
+<img src="img/screenshot_dashboard_metricbeat_selected_system.PNG" alt="Several metrics of my currently running laptop" />
+<p class="caption">Several metrics of my currently running laptop</p>
+</div>
+<div id="setup-metricbeat-for-the-first-time" class="section level2">
+<h2><span class="header-section-number">3.1</span> Setup Metricbeat for the first time</h2>
+<p>When we use Metricbeat for the first time, it needs an initial setup. The setup is specified in a Powershell script called <code>install-service-metricbeat.ps1</code>. We will walk through the steps to install and run metricbeat.</p>
+<p>Since the initial setup file is a Powershell script, we need to use Powershell instead of the Command Line this time to execute this script. We need to open Powershell as an Administrator in order to have the right permissions for executing scrips.</p>
+<p>Open Powershell as Administrator:</p>
+<ul>
+<li>Right-click</li>
+<li><code>Run as Administrator</code></li>
+</ul>
+<div class="figure">
+<img src="img/open_powershell_as_administrator.png" alt="Open Powershell as an Administrator" />
+<p class="caption">Open Powershell as an Administrator</p>
+</div>
+<p>Navigate to the directory containing Metricbeat:</p>
+<pre class="bat"><code>cd metricbeat-7.11.2-windows-x86_64\</code></pre>
+<p>We can use the <code>dir</code> command to get an overview of the files and folders of the current directory:</p>
+<div class="figure">
+<img src="img/screenshot_metricbeat_overview_directory.PNG" alt="Contents of the Metricbeat directory" />
+<p class="caption">Contents of the Metricbeat directory</p>
+</div>
+<p>If you want to run Metricbeat for the first time, we need to execute the installation script <code>install-service-metricbeat.ps1</code>. Let’s execute this script.</p>
+<pre class="bat"><code>.\install-service-metricbeat.ps1</code></pre>
+<p>It is possible you will get an error message “Authorization error”. This is a safety measure which prevents, malicious, scripts from running on our system. We need to lift this restriction for a bit in order to setup Metricbeat:</p>
+<div class="figure">
+<img src="img/powershell_authorization_error.PNG" alt="You might stumble upon this Authorization error" />
+<p class="caption">You might stumble upon this Authorization error</p>
+</div>
+<div class="figure">
+<img src="img/powershell_aanpassen_policy_scripts.PNG" alt="Insert Y to change the Execution Policy" />
+<p class="caption">Insert <code>Y</code> to change the Execution Policy</p>
+</div>
+<pre class="bat"><code>Set-ExecutionPolicy RemoteSigned
+
+.\install-service-metricbeat.ps1
+
+Set-ExecutionPolicy Restricted</code></pre>
+<p>When the Powershell script is finished, execute the initial setup:</p>
+<pre class="bat"><code>.\metricbeat.exe modules enable system</code></pre>
+<p>Next step:</p>
+<pre class="bat"><code>./metricbeat setup</code></pre>
+<div class="figure">
+<img src="img/screenshot_output_metricbeat_setup.PNG" alt="Metricbeat setup" />
+<p class="caption">Metricbeat setup</p>
+</div>
+<p>The final step, is ofcourse to start Metric beat. From the moment we start Metricbeat, it will look for System logs in our computer and send those to Elasticsearch to be indexed. To start Metricbeat, run the following command:</p>
+<pre class="bat"><code>./metricbeat -e </code></pre>
+<p>If we wait for a little while, we will see some log lines with metrics showing up:</p>
+<div class="figure">
+<img src="img/screenshot_voorbeeld_metrics_system_logs_die_binnenkomen_metricbeat.PNG" alt="Logs passing through Metricbeat" />
+<p class="caption">Logs passing through Metricbeat</p>
+</div>
+</div>
+<div id="check-out-the-metrics-dashboard" class="section level2">
+<h2><span class="header-section-number">3.2</span> Check out the Metrics Dashboard</h2>
+<p>Now the setup is complete, we will start Metric beat. Metricbeat will find the System Logs on our laptop and index these to Elasticsearch.</p>
+<p>Let’s move to kibana to get an overview of the data in our Elasticsearch indices. In the Kibana menu select <strong>Dev Tools</strong>. This will bring us to the editor in which we can execute Elasticsearch requests.</p>
+<div class="figure">
+<img src="img/screenshot_metricbeat_index.PNG" alt="Editor in Dev Tools for executing Elasticsearch queries" />
+<p class="caption">Editor in Dev Tools for executing Elasticsearch queries</p>
+</div>
+<p>To get an overview of our currnet indices, we can use the following Elasticsearch request:</p>
+<div class="sourceCode" id="cb12"><pre class="sourceCode json"><code class="sourceCode json"><a class="sourceLine" id="cb12-1" data-line-number="1"><span class="er">GET</span> <span class="er">_cat/indices?v</span></a></code></pre></div>
+</div>
+<div id="enable-the-metrics-dashboard-in-kibana" class="section level2">
+<h2><span class="header-section-number">3.3</span> Enable the Metrics Dashboard in Kibana</h2>
+<p>Select <code>Add data</code> in the header <strong>Ingest your data</strong></p>
+<div class="figure">
+<img src="img/screenshot_homepage_kibana.PNG" alt="“Add data”" />
+<p class="caption">“Add data”</p>
+</div>
+<p>When we finished the initial setup of Metricbeat, look it up in one of the many types of pre-configured log configurations.</p>
+<p>Select <code>System metrics</code></p>
+<div class="figure">
+<img src="img/screenshot_system_metrics_metricbeat.png" alt="The pre-configured System metrics setup" />
+<p class="caption">The pre-configured System metrics setup</p>
+</div>
+<p>Since we already executed the steps (Step 1 - Step 4) as specified on the page, we can proceed by selecting <code>System metrics dashboard</code></p>
+<div class="figure">
+<img src="img/metricbeat_klaar_klik_system_metrics_dashboard.PNG" alt="Prepare the Metrics Dashboard by selecting System Metric Dashboard" />
+<p class="caption">Prepare the Metrics Dashboard by selecting System Metric Dashboard</p>
+</div>
+</div>
+<div id="specify-index-patterns" class="section level2">
+<h2><span class="header-section-number">3.4</span> Specify Index Patterns</h2>
+<p>Before we can checkout our Metrics dashboard, we need to specify an <code>Index Pattern</code>. This will map an Elasticsearch index to a pattern that we can access to display in our visualisations and dashboards in Elasticsearch.</p>
+<p>Open <strong>Stack Management</strong> in de Kibana Menu</p>
+<div class="figure">
+<img src="img/screenshot_open_stack_management.PNG" alt="Overview Stack Management" />
+<p class="caption">Overview Stack Management</p>
+</div>
+<p>This will open the Stack Management menu. Select <strong>Index Patterns</strong> in the menu on the left.</p>
+<div class="figure">
+<img src="img/screenshot_create_index_pattern.PNG" alt="Index patterns" />
+<p class="caption">Index patterns</p>
+</div>
+<p>Let’s create an Index Pattern for Metricbeat. Insert <code>metric beat</code> in the <em>“index pattern name”</em> field.</p>
+<div class="figure">
+<img src="img/screenshot_index_pattern_insert_metricbeat_create.PNG" alt="The field will look for the current indices in Elasticsearch" />
+<p class="caption">The field will look for the current indices in Elasticsearch</p>
+</div>
+<p>Choose which field is used as the timestamp in our current source of log files. We will select the <code>@timestamp</code> field for this:</p>
+<p><a href="img/screenshot_index_pattern_step_2_timestamp.PNG">Select timestamp</a></p>
+<p>We get an overview of our succesfully created Index Pattern.</p>
+<div class="figure">
+<img src="img/screenshot_overview_index_pattern_metricbeat.PNG" alt="Our new Index Pattern" />
+<p class="caption">Our new Index Pattern</p>
+</div>
+</div>
+<div id="checkout-our-metrics" class="section level2">
+<h2><span class="header-section-number">3.5</span> Checkout our Metrics</h2>
+<p>Strangely we do not see any data yet.</p>
+<div class="figure">
+<img src="img/kibana_select_metrics_first_time.PNG" alt="Metrics Dashboard no data" />
+<p class="caption">Metrics Dashboard no data</p>
+</div>
+<p>Let’s hit <code>Refresh</code> button on the right.</p>
+<p>Metricbeat is continously pushing log-data to Elasticsearch. The Auto Refresh of Kibana will update the visualisations to display the new data.</p>
+<div class="figure">
+<img src="img/screenshot_metric_refresh.PNG" alt="Our Metric data will be visible once we hit the Refresh button" />
+<p class="caption">Our Metric data will be visible once we hit the Refresh button</p>
+</div>
+<p>Other than refreshing for the latest logs, we can also specify a specific data range:</p>
+<div class="figure">
+<img src="img/screenshot_pas_daterange_aan.PNG" alt="Selecting a data range for the log visualisations" />
+<p class="caption">Selecting a data range for the log visualisations</p>
+</div>
+<p>Go ahead and explor some different metrics:</p>
+<div class="figure">
+<img src="img/screenshot_probeer_verschillende_metrics.PNG" alt="Different Metrics Metricbeat" />
+<p class="caption">Different Metrics Metricbeat</p>
+</div>
+</div>
+<div id="check-out-our-metrics-in-the-dashboard" class="section level2">
+<h2><span class="header-section-number">3.6</span> Check out our Metrics in the Dashboard</h2>
+<p>Let’s checkout the Dashboard to get a nice overview of all the Metrics displayed in our dashboard.</p>
+</div>
+<div id="metrics-in-dashboard" class="section level2">
+<h2><span class="header-section-number">3.7</span> Metrics in Dashboard</h2>
+<p>Select <strong>Dashboard</strong> in the Kibana menu. Insert Metricbeat System in the search bar. Select the dashboard <strong>[Metricbeat System] Overview ECS</strong>. This is a pre-configured dashboard which is created during our setup of Metricbeat. As you can see, there are other pre-configured dashboards for different purposes. In our case, we can only use dashboards related to System Metrics since logs of our system are the only type of data we currently have in our Elasticsearch index.</p>
+<div class="figure">
+<img src="img/screenshot_metricbeat_dashboard_type_in_system_metrics.PNG" alt="Metricbeat System - Overview ECS Dashboard" />
+<p class="caption">Metricbeat System - Overview ECS Dashboard</p>
+</div>
+<p>We get an overview of all the systems for which we enabled Metricbeat to log metrics from. In our case this is one system/host, our own computer.</p>
+<div class="figure">
+<img src="img/screenshot_dashboard_metricbeat_system_overview.PNG" alt="An overview of the hosts/systems and their main metrics" />
+<p class="caption">An overview of the hosts/systems and their main metrics</p>
+</div>
+<p>We can deep dive into the metrics of this system by selecting Host</p>
+<div class="figure">
+<img src="img/screenshot_dashboard_metricbeat_selected_system.PNG" alt="Selected host for the Metrics Dashboard" />
+<p class="caption">Selected host for the Metrics Dashboard</p>
+</div>
+</div>
+<div id="metrics-in-discover" class="section level2">
+<h2><span class="header-section-number">3.8</span> Metrics in Discover</h2>
+<p>Select <strong>Discover</strong> in the Kibana menu.</p>
+<p>In Discover, we can execute KQL queries for exploring, aggregating or filtering our data. We will do this in <strong>Lab 6</strong>.</p>
+<div class="figure">
+<img src="img/screenshot_metric_beat_discover.PNG" alt="Metrics in Discover" />
+<p class="caption">Metrics in Discover</p>
+</div>
+</div>
+<div id="conclusion" class="section level2">
+<h2><span class="header-section-number">3.9</span> Conclusion</h2>
+<p>That’s it for now.
+De eerstvolgende keer dat je metricbeat wilt gebruiken, hoef je niet meer het configuratie-script voor powershell te openen</p>
+<p>Je het dan gewoon via het Command Prompt doen.</p>
+
+</div>
+</div>
+            </section>
+
+          </div>
+        </div>
+      </div>
+<a href="start-kibana.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="ingest-windows-logs-with-winlogbeat.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+    </div>
+  </div>
+<script src="libs/gitbook-2.6.7/js/app.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/lunr.js"></script>
+<script src="libs/gitbook-2.6.7/js/clipboard.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-search.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-sharing.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-fontsettings.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-bookdown.js"></script>
+<script src="libs/gitbook-2.6.7/js/jquery.highlight.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-clipboard.js"></script>
+<script>
+gitbook.require(["gitbook"], function(gitbook) {
+gitbook.start({
+"sharing": {
+"github": false,
+"facebook": true,
+"twitter": true,
+"linkedin": false,
+"weibo": false,
+"instapaper": false,
+"vk": false,
+"all": ["facebook", "twitter", "linkedin", "weibo", "instapaper"]
+},
+"fontsettings": {
+"theme": "white",
+"family": "sans",
+"size": 2
+},
+"edit": {
+"link": null,
+"text": null
+},
+"history": {
+"link": null,
+"text": null
+},
+"view": {
+"link": null,
+"text": null
+},
+"download": null,
+"toc": {
+"collapse": "subsection"
+}
+});
+});
+</script>
+
+</body>
+
+</html>
