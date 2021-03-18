@@ -265,7 +265,7 @@ We can deep dive into the metrics of this system by selecting Host
 
 
 
-## Metrics in Discover
+## Metrics in Discovery
 
 Select **Discover** in the Kibana menu.
 

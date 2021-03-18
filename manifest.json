@@ -1,0 +1,514 @@
+{
+  "version": 1,
+  "locale": "nl_NL",
+  "platform": "4.0.3",
+  "metadata": {
+    "appmode": "static",
+    "primary_rmd": null,
+    "primary_html": "_book/elasticsearch-and-kibana.html",
+    "content_category": null,
+    "has_parameters": false
+  },
+  "packages": null,
+  "files": {
+    "_book/elasticsearch-and-kibana.html": {
+      "checksum": "fdf1159a0615bd449d12af4d5d658b39"
+    },
+    "_book/filebeat.html": {
+      "checksum": "6d64e501b6994a8834c7ee9b7b14755a"
+    },
+    "_book/img/kibana_select_metrics_first_time.PNG": {
+      "checksum": "267c52f89b6907c3b26eeb3b3ccaec47"
+    },
+    "_book/img/mappen_elasticsearch.PNG": {
+      "checksum": "d38c63dc23ebb102971a85f3a7871918"
+    },
+    "_book/img/metricbeat_klaar_klik_system_metrics_dashboard.PNG": {
+      "checksum": "9fee6ab6d7a562cd8076a56f394e15ba"
+    },
+    "_book/img/open_powershell_as_administrator.png": {
+      "checksum": "66d064a07f4e55741562ac5712037b06"
+    },
+    "_book/img/powershell_aanpassen_policy_scripts.PNG": {
+      "checksum": "dd40e979693afe26e7802e885f344d47"
+    },
+    "_book/img/powershell_authorization_error.PNG": {
+      "checksum": "4d79a8a7182479631ba8bb3f877d886a"
+    },
+    "_book/img/screenshot_analytics_select_discover.PNG": {
+      "checksum": "c4fd41ff7c26d3861876ded8b21aa0b8"
+    },
+    "_book/img/screenshot_command_line_dir_elasticsearch_directory.PNG": {
+      "checksum": "b03d11d7c91d46a14e6df76cbe89815c"
+    },
+    "_book/img/screenshot_config_filebeat_voor_logstash.PNG": {
+      "checksum": "09c8ffddbe7d00f609e7eb0f02ad3c73"
+    },
+    "_book/img/screenshot_config_logstash_filebeat_ingest_pipeline.PNG": {
+      "checksum": "4df9476c9dd17579f90ddf208f02a00e"
+    },
+    "_book/img/screenshot_create_index_pattern.PNG": {
+      "checksum": "76f3fbf083dc35d0646274693d400f47"
+    },
+    "_book/img/screenshot_create_pipeline_naam_beschrijving.PNG": {
+      "checksum": "5c5318235e44bef857da01585c3fc997"
+    },
+    "_book/img/screenshot_dashboard_metricbeat_selected_system.PNG": {
+      "checksum": "8676b14486ad2af230f24a8f9d5e7847"
+    },
+    "_book/img/screenshot_dashboard_metricbeat_system_overview.PNG": {
+      "checksum": "6be79df4c39276278eaca019bded5536"
+    },
+    "_book/img/screenshot_elastic_localhost.PNG": {
+      "checksum": "b67afc6179318c9a10db4a5f2f7e40d7"
+    },
+    "_book/img/screenshot_elastic_started_2.PNG": {
+      "checksum": "0f51958a22d46c140c5521d401fd4287"
+    },
+    "_book/img/screenshot_elastic_started.PNG": {
+      "checksum": "a12e316eb87520c8b7f0fbf1c8998f58"
+    },
+    "_book/img/screenshot_filebeat_logs_toegevoegd.PNG": {
+      "checksum": "9d50ab6de898a84e5bddc58c92ef6d6d"
+    },
+    "_book/img/screenshot_filebeat_pattern_new_line_updated.PNG": {
+      "checksum": "6816b86325437e4a04fc3d91dbb50950"
+    },
+    "_book/img/screenshot_grok_toepassen_aan_processor.PNG": {
+      "checksum": "6560635bc75ac1fde1dd538aab841584"
+    },
+    "_book/img/screenshot_homepage_kibana.PNG": {
+      "checksum": "ebae5081bc5c319727b2fbb2b55ebbd8"
+    },
+    "_book/img/screenshot_index_pattern_insert_metricbeat_create.PNG": {
+      "checksum": "262f712162f242ec9896862490e30f32"
+    },
+    "_book/img/screenshot_index_pattern_step_2_timestamp.PNG": {
+      "checksum": "88341f13fedc2aadcced3023bcf7d5a9"
+    },
+    "_book/img/screenshot_ingest_nodes_pipelines.PNG": {
+      "checksum": "5422f84273e544f7146bcfd227fdda14"
+    },
+    "_book/img/screenshot_kibana_nieuwe_index_na_filebeat_pipeline.PNG": {
+      "checksum": "1eba8824b0b2990cefe8b2d6c146bdd5"
+    },
+    "_book/img/screenshot_log_regel_toevoegen_test_voor_filebeat.PNG": {
+      "checksum": "790346e23f3ac37bf76940bceef548e9"
+    },
+    "_book/img/screenshot_logstash_beats_data_loopt_erdoorheen.PNG": {
+      "checksum": "cc03f133d33c7b4688205bede1891dd8"
+    },
+    "_book/img/screenshot_logstash_directory.PNG": {
+      "checksum": "98e40685c85cb2e61040bb34d4591209"
+    },
+    "_book/img/screenshot_logstash_testrun_output.PNG": {
+      "checksum": "e509cc37469528b4f4869fdffe50139d"
+    },
+    "_book/img/screenshot_metric_beat_discover.PNG": {
+      "checksum": "c5069650a064e524965ae5c2c231646e"
+    },
+    "_book/img/screenshot_metric_refresh.PNG": {
+      "checksum": "a64054daa8c063290c3efcf903170210"
+    },
+    "_book/img/screenshot_metricbeat_dashboard_type_in_system_metrics.PNG": {
+      "checksum": "2670457a8b35d8a2286918e33da212b8"
+    },
+    "_book/img/screenshot_metricbeat_index.PNG": {
+      "checksum": "efc38a972135a13b7348188256fa567c"
+    },
+    "_book/img/screenshot_metricbeat_overview_directory.PNG": {
+      "checksum": "b8856d618982768e93e406028b84c046"
+    },
+    "_book/img/screenshot_open_stack_management.PNG": {
+      "checksum": "b38e3c4815420c83ee771c92a0cf9315"
+    },
+    "_book/img/screenshot_output_metricbeat_setup.PNG": {
+      "checksum": "4e6fbbb6624bd1834ffaefa50c9ef502"
+    },
+    "_book/img/screenshot_overview_index_pattern_metricbeat.PNG": {
+      "checksum": "4043452e4604bc1caa134668beef0128"
+    },
+    "_book/img/screenshot_overview_winlogbeat.PNG": {
+      "checksum": "f33983dd047c4986d943353ba1d92867"
+    },
+    "_book/img/screenshot_pas_daterange_aan.PNG": {
+      "checksum": "e93f35ec567b88a223fd9df03c3340cb"
+    },
+    "_book/img/screenshot_probeer_verschillende_metrics.PNG": {
+      "checksum": "c2d9e2a0250cf7c7146a2ebf5c1c8c76"
+    },
+    "_book/img/screenshot_start_filebeat.PNG": {
+      "checksum": "b4f85aabd87f86acc969d80bbacbf1fe"
+    },
+    "_book/img/screenshot_system_metrics_metricbeat.png": {
+      "checksum": "acfa284939d1b966ce2feb77687d5921"
+    },
+    "_book/img/screenshot_tab_open_grok_debugger.png": {
+      "checksum": "68c5907c0f4f7b4f8ec1aa14fea0dc5d"
+    },
+    "_book/img/screenshot_visualisation_edit_as_query_dsl.PNG": {
+      "checksum": "eb24329f82f5f9daa0dc25e810235e16"
+    },
+    "_book/img/screenshot_visualisation_expanded_document.PNG": {
+      "checksum": "98090f79405723e91f19ef10a2e47ccc"
+    },
+    "_book/img/screenshot_visualisation_filter_bytes_goed.PNG": {
+      "checksum": "6eca084628fff32cb5cd797b47684125"
+    },
+    "_book/img/screenshot_visualisation_lens_fields_system_processes.PNG": {
+      "checksum": "cc49e3c00d8bcb148f353e87e36fcfbb"
+    },
+    "_book/img/screenshot_visualisation_metricset_memory.PNG": {
+      "checksum": "ca19472d6110d88a668c9e8e683a7f1b"
+    },
+    "_book/img/screenshot_voorbeeld_metrics_system_logs_die_binnenkomen_metricbeat.PNG": {
+      "checksum": "949da0ae41887a8e9f4f27a402cd1485"
+    },
+    "_book/img/screenshot_voorbeeld_output_winlogbeat_document_bekijken.PNG": {
+      "checksum": "1e331664c5ebce8381c8cb35e544e494"
+    },
+    "_book/img/screenshot_windows_adddata_winlogbeat.PNG": {
+      "checksum": "348694f88bf1a577a6a7f3238fdaef2b"
+    },
+    "_book/img/screenshot_winlog_beat_done_check_siem_app.PNG": {
+      "checksum": "ec4c9b0db74d992fd50a65c05b1af6ae"
+    },
+    "_book/img/screenshot_winlogbeat_discover.PNG": {
+      "checksum": "e693b599817b99068d3964c19597f68b"
+    },
+    "_book/img/screenshot_winlogbeat_gestart.PNG": {
+      "checksum": "e9a33d7eebf040032bc2c3ba07876a13"
+    },
+    "_book/img/screenshot_winlogbeat_host_selecteerd_2_visualisaties.PNG": {
+      "checksum": "b9bb945d735ee191cd2600a42f94460a"
+    },
+    "_book/img/screenshot_winlogbeat_setup_eerste_keer.PNG": {
+      "checksum": "66c7d2bdc6a1110bec98bdac4b111bc1"
+    },
+    "_book/img/screenshot_winlogbeat_stap_4_klik_data_received_.PNG": {
+      "checksum": "e8fa40f569a37476b68288a280996c1d"
+    },
+    "_book/img/start_command_prompt_windows.jpg": {
+      "checksum": "a50455a394f7d6f84c5b4ce720995442"
+    },
+    "_book/img/winlogbeat_screenshot_siem_scroll_naar_beneden_events.PNG": {
+      "checksum": "43c6e35ee0364d27cae3f7cae5329e1c"
+    },
+    "_book/img/winlogbeat_siem_app_empty.PNG": {
+      "checksum": "464a0d5c178ecf914871c40b570fe5c5"
+    },
+    "_book/libs/gitbook-2.6.7/css/fontawesome/fontawesome-webfont.ttf": {
+      "checksum": "b06871f281fee6b241d60582ae9369b9"
+    },
+    "_book/libs/gitbook-2.6.7/css/plugin-bookdown.css": {
+      "checksum": "44444d0f3eb8064760ba1976976a7101"
+    },
+    "_book/libs/gitbook-2.6.7/css/plugin-clipboard.css": {
+      "checksum": "e4a3bdc1e3d5590f47cbac67976f3961"
+    },
+    "_book/libs/gitbook-2.6.7/css/plugin-fontsettings.css": {
+      "checksum": "76af8c23a8138a4b66aa6959ca5c3a8e"
+    },
+    "_book/libs/gitbook-2.6.7/css/plugin-highlight.css": {
+      "checksum": "467fbe4b6b5a4b88fdd75c463f8626ec"
+    },
+    "_book/libs/gitbook-2.6.7/css/plugin-search.css": {
+      "checksum": "0d7a6bb6a50e00c7358cf61027f099f0"
+    },
+    "_book/libs/gitbook-2.6.7/css/plugin-table.css": {
+      "checksum": "8cb82f94ce1446fa4bafe7a3933e6c65"
+    },
+    "_book/libs/gitbook-2.6.7/css/style.css": {
+      "checksum": "11f13a161c95d0e8257d673dc27f9251"
+    },
+    "_book/libs/gitbook-2.6.7/js/app.min.js": {
+      "checksum": "395a8093ce46450cabfaa545a0705a3b"
+    },
+    "_book/libs/gitbook-2.6.7/js/clipboard.min.js": {
+      "checksum": "be72101c8c16ba95fd8b69760d5ebc56"
+    },
+    "_book/libs/gitbook-2.6.7/js/jquery.highlight.js": {
+      "checksum": "999424d32e03b9857098d2c7f53928c2"
+    },
+    "_book/libs/gitbook-2.6.7/js/lunr.js": {
+      "checksum": "fbc747c6143aabb39b0ea7c0524b7057"
+    },
+    "_book/libs/gitbook-2.6.7/js/plugin-bookdown.js": {
+      "checksum": "36b5487b9c1020c0de1352b8f26b8a8e"
+    },
+    "_book/libs/gitbook-2.6.7/js/plugin-clipboard.js": {
+      "checksum": "a30f95fcd3fde10637ace1fb691b7475"
+    },
+    "_book/libs/gitbook-2.6.7/js/plugin-fontsettings.js": {
+      "checksum": "4f57689705fdfa3eabfb7b7b92614f33"
+    },
+    "_book/libs/gitbook-2.6.7/js/plugin-search.js": {
+      "checksum": "2d4c4d47ba34946b8ebcbe41aa522756"
+    },
+    "_book/libs/gitbook-2.6.7/js/plugin-sharing.js": {
+      "checksum": "799a983ef24c1cbe315d020a65aa1644"
+    },
+    "_book/libs/jquery-2.2.3/jquery.min.js": {
+      "checksum": "33cabfa15c1060aaa3d207c653afb1ee"
+    },
+    "_book/logstash.html": {
+      "checksum": "a17a78274fa59b8f26d5ba10b06728ac"
+    },
+    "_book/metricbeat.html": {
+      "checksum": "9e25430e162587d02653af575f023983"
+    },
+    "_book/reference-keys.txt": {
+      "checksum": "164cc9df06ae0a901eb1e67b9da4e9ea"
+    },
+    "_book/search_index.json": {
+      "checksum": "f97855b814a91175491ae5eeff1448ce"
+    },
+    "_book/setup.html": {
+      "checksum": "9cf01978fecdd90a65059677b6aa0824"
+    },
+    "_book/start-kibana.html": {
+      "checksum": "10ada0dc4ac9f15b6b1c14d4e2c3753c"
+    },
+    "_book/visualisation.html": {
+      "checksum": "e8f3befc62815b6c444ccdc603cdd445"
+    },
+    "_book/winlogbeat.html": {
+      "checksum": "2bf2de2d003ea95134a3092c71ee2226"
+    },
+    "_bookdown.yml": {
+      "checksum": "382efed6a8930208022a8ac964537888"
+    },
+    "elasticsearch_kibana.md": {
+      "checksum": "2d8dc23a5f1f623d151be3cf2d190351"
+    },
+    "filebeat.md": {
+      "checksum": "6997c80140b91368131c14fd67d25d9d"
+    },
+    "img/.DS_Store": {
+      "checksum": "194577a7e20bdcc7afbb718f502c134c"
+    },
+    "img/kibana_select_metrics_first_time.PNG": {
+      "checksum": "267c52f89b6907c3b26eeb3b3ccaec47"
+    },
+    "img/mappen_elasticsearch.PNG": {
+      "checksum": "d38c63dc23ebb102971a85f3a7871918"
+    },
+    "img/metricbeat_klaar_klik_system_metrics_dashboard.PNG": {
+      "checksum": "9fee6ab6d7a562cd8076a56f394e15ba"
+    },
+    "img/open_powershell_as_administrator.png": {
+      "checksum": "66d064a07f4e55741562ac5712037b06"
+    },
+    "img/powershell_aanpassen_policy_scripts.PNG": {
+      "checksum": "dd40e979693afe26e7802e885f344d47"
+    },
+    "img/powershell_authorization_error.PNG": {
+      "checksum": "4d79a8a7182479631ba8bb3f877d886a"
+    },
+    "img/screenshot_analytics_select_discover.PNG": {
+      "checksum": "c4fd41ff7c26d3861876ded8b21aa0b8"
+    },
+    "img/screenshot_command_line_dir_elasticsearch_directory.PNG": {
+      "checksum": "b03d11d7c91d46a14e6df76cbe89815c"
+    },
+    "img/screenshot_config_filebeat_voor_logstash.PNG": {
+      "checksum": "09c8ffddbe7d00f609e7eb0f02ad3c73"
+    },
+    "img/screenshot_config_logstash_filebeat_ingest_pipeline.PNG": {
+      "checksum": "4df9476c9dd17579f90ddf208f02a00e"
+    },
+    "img/screenshot_create_index_pattern.PNG": {
+      "checksum": "76f3fbf083dc35d0646274693d400f47"
+    },
+    "img/screenshot_create_pipeline_naam_beschrijving.PNG": {
+      "checksum": "5c5318235e44bef857da01585c3fc997"
+    },
+    "img/screenshot_dashboard_metricbeat_selected_system.PNG": {
+      "checksum": "8676b14486ad2af230f24a8f9d5e7847"
+    },
+    "img/screenshot_dashboard_metricbeat_system_overview.PNG": {
+      "checksum": "6be79df4c39276278eaca019bded5536"
+    },
+    "img/screenshot_elastic_localhost.PNG": {
+      "checksum": "b67afc6179318c9a10db4a5f2f7e40d7"
+    },
+    "img/screenshot_elastic_started_2.PNG": {
+      "checksum": "0f51958a22d46c140c5521d401fd4287"
+    },
+    "img/screenshot_elastic_started.PNG": {
+      "checksum": "a12e316eb87520c8b7f0fbf1c8998f58"
+    },
+    "img/screenshot_enter_select_metricbeat_as_source.PNG": {
+      "checksum": "05e015d5c83714fb2623a9cdec820953"
+    },
+    "img/screenshot_filebeat_logs_toegevoegd.PNG": {
+      "checksum": "9d50ab6de898a84e5bddc58c92ef6d6d"
+    },
+    "img/screenshot_filebeat_logstash_create_pipeline.PNG": {
+      "checksum": "1b5a8060900564bb3f1bdb35dc57bde9"
+    },
+    "img/screenshot_filebeat_pattern_new_line_updated.PNG": {
+      "checksum": "6816b86325437e4a04fc3d91dbb50950"
+    },
+    "img/screenshot_grok_toepassen_aan_processor.PNG": {
+      "checksum": "6560635bc75ac1fde1dd538aab841584"
+    },
+    "img/screenshot_homepage_kibana.PNG": {
+      "checksum": "ebae5081bc5c319727b2fbb2b55ebbd8"
+    },
+    "img/screenshot_index_pattern_insert_metricbeat_create.PNG": {
+      "checksum": "262f712162f242ec9896862490e30f32"
+    },
+    "img/screenshot_index_pattern_step_2_timestamp.PNG": {
+      "checksum": "88341f13fedc2aadcced3023bcf7d5a9"
+    },
+    "img/screenshot_ingest_nodes_pipelines.PNG": {
+      "checksum": "5422f84273e544f7146bcfd227fdda14"
+    },
+    "img/screenshot_kibana_nieuwe_index_na_filebeat_pipeline.PNG": {
+      "checksum": "1eba8824b0b2990cefe8b2d6c146bdd5"
+    },
+    "img/screenshot_log_regel_toevoegen_test_voor_filebeat.PNG": {
+      "checksum": "790346e23f3ac37bf76940bceef548e9"
+    },
+    "img/screenshot_logstash_beats_data_loopt_erdoorheen.PNG": {
+      "checksum": "cc03f133d33c7b4688205bede1891dd8"
+    },
+    "img/screenshot_logstash_directory.PNG": {
+      "checksum": "98e40685c85cb2e61040bb34d4591209"
+    },
+    "img/screenshot_logstash_testrun_output.PNG": {
+      "checksum": "e509cc37469528b4f4869fdffe50139d"
+    },
+    "img/screenshot_metric_beat_discover.PNG": {
+      "checksum": "c5069650a064e524965ae5c2c231646e"
+    },
+    "img/screenshot_metric_refresh.PNG": {
+      "checksum": "a64054daa8c063290c3efcf903170210"
+    },
+    "img/screenshot_metricbeat_dashboard_type_in_system_metrics.PNG": {
+      "checksum": "2670457a8b35d8a2286918e33da212b8"
+    },
+    "img/screenshot_metricbeat_index.PNG": {
+      "checksum": "efc38a972135a13b7348188256fa567c"
+    },
+    "img/screenshot_metricbeat_overview_directory.PNG": {
+      "checksum": "b8856d618982768e93e406028b84c046"
+    },
+    "img/screenshot_metricbeat_vraag_index_patterns.PNG": {
+      "checksum": "1d30cea5ca6008a4574ac847738f39b6"
+    },
+    "img/screenshot_open_stack_management.PNG": {
+      "checksum": "b38e3c4815420c83ee771c92a0cf9315"
+    },
+    "img/screenshot_output_metricbeat_setup.PNG": {
+      "checksum": "4e6fbbb6624bd1834ffaefa50c9ef502"
+    },
+    "img/screenshot_overview_index_pattern_metricbeat.PNG": {
+      "checksum": "4043452e4604bc1caa134668beef0128"
+    },
+    "img/screenshot_overview_winlogbeat.PNG": {
+      "checksum": "f33983dd047c4986d943353ba1d92867"
+    },
+    "img/screenshot_pas_daterange_aan.PNG": {
+      "checksum": "e93f35ec567b88a223fd9df03c3340cb"
+    },
+    "img/screenshot_probeer_verschillende_metrics.PNG": {
+      "checksum": "c2d9e2a0250cf7c7146a2ebf5c1c8c76"
+    },
+    "img/screenshot_start_filebeat.PNG": {
+      "checksum": "b4f85aabd87f86acc969d80bbacbf1fe"
+    },
+    "img/screenshot_system_metrics_metricbeat.png": {
+      "checksum": "acfa284939d1b966ce2feb77687d5921"
+    },
+    "img/screenshot_tab_open_grok_debugger.png": {
+      "checksum": "68c5907c0f4f7b4f8ec1aa14fea0dc5d"
+    },
+    "img/screenshot_visualisation_edit_as_query_dsl.PNG": {
+      "checksum": "eb24329f82f5f9daa0dc25e810235e16"
+    },
+    "img/screenshot_visualisation_expanded_document.PNG": {
+      "checksum": "98090f79405723e91f19ef10a2e47ccc"
+    },
+    "img/screenshot_visualisation_filter_bytes_goed.PNG": {
+      "checksum": "6eca084628fff32cb5cd797b47684125"
+    },
+    "img/screenshot_visualisation_lens_fields_system_processes.PNG": {
+      "checksum": "cc49e3c00d8bcb148f353e87e36fcfbb"
+    },
+    "img/screenshot_visualisation_lens_metricbeat_selected.PNG": {
+      "checksum": "4bb3deccc27d0becf7ba094fe4ee5f6a"
+    },
+    "img/screenshot_visualisation_log_lines_memory.PNG": {
+      "checksum": "63be65e8cfd4ed0b2e540968a506f556"
+    },
+    "img/screenshot_visualisation_metricset_memory.PNG": {
+      "checksum": "ca19472d6110d88a668c9e8e683a7f1b"
+    },
+    "img/screenshot_visualisation_select_metricbeat.PNG": {
+      "checksum": "4771100cb255af133871e4890938c46c"
+    },
+    "img/screenshot_visualisation_wrong_bytes.PNG": {
+      "checksum": "864c24f4618ce3afddd9d27a3f210f09"
+    },
+    "img/screenshot_visualisation_zoeken_via_interface.PNG": {
+      "checksum": "e01b1b622d26cd6887a7097ea809cb0b"
+    },
+    "img/screenshot_voorbeeld_metrics_system_logs_die_binnenkomen_metricbeat.PNG": {
+      "checksum": "949da0ae41887a8e9f4f27a402cd1485"
+    },
+    "img/screenshot_voorbeeld_output_winlogbeat_document_bekijken.PNG": {
+      "checksum": "1e331664c5ebce8381c8cb35e544e494"
+    },
+    "img/screenshot_windows_adddata_winlogbeat.PNG": {
+      "checksum": "348694f88bf1a577a6a7f3238fdaef2b"
+    },
+    "img/screenshot_winlog_beat_done_check_siem_app.PNG": {
+      "checksum": "ec4c9b0db74d992fd50a65c05b1af6ae"
+    },
+    "img/screenshot_winlogbeat_discover.PNG": {
+      "checksum": "e693b599817b99068d3964c19597f68b"
+    },
+    "img/screenshot_winlogbeat_gestart.PNG": {
+      "checksum": "e9a33d7eebf040032bc2c3ba07876a13"
+    },
+    "img/screenshot_winlogbeat_host_selecteerd_2_visualisaties.PNG": {
+      "checksum": "b9bb945d735ee191cd2600a42f94460a"
+    },
+    "img/screenshot_winlogbeat_setup_eerste_keer.PNG": {
+      "checksum": "66c7d2bdc6a1110bec98bdac4b111bc1"
+    },
+    "img/screenshot_winlogbeat_stap_4_klik_data_received_.PNG": {
+      "checksum": "e8fa40f569a37476b68288a280996c1d"
+    },
+    "img/start_command_prompt_windows.jpg": {
+      "checksum": "a50455a394f7d6f84c5b4ce720995442"
+    },
+    "img/winlogbeat_screenshot_siem_scroll_naar_beneden_events.PNG": {
+      "checksum": "43c6e35ee0364d27cae3f7cae5329e1c"
+    },
+    "img/winlogbeat_siem_app_empty.PNG": {
+      "checksum": "464a0d5c178ecf914871c40b570fe5c5"
+    },
+    "index.md": {
+      "checksum": "4c5712610f90cb7216eec4b6ac3b3fb6"
+    },
+    "logstash.md": {
+      "checksum": "2620431f3a256233b4f6966cfcb6d49e"
+    },
+    "metricbeat.md": {
+      "checksum": "133c5d0ee69cfee45faeab8993726980"
+    },
+    "setup.md": {
+      "checksum": "cb863b1dca111bd11ff793789ff020f0"
+    },
+    "visualisation.md": {
+      "checksum": "d67968077b14942a5491fa31808e4143"
+    },
+    "winlogbeat.md": {
+      "checksum": "761e929d5acac5b461227d77935de271"
+    }
+  },
+  "users": null
+}
