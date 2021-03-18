@@ -1,0 +1,322 @@
+<!DOCTYPE html>
+<html lang="" xml:lang="">
+<head>
+
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <title>5 Filebeat | _main.utf8</title>
+  <meta name="description" content="" />
+  <meta name="generator" content="bookdown 0.21 and GitBook 2.6.7" />
+
+  <meta property="og:title" content="5 Filebeat | _main.utf8" />
+  <meta property="og:type" content="book" />
+  
+  
+  
+  
+
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content="5 Filebeat | _main.utf8" />
+  
+  
+  
+
+
+
+
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+  
+  
+<link rel="prev" href="winlogbeat.html"/>
+<link rel="next" href="logstash.html"/>
+<script src="libs/jquery-2.2.3/jquery.min.js"></script>
+<link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-highlight.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-search.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-fontsettings.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-clipboard.css" rel="stylesheet" />
+
+
+
+
+
+
+
+
+
+
+
+<style type="text/css">
+a.sourceLine { display: inline-block; line-height: 1.25; }
+a.sourceLine { pointer-events: none; color: inherit; text-decoration: inherit; }
+a.sourceLine:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode { white-space: pre; position: relative; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+code.sourceCode { white-space: pre-wrap; }
+a.sourceLine { text-indent: -1em; padding-left: 1em; }
+}
+pre.numberSource a.sourceLine
+  { position: relative; left: -4em; }
+pre.numberSource a.sourceLine::before
+  { content: attr(data-line-number);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; pointer-events: all; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {  }
+@media screen {
+a.sourceLine::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+</style>
+
+</head>
+
+<body>
+
+
+
+  <div class="book without-animation with-summary font-size-2 font-family-1" data-basepath=".">
+
+    <div class="book-summary">
+      <nav role="navigation">
+
+<ul class="summary">
+<li class="chapter" data-level="1" data-path="setup.html"><a href="setup.html"><i class="fa fa-check"></i><b>1</b> Setup</a><ul>
+<li class="chapter" data-level="1.1" data-path="setup.html"><a href="setup.html#software."><i class="fa fa-check"></i><b>1.1</b> Software.</a><ul>
+<li class="chapter" data-level="1.1.1" data-path="setup.html"><a href="setup.html#download-and-extract-the-software-in-your-home-directory"><i class="fa fa-check"></i><b>1.1.1</b> Download and extract the software in your Home Directory</a></li>
+</ul></li>
+<li class="chapter" data-level="1.2" data-path="setup.html"><a href="setup.html#starting-elasticsearch-from-the-command-line"><i class="fa fa-check"></i><b>1.2</b> Starting Elasticsearch from the Command Line</a></li>
+</ul></li>
+<li class="chapter" data-level="2" data-path="elasticsearch-and-kibana.html"><a href="elasticsearch-and-kibana.html"><i class="fa fa-check"></i><b>2</b> Elasticsearch and Kibana</a><ul>
+<li class="chapter" data-level="2.1" data-path="elasticsearch-and-kibana.html"><a href="elasticsearch-and-kibana.html#start-elasticsearch"><i class="fa fa-check"></i><b>2.1</b> Start Elasticsearch</a></li>
+<li class="chapter" data-level="2.2" data-path="elasticsearch-and-kibana.html"><a href="elasticsearch-and-kibana.html#start-kibana"><i class="fa fa-check"></i><b>2.2</b> Start Kibana</a></li>
+</ul></li>
+<li class="chapter" data-level="3" data-path="metricbeat.html"><a href="metricbeat.html"><i class="fa fa-check"></i><b>3</b> Metricbeat</a><ul>
+<li class="chapter" data-level="3.1" data-path="metricbeat.html"><a href="metricbeat.html#setup-metricbeat-for-the-first-time"><i class="fa fa-check"></i><b>3.1</b> Setup Metricbeat for the first time</a></li>
+<li class="chapter" data-level="3.2" data-path="metricbeat.html"><a href="metricbeat.html#check-out-the-metrics-dashboard"><i class="fa fa-check"></i><b>3.2</b> Check out the Metrics Dashboard</a></li>
+<li class="chapter" data-level="3.3" data-path="metricbeat.html"><a href="metricbeat.html#enable-the-metrics-dashboard-in-kibana"><i class="fa fa-check"></i><b>3.3</b> Enable the Metrics Dashboard in Kibana</a></li>
+<li class="chapter" data-level="3.4" data-path="metricbeat.html"><a href="metricbeat.html#specify-index-patterns"><i class="fa fa-check"></i><b>3.4</b> Specify Index Patterns</a></li>
+<li class="chapter" data-level="3.5" data-path="metricbeat.html"><a href="metricbeat.html#checkout-our-metrics"><i class="fa fa-check"></i><b>3.5</b> Checkout our Metrics</a></li>
+<li class="chapter" data-level="3.6" data-path="metricbeat.html"><a href="metricbeat.html#check-out-our-metrics-in-the-dashboard"><i class="fa fa-check"></i><b>3.6</b> Check out our Metrics in the Dashboard</a></li>
+<li class="chapter" data-level="3.7" data-path="metricbeat.html"><a href="metricbeat.html#metrics-in-dashboard"><i class="fa fa-check"></i><b>3.7</b> Metrics in Dashboard</a></li>
+<li class="chapter" data-level="3.8" data-path="metricbeat.html"><a href="metricbeat.html#metrics-in-discover"><i class="fa fa-check"></i><b>3.8</b> Metrics in Discover</a></li>
+<li class="chapter" data-level="3.9" data-path="metricbeat.html"><a href="metricbeat.html#conclusion"><i class="fa fa-check"></i><b>3.9</b> Conclusion</a></li>
+</ul></li>
+<li class="chapter" data-level="4" data-path="winlogbeat.html"><a href="winlogbeat.html"><i class="fa fa-check"></i><b>4</b> Winlogbeat</a><ul>
+<li class="chapter" data-level="4.1" data-path="winlogbeat.html"><a href="winlogbeat.html#setup-winlogbeat"><i class="fa fa-check"></i><b>4.1</b> Setup Winlogbeat</a></li>
+<li class="chapter" data-level="4.2" data-path="winlogbeat.html"><a href="winlogbeat.html#initiate-the-windows-logs-dashboard-in-kibana"><i class="fa fa-check"></i><b>4.2</b> Initiate the Windows logs dashboard in Kibana</a></li>
+<li class="chapter" data-level="4.3" data-path="winlogbeat.html"><a href="winlogbeat.html#check-out-the-windows-logs-in-the-elasticsearch-index"><i class="fa fa-check"></i><b>4.3</b> Check out the Windows logs in the Elasticsearch index</a></li>
+<li class="chapter" data-level="4.4" data-path="winlogbeat.html"><a href="winlogbeat.html#index-patterns-en-discover"><i class="fa fa-check"></i><b>4.4</b> Index Patterns en Discover</a></li>
+</ul></li>
+<li class="chapter" data-level="5" data-path="filebeat.html"><a href="filebeat.html"><i class="fa fa-check"></i><b>5</b> Filebeat</a><ul>
+<li class="chapter" data-level="5.1" data-path="filebeat.html"><a href="filebeat.html#configure-filebeat.yml"><i class="fa fa-check"></i><b>5.1</b> Configure <code>filebeat.yml</code></a></li>
+<li class="chapter" data-level="5.2" data-path="filebeat.html"><a href="filebeat.html#run-filebeat"><i class="fa fa-check"></i><b>5.2</b> Run filebeat</a></li>
+</ul></li>
+<li class="chapter" data-level="6" data-path="logstash.html"><a href="logstash.html"><i class="fa fa-check"></i><b>6</b> Logstash</a><ul>
+<li class="chapter" data-level="6.1" data-path="logstash.html"><a href="logstash.html#ingest-pipelines"><i class="fa fa-check"></i><b>6.1</b> Ingest Pipelines</a></li>
+<li class="chapter" data-level="6.2" data-path="logstash.html"><a href="logstash.html#grok-patterns"><i class="fa fa-check"></i><b>6.2</b> Grok Patterns</a></li>
+<li class="chapter" data-level="6.3" data-path="logstash.html"><a href="logstash.html#start-logstash"><i class="fa fa-check"></i><b>6.3</b> Start Logstash</a></li>
+<li class="chapter" data-level="6.4" data-path="logstash.html"><a href="logstash.html#specify-filebeat-to-ingest-to-logstash"><i class="fa fa-check"></i><b>6.4</b> Specify Filebeat to ingest to Logstash</a></li>
+<li class="chapter" data-level="6.5" data-path="logstash.html"><a href="logstash.html#configure-logstash-to-ingest-with-a-pipeline"><i class="fa fa-check"></i><b>6.5</b> Configure Logstash to ingest with a pipeline</a></li>
+<li class="chapter" data-level="6.6" data-path="logstash.html"><a href="logstash.html#check-the-data-from-logstash-in-elasticsearch"><i class="fa fa-check"></i><b>6.6</b> Check the data from Logstash in Elasticsearch</a></li>
+</ul></li>
+<li class="chapter" data-level="7" data-path="visualisation.html"><a href="visualisation.html"><i class="fa fa-check"></i><b>7</b> Visualisation</a><ul>
+<li class="chapter" data-level="7.1" data-path="visualisation.html"><a href="visualisation.html#analyze"><i class="fa fa-check"></i><b>7.1</b> Analyze</a></li>
+<li class="chapter" data-level="7.2" data-path="visualisation.html"><a href="visualisation.html#visualisation-1"><i class="fa fa-check"></i><b>7.2</b> Visualisation</a></li>
+</ul></li>
+</ul>
+
+      </nav>
+    </div>
+
+    <div class="book-body">
+      <div class="body-inner">
+        <div class="book-header" role="navigation">
+          <h1>
+            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./"></a>
+          </h1>
+        </div>
+
+        <div class="page-wrapper" tabindex="-1" role="main">
+          <div class="page-inner">
+
+            <section class="normal" id="section-">
+<div id="filebeat" class="section level1">
+<h1><span class="header-section-number">5</span> Filebeat</h1>
+<p>In this lab we are going to use Filebeat to send logs of our running Elasticsearch to Elasticsearch. This sounds a bit confusing.
+Our running Elasticsearch instance is also logged. These logs are written to a file in our Elasticsearch directory. We are going to use Filebeat to log the content of this file to an index in Elasticsearch. Basically we are going to log our running Elasticsearch instance.</p>
+<div id="configure-filebeat.yml" class="section level2">
+<h2><span class="header-section-number">5.1</span> Configure <code>filebeat.yml</code></h2>
+<p>Open a new Command Line while at least the Command Line windows of Elasticsearch and Kibana are running.</p>
+<div class="figure">
+<img src="img/start_command_prompt_windows.jpg" alt="Start the Command Line (Command Prompt) in Windows" />
+<p class="caption"><em>Start the Command Line (Command Prompt) in Windows</em></p>
+</div>
+<p>Navigate to the right directory containing the files and folder for filebeat.</p>
+<pre class="bat"><code>cd filebeat-7.11.2-windows-x86_64</code></pre>
+<p>Before we start filebeat, we are going to take a look into the <code>filebeat.yml</code> file. This file contains the configuration of our filebeat instance.</p>
+<p>First we are going to specify a Filebeat stream in which we tell filebeat for which file to look for incoming log lines. The <code>filebeat.yml</code> file contains mainly lines that are commented out <code>#</code> to indicate that the code in that specific line is not active at the moment.</p>
+<p>Open this file with your favourite Text Editor whether it is in the Command Line or it is an editer like Notepad++ or Sublime Text. I mainly use the latter.</p>
+<p>We can see these lines as templates that we can use to specify our own configurations. Let’s specify a configuration for an instance in which we are going to ingest the log lines from the Elasticsearch logs file:</p>
+<div class="figure">
+<img src="img/screenshot_filebeat_pattern_new_line_updated.PNG" alt="Filebeat yml" />
+<p class="caption"><em>Filebeat yml</em></p>
+</div>
+<p>Let’s take a look at the configuration we applied:</p>
+<ul>
+<li><code>type</code>: As what type of data the ingested data should be interpreted. We choose for <code>log</code> since we are going to ingest log lines of our running Elasticsearch instance.</li>
+<li><code>enabled</code>: The current configuration will be enabled. The logs will be ingested as soon as filebeat will be initated.</li>
+<li><code>paths</code>: The path in which we can find the log lines we want to log.</li>
+<li><code>mutiline.pattern</code>: The pattern that indicates a log line. With a regular expression we indicate the a <code>Date and Time</code> specification indicates that it is the start of a new log line.</li>
+<li><code>multiline.negate</code>: Any line that does not match the pattern in <code>multiline.pattern</code>, is part of the previous line. In our case this is true since we want to group all log lines to the current <code>multiline.pattern</code> which is in this case a (regular expression) of a date and time.</li>
+<li><code>multiline.match</code>: How filebeat will deal with matching lines.</li>
+</ul>
+<p>Next to these parameters, there are some other parameters like <code>exclude_files</code> in which we can specify which files to exclude when we specify an entire directory in the <code>paths</code> parameter. For now, we are all set with the current parameters.</p>
+<p>We will specify/uncomment some additonal important parameters:</p>
+<ul>
+<li><code>index</code>
+<ul>
+<li><code>index</code>: <code>index: &quot;%{[fields.log_type]}-%{[agent.version]}-%{+yyyy.MM.dd}&quot;</code></li>
+</ul></li>
+<li><code>templates</code>
+<ul>
+<li><code>setup.template.name</code>: “filebeat”</li>
+<li><code>setup.template.pattern</code>: &quot;filebeat-*&quot;</li>
+</ul></li>
+</ul>
+</div>
+<div id="run-filebeat" class="section level2">
+<h2><span class="header-section-number">5.2</span> Run filebeat</h2>
+<p>Now that we have finished setting up our Filebeat conifiguration, we are ready to start Filebeat. From the main directory of Filebeat.</p>
+<pre class="bat"><code>filebeat</code></pre>
+<div class="figure">
+<img src="img/screenshot_start_filebeat.PNG" alt="Starting Filebeat" />
+<p class="caption"><em>Starting Filebeat</em></p>
+</div>
+<p>Now filebeat is running, we must wait for some Elasticsearch log lines which can be found by Filebeat and indexed in Elasticsearch. But waiting can sometimes take a lot of time, so we will make sure Elasticsearch will genereate some logs.</p>
+<p>In Kibana open Dev Tools to access the editor. Lets put and delete an index. This will be logged by Elasticsearch.</p>
+<p>Add an index</p>
+<div class="sourceCode" id="cb20"><pre class="sourceCode json"><code class="sourceCode json"><a class="sourceLine" id="cb20-1" data-line-number="1"><span class="er">PUT</span> <span class="er">test_for_filebeat</span></a></code></pre></div>
+<p>Delete tha index again</p>
+<pre><code>DELETE test_for_filebeat</code></pre>
+<p>Let’s look at our Command Line in which Elasticsearch is running. The creating and deletion of the index should be logged.</p>
+<div class="figure">
+<img src="img/screenshot_log_regel_toevoegen_test_voor_filebeat.PNG" alt="Logs of the creation and deletion of the index" />
+<p class="caption"><em>Logs of the creation and deletion of the index</em></p>
+</div>
+<p>In a little while, these logs will be indexed in the index we specified in our <code>filebeat.yml</code> file.</p>
+<p>Our index starts with <code>filebeat</code></p>
+<div class="sourceCode" id="cb22"><pre class="sourceCode json"><code class="sourceCode json"><a class="sourceLine" id="cb22-1" data-line-number="1"><span class="er">GET</span> <span class="er">_cat/indices?v</span></a></code></pre></div>
+<blockquote>
+<p>The logs will nog immediately be visible since the logs are not logged realtime are fetched by Filebeat for a specific time interval. Execute the command a few times until you see the new index. If it does not appear, there might be something wrong with the configuration.</p>
+</blockquote>
+<div class="figure">
+<img src="img/screenshot_filebeat_logs_toegevoegd.PNG" alt="Elastic logs added to index" />
+<p class="caption"><em>Elastic logs added to index</em></p>
+</div>
+
+</div>
+</div>
+            </section>
+
+          </div>
+        </div>
+      </div>
+<a href="winlogbeat.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="logstash.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+    </div>
+  </div>
+<script src="libs/gitbook-2.6.7/js/app.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/lunr.js"></script>
+<script src="libs/gitbook-2.6.7/js/clipboard.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-search.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-sharing.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-fontsettings.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-bookdown.js"></script>
+<script src="libs/gitbook-2.6.7/js/jquery.highlight.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-clipboard.js"></script>
+<script>
+gitbook.require(["gitbook"], function(gitbook) {
+gitbook.start({
+"sharing": {
+"github": false,
+"facebook": true,
+"twitter": true,
+"linkedin": false,
+"weibo": false,
+"instapaper": false,
+"vk": false,
+"all": ["facebook", "twitter", "linkedin", "weibo", "instapaper"]
+},
+"fontsettings": {
+"theme": "white",
+"family": "sans",
+"size": 2
+},
+"edit": {
+"link": null,
+"text": null
+},
+"history": {
+"link": null,
+"text": null
+},
+"view": {
+"link": null,
+"text": null
+},
+"download": null,
+"toc": {
+"collapse": "subsection"
+}
+});
+});
+</script>
+
+</body>
+
+</html>

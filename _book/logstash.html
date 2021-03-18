@@ -1,0 +1,389 @@
+<!DOCTYPE html>
+<html lang="" xml:lang="">
+<head>
+
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <title>6 Logstash | _main.utf8</title>
+  <meta name="description" content="" />
+  <meta name="generator" content="bookdown 0.21 and GitBook 2.6.7" />
+
+  <meta property="og:title" content="6 Logstash | _main.utf8" />
+  <meta property="og:type" content="book" />
+  
+  
+  
+  
+
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content="6 Logstash | _main.utf8" />
+  
+  
+  
+
+
+
+
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+  
+  
+<link rel="prev" href="filebeat.html"/>
+<link rel="next" href="visualisation.html"/>
+<script src="libs/jquery-2.2.3/jquery.min.js"></script>
+<link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-highlight.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-search.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-fontsettings.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-clipboard.css" rel="stylesheet" />
+
+
+
+
+
+
+
+
+
+
+
+<style type="text/css">
+a.sourceLine { display: inline-block; line-height: 1.25; }
+a.sourceLine { pointer-events: none; color: inherit; text-decoration: inherit; }
+a.sourceLine:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode { white-space: pre; position: relative; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+code.sourceCode { white-space: pre-wrap; }
+a.sourceLine { text-indent: -1em; padding-left: 1em; }
+}
+pre.numberSource a.sourceLine
+  { position: relative; left: -4em; }
+pre.numberSource a.sourceLine::before
+  { content: attr(data-line-number);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; pointer-events: all; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {  }
+@media screen {
+a.sourceLine::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+</style>
+
+</head>
+
+<body>
+
+
+
+  <div class="book without-animation with-summary font-size-2 font-family-1" data-basepath=".">
+
+    <div class="book-summary">
+      <nav role="navigation">
+
+<ul class="summary">
+<li class="chapter" data-level="1" data-path="setup.html"><a href="setup.html"><i class="fa fa-check"></i><b>1</b> Setup</a><ul>
+<li class="chapter" data-level="1.1" data-path="setup.html"><a href="setup.html#software."><i class="fa fa-check"></i><b>1.1</b> Software.</a><ul>
+<li class="chapter" data-level="1.1.1" data-path="setup.html"><a href="setup.html#download-and-extract-the-software-in-your-home-directory"><i class="fa fa-check"></i><b>1.1.1</b> Download and extract the software in your Home Directory</a></li>
+</ul></li>
+<li class="chapter" data-level="1.2" data-path="setup.html"><a href="setup.html#starting-elasticsearch-from-the-command-line"><i class="fa fa-check"></i><b>1.2</b> Starting Elasticsearch from the Command Line</a></li>
+</ul></li>
+<li class="chapter" data-level="2" data-path="elasticsearch-and-kibana.html"><a href="elasticsearch-and-kibana.html"><i class="fa fa-check"></i><b>2</b> Elasticsearch and Kibana</a><ul>
+<li class="chapter" data-level="2.1" data-path="elasticsearch-and-kibana.html"><a href="elasticsearch-and-kibana.html#start-elasticsearch"><i class="fa fa-check"></i><b>2.1</b> Start Elasticsearch</a></li>
+<li class="chapter" data-level="2.2" data-path="elasticsearch-and-kibana.html"><a href="elasticsearch-and-kibana.html#start-kibana"><i class="fa fa-check"></i><b>2.2</b> Start Kibana</a></li>
+</ul></li>
+<li class="chapter" data-level="3" data-path="metricbeat.html"><a href="metricbeat.html"><i class="fa fa-check"></i><b>3</b> Metricbeat</a><ul>
+<li class="chapter" data-level="3.1" data-path="metricbeat.html"><a href="metricbeat.html#setup-metricbeat-for-the-first-time"><i class="fa fa-check"></i><b>3.1</b> Setup Metricbeat for the first time</a></li>
+<li class="chapter" data-level="3.2" data-path="metricbeat.html"><a href="metricbeat.html#check-out-the-metrics-dashboard"><i class="fa fa-check"></i><b>3.2</b> Check out the Metrics Dashboard</a></li>
+<li class="chapter" data-level="3.3" data-path="metricbeat.html"><a href="metricbeat.html#enable-the-metrics-dashboard-in-kibana"><i class="fa fa-check"></i><b>3.3</b> Enable the Metrics Dashboard in Kibana</a></li>
+<li class="chapter" data-level="3.4" data-path="metricbeat.html"><a href="metricbeat.html#specify-index-patterns"><i class="fa fa-check"></i><b>3.4</b> Specify Index Patterns</a></li>
+<li class="chapter" data-level="3.5" data-path="metricbeat.html"><a href="metricbeat.html#checkout-our-metrics"><i class="fa fa-check"></i><b>3.5</b> Checkout our Metrics</a></li>
+<li class="chapter" data-level="3.6" data-path="metricbeat.html"><a href="metricbeat.html#check-out-our-metrics-in-the-dashboard"><i class="fa fa-check"></i><b>3.6</b> Check out our Metrics in the Dashboard</a></li>
+<li class="chapter" data-level="3.7" data-path="metricbeat.html"><a href="metricbeat.html#metrics-in-dashboard"><i class="fa fa-check"></i><b>3.7</b> Metrics in Dashboard</a></li>
+<li class="chapter" data-level="3.8" data-path="metricbeat.html"><a href="metricbeat.html#metrics-in-discover"><i class="fa fa-check"></i><b>3.8</b> Metrics in Discover</a></li>
+<li class="chapter" data-level="3.9" data-path="metricbeat.html"><a href="metricbeat.html#conclusion"><i class="fa fa-check"></i><b>3.9</b> Conclusion</a></li>
+</ul></li>
+<li class="chapter" data-level="4" data-path="winlogbeat.html"><a href="winlogbeat.html"><i class="fa fa-check"></i><b>4</b> Winlogbeat</a><ul>
+<li class="chapter" data-level="4.1" data-path="winlogbeat.html"><a href="winlogbeat.html#setup-winlogbeat"><i class="fa fa-check"></i><b>4.1</b> Setup Winlogbeat</a></li>
+<li class="chapter" data-level="4.2" data-path="winlogbeat.html"><a href="winlogbeat.html#initiate-the-windows-logs-dashboard-in-kibana"><i class="fa fa-check"></i><b>4.2</b> Initiate the Windows logs dashboard in Kibana</a></li>
+<li class="chapter" data-level="4.3" data-path="winlogbeat.html"><a href="winlogbeat.html#check-out-the-windows-logs-in-the-elasticsearch-index"><i class="fa fa-check"></i><b>4.3</b> Check out the Windows logs in the Elasticsearch index</a></li>
+<li class="chapter" data-level="4.4" data-path="winlogbeat.html"><a href="winlogbeat.html#index-patterns-en-discover"><i class="fa fa-check"></i><b>4.4</b> Index Patterns en Discover</a></li>
+</ul></li>
+<li class="chapter" data-level="5" data-path="filebeat.html"><a href="filebeat.html"><i class="fa fa-check"></i><b>5</b> Filebeat</a><ul>
+<li class="chapter" data-level="5.1" data-path="filebeat.html"><a href="filebeat.html#configure-filebeat.yml"><i class="fa fa-check"></i><b>5.1</b> Configure <code>filebeat.yml</code></a></li>
+<li class="chapter" data-level="5.2" data-path="filebeat.html"><a href="filebeat.html#run-filebeat"><i class="fa fa-check"></i><b>5.2</b> Run filebeat</a></li>
+</ul></li>
+<li class="chapter" data-level="6" data-path="logstash.html"><a href="logstash.html"><i class="fa fa-check"></i><b>6</b> Logstash</a><ul>
+<li class="chapter" data-level="6.1" data-path="logstash.html"><a href="logstash.html#ingest-pipelines"><i class="fa fa-check"></i><b>6.1</b> Ingest Pipelines</a></li>
+<li class="chapter" data-level="6.2" data-path="logstash.html"><a href="logstash.html#grok-patterns"><i class="fa fa-check"></i><b>6.2</b> Grok Patterns</a></li>
+<li class="chapter" data-level="6.3" data-path="logstash.html"><a href="logstash.html#start-logstash"><i class="fa fa-check"></i><b>6.3</b> Start Logstash</a></li>
+<li class="chapter" data-level="6.4" data-path="logstash.html"><a href="logstash.html#specify-filebeat-to-ingest-to-logstash"><i class="fa fa-check"></i><b>6.4</b> Specify Filebeat to ingest to Logstash</a></li>
+<li class="chapter" data-level="6.5" data-path="logstash.html"><a href="logstash.html#configure-logstash-to-ingest-with-a-pipeline"><i class="fa fa-check"></i><b>6.5</b> Configure Logstash to ingest with a pipeline</a></li>
+<li class="chapter" data-level="6.6" data-path="logstash.html"><a href="logstash.html#check-the-data-from-logstash-in-elasticsearch"><i class="fa fa-check"></i><b>6.6</b> Check the data from Logstash in Elasticsearch</a></li>
+</ul></li>
+<li class="chapter" data-level="7" data-path="visualisation.html"><a href="visualisation.html"><i class="fa fa-check"></i><b>7</b> Visualisation</a><ul>
+<li class="chapter" data-level="7.1" data-path="visualisation.html"><a href="visualisation.html#analyze"><i class="fa fa-check"></i><b>7.1</b> Analyze</a></li>
+<li class="chapter" data-level="7.2" data-path="visualisation.html"><a href="visualisation.html#visualisation-1"><i class="fa fa-check"></i><b>7.2</b> Visualisation</a></li>
+</ul></li>
+</ul>
+
+      </nav>
+    </div>
+
+    <div class="book-body">
+      <div class="body-inner">
+        <div class="book-header" role="navigation">
+          <h1>
+            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./"></a>
+          </h1>
+        </div>
+
+        <div class="page-wrapper" tabindex="-1" role="main">
+          <div class="page-inner">
+
+            <section class="normal" id="section-">
+<div id="logstash" class="section level1">
+<h1><span class="header-section-number">6</span> Logstash</h1>
+<p>With Filebeat it is possible to ingest log files directly into Elasticsearch. In some situations, we want to modify the logs in different ways before it gets ingested into Elasticsearch. This is where we can use pipelines for. Logstash can be used to specify our pipelines.</p>
+<div id="ingest-pipelines" class="section level2">
+<h2><span class="header-section-number">6.1</span> Ingest Pipelines</h2>
+<p>We create a pipeline by nagivating to the <strong>Stack Management</strong> page in Kibana.</p>
+<p>Select <strong>Ingest Node Pipelines</strong> in the menu.
+Choose <em>Create Pipeline</em></p>
+<div class="figure">
+<img src="img/screenshot_ingest_nodes_pipelines.PNG" alt="Ingest Pipelines" />
+<p class="caption"><em>Ingest Pipelines</em></p>
+</div>
+<p>Give the pipeline an explanatory name:</p>
+<div class="figure">
+<img src="img/screenshot_create_pipeline_naam_beschrijving.PNG" alt="Naming and describing the pipeline" />
+<p class="caption"><em>Naming and describing the pipeline</em></p>
+</div>
+<p>We are now asked to configure our processor. In this section we need to specify how our pipeline will parse the log data. For this step we can use <code>grok patterns</code>. It is quite hard to figure out what our grok pattern would look like. Fortunately Dev Tools in Elasticsearch contains a debugger in which we can experiment with our incoming data to specify the right grok-pattern.</p>
+</div>
+<div id="grok-patterns" class="section level2">
+<h2><span class="header-section-number">6.2</span> Grok Patterns</h2>
+<blockquote>
+<p>An overview of the grok patterns that are available out-of-the box can be found at</p>
+</blockquote>
+<p><a href="https://github.com/elastic/elasticsearch/blob/master/libs/grok/src/main/resources/patterns/grok-patterns"><em>Elasticsearch overview grok patterns</em></a></p>
+<p>In Dev Tools open the <strong>Grok Debugger</strong> tab.</p>
+<div class="figure">
+<img src="img/screenshot_tab_open_grok_debugger.png" alt="Grok Debugger tab" />
+<p class="caption"><em>Grok Debugger tab</em></p>
+</div>
+<p>To experiment for the right grok pattern, we need an example log line. Copy a log line from the running Elasticsearch instance in the Command Line. For example, use the following:</p>
+<pre class="bat"><code>[2021-03-14T15:59:16,860][INFO ][o.e.x.i.IndexLifecycleTransition] [LAPTOP-V6JSAGOU] moving index [filebeat-7.11.2-2021.03.14-000001] from [null] to [{&quot;phase&quot;:&quot;new&quot;,&quot;action&quot;:&quot;complete&quot;,&quot;name&quot;:&quot;complete&quot;}] in policy [filebeat]</code></pre>
+<p>Paste this line in the <strong>Sample Data</strong> field.</p>
+<p>Lets start with some grok patterns:</p>
+<pre class="grok"><code>%{GREEDYDATA:details}</code></pre>
+<p>The <code>GREEDYDATA</code> pattern will take all the that from a certain point. The section after the colons <code>:</code> specifies the name of the field in which we will put this part of the log.</p>
+<p>Lets extend the grok pattern. Take a few moments to find out how the grok pattern exactly works by trying th following patterns:</p>
+<pre class="grok"><code>\[%{TIMESTAMP_ISO8601:log_timestamp}]%{GREEDYDATA:details}</code></pre>
+<p>Notice the importance of the position of the spaces.
+The <code>\</code> indicates the <code>[</code> symbol needs to be “escaped” since it is also used in regular expressions.</p>
+<pre class="grok"><code>\[%{TIMESTAMP_ISO8601:log_timestamp}]\[%{WORD:log_level} ]</code></pre>
+<p>Let’s experiment a little further:</p>
+<pre class="grok"><code>\[%{TIMESTAMP_ISO8601:log_timestamp}]\[%{WORD:log_level}]\[%{NOTSPACE:log_action}]%{GREEDYDATA:de_rest}</code></pre>
+<p>The end result:</p>
+<pre class="grok"><code>\[%{TIMESTAMP_ISO8601:log_timestamp}]\[%{WORD:log_level} ]\[%{NOTSPACE:log_action}]\[%{NOTSPACE:node_name}]%{GREEDYDATA:log_details}</code></pre>
+<p>No that we have figured out the right grok pattern, we can return to the <strong>Ingest Node Pipelines</strong> page and continue defining our pipeline.</p>
+<p>[<em>Create a pipeline</em>]((img/screenshot_filebeat_logstash_create_pipeline.PNG)</p>
+<p>Select <code>Grok</code> in <strong>Processors</strong>
+Insert <code>message</code> in <strong>Field</strong> since this is the original field that contains our log data.
+Insert the Grok Pattern we just compoosed in the <strong>Patterns</strong> field.</p>
+<div class="figure">
+<img src="img/screenshot_grok_toepassen_aan_processor.PNG" alt="Add the Grok pattern to the pipeline" />
+<p class="caption"><em>Add the Grok pattern to the pipeline</em></p>
+</div>
+<p>Finish the configuration of the pipeline.</p>
+</div>
+<div id="start-logstash" class="section level2">
+<h2><span class="header-section-number">6.3</span> Start Logstash</h2>
+<p>It is time to start Logstash. Open a new Command Line session and navigate to the main directory of Logstash:</p>
+<pre class="bat"><code>cd logstash-7.8.0</code></pre>
+<p>Use the <code>dir</code> command to make sure you are in the right directory:</p>
+<div class="figure">
+<img src="img/screenshot_logstash_directory.PNG" alt="The main directory of Logstash" />
+<p class="caption"><em>The main directory of Logstash</em></p>
+</div>
+<p>Let’s to a little testrun for logstash with the following command:</p>
+<pre class="bar"><code>.\bin\logstash.bat -f .\config\syslog.conf</code></pre>
+<p>In this command <code>.\bin\logstash.bat</code> indicates we want to run logstash
+With the filename <code>.\config\syslog.conf</code> after the <code>-f</code> flag we specify the configuration file in which it is indicated which log-data should be ingested in Elasticsearch.</p>
+<p>It can take a little while before we see some logs flowing trough the command line.</p>
+<div class="figure">
+<img src="img/screenshot_logstash_testrun_output.PNG" alt="Output of the test run" />
+<p class="caption"><em>Output of the test run</em></p>
+</div>
+<p>If the test run is succesfully executed, we are sure Logstash works. Our next step is to specify Filebeat to ingest to Logstash instead of directly to Elasticsearch.</p>
+</div>
+<div id="specify-filebeat-to-ingest-to-logstash" class="section level2">
+<h2><span class="header-section-number">6.4</span> Specify Filebeat to ingest to Logstash</h2>
+<p>Open the <code>filebeat.yml</code> file in which we modified the configurations earlier.</p>
+<p>Look for the parameter <code>output.logstash</code> and outcomment it which will make it active in the configuration.</p>
+<p>Also uncomment the line <code>hosts: [&quot;localhost:5044&quot;]</code>.</p>
+<div class="figure">
+<img src="img/screenshot_config_filebeat_voor_logstash.PNG" alt="Configure Filebeat to ingest to Logstash" />
+<p class="caption"><em>Configure Filebeat to ingest to Logstash</em></p>
+</div>
+</div>
+<div id="configure-logstash-to-ingest-with-a-pipeline" class="section level2">
+<h2><span class="header-section-number">6.5</span> Configure Logstash to ingest with a pipeline</h2>
+<p>Let’s switch back to Logstash.</p>
+<p>Getting the logs from Filebeat to Logstash is the first step. The next step is to configure Logstash how to ingest the data in Elasticsearch.</p>
+<p>To keep it simple, we will use the default <code>logstash_sample.conf</code> configuration (full path from the main Logstash directory is: <code>.\config\logstash-sample.conf</code>).</p>
+<p>Check out the <code>logstash-sample.conf</code> file.</p>
+<p>The <code>input</code> section specifies where Logstash will look for data, which is in this case Filebeat.
+Next, <code>output</code> specifies how and where the data will be ingested.</p>
+<p>This output has several fields:</p>
+<ul>
+<li><code>stdout</code>: How would we like to display the progress of the logs that are being ingested by Logstash. With the option <code>rubydebug</code> we will see the all the raw files (in the command line) that are being ingested in Elasticsearch</li>
+<li><code>elasticsearch</code> We specify that the logs will be ingested in Elasticsearch
+<ul>
+<li><code>hosts</code>: The location of Elasticsearch, which is in this case our instance running locally.</li>
+<li><code>index</code>: The name of the index the data will be ingested. If this index does not exist yet, it will be created automatically.</li>
+<li><code>pipeline</code>: This is an important step. In the previous section, we have defined our pipeline with the right grok pattern for ingesting the logs in Elasticsearch. In this parameter we need to specify the name of that pipeline.</li>
+</ul></li>
+</ul>
+<div class="figure">
+<img src="img/screenshot_config_logstash_filebeat_ingest_pipeline.PNG" alt="Logstash pipeline" />
+<p class="caption"><em>Logstash pipeline</em></p>
+</div>
+<p>Now that we have our Logstash configuration file setup, we are ready to start Logstash to ingest the logs ingested by Filebeat.</p>
+<p>First we start filebeat (if we still have a Command Line window open with Filebeat )</p>
+<pre class="bat"><code>filebeat</code></pre>
+<p>In the command line in which we have Logstash, we will start our Logstash instance with our configuration.</p>
+<pre class="bat"><code>.\bin\logstash.bat -f .\config\logstash-sample.conf</code></pre>
+<p>The startup of Logstash will take little while.</p>
+<blockquote>
+<p>It is important that Filebeat is running while we have Logstash running. Otherwise there is no data to be ingested.</p>
+</blockquote>
+<p>As soon as Elasticsearch will generate some logs, we will see them flowing through our Logstash instance.</p>
+<div class="figure">
+<img src="img/screenshot_logstash_beats_data_loopt_erdoorheen.PNG" alt="Data through Logstash" />
+<p class="caption"><em>Data through Logstash</em></p>
+</div>
+</div>
+<div id="check-the-data-from-logstash-in-elasticsearch" class="section level2">
+<h2><span class="header-section-number">6.6</span> Check the data from Logstash in Elasticsearch</h2>
+<p>When our Logstash instance is running, busy ingesting the logs that are being ingested by Filebeat, we can take a look at the data in the new index that we have specified in the Logstash configuration.</p>
+<p>In Kibana open Devtools en check if our new index is visible.</p>
+<div class="sourceCode" id="cb33"><pre class="sourceCode json"><code class="sourceCode json"><a class="sourceLine" id="cb33-1" data-line-number="1"><span class="er">GET</span> <span class="er">_cat/indices?v</span></a></code></pre></div>
+<p>If the index is visible, we can view what a document in this index looks like. It should match the way we specified it with our grok patterns.</p>
+<div class="sourceCode" id="cb34"><pre class="sourceCode json"><code class="sourceCode json"><a class="sourceLine" id="cb34-1" data-line-number="1"><span class="er">GET</span> <span class="er">demo_elastic_logs_clean/_search</span></a>
+<a class="sourceLine" id="cb34-2" data-line-number="2"><span class="fu">{</span></a>
+<a class="sourceLine" id="cb34-3" data-line-number="3">  <span class="dt">&quot;query&quot;</span><span class="fu">:</span> <span class="fu">{</span></a>
+<a class="sourceLine" id="cb34-4" data-line-number="4">    <span class="dt">&quot;match_all&quot;</span><span class="fu">:</span> <span class="fu">{}</span></a>
+<a class="sourceLine" id="cb34-5" data-line-number="5">  <span class="fu">}</span></a>
+<a class="sourceLine" id="cb34-6" data-line-number="6"><span class="fu">}</span></a></code></pre></div>
+<div class="figure">
+<img src="img/screenshot_kibana_nieuwe_index_na_filebeat_pipeline.PNG" alt="Log files in our new index" />
+<p class="caption"><em>Log files in our new index</em></p>
+</div>
+<p>Voila!</p>
+
+</div>
+</div>
+            </section>
+
+          </div>
+        </div>
+      </div>
+<a href="filebeat.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="visualisation.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+    </div>
+  </div>
+<script src="libs/gitbook-2.6.7/js/app.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/lunr.js"></script>
+<script src="libs/gitbook-2.6.7/js/clipboard.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-search.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-sharing.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-fontsettings.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-bookdown.js"></script>
+<script src="libs/gitbook-2.6.7/js/jquery.highlight.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-clipboard.js"></script>
+<script>
+gitbook.require(["gitbook"], function(gitbook) {
+gitbook.start({
+"sharing": {
+"github": false,
+"facebook": true,
+"twitter": true,
+"linkedin": false,
+"weibo": false,
+"instapaper": false,
+"vk": false,
+"all": ["facebook", "twitter", "linkedin", "weibo", "instapaper"]
+},
+"fontsettings": {
+"theme": "white",
+"family": "sans",
+"size": 2
+},
+"edit": {
+"link": null,
+"text": null
+},
+"history": {
+"link": null,
+"text": null
+},
+"view": {
+"link": null,
+"text": null
+},
+"download": null,
+"toc": {
+"collapse": "subsection"
+}
+});
+});
+</script>
+
+</body>
+
+</html>
