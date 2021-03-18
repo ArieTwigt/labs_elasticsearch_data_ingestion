@@ -63,6 +63,14 @@ Set-ExecutionPolicy RemoteSigned
 Set-ExecutionPolicy Restricted
 ```
 
+If that does not work either, try:
+
+```
+Set-ExecutionPolicy Unrestricted
+.\install-service-metricbeat.ps1
+Set-ExecutionPolicy Restricted
+```
+
 
 When the Powershell script is finished, execute the initial setup:
 
