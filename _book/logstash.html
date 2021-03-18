@@ -4,11 +4,11 @@
 
   <meta charset="utf-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  <title>6 Logstash | _main.utf8</title>
-  <meta name="description" content="" />
+  <title>6 Logstash | Elastic Data Ingestion</title>
+  <meta name="description" content="6 Logstash | Elastic Data Ingestion" />
   <meta name="generator" content="bookdown 0.21 and GitBook 2.6.7" />
 
-  <meta property="og:title" content="6 Logstash | _main.utf8" />
+  <meta property="og:title" content="6 Logstash | Elastic Data Ingestion" />
   <meta property="og:type" content="book" />
   
   
@@ -16,7 +16,7 @@
   
 
   <meta name="twitter:card" content="summary" />
-  <meta name="twitter:title" content="6 Logstash | _main.utf8" />
+  <meta name="twitter:title" content="6 Logstash | Elastic Data Ingestion" />
   
   
   
@@ -143,7 +143,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="3.5" data-path="metricbeat.html"><a href="metricbeat.html#checkout-our-metrics"><i class="fa fa-check"></i><b>3.5</b> Checkout our Metrics</a></li>
 <li class="chapter" data-level="3.6" data-path="metricbeat.html"><a href="metricbeat.html#check-out-our-metrics-in-the-dashboard"><i class="fa fa-check"></i><b>3.6</b> Check out our Metrics in the Dashboard</a></li>
 <li class="chapter" data-level="3.7" data-path="metricbeat.html"><a href="metricbeat.html#metrics-in-dashboard"><i class="fa fa-check"></i><b>3.7</b> Metrics in Dashboard</a></li>
-<li class="chapter" data-level="3.8" data-path="metricbeat.html"><a href="metricbeat.html#metrics-in-discover"><i class="fa fa-check"></i><b>3.8</b> Metrics in Discover</a></li>
+<li class="chapter" data-level="3.8" data-path="metricbeat.html"><a href="metricbeat.html#metrics-in-discovery"><i class="fa fa-check"></i><b>3.8</b> Metrics in Discovery</a></li>
 <li class="chapter" data-level="3.9" data-path="metricbeat.html"><a href="metricbeat.html#conclusion"><i class="fa fa-check"></i><b>3.9</b> Conclusion</a></li>
 </ul></li>
 <li class="chapter" data-level="4" data-path="winlogbeat.html"><a href="winlogbeat.html"><i class="fa fa-check"></i><b>4</b> Winlogbeat</a><ul>
@@ -177,7 +177,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
       <div class="body-inner">
         <div class="book-header" role="navigation">
           <h1>
-            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./"></a>
+            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">Elastic Data Ingestion</a>
           </h1>
         </div>
 
@@ -312,14 +312,14 @@ Next, <code>output</code> specifies how and where the data will be ingested.</p>
 <h2><span class="header-section-number">6.6</span> Check the data from Logstash in Elasticsearch</h2>
 <p>When our Logstash instance is running, busy ingesting the logs that are being ingested by Filebeat, we can take a look at the data in the new index that we have specified in the Logstash configuration.</p>
 <p>In Kibana open Devtools en check if our new index is visible.</p>
-<div class="sourceCode" id="cb33"><pre class="sourceCode json"><code class="sourceCode json"><a class="sourceLine" id="cb33-1" data-line-number="1"><span class="er">GET</span> <span class="er">_cat/indices?v</span></a></code></pre></div>
+<div class="sourceCode" id="cb34"><pre class="sourceCode json"><code class="sourceCode json"><a class="sourceLine" id="cb34-1" data-line-number="1"><span class="er">GET</span> <span class="er">_cat/indices?v</span></a></code></pre></div>
 <p>If the index is visible, we can view what a document in this index looks like. It should match the way we specified it with our grok patterns.</p>
-<div class="sourceCode" id="cb34"><pre class="sourceCode json"><code class="sourceCode json"><a class="sourceLine" id="cb34-1" data-line-number="1"><span class="er">GET</span> <span class="er">demo_elastic_logs_clean/_search</span></a>
-<a class="sourceLine" id="cb34-2" data-line-number="2"><span class="fu">{</span></a>
-<a class="sourceLine" id="cb34-3" data-line-number="3">  <span class="dt">&quot;query&quot;</span><span class="fu">:</span> <span class="fu">{</span></a>
-<a class="sourceLine" id="cb34-4" data-line-number="4">    <span class="dt">&quot;match_all&quot;</span><span class="fu">:</span> <span class="fu">{}</span></a>
-<a class="sourceLine" id="cb34-5" data-line-number="5">  <span class="fu">}</span></a>
-<a class="sourceLine" id="cb34-6" data-line-number="6"><span class="fu">}</span></a></code></pre></div>
+<div class="sourceCode" id="cb35"><pre class="sourceCode json"><code class="sourceCode json"><a class="sourceLine" id="cb35-1" data-line-number="1"><span class="er">GET</span> <span class="er">demo_elastic_logs_clean/_search</span></a>
+<a class="sourceLine" id="cb35-2" data-line-number="2"><span class="fu">{</span></a>
+<a class="sourceLine" id="cb35-3" data-line-number="3">  <span class="dt">&quot;query&quot;</span><span class="fu">:</span> <span class="fu">{</span></a>
+<a class="sourceLine" id="cb35-4" data-line-number="4">    <span class="dt">&quot;match_all&quot;</span><span class="fu">:</span> <span class="fu">{}</span></a>
+<a class="sourceLine" id="cb35-5" data-line-number="5">  <span class="fu">}</span></a>
+<a class="sourceLine" id="cb35-6" data-line-number="6"><span class="fu">}</span></a></code></pre></div>
 <div class="figure">
 <img src="img/screenshot_kibana_nieuwe_index_na_filebeat_pipeline.PNG" alt="Log files in our new index" />
 <p class="caption"><em>Log files in our new index</em></p>

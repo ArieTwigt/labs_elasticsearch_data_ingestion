@@ -4,11 +4,11 @@
 
   <meta charset="utf-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  <title>3 Metricbeat | _main.utf8</title>
-  <meta name="description" content="" />
+  <title>3 Metricbeat | Elastic Data Ingestion</title>
+  <meta name="description" content="3 Metricbeat | Elastic Data Ingestion" />
   <meta name="generator" content="bookdown 0.21 and GitBook 2.6.7" />
 
-  <meta property="og:title" content="3 Metricbeat | _main.utf8" />
+  <meta property="og:title" content="3 Metricbeat | Elastic Data Ingestion" />
   <meta property="og:type" content="book" />
   
   
@@ -16,7 +16,7 @@
   
 
   <meta name="twitter:card" content="summary" />
-  <meta name="twitter:title" content="3 Metricbeat | _main.utf8" />
+  <meta name="twitter:title" content="3 Metricbeat | Elastic Data Ingestion" />
   
   
   
@@ -143,7 +143,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="3.5" data-path="metricbeat.html"><a href="metricbeat.html#checkout-our-metrics"><i class="fa fa-check"></i><b>3.5</b> Checkout our Metrics</a></li>
 <li class="chapter" data-level="3.6" data-path="metricbeat.html"><a href="metricbeat.html#check-out-our-metrics-in-the-dashboard"><i class="fa fa-check"></i><b>3.6</b> Check out our Metrics in the Dashboard</a></li>
 <li class="chapter" data-level="3.7" data-path="metricbeat.html"><a href="metricbeat.html#metrics-in-dashboard"><i class="fa fa-check"></i><b>3.7</b> Metrics in Dashboard</a></li>
-<li class="chapter" data-level="3.8" data-path="metricbeat.html"><a href="metricbeat.html#metrics-in-discover"><i class="fa fa-check"></i><b>3.8</b> Metrics in Discover</a></li>
+<li class="chapter" data-level="3.8" data-path="metricbeat.html"><a href="metricbeat.html#metrics-in-discovery"><i class="fa fa-check"></i><b>3.8</b> Metrics in Discovery</a></li>
 <li class="chapter" data-level="3.9" data-path="metricbeat.html"><a href="metricbeat.html#conclusion"><i class="fa fa-check"></i><b>3.9</b> Conclusion</a></li>
 </ul></li>
 <li class="chapter" data-level="4" data-path="winlogbeat.html"><a href="winlogbeat.html"><i class="fa fa-check"></i><b>4</b> Winlogbeat</a><ul>
@@ -177,7 +177,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
       <div class="body-inner">
         <div class="book-header" role="navigation">
           <h1>
-            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./"></a>
+            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">Elastic Data Ingestion</a>
           </h1>
         </div>
 
@@ -228,6 +228,10 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 .\install-service-metricbeat.ps1
 
 Set-ExecutionPolicy Restricted</code></pre>
+<p>If that does not work either, try:</p>
+<pre><code>Set-ExecutionPolicy Unrestricted
+.\install-service-metricbeat.ps1
+Set-ExecutionPolicy Restricted</code></pre>
 <p>When the Powershell script is finished, execute the initial setup:</p>
 <pre class="bat"><code>.\metricbeat.exe modules enable system</code></pre>
 <p>Next step:</p>
@@ -253,7 +257,7 @@ Set-ExecutionPolicy Restricted</code></pre>
 <p class="caption">Editor in Dev Tools for executing Elasticsearch queries</p>
 </div>
 <p>To get an overview of our currnet indices, we can use the following Elasticsearch request:</p>
-<div class="sourceCode" id="cb12"><pre class="sourceCode json"><code class="sourceCode json"><a class="sourceLine" id="cb12-1" data-line-number="1"><span class="er">GET</span> <span class="er">_cat/indices?v</span></a></code></pre></div>
+<div class="sourceCode" id="cb13"><pre class="sourceCode json"><code class="sourceCode json"><a class="sourceLine" id="cb13-1" data-line-number="1"><span class="er">GET</span> <span class="er">_cat/indices?v</span></a></code></pre></div>
 </div>
 <div id="enable-the-metrics-dashboard-in-kibana" class="section level2">
 <h2><span class="header-section-number">3.3</span> Enable the Metrics Dashboard in Kibana</h2>
@@ -346,8 +350,8 @@ Set-ExecutionPolicy Restricted</code></pre>
 <p class="caption"><em>Selected host for the Metrics Dashboard</em></p>
 </div>
 </div>
-<div id="metrics-in-discover" class="section level2">
-<h2><span class="header-section-number">3.8</span> Metrics in Discover</h2>
+<div id="metrics-in-discovery" class="section level2">
+<h2><span class="header-section-number">3.8</span> Metrics in Discovery</h2>
 <p>Select <strong>Discover</strong> in the Kibana menu.</p>
 <p>In Discover, we can execute KQL queries for exploring, aggregating or filtering our data. We will do this in <strong>Lab 6</strong>.</p>
 <div class="figure">

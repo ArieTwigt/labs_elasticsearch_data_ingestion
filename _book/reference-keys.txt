@@ -13,7 +13,7 @@ specify-index-patterns
 checkout-our-metrics
 check-out-our-metrics-in-the-dashboard
 metrics-in-dashboard
-metrics-in-discover
+metrics-in-discovery
 conclusion
 winlogbeat
 setup-winlogbeat

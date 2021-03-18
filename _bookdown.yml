@@ -1,1 +1,1 @@
-rmd_files: ["setup.md", "elasticsearch_kibana.md", "metricbeat.md", "winlogbeat.md", "filebeat.md", "logstash.md", "visualisation.md"]
+rmd_files: ["index.Rmd", "setup.Rmd", "elasticsearch_kibana.Rmd", "metricbeat.Rmd", "winlogbeat.Rmd", "filebeat.Rmd", "logstash.Rmd", "visualisation.Rmd"]

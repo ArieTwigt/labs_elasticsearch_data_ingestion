@@ -4,11 +4,11 @@
 
   <meta charset="utf-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  <title>4 Winlogbeat | _main.utf8</title>
-  <meta name="description" content="" />
+  <title>4 Winlogbeat | Elastic Data Ingestion</title>
+  <meta name="description" content="4 Winlogbeat | Elastic Data Ingestion" />
   <meta name="generator" content="bookdown 0.21 and GitBook 2.6.7" />
 
-  <meta property="og:title" content="4 Winlogbeat | _main.utf8" />
+  <meta property="og:title" content="4 Winlogbeat | Elastic Data Ingestion" />
   <meta property="og:type" content="book" />
   
   
@@ -16,7 +16,7 @@
   
 
   <meta name="twitter:card" content="summary" />
-  <meta name="twitter:title" content="4 Winlogbeat | _main.utf8" />
+  <meta name="twitter:title" content="4 Winlogbeat | Elastic Data Ingestion" />
   
   
   
@@ -143,7 +143,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="3.5" data-path="metricbeat.html"><a href="metricbeat.html#checkout-our-metrics"><i class="fa fa-check"></i><b>3.5</b> Checkout our Metrics</a></li>
 <li class="chapter" data-level="3.6" data-path="metricbeat.html"><a href="metricbeat.html#check-out-our-metrics-in-the-dashboard"><i class="fa fa-check"></i><b>3.6</b> Check out our Metrics in the Dashboard</a></li>
 <li class="chapter" data-level="3.7" data-path="metricbeat.html"><a href="metricbeat.html#metrics-in-dashboard"><i class="fa fa-check"></i><b>3.7</b> Metrics in Dashboard</a></li>
-<li class="chapter" data-level="3.8" data-path="metricbeat.html"><a href="metricbeat.html#metrics-in-discover"><i class="fa fa-check"></i><b>3.8</b> Metrics in Discover</a></li>
+<li class="chapter" data-level="3.8" data-path="metricbeat.html"><a href="metricbeat.html#metrics-in-discovery"><i class="fa fa-check"></i><b>3.8</b> Metrics in Discovery</a></li>
 <li class="chapter" data-level="3.9" data-path="metricbeat.html"><a href="metricbeat.html#conclusion"><i class="fa fa-check"></i><b>3.9</b> Conclusion</a></li>
 </ul></li>
 <li class="chapter" data-level="4" data-path="winlogbeat.html"><a href="winlogbeat.html"><i class="fa fa-check"></i><b>4</b> Winlogbeat</a><ul>
@@ -177,7 +177,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
       <div class="body-inner">
         <div class="book-header" role="navigation">
           <h1>
-            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./"></a>
+            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">Elastic Data Ingestion</a>
           </h1>
         </div>
 
@@ -261,15 +261,15 @@ cd winlogbeat-7.11.2-windows-x86_64</code></pre>
 <h2><span class="header-section-number">4.3</span> Check out the Windows logs in the Elasticsearch index</h2>
 <p>Let’s checkout the raw Windows logs in our Elasticsearch index. In the Kibana menu, navigate to Dev Tools.</p>
 <p>In the Editor, execute the Elasticsearch request to get an overview of our current indices.</p>
-<div class="sourceCode" id="cb16"><pre class="sourceCode json"><code class="sourceCode json"><a class="sourceLine" id="cb16-1" data-line-number="1"><span class="er">GET</span> <span class="er">_cat/indices?v</span></a></code></pre></div>
+<div class="sourceCode" id="cb17"><pre class="sourceCode json"><code class="sourceCode json"><a class="sourceLine" id="cb17-1" data-line-number="1"><span class="er">GET</span> <span class="er">_cat/indices?v</span></a></code></pre></div>
 <p>The list with indices contains an index staring with <code>winlogbeat</code> (followed by the timestamp of the initation of the Winlogbeat instance).</p>
 <p>Let’s checkout what a Window log line indexed in Elasticsearch looks like</p>
-<div class="sourceCode" id="cb17"><pre class="sourceCode json"><code class="sourceCode json"><a class="sourceLine" id="cb17-1" data-line-number="1"><span class="er">GET</span> <span class="er">winlogbeat-*/_search</span></a>
-<a class="sourceLine" id="cb17-2" data-line-number="2"><span class="fu">{</span></a>
-<a class="sourceLine" id="cb17-3" data-line-number="3">  <span class="dt">&quot;query&quot;</span><span class="fu">:</span> <span class="fu">{</span></a>
-<a class="sourceLine" id="cb17-4" data-line-number="4">    <span class="dt">&quot;match_all&quot;</span><span class="fu">:</span> <span class="fu">{}</span></a>
-<a class="sourceLine" id="cb17-5" data-line-number="5">  <span class="fu">}</span></a>
-<a class="sourceLine" id="cb17-6" data-line-number="6"><span class="fu">}</span></a></code></pre></div>
+<div class="sourceCode" id="cb18"><pre class="sourceCode json"><code class="sourceCode json"><a class="sourceLine" id="cb18-1" data-line-number="1"><span class="er">GET</span> <span class="er">winlogbeat-*/_search</span></a>
+<a class="sourceLine" id="cb18-2" data-line-number="2"><span class="fu">{</span></a>
+<a class="sourceLine" id="cb18-3" data-line-number="3">  <span class="dt">&quot;query&quot;</span><span class="fu">:</span> <span class="fu">{</span></a>
+<a class="sourceLine" id="cb18-4" data-line-number="4">    <span class="dt">&quot;match_all&quot;</span><span class="fu">:</span> <span class="fu">{}</span></a>
+<a class="sourceLine" id="cb18-5" data-line-number="5">  <span class="fu">}</span></a>
+<a class="sourceLine" id="cb18-6" data-line-number="6"><span class="fu">}</span></a></code></pre></div>
 <div class="figure">
 <img src="img/screenshot_voorbeeld_output_winlogbeat_document_bekijken.PNG" alt="A Windows log indexed in Elasticsearch" />
 <p class="caption">A Windows log indexed in Elasticsearch</p>
