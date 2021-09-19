@@ -1,0 +1,359 @@
+<!DOCTYPE html>
+<html lang="" xml:lang="">
+<head>
+
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <title>4 Functions, loops and conditional statements in R | Programming and analyzing data with R</title>
+  <meta name="description" content="4 Functions, loops and conditional statements in R | Programming and analyzing data with R" />
+  <meta name="generator" content="bookdown 0.24 and GitBook 2.6.7" />
+
+  <meta property="og:title" content="4 Functions, loops and conditional statements in R | Programming and analyzing data with R" />
+  <meta property="og:type" content="book" />
+  
+  
+  
+  
+
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content="4 Functions, loops and conditional statements in R | Programming and analyzing data with R" />
+  
+  
+  
+
+
+
+
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+  
+  
+<link rel="prev" href="using-the-dplyr-package-in-r-for-data-wrangling.html"/>
+<link rel="next" href="data-visualization-in-ggplot.html"/>
+<script src="libs/header-attrs-2.11/header-attrs.js"></script>
+<script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/fuse.js@6.4.6/dist/fuse.min.js"></script>
+<link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-highlight.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-search.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-fontsettings.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-clipboard.css" rel="stylesheet" />
+
+
+
+
+
+
+
+
+<link href="libs/anchor-sections-1.0.1/anchor-sections.css" rel="stylesheet" />
+<script src="libs/anchor-sections-1.0.1/anchor-sections.js"></script>
+<script src="libs/htmlwidgets-1.5.4/htmlwidgets.js"></script>
+<script src="libs/plotly-binding-4.9.4.1/plotly.js"></script>
+<script src="libs/typedarray-0.1/typedarray.min.js"></script>
+<link href="libs/crosstalk-1.1.1/css/crosstalk.css" rel="stylesheet" />
+<script src="libs/crosstalk-1.1.1/js/crosstalk.min.js"></script>
+<link href="libs/plotly-htmlwidgets-css-1.57.1/plotly-htmlwidgets.css" rel="stylesheet" />
+<script src="libs/plotly-main-1.57.1/plotly-latest.min.js"></script>
+
+
+<style type="text/css">
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+</style>
+
+
+</head>
+
+<body>
+
+
+
+  <div class="book without-animation with-summary font-size-2 font-family-1" data-basepath=".">
+
+    <div class="book-summary">
+      <nav role="navigation">
+
+<ul class="summary">
+<li class="chapter" data-level="1" data-path="introduction-of-the-r-syntax.html"><a href="introduction-of-the-r-syntax.html"><i class="fa fa-check"></i><b>1</b> Introduction of the R syntax</a>
+<ul>
+<li class="chapter" data-level="1.1" data-path="introduction-of-the-r-syntax.html"><a href="introduction-of-the-r-syntax.html#variable-assignment-in-r"><i class="fa fa-check"></i><b>1.1</b> Variable assignment in R</a>
+<ul>
+<li class="chapter" data-level="1.1.1" data-path="introduction-of-the-r-syntax.html"><a href="introduction-of-the-r-syntax.html#vectors-in-r"><i class="fa fa-check"></i><b>1.1.1</b> Vectors in R</a></li>
+<li class="chapter" data-level="1.1.2" data-path="introduction-of-the-r-syntax.html"><a href="introduction-of-the-r-syntax.html#assigning-multiple-values-to-a-variable-with-the-c-function"><i class="fa fa-check"></i><b>1.1.2</b> Assigning multiple values to a variable with the <code>c()</code> function</a></li>
+<li class="chapter" data-level="1.1.3" data-path="introduction-of-the-r-syntax.html"><a href="introduction-of-the-r-syntax.html#getting-values-by-indices-in-a-vector-in-r"><i class="fa fa-check"></i><b>1.1.3</b> Getting values by indices in a vector in R</a></li>
+<li class="chapter" data-level="1.1.4" data-path="introduction-of-the-r-syntax.html"><a href="introduction-of-the-r-syntax.html#different-data-types-in-r"><i class="fa fa-check"></i><b>1.1.4</b> Different data types in R</a></li>
+<li class="chapter" data-level="1.1.5" data-path="introduction-of-the-r-syntax.html"><a href="introduction-of-the-r-syntax.html#converting-to-different-data-types-in-r"><i class="fa fa-check"></i><b>1.1.5</b> Converting to different data types in R</a></li>
+<li class="chapter" data-level="1.1.6" data-path="introduction-of-the-r-syntax.html"><a href="introduction-of-the-r-syntax.html#the-logical-data-type-in-r"><i class="fa fa-check"></i><b>1.1.6</b> The <code>logical</code> data type in R</a></li>
+</ul></li>
+<li class="chapter" data-level="1.2" data-path="introduction-of-the-r-syntax.html"><a href="introduction-of-the-r-syntax.html#calculations-with-r"><i class="fa fa-check"></i><b>1.2</b> Calculations with R</a></li>
+<li class="chapter" data-level="1.3" data-path="introduction-of-the-r-syntax.html"><a href="introduction-of-the-r-syntax.html#statistical-functions-in-r"><i class="fa fa-check"></i><b>1.3</b> Statistical functions in R</a>
+<ul>
+<li class="chapter" data-level="1.3.1" data-path="introduction-of-the-r-syntax.html"><a href="introduction-of-the-r-syntax.html#exploring-the-data"><i class="fa fa-check"></i><b>1.3.1</b> Exploring the data</a></li>
+<li class="chapter" data-level="1.3.2" data-path="introduction-of-the-r-syntax.html"><a href="introduction-of-the-r-syntax.html#statistical-functions-for-data-exploration-in-r"><i class="fa fa-check"></i><b>1.3.2</b> Statistical functions for data exploration in R</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="2" data-path="working-with-data-frames-in-r.html"><a href="working-with-data-frames-in-r.html"><i class="fa fa-check"></i><b>2</b> Working with Data Frames in R</a>
+<ul>
+<li class="chapter" data-level="2.1" data-path="working-with-data-frames-in-r.html"><a href="working-with-data-frames-in-r.html#the-example-dataset"><i class="fa fa-check"></i><b>2.1</b> The example dataset</a></li>
+<li class="chapter" data-level="2.2" data-path="working-with-data-frames-in-r.html"><a href="working-with-data-frames-in-r.html#importing-data-with-rstudio"><i class="fa fa-check"></i><b>2.2</b> Importing data with RStudio</a></li>
+<li class="chapter" data-level="2.3" data-path="working-with-data-frames-in-r.html"><a href="working-with-data-frames-in-r.html#exploring-data-frames-in-r"><i class="fa fa-check"></i><b>2.3</b> Exploring data frames in R</a>
+<ul>
+<li class="chapter" data-level="2.3.1" data-path="working-with-data-frames-in-r.html"><a href="working-with-data-frames-in-r.html#selecting-rows-and-columns-in-a-data-frame"><i class="fa fa-check"></i><b>2.3.1</b> Selecting rows and columns in a data frame</a></li>
+<li class="chapter" data-level="2.3.2" data-path="working-with-data-frames-in-r.html"><a href="working-with-data-frames-in-r.html#filtering-data-frames"><i class="fa fa-check"></i><b>2.3.2</b> Filtering data frames</a></li>
+</ul></li>
+<li class="chapter" data-level="2.4" data-path="working-with-data-frames-in-r.html"><a href="working-with-data-frames-in-r.html#data-exploration-with-basic-r-visualisations"><i class="fa fa-check"></i><b>2.4</b> Data exploration with basic R visualisations</a></li>
+</ul></li>
+<li class="chapter" data-level="3" data-path="using-the-dplyr-package-in-r-for-data-wrangling.html"><a href="using-the-dplyr-package-in-r-for-data-wrangling.html"><i class="fa fa-check"></i><b>3</b> Using the dplyr package in R for data wrangling</a>
+<ul>
+<li class="chapter" data-level="3.1" data-path="using-the-dplyr-package-in-r-for-data-wrangling.html"><a href="using-the-dplyr-package-in-r-for-data-wrangling.html#installing-and-loading-the-dplyr-package"><i class="fa fa-check"></i><b>3.1</b> Installing and loading the <code>dplyr</code> package</a></li>
+<li class="chapter" data-level="3.2" data-path="using-the-dplyr-package-in-r-for-data-wrangling.html"><a href="using-the-dplyr-package-in-r-for-data-wrangling.html#creating-subsets-of-a-data-frame-with-dplyr"><i class="fa fa-check"></i><b>3.2</b> Creating subsets of a data frame with dplyr</a></li>
+<li class="chapter" data-level="3.3" data-path="using-the-dplyr-package-in-r-for-data-wrangling.html"><a href="using-the-dplyr-package-in-r-for-data-wrangling.html#combining-dplyr-for-creating-visualisations-for-specific-subsets"><i class="fa fa-check"></i><b>3.3</b> Combining dplyr for creating visualisations for specific subsets</a></li>
+<li class="chapter" data-level="3.4" data-path="using-the-dplyr-package-in-r-for-data-wrangling.html"><a href="using-the-dplyr-package-in-r-for-data-wrangling.html#creating-subsets-and-aggregations-in-dplyr"><i class="fa fa-check"></i><b>3.4</b> Creating subsets and aggregations in dplyr</a></li>
+</ul></li>
+<li class="chapter" data-level="4" data-path="functions-loops-and-conditional-statements-in-r.html"><a href="functions-loops-and-conditional-statements-in-r.html"><i class="fa fa-check"></i><b>4</b> Functions, loops and conditional statements in R</a>
+<ul>
+<li class="chapter" data-level="4.1" data-path="functions-loops-and-conditional-statements-in-r.html"><a href="functions-loops-and-conditional-statements-in-r.html#writing-functions-in-r"><i class="fa fa-check"></i><b>4.1</b> Writing functions in R</a></li>
+<li class="chapter" data-level="4.2" data-path="functions-loops-and-conditional-statements-in-r.html"><a href="functions-loops-and-conditional-statements-in-r.html#loops"><i class="fa fa-check"></i><b>4.2</b> Loops</a></li>
+<li class="chapter" data-level="4.3" data-path="functions-loops-and-conditional-statements-in-r.html"><a href="functions-loops-and-conditional-statements-in-r.html#conditional-statements-in-r"><i class="fa fa-check"></i><b>4.3</b> Conditional statements in R</a></li>
+</ul></li>
+<li class="chapter" data-level="5" data-path="data-visualization-in-ggplot.html"><a href="data-visualization-in-ggplot.html"><i class="fa fa-check"></i><b>5</b> Data visualization in ggplot</a>
+<ul>
+<li class="chapter" data-level="5.1" data-path="data-visualization-in-ggplot.html"><a href="data-visualization-in-ggplot.html#installing-and-loading-the-required-packages"><i class="fa fa-check"></i><b>5.1</b> Installing and loading the required packages</a></li>
+<li class="chapter" data-level="5.2" data-path="data-visualization-in-ggplot.html"><a href="data-visualization-in-ggplot.html#normal-plots-vs-ggplot-in-r"><i class="fa fa-check"></i><b>5.2</b> Normal plots vs ggplot in R</a></li>
+<li class="chapter" data-level="5.3" data-path="data-visualization-in-ggplot.html"><a href="data-visualization-in-ggplot.html#different-types-of-visualizations-with-ggplot"><i class="fa fa-check"></i><b>5.3</b> Different types of visualizations with ggplot</a></li>
+<li class="chapter" data-level="5.4" data-path="data-visualization-in-ggplot.html"><a href="data-visualization-in-ggplot.html#using-multiple-dimensions-in-ggplot"><i class="fa fa-check"></i><b>5.4</b> Using multiple dimensions in ggplot</a></li>
+<li class="chapter" data-level="5.5" data-path="data-visualization-in-ggplot.html"><a href="data-visualization-in-ggplot.html#making-visualisations-interactive-with-plotly"><i class="fa fa-check"></i><b>5.5</b> Making visualisations interactive with plotly</a></li>
+<li class="chapter" data-level="5.6" data-path="data-visualization-in-ggplot.html"><a href="data-visualization-in-ggplot.html#experimenting-multiple-ways-to-display-your-data"><i class="fa fa-check"></i><b>5.6</b> Experimenting multiple ways to display your data</a>
+<ul>
+<li class="chapter" data-level="5.6.1" data-path="data-visualization-in-ggplot.html"><a href="data-visualization-in-ggplot.html#using-different-themes"><i class="fa fa-check"></i><b>5.6.1</b> Using different themes</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="6" data-path="working-with-external-data.html"><a href="working-with-external-data.html"><i class="fa fa-check"></i><b>6</b> Working with external data</a>
+<ul>
+<li class="chapter" data-level="6.1" data-path="working-with-external-data.html"><a href="working-with-external-data.html#externe-data"><i class="fa fa-check"></i><b>6.1</b> Externe data</a></li>
+</ul></li>
+</ul>
+
+      </nav>
+    </div>
+
+    <div class="book-body">
+      <div class="body-inner">
+        <div class="book-header" role="navigation">
+          <h1>
+            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">Programming and analyzing data with R</a>
+          </h1>
+        </div>
+
+        <div class="page-wrapper" tabindex="-1" role="main">
+          <div class="page-inner">
+
+            <section class="normal" id="section-">
+<div id="functions-loops-and-conditional-statements-in-r" class="section level1" number="4">
+<h1><span class="header-section-number">4</span> Functions, loops and conditional statements in R</h1>
+<div id="writing-functions-in-r" class="section level2" number="4.1">
+<h2><span class="header-section-number">4.1</span> Writing functions in R</h2>
+<div class="sourceCode" id="cb182"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb182-1"><a href="functions-loops-and-conditional-statements-in-r.html#cb182-1" aria-hidden="true" tabindex="-1"></a>number <span class="ot">&lt;-</span> <span class="dv">10</span></span>
+<span id="cb182-2"><a href="functions-loops-and-conditional-statements-in-r.html#cb182-2" aria-hidden="true" tabindex="-1"></a>number_increased <span class="ot">&lt;-</span> number <span class="sc">^</span><span class="dv">2</span></span>
+<span id="cb182-3"><a href="functions-loops-and-conditional-statements-in-r.html#cb182-3" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(<span class="fu">paste0</span>(<span class="st">&quot;The result is: &quot;</span>, number_increased))</span></code></pre></div>
+<pre><code>## [1] &quot;The result is: 100&quot;</code></pre>
+<div class="sourceCode" id="cb184"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb184-1"><a href="functions-loops-and-conditional-statements-in-r.html#cb184-1" aria-hidden="true" tabindex="-1"></a>myFun <span class="ot">&lt;-</span> <span class="cf">function</span>(){</span>
+<span id="cb184-2"><a href="functions-loops-and-conditional-statements-in-r.html#cb184-2" aria-hidden="true" tabindex="-1"></a>  number <span class="ot">&lt;-</span> <span class="dv">10</span></span>
+<span id="cb184-3"><a href="functions-loops-and-conditional-statements-in-r.html#cb184-3" aria-hidden="true" tabindex="-1"></a>  number_increased <span class="ot">&lt;-</span> number <span class="sc">^</span><span class="dv">2</span></span>
+<span id="cb184-4"><a href="functions-loops-and-conditional-statements-in-r.html#cb184-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">return</span>(<span class="fu">print</span>(<span class="fu">paste0</span>(<span class="st">&quot;The result is: &quot;</span>, number_increased)))</span>
+<span id="cb184-5"><a href="functions-loops-and-conditional-statements-in-r.html#cb184-5" aria-hidden="true" tabindex="-1"></a>}</span></code></pre></div>
+<div class="sourceCode" id="cb185"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb185-1"><a href="functions-loops-and-conditional-statements-in-r.html#cb185-1" aria-hidden="true" tabindex="-1"></a><span class="fu">myFun</span>()</span></code></pre></div>
+<pre><code>## [1] &quot;The result is: 100&quot;</code></pre>
+<div class="sourceCode" id="cb187"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb187-1"><a href="functions-loops-and-conditional-statements-in-r.html#cb187-1" aria-hidden="true" tabindex="-1"></a>myFunVar <span class="ot">&lt;-</span> <span class="cf">function</span>(x){</span>
+<span id="cb187-2"><a href="functions-loops-and-conditional-statements-in-r.html#cb187-2" aria-hidden="true" tabindex="-1"></a>  number <span class="ot">&lt;-</span> x</span>
+<span id="cb187-3"><a href="functions-loops-and-conditional-statements-in-r.html#cb187-3" aria-hidden="true" tabindex="-1"></a>  number_increased <span class="ot">&lt;-</span> number <span class="sc">^</span><span class="dv">2</span></span>
+<span id="cb187-4"><a href="functions-loops-and-conditional-statements-in-r.html#cb187-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">return</span>(<span class="fu">print</span>(<span class="fu">paste0</span>(<span class="st">&quot;The result is: &quot;</span>, number_increased)))</span>
+<span id="cb187-5"><a href="functions-loops-and-conditional-statements-in-r.html#cb187-5" aria-hidden="true" tabindex="-1"></a>}</span></code></pre></div>
+<div class="sourceCode" id="cb188"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb188-1"><a href="functions-loops-and-conditional-statements-in-r.html#cb188-1" aria-hidden="true" tabindex="-1"></a><span class="fu">myFunVar</span>(<span class="dv">5</span>)</span></code></pre></div>
+<pre><code>## [1] &quot;The result is: 25&quot;</code></pre>
+<div class="sourceCode" id="cb190"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb190-1"><a href="functions-loops-and-conditional-statements-in-r.html#cb190-1" aria-hidden="true" tabindex="-1"></a>myFunVarMulti <span class="ot">&lt;-</span> <span class="cf">function</span>(x,y){</span>
+<span id="cb190-2"><a href="functions-loops-and-conditional-statements-in-r.html#cb190-2" aria-hidden="true" tabindex="-1"></a>  number <span class="ot">&lt;-</span> x</span>
+<span id="cb190-3"><a href="functions-loops-and-conditional-statements-in-r.html#cb190-3" aria-hidden="true" tabindex="-1"></a>  number_increased <span class="ot">&lt;-</span> number <span class="sc">^</span>y</span>
+<span id="cb190-4"><a href="functions-loops-and-conditional-statements-in-r.html#cb190-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">return</span>(<span class="fu">print</span>(<span class="fu">paste0</span>(<span class="st">&quot;The result is: &quot;</span>, number_increased)))</span>
+<span id="cb190-5"><a href="functions-loops-and-conditional-statements-in-r.html#cb190-5" aria-hidden="true" tabindex="-1"></a>}</span></code></pre></div>
+<div class="sourceCode" id="cb191"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb191-1"><a href="functions-loops-and-conditional-statements-in-r.html#cb191-1" aria-hidden="true" tabindex="-1"></a><span class="fu">myFunVarMulti</span>(<span class="dv">5</span>, <span class="dv">3</span>)</span></code></pre></div>
+<pre><code>## [1] &quot;The result is: 125&quot;</code></pre>
+<p>Character-function</p>
+<div class="sourceCode" id="cb193"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb193-1"><a href="functions-loops-and-conditional-statements-in-r.html#cb193-1" aria-hidden="true" tabindex="-1"></a>greetName <span class="ot">&lt;-</span> <span class="cf">function</span>(name){</span>
+<span id="cb193-2"><a href="functions-loops-and-conditional-statements-in-r.html#cb193-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">return</span>(<span class="fu">print</span>(<span class="fu">paste0</span>(<span class="st">&quot;Hello &quot;</span>, name)))</span>
+<span id="cb193-3"><a href="functions-loops-and-conditional-statements-in-r.html#cb193-3" aria-hidden="true" tabindex="-1"></a>}</span></code></pre></div>
+<div class="sourceCode" id="cb194"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb194-1"><a href="functions-loops-and-conditional-statements-in-r.html#cb194-1" aria-hidden="true" tabindex="-1"></a><span class="fu">greetName</span>(<span class="st">&quot;Arie&quot;</span>)</span></code></pre></div>
+<pre><code>## [1] &quot;Hello Arie&quot;</code></pre>
+</div>
+<div id="loops" class="section level2" number="4.2">
+<h2><span class="header-section-number">4.2</span> Loops</h2>
+<div class="sourceCode" id="cb196"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb196-1"><a href="functions-loops-and-conditional-statements-in-r.html#cb196-1" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span>(i <span class="cf">in</span> <span class="dv">1</span><span class="sc">:</span><span class="dv">5</span>){</span>
+<span id="cb196-2"><a href="functions-loops-and-conditional-statements-in-r.html#cb196-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">print</span>(<span class="st">&quot;Hello&quot;</span>)</span>
+<span id="cb196-3"><a href="functions-loops-and-conditional-statements-in-r.html#cb196-3" aria-hidden="true" tabindex="-1"></a>}</span></code></pre></div>
+<pre><code>## [1] &quot;Hello&quot;
+## [1] &quot;Hello&quot;
+## [1] &quot;Hello&quot;
+## [1] &quot;Hello&quot;
+## [1] &quot;Hello&quot;</code></pre>
+<div class="sourceCode" id="cb198"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb198-1"><a href="functions-loops-and-conditional-statements-in-r.html#cb198-1" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span>(i <span class="cf">in</span> <span class="dv">1</span><span class="sc">:</span><span class="dv">10</span>){</span>
+<span id="cb198-2"><a href="functions-loops-and-conditional-statements-in-r.html#cb198-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">print</span>(<span class="dv">2</span> <span class="sc">*</span> i)</span>
+<span id="cb198-3"><a href="functions-loops-and-conditional-statements-in-r.html#cb198-3" aria-hidden="true" tabindex="-1"></a>}</span></code></pre></div>
+<pre><code>## [1] 2
+## [1] 4
+## [1] 6
+## [1] 8
+## [1] 10
+## [1] 12
+## [1] 14
+## [1] 16
+## [1] 18
+## [1] 20</code></pre>
+</div>
+<div id="conditional-statements-in-r" class="section level2" number="4.3">
+<h2><span class="header-section-number">4.3</span> Conditional statements in R</h2>
+<div class="sourceCode" id="cb200"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb200-1"><a href="functions-loops-and-conditional-statements-in-r.html#cb200-1" aria-hidden="true" tabindex="-1"></a>a <span class="ot">=</span> <span class="dv">10</span></span>
+<span id="cb200-2"><a href="functions-loops-and-conditional-statements-in-r.html#cb200-2" aria-hidden="true" tabindex="-1"></a>b <span class="ot">=</span> <span class="dv">20</span></span></code></pre></div>
+<div class="sourceCode" id="cb201"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb201-1"><a href="functions-loops-and-conditional-statements-in-r.html#cb201-1" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span> (a <span class="sc">&gt;</span> b){</span>
+<span id="cb201-2"><a href="functions-loops-and-conditional-statements-in-r.html#cb201-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">print</span>(<span class="st">&quot;A is larger than B&quot;</span>)</span>
+<span id="cb201-3"><a href="functions-loops-and-conditional-statements-in-r.html#cb201-3" aria-hidden="true" tabindex="-1"></a>} <span class="cf">else</span> {</span>
+<span id="cb201-4"><a href="functions-loops-and-conditional-statements-in-r.html#cb201-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">print</span>(<span class="st">&quot;That is not true&quot;</span>)</span>
+<span id="cb201-5"><a href="functions-loops-and-conditional-statements-in-r.html#cb201-5" aria-hidden="true" tabindex="-1"></a>}</span></code></pre></div>
+<pre><code>## [1] &quot;That is not true&quot;</code></pre>
+<div class="sourceCode" id="cb203"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb203-1"><a href="functions-loops-and-conditional-statements-in-r.html#cb203-1" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span> (a <span class="sc">&gt;</span> b){</span>
+<span id="cb203-2"><a href="functions-loops-and-conditional-statements-in-r.html#cb203-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">print</span>(<span class="st">&quot;A is larger than B&quot;</span>)</span>
+<span id="cb203-3"><a href="functions-loops-and-conditional-statements-in-r.html#cb203-3" aria-hidden="true" tabindex="-1"></a>} <span class="cf">else</span> <span class="cf">if</span> (a <span class="sc">&lt;</span> b) {</span>
+<span id="cb203-4"><a href="functions-loops-and-conditional-statements-in-r.html#cb203-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">print</span>(<span class="st">&quot;A is smaller than B&quot;</span>)</span>
+<span id="cb203-5"><a href="functions-loops-and-conditional-statements-in-r.html#cb203-5" aria-hidden="true" tabindex="-1"></a>} <span class="cf">else</span> {</span>
+<span id="cb203-6"><a href="functions-loops-and-conditional-statements-in-r.html#cb203-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">print</span>(<span class="st">&quot;That is not true&quot;</span>)</span>
+<span id="cb203-7"><a href="functions-loops-and-conditional-statements-in-r.html#cb203-7" aria-hidden="true" tabindex="-1"></a>}</span></code></pre></div>
+<pre><code>## [1] &quot;A is smaller than B&quot;</code></pre>
+
+</div>
+</div>
+            </section>
+
+          </div>
+        </div>
+      </div>
+<a href="using-the-dplyr-package-in-r-for-data-wrangling.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="data-visualization-in-ggplot.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+    </div>
+  </div>
+<script src="libs/gitbook-2.6.7/js/app.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/clipboard.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-search.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-sharing.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-fontsettings.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-bookdown.js"></script>
+<script src="libs/gitbook-2.6.7/js/jquery.highlight.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-clipboard.js"></script>
+<script>
+gitbook.require(["gitbook"], function(gitbook) {
+gitbook.start({
+"sharing": {
+"github": false,
+"facebook": true,
+"twitter": true,
+"linkedin": false,
+"weibo": false,
+"instapaper": false,
+"vk": false,
+"whatsapp": false,
+"all": ["facebook", "twitter", "linkedin", "weibo", "instapaper"]
+},
+"fontsettings": {
+"theme": "white",
+"family": "sans",
+"size": 2
+},
+"edit": {
+"link": null,
+"text": null
+},
+"history": {
+"link": null,
+"text": null
+},
+"view": {
+"link": null,
+"text": null
+},
+"download": null,
+"search": {
+"engine": "fuse",
+"options": null
+},
+"toc": {
+"collapse": "subsection"
+}
+});
+});
+</script>
+
+</body>
+
+</html>

@@ -1,1 +1,1 @@
-rmd_files: ["index.Rmd", "setup.Rmd", "elasticsearch_kibana.Rmd", "metricbeat.Rmd", "winlogbeat.Rmd", "filebeat.Rmd", "logstash.Rmd", "visualisation.Rmd"]
+rmd_files: ["index.Rmd", "introduction_r_syntax.Rmd", "working_with_data_frames_in_r.Rmd", "data_wrangling_dplyr_r.Rmd", "functions_loops_conditional_statements_r.Rmd", "data_visualisation_in_ggplot.Rmd", "working_with_external_data.Rmd"]

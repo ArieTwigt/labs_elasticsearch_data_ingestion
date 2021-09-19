@@ -1,0 +1,203 @@
+# Het *factor* datatype
+
+***Het `factor` datatype zijn we al een aantal keren tegengekomen in deze handleiding. Het lijkt misschien overdreven om een heel hoofdstuk aan een datatype toe te wijden. Echter zal je dit datatype veel tegen komen als je werkt met R. Daarbij kan je er ook zeer handig gebruik van maken en is het in sommige gevallen zelfs onmisbaar. In deze handleiding wordt het datatype `factor` uitgebreid uitgelegd en kun je aan de hand van demonstraties zien hoe je van het `factor` datatype handig gebruik kunt maken.***
+
+
+
+***
+
+\pagebreak
+
+## Het "factor"-datatype in R
+
+
+Naast de datatypes `character`, `numeric` en `boolean` is er ook het `factor` datatype. Dit datatype kun je op een eenvoudige manier beschrijven door te zeggen dat het een datatype is die qua eigenschappen tussen de `numeric` en `character` datatypen in zit. Het kan namelijk numerieke en character waarde bevatten, en er kan niet mee worden gerekend. Als we het `factor`-datatype beschrijven door vanuit de `character`-datatype te redeneren, kun je zeggen dat de `factor`-datatype een `character`-datatype is met vooraf gedefinieerde niveaus. Dit wordt aan de hand van een voorbeeld uitgelegd. Tijdens deze uitleg wordt gelijk geleerd hoe je handmatig een data frame kunt maken dooR-vectoren samen te stellen.
+
+>  *Het artikel, **[5]** [Factor variables, (Bruin, 2006)](http://www.ats.ucla.edu/stat/r/modules/factor_variables.htm) geeft een uitstekende uitleg over `factor` variabelen in R.* 
+
+### Handmatig data frames maken
+
+
+We maken twee tabellen, in R dus `data frames`, een (1) data frame dat het salaris per persoon weergeeft en (2) een data frame die het aantal personen op kantoor weergeeft.
+
+Om de `data frames` te maken, stellen we eerst `vectoren` op. Deze `vectoren` stellen we samen als `data frames`. 
+
+```{r}
+# Een vector maken met de namen van 10 personen
+personen <- c("Jack","Rosemarijn","Arie","Marco","Koen","Noah",
+             "Helga","Francis","Henk","Winston")
+#personen is een character vector
+class(personen)
+# Een vector maken met 10 salarissen. Let op! Om de juiste salarissen bij 
+# de bijbehorende personen te
+# houden, moeten de salarissen in dezelfde volgorde als de personen-vector 
+# worden gedefinieerd.
+salarissen <- c(7000,2800,5000,2000,3600,5000,7000,3100,6000,2000)
+#salarissen is een numeric vector
+class(salarissen)
+```
+
+Zoals we in de output kunnen zien, hebben de vectoren `personen` en `salarissen` respectievelijk de datatypen `character` en `numeric`. Nu we de twee vectoren hebben gedefinieerd, kunnen we deze samenvoegen tot een data frame. Dit doen we eenvoudig met de `data.frame()` functie.
+
+```{r}
+#De salarisPersonen dataframe maken
+salarisPersonen <- data.frame(personen,salarissen)
+salarisPersonen
+```
+
+De data frame ziet er keurig uit.
+Laten we de datatypes van de data frame bekijken met de `class` functie. De verwachting is dat `personen` de `character` datatype heeft en `salarissen` de `numeric` datatype.
+
+```{r}
+str(salarisPersonen)
+```
+
+Echter zien we dat `personen` in de kolom als data frame nu een `factor` is. We komen later hier op terug.
+
+
+
+## Een data frame plotten
+
+
+Als we nu deze informatie in een grafiek willen laten zien, kunnen we een eenvoudige staafdiagram maken door de personen op de x-as te plaatsen en de salarissen op de y-as. Dit doen we eenvoudig met de `barplot()` - functie. 
+
+> *Plot functies worden uitgebreid besproken in het hoofdstuk "Data importeren en plotten".*
+```{r}
+#Een barplot maken met de volgende parameters: staven van grootte 3, geen 
+#ruimte tussen de staven, namen op de x-as, en de vulkleur rood.
+barplot(salarisPersonen$salarissen, width = 3,space=0,
+        names.arg = personen,col="red")
+```
+
+We zien dat het staafdiagram exact in dezelfde volgorde wordt weergegeven als we die hebben gedefinieerd bij de `personen` vector. Dit is waar het `factor` datatype zijn werk doet, namelijk ervoor zorgen dat er in ieder geval een vorm van volgorde aanwezig is in de data frame. Echter slaat deze volgorde nergens op, deze is gewoon door R gegenereerd. In deze situatie maakt de volgorde niet uit, dus maken we er verder geen probleem van.
+
+
+
+## Het factor-datatype definiëren
+
+
+Als volgorde in een `character` datatype echter wel belangrijk is, maken we gebruik van de `factor` datatype. Een situatie waarbij dit handig is, is bijvoorbeeld namen van dagen en maanden. Laten we kijken wat de verschillen zijn als we hierbij geen gebruik maken van de `factor` datatype en wanneer we dat wel doen.
+
+```{r}
+#character
+dagen1 <- c("maandag","dinsdag","woensdag","donderdag",
+           "vrijdag","zaterdag","zondag")
+#factor
+dagen2 <- factor(dagen1,levels=c("maandag","dinsdag","woensdag",
+                                "donderdag","vrijdag","zaterdag",
+                                "zondag"))
+#numeric
+aanwezigen <- c(9,8,6,9,3,1,0)
+# De dataframe maken
+bezetting <- data.frame(dagen1,dagen2,aanwezigen)
+# De data frame laten zien
+bezetting
+# Eigenschappen van de data frame
+str(bezetting)
+```
+
+We kunnen bij de laatste output al zien (achter de `str()` functie dat voor de kolom `dagen1` de volgorde er niet helemaal goed uitziet. Dit is bij `dagen2` echter wel zo. Dit komt omdat we bij `dagen2` expliciet hebben aangeven dat we een `factor vector` willen hebben en daar duidelijk de volgorde in aangeven. Dit hebben we bij `dagen1` niet gedaan. R kiest hiervoor zelf de volgorde, die in dit geval alfabetisch is. Om dit nog duidelijker te demonstreren, laten we de twee vectoren nog een keer gesorteerd zien:
+
+```{r}
+# de character vector 'dagen1' gesorteerd weergeven
+sort(dagen1, decreasing = FALSE)
+# de character vector 'dagen2' gesorteerd weergeven
+sort(dagen2, decreasing = FALSE)
+```
+
+Zoals je kunt zien, wordt de `dagen1` vector simpelweg weergegeven in alfabetische volgorde. De `dagen2` vector wordt echter weergegeven in de goede volgorde van de dagen in de week, zoals we dat bij de factor vector gedefinieerd hebben. 
+
+Voor de duidelijkheid geeft R ook het aantal niveaus aan in de factor vector. Dit kun je ook individueel weergeven met de `levels()` functie:
+
+```{r}
+levels(dagen2)
+```
+
+
+## Data in de juiste volgorde plotten met factors
+
+
+Het nadeel van **geen** gebruik maken van factors zien we pas echt als we grafieken maken. We maken twee visualisaties: (1) een staafdiagram die de `dagen1` vector weergeeft, dus waarvan we geen gebruik hebben gemaakt van `factors` en (2) een staafdiagram met `dagen2` , waar we wel goed gebruik hebben gemaakt van `factors`. We zullen zien dat dit voor een staafdiagram nog goed gaat:
+
+```{r}
+#Barplot met de character vector dagen1
+barplot(bezetting$aanwezigen,width=3,space=0,names.arg = dagen1,col="orange")
+#Barplot met de factor vector dagen2
+barplot(bezetting$aanwezigen,width=3,space=0,names.arg = dagen2,col="darkgreen")
+```
+
+Beide grafieken zijn identiek omdat bij een `barplot` de numerieke waarde leidend is. De volgorde waarin deze numerieke waarde is gedefinieerd wordt dan gebruikt. Aangezien wij deze in de juiste volgorde hebben gedefinieerd, is er geen probleem. 
+
+Als we echter een grafiek willen maken, krijgen we wel een probleem. We doen nu hetzelfde testje voor een grafiek:
+
+```{r}
+#Grafiek met de character vector dagen1
+plot(bezetting$dagen1,bezetting$aanwezigen,type="l")
+#Grafiek met de factor vector dagen2
+plot(bezetting$dagen2,bezetting$aanwezigen,type="l")
+```
+
+Omdat we bij de eerste grafiek een `dagen1` hebben gebruikt en daardoor dus geen volgorde hebben kunnen genereren, kiest de `plot()` functie zelf een volgorde: welke in dit geval oplopend alfabetisch is en niet de goede volgorde van de dagen in de week. 
+
+
+## Handig gebruik maken van factor-vectoren
+
+
+We hebben gezien dat het factor datatype in sommige gevallen handig kan zijn en soms zelfs nodig is om het gewenste resultaat te krijgen. Maak je geen zorgen, in veel gevallen volstaat de `character` datatype. Wil je echter een volgorde of hiërarchie vastleggen in een `character` vector, maak dan gebruik van het `factor` datatype. Hiermee bespaar je veel sorteerwerk achteraf en zorg je ervoor dat je voorbewerking van de data staat als een huis. 
+
+Om nog een keer het gebruik van de `factor` datatype te laten zien, werken we nog 1 voorbeeld uit waarin we deze gebruiken. We maken opnieuw een klein werknemersbestandje, maar deze keer met de functies van de werknemers. Alhoewel ik het vrij ouderwets vind, bestaat er een bepaalde hiërarchie  onder functies. We stellen deze volgorde vast door gebruik te maken van een factor en laten uiteindelijk een tabel zien waarin gesorteerd naar hiërarchie de maandsalarissen worden getoond per persoon.
+
+```{r}
+# De namen van de werknemers aangeven
+namenPersonen <- c("Jack","Rosemarijn","Arie","Marco","Koen","Noah",
+                  "Helga","Francis","Henk","Winston")
+# De salarissen van de werknemers definiëren
+salarissenPersonen <- c(9000,2800,5000,2000,3600,5000,7000,3100,
+                       6000,2000)
+# De functies van de werknemers aangeven
+functiesPersonen <- c("Managing partner","Secretariaat",
+                     "Senior","Junior","Senior","Senior",
+                     "Partner","Senior","Partner","Facilitair")
+# De hiërarchie van functies aangeven
+functiesPersonen2 <- factor(functiesPersonen,levels=c(
+  "Managing partner","Partner","Senior","Junior","Secretariaat","Facilitair"))
+werknemersbestand <- data.frame(
+  namenPersonen,salarissenPersonen,functiesPersonen,functiesPersonen2)
+werknemersbestand
+```
+
+Zoals je kunt zien, hebben we een dataframe `werknemersbestand` aangemaakt die de namen, salarissen en functies van de personen bevat. Hierbij is `functiesPersonen` van het datatype `character` en `functiesPersonen2` van het type `factor`.
+
+
+## Een data frame ~~sorteren~~ rangschikken 
+
+
+**Terminologie**
+
+> *Nu moeten we letten op de terminologie: onder sorteren verstaan we in de volksmond soms dat we iets aflopen of oplopend sorteren. Echter is sorteren het plaatsen van elementen in de daarvoor gedefinieerde juiste doelen. Net zoals je als baby de juiste figuurtjes (driehoekje, blokje en rondje) in het juiste gat moest stoppen. Echter bedoelen we hier rangschikken: van hoog naar laag of van laag naar hoog.*
+Naast rangschikken op de salarissen kunnen we de data frame `werknemers`  nu ook rangschikken op de kolom `functiesPersonen2`. Om te rangschikken in R, gebruik je de `order` functie. Aan de hand van de volgende voorbeelden zullen we zien dat rangschikken in R vrij eenvoudig is.
+
+> *In het artikel **[6]** [**Sorting data**, (Kabacoff, 2014)](http://www.statmethods.net/management/sorting.html) wordt een handig overzicht gegeven over hoe je kunt sorteren in R.*
+```{r}
+# het werknemersbestand oplopend rangschikken op salarissen
+werknemersbestand[order(werknemersbestand$salarissenPersonen),]
+# het werknemersbestand aflopend rangschikken op salarissen
+werknemersbestand[order(-werknemersbestand$salarissenPersonen),]
+# het werknemers bestand aflopend rangschikken op functie (zonder hiërarchie)
+werknemersbestand[order(-werknemersbestand$functiesPersonen),]
+# het werknemers bestand aflopend rangschikken op functie (met hiërarchie)
+werknemersbestand[order(werknemersbestand$functiesPersonen2),]
+```
+
+Zoals je kunt zien, kunnen we sorteren op de functies in de volgorde die we voor de factor gedefinieerd hebben.
+
+De laatste tabel is gerangschikt op de functie (de factor-versie). Als we naar de *Senior* werknemers kijken, is het misschien een goede toevoeging om binnen een bepaalde functie aan werknemers een rangschikking (aflopend) van de salarissen toe te voegen. Op dit moment zie je namelijk dat de salarissen nog niet zijn gerangschikt Dit kunnen we eenvoudig doen door een extra argument aan de `order` functie toe te voegen. Namelijk `salarissenPersonen` als secondaire rangschikking.
+
+
+```{r}
+# Het werknemers bestand aflopend rangschikken op functie (met hiërarchie)
+werknemersbestand[order(werknemersbestand$functiesPersonen2,
+                        -werknemersbestand$salarissenPersonen),]
+```
+
+Het eindresultaat is dat de werknemers op functies zijn gerangschikt, en binnen de functies op hun salaris zijn gerangschikt.
