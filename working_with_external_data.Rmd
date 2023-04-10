@@ -1,0 +1,328 @@
+# Working with external data
+
+Extra kolommen, features, aanmaken die we kunnen gebruiken voor Machine Learning
+
+
+Zie slides:
+
+
+
+## Externe data
+
+Zie slides, csv-s downloaden van de website open data CBS
+
+
+Dataset importeren
+
+```{r}
+diensten <- read_delim("data/diensten.csv",     ";", escape_double = FALSE, trim_ws = TRUE)
+```
+
+
+Eigenschappen van de dataset bekijken
+
+```{r}
+str(diensten)
+```
+
+Prijs-eigenschappen zijn *characters*
+
+Het best om alles onder elkaar te zetten. 
+Hiermee converteren we alles in de juiste datatypes en in de juiste volgorden:
+* id's als eerst
+* vervolgd door character, date- datatypes
+* uiteindelijk de cijfers
+
+```{r}
+library(dplyr)
+
+diensten <- read_delim("data/diensten.csv", ";", escape_double = FALSE, trim_ws = TRUE)
+
+id_cols        <- c("ID")
+character_cols <- c("CPA2008", "Perioden")
+numeric_cols   <- c("Prijsindex_1", "Kwartaalmutaties_2", "Jaarmutaties_3") 
+
+diensten_clean <- diensten %>%
+  select(id_cols, numeric_cols, character_cols) %>%  
+  mutate_at(id_cols, funs(as.character)) %>% 
+  mutate_at(character_cols, funs(as.character)) %>%              
+  mutate_at(numeric_cols, funs(as.character)) %>%                
+  mutate_at(numeric_cols, funs(as.numeric)) 
+```
+
+Punten veranderen in `NA` waarden. Daar kunnen we niks mee. Laten we onze pipeline aanpassen:
+
+```{r}
+library(dplyr)
+
+diensten <- read_delim("data/diensten.csv", ";", escape_double = FALSE, trim_ws = TRUE)
+
+id_cols        <- c("ID")
+character_cols <- c("CPA2008", "Perioden")
+numeric_cols   <- c("Prijsindex_1", "Kwartaalmutaties_2", "Jaarmutaties_3") 
+
+diensten_clean <- diensten %>%
+  select(id_cols, character_cols, numeric_cols) %>%               
+  mutate_at(character_cols, funs(as.character)) %>%              
+  mutate_at(numeric_cols, funs(as.character)) %>%                
+  mutate_at(numeric_cols, funs(as.numeric)) %>%
+  filter(!is.na(Prijsindex_1)) 
+```
+
+
+Hoe gaan we met de kwartalen te werk? Hier zijn handige packages voor in R:
+* lubridate
+* zoo (gevonden via Google)
+
+```{r}
+library(zoo)
+```
+
+Experimenteren:
+
+Hoe ziet het er nu uit?
+
+```{r}
+head(diensten_clean$Perioden)
+```
+
+Functie in het *zoo* -package. Pakt de eerste datum van het kwartaal
+
+```{r}
+head(as.Date(as.yearqtr(diensten_clean$Perioden, format = "%YKW0%q")))
+```
+
+We willen een grafiek op een gelijk aggregatie-niveau: per kwartaal. We willen de jaarlijkse data dus niet hebben. Hiervoor worden ook de `NA` waarden gegenereerd.
+
+
+Laten de de pipeline weer aanpassen:
+
+```{r}
+library(dplyr)
+library(zoo)
+
+diensten <- read_delim("data/diensten.csv", ";", escape_double = FALSE, trim_ws = TRUE)
+
+id_cols        <- c("ID")
+character_cols <- c("CPA2008", "Perioden")
+numeric_cols   <- c("Prijsindex_1", "Kwartaalmutaties_2", "Jaarmutaties_3") 
+
+diensten_clean <- diensten %>%
+  select(id_cols, character_cols, numeric_cols) %>%               
+  mutate_at(character_cols, funs(as.character)) %>%              
+  mutate_at(numeric_cols, funs(as.character)) %>%                
+  mutate_at(numeric_cols, funs(as.numeric)) %>%
+  mutate(Perioden = as.Date(as.yearqtr(Perioden, format = "%YKW0%q"))) %>%
+  filter(!is.na(c(Prijsindex_1))) 
+```
+
+Zijn de datatypen goed?
+
+```{r}
+str(diensten_clean)
+
+```
+
+Ja.
+
+
+Misschien toch handig om de **jaar** en **kwartaal** data te hebben? Standaard ingebouwde functies in R:
+
+
+```{r}
+head(months(diensten_clean$Perioden))
+```
+
+De enige relevante in dit geval
+
+```{r}
+head(quarters(diensten_clean$Perioden))
+```
+
+Jaar gaat net iets anders:
+
+```{r}
+head(format(as.Date(diensten_clean$Perioden), "%Y"))
+```
+
+We gaan onze pipeline weer aanpassen
+
+```{r}
+library(dplyr)
+library(zoo)
+
+diensten <- read_delim("data/diensten.csv", ";", escape_double = FALSE, trim_ws = TRUE)
+
+id_cols        <- c("ID")
+character_cols <- c("CPA2008", "Perioden")
+numeric_cols   <- c("Prijsindex_1", "Kwartaalmutaties_2", "Jaarmutaties_3") 
+
+diensten_clean <- diensten %>%
+  select(id_cols, character_cols, numeric_cols) %>%               
+  mutate_at(character_cols, funs(as.character)) %>%              
+  mutate_at(numeric_cols, funs(as.character)) %>%                
+  mutate_at(numeric_cols, funs(as.numeric)) %>%
+  mutate(Perioden = as.Date(as.yearqtr(Perioden, format = "%YKW0%q"))) %>%
+  mutate(jaar = format(as.Date(Perioden), "%Y")) %>%
+  mutate(kwartaal = quarters(Perioden)) %>%
+  filter(!is.na(Prijsindex_1)) %>%
+  filter(!is.na(Perioden))
+```
+
+Dataset begint er al beter uit te zien. Nu nog de juiste titels van de functies.
+
+Staat beschreven in de metadata:
+
+```{r}
+diensten_mapping <- read_delim("data/metadata_diensten.csv",  ";", escape_double = FALSE, trim_ws = TRUE, skip = 11)
+```
+
+
+Bekijken of ze bij elkaar voor komen
+
+```{r}
+diensten_mapping$Key %in% diensten_clean$CPA2008
+```
+
+Hoeveel?
+
+```{r}
+sum(diensten_mapping$Key %in% diensten_clean$CPA2008)
+```
+
+
+"Match" functie toepassen in R
+
+
+
+```{r}
+diensten_clean$titel <- diensten_mapping$Title[match(diensten_clean$CPA2008, diensten_mapping$Key)]
+```
+
+Nog niet zo heel netjes
+
+```{r}
+head(diensten_clean$titel)
+```
+
+1) "Dienstenprijsindex (DPI)"  hebbenwe niet nodig --> is een samenvatting. 
+2) Code voor de titel willen we graag weghalen
+
+1 lossen we straks op in de pipeline met filteren
+2 Gaan we aan de hand van regular expressions en R eruit halen
+
+```{r}
+head(gsub('[[:digit:]]+ ', '', diensten_clean$titel))
+```
+
+Tijd om onze pipeline weer bij te werken:
+
+We gaan de volgende blokken toevoegen:
+
+```{r}
+diensten_mapping <- read_delim("data/metadata_diensten.csv",  ";", escape_double = FALSE, trim_ws = TRUE, skip = 11)
+```
+
+```{r}
+diensten_clean$titel <- diensten_mapping$Title[match(diensten_clean$CPA2008, diensten_mapping$Key)]
+```
+
+```{r}
+head(gsub('[[:digit:]]+', '', diensten_clean$titel))
+```
+
+
+```{r}
+library(dplyr)
+library(zoo)
+
+diensten <- read_delim("data/diensten.csv", ";", escape_double = FALSE, trim_ws = TRUE)
+diensten_mapping <- read_delim("data/metadata_diensten.csv",  ";", escape_double = FALSE, trim_ws = TRUE, skip = 11)
+
+id_cols        <- c("ID")
+character_cols <- c("CPA2008", "Perioden")
+numeric_cols   <- c("Prijsindex_1", "Kwartaalmutaties_2", "Jaarmutaties_3") 
+
+diensten_clean <- diensten %>%
+  select(id_cols, character_cols, numeric_cols) %>%               
+  mutate_at(character_cols, funs(as.character)) %>%              
+  mutate_at(numeric_cols, funs(as.character)) %>%                
+  mutate_at(numeric_cols, funs(as.numeric)) %>%
+  mutate(Perioden = as.Date(as.yearqtr(Perioden, format = "%YKW0%q"))) %>%
+  mutate(jaar = format(as.Date(Perioden), "%Y")) %>%
+  mutate(kwartaal = quarters(Perioden)) %>%
+  mutate(titel = diensten_mapping$Title[match(CPA2008, diensten_mapping$Key)]) %>%
+  mutate(titel = gsub('[[:digit:]]+', '', titel)) %>%
+  filter(titel != "Dienstenprijsindex (DPI)") %>%
+  filter(!is.na(c(Prijsindex_1))) %>%
+  filter(!is.na(Perioden))
+```
+
+```{r}
+write.csv(diensten_clean, "output_diensten.csv")
+```
+
+
+Laten we de data een final touch geven:
+
+
+```{r}
+library(dplyr)
+library(zoo)
+
+diensten <- read_delim("data/diensten.csv", ";", escape_double = FALSE, trim_ws = TRUE)
+diensten_mapping <- read_delim("data/metadata_diensten.csv",  ";", escape_double = FALSE, trim_ws = TRUE, skip = 11)
+
+id_cols        <- c("ID")
+character_cols <- c("CPA2008", "Perioden")
+numeric_cols   <- c("Prijsindex_1", "Kwartaalmutaties_2", "Jaarmutaties_3") 
+
+diensten_clean <- diensten %>%             
+  mutate_at(character_cols, funs(as.character)) %>%              
+  mutate_at(numeric_cols, funs(as.character)) %>%                
+  mutate_at(numeric_cols, funs(as.numeric)) %>%
+  mutate(Perioden = as.Date(as.yearqtr(Perioden, format = "%YKW0%q"))) %>%
+  mutate(jaar = format(as.Date(Perioden), "%Y")) %>%
+  mutate(kwartaal = quarters(Perioden)) %>%
+  mutate(titel = diensten_mapping$Title[match(CPA2008, diensten_mapping$Key)]) %>%
+  mutate(titel = gsub('[[:digit:]]+', '', titel)) %>%
+  filter(titel != "Dienstenprijsindex (DPI)") %>%
+  filter(!is.na(c(Prijsindex_1))) %>%
+  filter(!is.na(Perioden)) %>%
+  rename_all(.funs = funs(tolower(.))) %>%                     # Alle kolommen naar lowercase
+  select(-c("cpa2008", "jaarmutaties_3")) %>%                      # Kolommen verwijderen die niet meer van belang zijn
+  rename(prijsindex = prijsindex_1) %>%
+  rename(kwartaalmutaties = kwartaalmutaties_2) %>%
+  select(id, perioden, jaar, kwartaal, titel, prijsindex, kwartaalmutaties)
+```
+
+Basic visualiseren voor 1 type dienst
+
+Welke smaken zijn er allemaal
+
+```{r}
+unique(diensten_clean$titel)
+```
+
+```{r}
+diensten_fin <- diensten_clean %>%
+  filter(titel == "A Financiële audits en advisering..")
+```
+
+Plot een simpele barplot met ggplot
+
+```{r}
+library(ggplot2)
+library(plotly)
+
+p <- ggplot(data=diensten_fin, aes(x=perioden, y=prijsindex)) +
+  geom_bar(stat="identity") 
+
+ggplotly(p)
+```
+
+
+
+
+
+

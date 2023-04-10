@@ -1,0 +1,191 @@
+# Werken met lijsten en matrixen in R
+
+***Een `matrix` is een ander object in R dat een verzameling aan data onderverdeeld in rijen en kolommen kan bevatten. Een `matrix` lijkt veel op een data frame, maar heeft op sommige gebieden andere eigenschappen. Aan de hand van verschillende demonstraties en databewerkingen, krijg je een goed van matrixen in R en hoe deze zich verhouden ten opzichte van een data frames in R.*** 
+
+
+![](/Users/arietwigt/Dropbox/Data-analyseren-met-R-master/afbeeldingen/Tabellen.png)
+
+
+***
+
+\pagebreak
+
+## Handmatig een matrix maken
+
+
+De handigste manier om een matrix aan te maken in R is met de `matrix()` functie. Om een matrix op de manier te maken die je wenst, kun je standaard 3 parameters geven aan de `matrix()` functie:
+
+* `data` : Met welke data of met welke waarden de matrix gevuld moet worden;
+
+* `nrow` : Het aantal rijen dat de matrix moet hebben;
+
+* `ncol` : Het aantal kolommen dat de matrix moet hebben.
+
+Om dit te demonstreren, maken we een matrix aan die de waarden 1 t/m 10 bevat, verdeeld in 2 kolommen en 5 rijen.
+
+```{r}
+# de waarden 1 t/m 10 genereren
+getallen <- 1:10
+# de matrix "getallen" aanmaken met "getallen" als data
+getallenMatrix <- matrix(getallen, nrow = 5, ncol = 2)
+getallenMatrix
+```
+
+Zoals je kunt zien, wordt de matrix gevuld met de getallen die het `getallen` object bevat. 
+
+
+### Een matrix vullen per rij of per kolom
+
+
+Ook kun je zien dat dit per kolom opeenvolgend is gedaan. Als we de matrix willen vullen per rij in plaats van per kolom, kunnen we een `byrow` parameter toevoegen. Hiermee krijgen we het volgende resultaat.
+
+```{r}
+# getallenMatrix2 aanmaken, in dit geval vullen per rij
+getallenMatrix2 <- matrix(getallen, nrow = 5, ncol = 2, byrow = TRUE)
+getallenMatrix2
+```
+
+Zoals je kunt zien, is de matrix nu per rij gevuld.
+
+
+## Lijsten (lists) maken in R
+
+
+Net als bij een data frame, kan een matrix rij- en kolomnamen bevatten. Dit is heel handig als je bijvoorbeeld later data wilt opzoeken uit specifieke rijen en kolommen. Om dit te demonstreren, maken we een matrix waarin we voor een aantal personen een aantal eigenschappen bijhouden. Hierbij zetten we de namen van de personen op de rijen en de eigenschappen op de kolomnamen.
+
+
+
+```{r}
+# lijsten aanmaken van persoonsgegevens
+Harry <- list(
+          voornaam = "Harry", achternaam = "de Hengst", lengte = 1.87, 
+          gewicht = 81.3, woonplaats = "Leiden", rookt = FALSE, studie = "Bedrijfskunde",
+          geslacht = "M", leeftijd = 21
+          )
+```
+
+
+### Key-value pair in lists
+
+
+Lijsten (lists) zijn hele handige objecten in R. Lists bestaan namelijk uit vectoren die een naam hebben, in dit geval bijvoorbeeld `leeftijd`, `voornaam`, `rookt` enzovoort. Deze namen worden *keys* genoemd, de waarden achter deze namen worden *values* genoemd. Hierdoor spreek je over *key - value pairs*, of in Nederlands: de naam van de vector en de waarde in deze vector. Door deze opbouw, kun je net zoals bij een dataframe met de `$` operator de waarde achter een key oproepen. 
+
+
+### Verschillende datatypes opslaan in lists
+
+
+Een sterk punt van de `list` structuur is dat je waarden van verschillende datatypen er in kunt opslaan. Dit kan niet met een vector. Als je namelijk een vector maakt die allemaal numerieke waarden heeft en slechts een enkele `character` waarde, wordt de vector gelijk omgezet naar een `character` vector. Hierdoor worden alle numerieke waarden in de vector gelijk onbruikbaar. Dit probleem heb je met een `list` echter niet. Iedere waarde in een list heeft zijn eigenschappen. 
+
+```{r}
+waardenVector <- c(1, 2, 3, 4, "Woord")
+waardenVector
+class(waardenVector)
+waardenLijst <- list(1, 2, 3, 4, "Woord")
+waardenLijst 
+class(waardenLijst)
+```
+
+Je kunt aan de aanhalingstekens bij de nummers in de `waardenVector` zien dat de nummers omgezet zijn naar het `character` datatype. Dit is bij de `waardenLijst` echter niet zo.
+
+```{r}
+class(Harry)
+# de leeftijd van Harry terugvinden
+Harry$leeftijd
+# de gehele 'Harry' lijst weergeven
+Harry
+```
+
+> **Key-value pairs** *kom je in de Business Intelligence en Analytics wereld steeds meer tegen. Dit is een van de meeste gebruikte datastructuren die onder* *NoSQL* *categorie vallen. De JSON-datastructuur werkt ook met* *key-value pairs* *, daarom wordt JSON-data in R geïnterpreteerd als een `list` datatype.*
+Het is niet verplicht om de namen in een lijst een naam te geven. Het nadeel hiervan is echter dat je deze dan ook niet kunt oproepen zoals in het vorige voorbeeld.
+
+```{r}
+Japie <- list("Japie","Krekel", 1.47, 65.3, "Utrecht", TRUE,"Rechten","M",23)
+Roos <- list("Roos","Jansen", 1.67, 60, "Utrecht", FALSE,"Geneeskunde","V",25)
+Hans <- list("Hans","Klock", 1.78, 78.2, "Utrecht", FALSE,"Bedrijfskunde","M",20)
+Marco <- list("Marco","Polo", 1.89, 81.3, "Leiden", FALSE,"Rechten","M",19)
+Erica <- list("Erica","Jansen", 1.53, 65.3, "Leiden", TRUE,"Geneeskunde","V",27)
+```
+
+
+## Een matrix samenstellen op basis van lijsten
+
+
+Nu we de data hebben gemaakt, kunnen we de matrix samenstellen. In dit geval willen we rij- en kolomnamen toevoegen aan de matrix. Deze rij- en kolomnamen zijn de namen van de personen en de namen van de eigenschappen. Hiervoor gebruiken we de parameter `dimnames` in de `matrix()` functie. Hiervoor moeten we een lijst aanmaken die twee reeksen aan namen bevat, een voor de rijnamen (als eerst) en een voor de kolomnamen (als tweede). Hiervoor wordt de `list()` functie gebruikt. In het onderstaande voorbeeld krijg je een beter beeld over hoe dit in zijn werk gaat.
+
+```{r}
+# de personenMatrix maken op basis van lijsten
+personenMatrix <- 
+  matrix(c(Harry, Japie, Roos, Hans, Marco, Erica),
+         nrow = 6, 
+         ncol = 9, 
+         byrow = TRUE, 
+         dimnames = list( 
+           c("Harry","Japie","Roos","Hans","Marco","Erica"), 
+           c("Voornaam","Achternaam","Lengte","Gewicht","Woonplaats","Thuiswonend", 
+             "Studie", "Geslacht" ,"Leeftijd")))
+personenMatrix
+```
+
+Zoals je kunt zien, heeft de matrix nu rij- en kolomnamen.
+
+
+## Data uit de matrix selecteren
+
+Met matrixen kun je heel handig data opzoeken. Dit demonstreren we met de matrix die we in de vorige stap hebben gemaakt. Aangezien we rij- en kolomnamen hebben toegevoegd aan de matrix, is het makkelijker om specifieke datapunten op te zoeken. 
+
+
+### Data uit een matrix opzoeken met rij- en kolomnummers
+
+
+Net als bij een data frame, kunnen we de rij en kolomnummers invoeren om het datapunt op die plek in de matrix op te halen.
+
+```{r}
+# de waarde uit rij 4 en kolom 7 bekijken
+personenMatrix[4,7]
+```
+
+
+### Data uit een matrix opzoeken met rij- en kolomnamen
+
+
+Wat zeer handig is van deze matrix, is dat we rij- en kolomnamen hebben toegevoegd. Hiermee kunnen we heel duidelijk een specifiek data punt, of meerdere dataverzamelingen uit de matrix terughalen. Het is net alsof je tegen de matrix spreekt, bijvoorbeeld: "Wat is de woonplaats van Erica?".
+
+```{r}
+personenMatrix["Erica","Woonplaats"]
+```
+
+Op deze manier kun je zien op welke manier gebruik van rijnummers veel gemak kan opleveren bij het opzoeken van data uit een matrix.
+
+
+## Calculaties maken met matrixen
+
+
+Matrixen zijn zeer handig bij het toepassen van calculaties op meerdere waarden. Om dit te demonstreren, gebruiken we de matrixen die we in het begin van dit hoofdstuk hebben aangemaakt: `getallenMatrix` en `getallenMatrix2`.
+
+
+### Sommen toepassen op de gehele matrix
+
+
+Het is zeer eenvoudig om een bepaalde berekening toe te passen op alle waarden in een matrix:
+
+```{r}
+getallenMatrix
+# 3 optellen bij alle waarden in "getallenMatrix" 
+getallenMatrix + 3
+# alle waarden in "getallenMatrix" vermenigvuldigen met 2
+getallenMatrix *2
+```
+
+
+### Matrixen met elkaar vermenigvuldigen
+
+
+Je kunt ook een calculatie toepassen op een matrix op basis van de waarden uit een andere matrix. In het onderstaande voorbeeld worden alle waarden uit `getallenMatrix` vermenigvuldigt met de waarden uit `getallenMatrix2` die op dezelfde plek staan. 
+Het voorbeeld daarna vermenigvuldigt alle waarden uit `getallenMatrix` met de waarden die op de eerste rij staan van `getallenMatrix2`.
+
+```{r}
+getallenMatrix
+getallenMatrix2
+getallenMatrix* getallenMatrix2
+getallenMatrix* getallenMatrix2[1,]
+```

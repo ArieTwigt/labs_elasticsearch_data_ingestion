@@ -1,0 +1,762 @@
+<!DOCTYPE html>
+<html lang="" xml:lang="">
+<head>
+
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <title>6 Working with external data | Programming and analyzing data with R</title>
+  <meta name="description" content="6 Working with external data | Programming and analyzing data with R" />
+  <meta name="generator" content="bookdown 0.24 and GitBook 2.6.7" />
+
+  <meta property="og:title" content="6 Working with external data | Programming and analyzing data with R" />
+  <meta property="og:type" content="book" />
+  
+  
+  
+  
+
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content="6 Working with external data | Programming and analyzing data with R" />
+  
+  
+  
+
+
+
+
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+  
+  
+<link rel="prev" href="data-visualization-in-ggplot.html"/>
+
+<script src="libs/header-attrs-2.11/header-attrs.js"></script>
+<script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/fuse.js@6.4.6/dist/fuse.min.js"></script>
+<link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-highlight.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-search.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-fontsettings.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-clipboard.css" rel="stylesheet" />
+
+
+
+
+
+
+
+
+<link href="libs/anchor-sections-1.0.1/anchor-sections.css" rel="stylesheet" />
+<script src="libs/anchor-sections-1.0.1/anchor-sections.js"></script>
+<script src="libs/htmlwidgets-1.5.4/htmlwidgets.js"></script>
+<script src="libs/plotly-binding-4.9.4.1/plotly.js"></script>
+<script src="libs/typedarray-0.1/typedarray.min.js"></script>
+<link href="libs/crosstalk-1.1.1/css/crosstalk.css" rel="stylesheet" />
+<script src="libs/crosstalk-1.1.1/js/crosstalk.min.js"></script>
+<link href="libs/plotly-htmlwidgets-css-1.57.1/plotly-htmlwidgets.css" rel="stylesheet" />
+<script src="libs/plotly-main-1.57.1/plotly-latest.min.js"></script>
+
+
+<style type="text/css">
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+</style>
+
+
+</head>
+
+<body>
+
+
+
+  <div class="book without-animation with-summary font-size-2 font-family-1" data-basepath=".">
+
+    <div class="book-summary">
+      <nav role="navigation">
+
+<ul class="summary">
+<li class="chapter" data-level="1" data-path="introduction-of-the-r-syntax.html"><a href="introduction-of-the-r-syntax.html"><i class="fa fa-check"></i><b>1</b> Introduction of the R syntax</a>
+<ul>
+<li class="chapter" data-level="1.1" data-path="introduction-of-the-r-syntax.html"><a href="introduction-of-the-r-syntax.html#variable-assignment-in-r"><i class="fa fa-check"></i><b>1.1</b> Variable assignment in R</a>
+<ul>
+<li class="chapter" data-level="1.1.1" data-path="introduction-of-the-r-syntax.html"><a href="introduction-of-the-r-syntax.html#vectors-in-r"><i class="fa fa-check"></i><b>1.1.1</b> Vectors in R</a></li>
+<li class="chapter" data-level="1.1.2" data-path="introduction-of-the-r-syntax.html"><a href="introduction-of-the-r-syntax.html#assigning-multiple-values-to-a-variable-with-the-c-function"><i class="fa fa-check"></i><b>1.1.2</b> Assigning multiple values to a variable with the <code>c()</code> function</a></li>
+<li class="chapter" data-level="1.1.3" data-path="introduction-of-the-r-syntax.html"><a href="introduction-of-the-r-syntax.html#getting-values-by-indices-in-a-vector-in-r"><i class="fa fa-check"></i><b>1.1.3</b> Getting values by indices in a vector in R</a></li>
+<li class="chapter" data-level="1.1.4" data-path="introduction-of-the-r-syntax.html"><a href="introduction-of-the-r-syntax.html#different-data-types-in-r"><i class="fa fa-check"></i><b>1.1.4</b> Different data types in R</a></li>
+<li class="chapter" data-level="1.1.5" data-path="introduction-of-the-r-syntax.html"><a href="introduction-of-the-r-syntax.html#converting-to-different-data-types-in-r"><i class="fa fa-check"></i><b>1.1.5</b> Converting to different data types in R</a></li>
+<li class="chapter" data-level="1.1.6" data-path="introduction-of-the-r-syntax.html"><a href="introduction-of-the-r-syntax.html#the-logical-data-type-in-r"><i class="fa fa-check"></i><b>1.1.6</b> The <code>logical</code> data type in R</a></li>
+</ul></li>
+<li class="chapter" data-level="1.2" data-path="introduction-of-the-r-syntax.html"><a href="introduction-of-the-r-syntax.html#calculations-with-r"><i class="fa fa-check"></i><b>1.2</b> Calculations with R</a></li>
+<li class="chapter" data-level="1.3" data-path="introduction-of-the-r-syntax.html"><a href="introduction-of-the-r-syntax.html#statistical-functions-in-r"><i class="fa fa-check"></i><b>1.3</b> Statistical functions in R</a>
+<ul>
+<li class="chapter" data-level="1.3.1" data-path="introduction-of-the-r-syntax.html"><a href="introduction-of-the-r-syntax.html#exploring-the-data"><i class="fa fa-check"></i><b>1.3.1</b> Exploring the data</a></li>
+<li class="chapter" data-level="1.3.2" data-path="introduction-of-the-r-syntax.html"><a href="introduction-of-the-r-syntax.html#statistical-functions-for-data-exploration-in-r"><i class="fa fa-check"></i><b>1.3.2</b> Statistical functions for data exploration in R</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="2" data-path="working-with-data-frames-in-r.html"><a href="working-with-data-frames-in-r.html"><i class="fa fa-check"></i><b>2</b> Working with Data Frames in R</a>
+<ul>
+<li class="chapter" data-level="2.1" data-path="working-with-data-frames-in-r.html"><a href="working-with-data-frames-in-r.html#the-example-dataset"><i class="fa fa-check"></i><b>2.1</b> The example dataset</a></li>
+<li class="chapter" data-level="2.2" data-path="working-with-data-frames-in-r.html"><a href="working-with-data-frames-in-r.html#importing-data-with-rstudio"><i class="fa fa-check"></i><b>2.2</b> Importing data with RStudio</a></li>
+<li class="chapter" data-level="2.3" data-path="working-with-data-frames-in-r.html"><a href="working-with-data-frames-in-r.html#exploring-data-frames-in-r"><i class="fa fa-check"></i><b>2.3</b> Exploring data frames in R</a>
+<ul>
+<li class="chapter" data-level="2.3.1" data-path="working-with-data-frames-in-r.html"><a href="working-with-data-frames-in-r.html#selecting-rows-and-columns-in-a-data-frame"><i class="fa fa-check"></i><b>2.3.1</b> Selecting rows and columns in a data frame</a></li>
+<li class="chapter" data-level="2.3.2" data-path="working-with-data-frames-in-r.html"><a href="working-with-data-frames-in-r.html#filtering-data-frames"><i class="fa fa-check"></i><b>2.3.2</b> Filtering data frames</a></li>
+</ul></li>
+<li class="chapter" data-level="2.4" data-path="working-with-data-frames-in-r.html"><a href="working-with-data-frames-in-r.html#data-exploration-with-basic-r-visualisations"><i class="fa fa-check"></i><b>2.4</b> Data exploration with basic R visualisations</a></li>
+</ul></li>
+<li class="chapter" data-level="3" data-path="using-the-dplyr-package-in-r-for-data-wrangling.html"><a href="using-the-dplyr-package-in-r-for-data-wrangling.html"><i class="fa fa-check"></i><b>3</b> Using the dplyr package in R for data wrangling</a>
+<ul>
+<li class="chapter" data-level="3.1" data-path="using-the-dplyr-package-in-r-for-data-wrangling.html"><a href="using-the-dplyr-package-in-r-for-data-wrangling.html#installing-and-loading-the-dplyr-package"><i class="fa fa-check"></i><b>3.1</b> Installing and loading the <code>dplyr</code> package</a></li>
+<li class="chapter" data-level="3.2" data-path="using-the-dplyr-package-in-r-for-data-wrangling.html"><a href="using-the-dplyr-package-in-r-for-data-wrangling.html#creating-subsets-of-a-data-frame-with-dplyr"><i class="fa fa-check"></i><b>3.2</b> Creating subsets of a data frame with dplyr</a></li>
+<li class="chapter" data-level="3.3" data-path="using-the-dplyr-package-in-r-for-data-wrangling.html"><a href="using-the-dplyr-package-in-r-for-data-wrangling.html#combining-dplyr-for-creating-visualisations-for-specific-subsets"><i class="fa fa-check"></i><b>3.3</b> Combining dplyr for creating visualisations for specific subsets</a></li>
+<li class="chapter" data-level="3.4" data-path="using-the-dplyr-package-in-r-for-data-wrangling.html"><a href="using-the-dplyr-package-in-r-for-data-wrangling.html#creating-subsets-and-aggregations-in-dplyr"><i class="fa fa-check"></i><b>3.4</b> Creating subsets and aggregations in dplyr</a></li>
+</ul></li>
+<li class="chapter" data-level="4" data-path="functions-loops-and-conditional-statements-in-r.html"><a href="functions-loops-and-conditional-statements-in-r.html"><i class="fa fa-check"></i><b>4</b> Functions, loops and conditional statements in R</a>
+<ul>
+<li class="chapter" data-level="4.1" data-path="functions-loops-and-conditional-statements-in-r.html"><a href="functions-loops-and-conditional-statements-in-r.html#writing-functions-in-r"><i class="fa fa-check"></i><b>4.1</b> Writing functions in R</a></li>
+<li class="chapter" data-level="4.2" data-path="functions-loops-and-conditional-statements-in-r.html"><a href="functions-loops-and-conditional-statements-in-r.html#loops"><i class="fa fa-check"></i><b>4.2</b> Loops</a></li>
+<li class="chapter" data-level="4.3" data-path="functions-loops-and-conditional-statements-in-r.html"><a href="functions-loops-and-conditional-statements-in-r.html#conditional-statements-in-r"><i class="fa fa-check"></i><b>4.3</b> Conditional statements in R</a></li>
+</ul></li>
+<li class="chapter" data-level="5" data-path="data-visualization-in-ggplot.html"><a href="data-visualization-in-ggplot.html"><i class="fa fa-check"></i><b>5</b> Data visualization in ggplot</a>
+<ul>
+<li class="chapter" data-level="5.1" data-path="data-visualization-in-ggplot.html"><a href="data-visualization-in-ggplot.html#installing-and-loading-the-required-packages"><i class="fa fa-check"></i><b>5.1</b> Installing and loading the required packages</a></li>
+<li class="chapter" data-level="5.2" data-path="data-visualization-in-ggplot.html"><a href="data-visualization-in-ggplot.html#normal-plots-vs-ggplot-in-r"><i class="fa fa-check"></i><b>5.2</b> Normal plots vs ggplot in R</a></li>
+<li class="chapter" data-level="5.3" data-path="data-visualization-in-ggplot.html"><a href="data-visualization-in-ggplot.html#different-types-of-visualizations-with-ggplot"><i class="fa fa-check"></i><b>5.3</b> Different types of visualizations with ggplot</a></li>
+<li class="chapter" data-level="5.4" data-path="data-visualization-in-ggplot.html"><a href="data-visualization-in-ggplot.html#using-multiple-dimensions-in-ggplot"><i class="fa fa-check"></i><b>5.4</b> Using multiple dimensions in ggplot</a></li>
+<li class="chapter" data-level="5.5" data-path="data-visualization-in-ggplot.html"><a href="data-visualization-in-ggplot.html#making-visualisations-interactive-with-plotly"><i class="fa fa-check"></i><b>5.5</b> Making visualisations interactive with plotly</a></li>
+<li class="chapter" data-level="5.6" data-path="data-visualization-in-ggplot.html"><a href="data-visualization-in-ggplot.html#experimenting-multiple-ways-to-display-your-data"><i class="fa fa-check"></i><b>5.6</b> Experimenting multiple ways to display your data</a>
+<ul>
+<li class="chapter" data-level="5.6.1" data-path="data-visualization-in-ggplot.html"><a href="data-visualization-in-ggplot.html#using-different-themes"><i class="fa fa-check"></i><b>5.6.1</b> Using different themes</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="6" data-path="working-with-external-data.html"><a href="working-with-external-data.html"><i class="fa fa-check"></i><b>6</b> Working with external data</a>
+<ul>
+<li class="chapter" data-level="6.1" data-path="working-with-external-data.html"><a href="working-with-external-data.html#externe-data"><i class="fa fa-check"></i><b>6.1</b> Externe data</a></li>
+</ul></li>
+</ul>
+
+      </nav>
+    </div>
+
+    <div class="book-body">
+      <div class="body-inner">
+        <div class="book-header" role="navigation">
+          <h1>
+            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">Programming and analyzing data with R</a>
+          </h1>
+        </div>
+
+        <div class="page-wrapper" tabindex="-1" role="main">
+          <div class="page-inner">
+
+            <section class="normal" id="section-">
+<div id="working-with-external-data" class="section level1" number="6">
+<h1><span class="header-section-number">6</span> Working with external data</h1>
+<p>Extra kolommen, features, aanmaken die we kunnen gebruiken voor Machine Learning</p>
+<p>Zie slides:</p>
+<div id="externe-data" class="section level2" number="6.1">
+<h2><span class="header-section-number">6.1</span> Externe data</h2>
+<p>Zie slides, csv-s downloaden van de website open data CBS</p>
+<p>Dataset importeren</p>
+<div class="sourceCode" id="cb248"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb248-1"><a href="working-with-external-data.html#cb248-1" aria-hidden="true" tabindex="-1"></a>diensten <span class="ot">&lt;-</span> <span class="fu">read_delim</span>(<span class="st">&quot;data/diensten.csv&quot;</span>,     <span class="st">&quot;;&quot;</span>, <span class="at">escape_double =</span> <span class="cn">FALSE</span>, <span class="at">trim_ws =</span> <span class="cn">TRUE</span>)</span></code></pre></div>
+<pre><code>## Rows: 10375 Columns: 6</code></pre>
+<pre><code>## ── Column specification ────────────────────────────────────────────────────────
+## Delimiter: &quot;;&quot;
+## chr (5): CPA2008, Perioden, Prijsindex_1, Kwartaalmutaties_2, Jaarmutaties_3
+## dbl (1): ID</code></pre>
+<pre><code>## 
+## ℹ Use `spec()` to retrieve the full column specification for this data.
+## ℹ Specify the column types or set `show_col_types = FALSE` to quiet this message.</code></pre>
+<p>Eigenschappen van de dataset bekijken</p>
+<div class="sourceCode" id="cb252"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb252-1"><a href="working-with-external-data.html#cb252-1" aria-hidden="true" tabindex="-1"></a><span class="fu">str</span>(diensten)</span></code></pre></div>
+<pre><code>## spec_tbl_df [10,375 × 6] (S3: spec_tbl_df/tbl_df/tbl/data.frame)
+##  $ ID                : num [1:10375] 0 1 2 3 4 5 6 7 8 9 ...
+##  $ CPA2008           : chr [1:10375] &quot;T001157&quot; &quot;T001157&quot; &quot;T001157&quot; &quot;T001157&quot; ...
+##  $ Perioden          : chr [1:10375] &quot;2002KW04&quot; &quot;2003KW01&quot; &quot;2003KW02&quot; &quot;2003KW03&quot; ...
+##  $ Prijsindex_1      : chr [1:10375] &quot;.&quot; &quot;.&quot; &quot;.&quot; &quot;.&quot; ...
+##  $ Kwartaalmutaties_2: chr [1:10375] &quot;.&quot; &quot;.&quot; &quot;.&quot; &quot;.&quot; ...
+##  $ Jaarmutaties_3    : chr [1:10375] &quot;.&quot; &quot;.&quot; &quot;.&quot; &quot;.&quot; ...
+##  - attr(*, &quot;spec&quot;)=
+##   .. cols(
+##   ..   ID = col_double(),
+##   ..   CPA2008 = col_character(),
+##   ..   Perioden = col_character(),
+##   ..   Prijsindex_1 = col_character(),
+##   ..   Kwartaalmutaties_2 = col_character(),
+##   ..   Jaarmutaties_3 = col_character()
+##   .. )
+##  - attr(*, &quot;problems&quot;)=&lt;externalptr&gt;</code></pre>
+<p>Prijs-eigenschappen zijn <em>characters</em></p>
+<p>Het best om alles onder elkaar te zetten.
+Hiermee converteren we alles in de juiste datatypes en in de juiste volgorden:
+* id’s als eerst
+* vervolgd door character, date- datatypes
+* uiteindelijk de cijfers</p>
+<div class="sourceCode" id="cb254"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb254-1"><a href="working-with-external-data.html#cb254-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(dplyr)</span>
+<span id="cb254-2"><a href="working-with-external-data.html#cb254-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb254-3"><a href="working-with-external-data.html#cb254-3" aria-hidden="true" tabindex="-1"></a>diensten <span class="ot">&lt;-</span> <span class="fu">read_delim</span>(<span class="st">&quot;data/diensten.csv&quot;</span>, <span class="st">&quot;;&quot;</span>, <span class="at">escape_double =</span> <span class="cn">FALSE</span>, <span class="at">trim_ws =</span> <span class="cn">TRUE</span>)</span></code></pre></div>
+<pre><code>## Rows: 10375 Columns: 6</code></pre>
+<pre><code>## ── Column specification ────────────────────────────────────────────────────────
+## Delimiter: &quot;;&quot;
+## chr (5): CPA2008, Perioden, Prijsindex_1, Kwartaalmutaties_2, Jaarmutaties_3
+## dbl (1): ID</code></pre>
+<pre><code>## 
+## ℹ Use `spec()` to retrieve the full column specification for this data.
+## ℹ Specify the column types or set `show_col_types = FALSE` to quiet this message.</code></pre>
+<div class="sourceCode" id="cb258"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb258-1"><a href="working-with-external-data.html#cb258-1" aria-hidden="true" tabindex="-1"></a>id_cols        <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">&quot;ID&quot;</span>)</span>
+<span id="cb258-2"><a href="working-with-external-data.html#cb258-2" aria-hidden="true" tabindex="-1"></a>character_cols <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">&quot;CPA2008&quot;</span>, <span class="st">&quot;Perioden&quot;</span>)</span>
+<span id="cb258-3"><a href="working-with-external-data.html#cb258-3" aria-hidden="true" tabindex="-1"></a>numeric_cols   <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">&quot;Prijsindex_1&quot;</span>, <span class="st">&quot;Kwartaalmutaties_2&quot;</span>, <span class="st">&quot;Jaarmutaties_3&quot;</span>) </span>
+<span id="cb258-4"><a href="working-with-external-data.html#cb258-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb258-5"><a href="working-with-external-data.html#cb258-5" aria-hidden="true" tabindex="-1"></a>diensten_clean <span class="ot">&lt;-</span> diensten <span class="sc">%&gt;%</span></span>
+<span id="cb258-6"><a href="working-with-external-data.html#cb258-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(id_cols, numeric_cols, character_cols) <span class="sc">%&gt;%</span>  </span>
+<span id="cb258-7"><a href="working-with-external-data.html#cb258-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate_at</span>(id_cols, <span class="fu">funs</span>(as.character)) <span class="sc">%&gt;%</span> </span>
+<span id="cb258-8"><a href="working-with-external-data.html#cb258-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate_at</span>(character_cols, <span class="fu">funs</span>(as.character)) <span class="sc">%&gt;%</span>              </span>
+<span id="cb258-9"><a href="working-with-external-data.html#cb258-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate_at</span>(numeric_cols, <span class="fu">funs</span>(as.character)) <span class="sc">%&gt;%</span>                </span>
+<span id="cb258-10"><a href="working-with-external-data.html#cb258-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate_at</span>(numeric_cols, <span class="fu">funs</span>(as.numeric)) </span></code></pre></div>
+<pre><code>## Note: Using an external vector in selections is ambiguous.
+## ℹ Use `all_of(id_cols)` instead of `id_cols` to silence this message.
+## ℹ See &lt;https://tidyselect.r-lib.org/reference/faq-external-vector.html&gt;.
+## This message is displayed once per session.</code></pre>
+<pre><code>## Note: Using an external vector in selections is ambiguous.
+## ℹ Use `all_of(numeric_cols)` instead of `numeric_cols` to silence this message.
+## ℹ See &lt;https://tidyselect.r-lib.org/reference/faq-external-vector.html&gt;.
+## This message is displayed once per session.</code></pre>
+<pre><code>## Note: Using an external vector in selections is ambiguous.
+## ℹ Use `all_of(character_cols)` instead of `character_cols` to silence this message.
+## ℹ See &lt;https://tidyselect.r-lib.org/reference/faq-external-vector.html&gt;.
+## This message is displayed once per session.</code></pre>
+<pre><code>## Warning: `funs()` was deprecated in dplyr 0.8.0.
+## Please use a list of either functions or lambdas: 
+## 
+##   # Simple named list: 
+##   list(mean = mean, median = median)
+## 
+##   # Auto named with `tibble::lst()`: 
+##   tibble::lst(mean, median)
+## 
+##   # Using lambdas
+##   list(~ mean(., trim = .2), ~ median(., na.rm = TRUE))
+## This warning is displayed once every 8 hours.
+## Call `lifecycle::last_warnings()` to see where this warning was generated.</code></pre>
+<pre><code>## Warning in mask$eval_all_mutate(quo): NAs introduced by coercion
+
+## Warning in mask$eval_all_mutate(quo): NAs introduced by coercion
+
+## Warning in mask$eval_all_mutate(quo): NAs introduced by coercion</code></pre>
+<p>Punten veranderen in <code>NA</code> waarden. Daar kunnen we niks mee. Laten we onze pipeline aanpassen:</p>
+<div class="sourceCode" id="cb264"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb264-1"><a href="working-with-external-data.html#cb264-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(dplyr)</span>
+<span id="cb264-2"><a href="working-with-external-data.html#cb264-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb264-3"><a href="working-with-external-data.html#cb264-3" aria-hidden="true" tabindex="-1"></a>diensten <span class="ot">&lt;-</span> <span class="fu">read_delim</span>(<span class="st">&quot;data/diensten.csv&quot;</span>, <span class="st">&quot;;&quot;</span>, <span class="at">escape_double =</span> <span class="cn">FALSE</span>, <span class="at">trim_ws =</span> <span class="cn">TRUE</span>)</span></code></pre></div>
+<pre><code>## Rows: 10375 Columns: 6</code></pre>
+<pre><code>## ── Column specification ────────────────────────────────────────────────────────
+## Delimiter: &quot;;&quot;
+## chr (5): CPA2008, Perioden, Prijsindex_1, Kwartaalmutaties_2, Jaarmutaties_3
+## dbl (1): ID</code></pre>
+<pre><code>## 
+## ℹ Use `spec()` to retrieve the full column specification for this data.
+## ℹ Specify the column types or set `show_col_types = FALSE` to quiet this message.</code></pre>
+<div class="sourceCode" id="cb268"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb268-1"><a href="working-with-external-data.html#cb268-1" aria-hidden="true" tabindex="-1"></a>id_cols        <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">&quot;ID&quot;</span>)</span>
+<span id="cb268-2"><a href="working-with-external-data.html#cb268-2" aria-hidden="true" tabindex="-1"></a>character_cols <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">&quot;CPA2008&quot;</span>, <span class="st">&quot;Perioden&quot;</span>)</span>
+<span id="cb268-3"><a href="working-with-external-data.html#cb268-3" aria-hidden="true" tabindex="-1"></a>numeric_cols   <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">&quot;Prijsindex_1&quot;</span>, <span class="st">&quot;Kwartaalmutaties_2&quot;</span>, <span class="st">&quot;Jaarmutaties_3&quot;</span>) </span>
+<span id="cb268-4"><a href="working-with-external-data.html#cb268-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb268-5"><a href="working-with-external-data.html#cb268-5" aria-hidden="true" tabindex="-1"></a>diensten_clean <span class="ot">&lt;-</span> diensten <span class="sc">%&gt;%</span></span>
+<span id="cb268-6"><a href="working-with-external-data.html#cb268-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(id_cols, character_cols, numeric_cols) <span class="sc">%&gt;%</span>               </span>
+<span id="cb268-7"><a href="working-with-external-data.html#cb268-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate_at</span>(character_cols, <span class="fu">funs</span>(as.character)) <span class="sc">%&gt;%</span>              </span>
+<span id="cb268-8"><a href="working-with-external-data.html#cb268-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate_at</span>(numeric_cols, <span class="fu">funs</span>(as.character)) <span class="sc">%&gt;%</span>                </span>
+<span id="cb268-9"><a href="working-with-external-data.html#cb268-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate_at</span>(numeric_cols, <span class="fu">funs</span>(as.numeric)) <span class="sc">%&gt;%</span></span>
+<span id="cb268-10"><a href="working-with-external-data.html#cb268-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(<span class="sc">!</span><span class="fu">is.na</span>(Prijsindex_1)) </span></code></pre></div>
+<pre><code>## Warning in mask$eval_all_mutate(quo): NAs introduced by coercion
+
+## Warning in mask$eval_all_mutate(quo): NAs introduced by coercion
+
+## Warning in mask$eval_all_mutate(quo): NAs introduced by coercion</code></pre>
+<p>Hoe gaan we met de kwartalen te werk? Hier zijn handige packages voor in R:
+* lubridate
+* zoo (gevonden via Google)</p>
+<div class="sourceCode" id="cb270"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb270-1"><a href="working-with-external-data.html#cb270-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(zoo)</span></code></pre></div>
+<pre><code>## 
+## Attaching package: &#39;zoo&#39;</code></pre>
+<pre><code>## The following objects are masked from &#39;package:base&#39;:
+## 
+##     as.Date, as.Date.numeric</code></pre>
+<p>Experimenteren:</p>
+<p>Hoe ziet het er nu uit?</p>
+<div class="sourceCode" id="cb273"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb273-1"><a href="working-with-external-data.html#cb273-1" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(diensten_clean<span class="sc">$</span>Perioden)</span></code></pre></div>
+<pre><code>## [1] &quot;2006KW01&quot; &quot;2006KW02&quot; &quot;2006KW03&quot; &quot;2006KW04&quot; &quot;2006JJ00&quot; &quot;2007KW01&quot;</code></pre>
+<p>Functie in het <em>zoo</em> -package. Pakt de eerste datum van het kwartaal</p>
+<div class="sourceCode" id="cb275"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb275-1"><a href="working-with-external-data.html#cb275-1" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(<span class="fu">as.Date</span>(<span class="fu">as.yearqtr</span>(diensten_clean<span class="sc">$</span>Perioden, <span class="at">format =</span> <span class="st">&quot;%YKW0%q&quot;</span>)))</span></code></pre></div>
+<pre><code>## [1] &quot;2006-01-01&quot; &quot;2006-04-01&quot; &quot;2006-07-01&quot; &quot;2006-10-01&quot; NA          
+## [6] &quot;2007-01-01&quot;</code></pre>
+<p>We willen een grafiek op een gelijk aggregatie-niveau: per kwartaal. We willen de jaarlijkse data dus niet hebben. Hiervoor worden ook de <code>NA</code> waarden gegenereerd.</p>
+<p>Laten de de pipeline weer aanpassen:</p>
+<div class="sourceCode" id="cb277"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb277-1"><a href="working-with-external-data.html#cb277-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(dplyr)</span>
+<span id="cb277-2"><a href="working-with-external-data.html#cb277-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(zoo)</span>
+<span id="cb277-3"><a href="working-with-external-data.html#cb277-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb277-4"><a href="working-with-external-data.html#cb277-4" aria-hidden="true" tabindex="-1"></a>diensten <span class="ot">&lt;-</span> <span class="fu">read_delim</span>(<span class="st">&quot;data/diensten.csv&quot;</span>, <span class="st">&quot;;&quot;</span>, <span class="at">escape_double =</span> <span class="cn">FALSE</span>, <span class="at">trim_ws =</span> <span class="cn">TRUE</span>)</span></code></pre></div>
+<pre><code>## Rows: 10375 Columns: 6</code></pre>
+<pre><code>## ── Column specification ────────────────────────────────────────────────────────
+## Delimiter: &quot;;&quot;
+## chr (5): CPA2008, Perioden, Prijsindex_1, Kwartaalmutaties_2, Jaarmutaties_3
+## dbl (1): ID</code></pre>
+<pre><code>## 
+## ℹ Use `spec()` to retrieve the full column specification for this data.
+## ℹ Specify the column types or set `show_col_types = FALSE` to quiet this message.</code></pre>
+<div class="sourceCode" id="cb281"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb281-1"><a href="working-with-external-data.html#cb281-1" aria-hidden="true" tabindex="-1"></a>id_cols        <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">&quot;ID&quot;</span>)</span>
+<span id="cb281-2"><a href="working-with-external-data.html#cb281-2" aria-hidden="true" tabindex="-1"></a>character_cols <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">&quot;CPA2008&quot;</span>, <span class="st">&quot;Perioden&quot;</span>)</span>
+<span id="cb281-3"><a href="working-with-external-data.html#cb281-3" aria-hidden="true" tabindex="-1"></a>numeric_cols   <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">&quot;Prijsindex_1&quot;</span>, <span class="st">&quot;Kwartaalmutaties_2&quot;</span>, <span class="st">&quot;Jaarmutaties_3&quot;</span>) </span>
+<span id="cb281-4"><a href="working-with-external-data.html#cb281-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb281-5"><a href="working-with-external-data.html#cb281-5" aria-hidden="true" tabindex="-1"></a>diensten_clean <span class="ot">&lt;-</span> diensten <span class="sc">%&gt;%</span></span>
+<span id="cb281-6"><a href="working-with-external-data.html#cb281-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(id_cols, character_cols, numeric_cols) <span class="sc">%&gt;%</span>               </span>
+<span id="cb281-7"><a href="working-with-external-data.html#cb281-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate_at</span>(character_cols, <span class="fu">funs</span>(as.character)) <span class="sc">%&gt;%</span>              </span>
+<span id="cb281-8"><a href="working-with-external-data.html#cb281-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate_at</span>(numeric_cols, <span class="fu">funs</span>(as.character)) <span class="sc">%&gt;%</span>                </span>
+<span id="cb281-9"><a href="working-with-external-data.html#cb281-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate_at</span>(numeric_cols, <span class="fu">funs</span>(as.numeric)) <span class="sc">%&gt;%</span></span>
+<span id="cb281-10"><a href="working-with-external-data.html#cb281-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">Perioden =</span> <span class="fu">as.Date</span>(<span class="fu">as.yearqtr</span>(Perioden, <span class="at">format =</span> <span class="st">&quot;%YKW0%q&quot;</span>))) <span class="sc">%&gt;%</span></span>
+<span id="cb281-11"><a href="working-with-external-data.html#cb281-11" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(<span class="sc">!</span><span class="fu">is.na</span>(<span class="fu">c</span>(Prijsindex_1))) </span></code></pre></div>
+<pre><code>## Warning in mask$eval_all_mutate(quo): NAs introduced by coercion
+
+## Warning in mask$eval_all_mutate(quo): NAs introduced by coercion
+
+## Warning in mask$eval_all_mutate(quo): NAs introduced by coercion</code></pre>
+<p>Zijn de datatypen goed?</p>
+<div class="sourceCode" id="cb283"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb283-1"><a href="working-with-external-data.html#cb283-1" aria-hidden="true" tabindex="-1"></a><span class="fu">str</span>(diensten_clean)</span></code></pre></div>
+<pre><code>## tibble [6,769 × 6] (S3: tbl_df/tbl/data.frame)
+##  $ ID                : num [1:6769] 16 17 18 19 20 21 22 23 24 25 ...
+##  $ CPA2008           : chr [1:6769] &quot;T001157&quot; &quot;T001157&quot; &quot;T001157&quot; &quot;T001157&quot; ...
+##  $ Perioden          : Date[1:6769], format: &quot;2006-01-01&quot; &quot;2006-04-01&quot; ...
+##  $ Prijsindex_1      : num [1:6769] 91.5 91.6 92.3 93 92.1 93.4 93.9 94.3 94.9 94.1 ...
+##  $ Kwartaalmutaties_2: num [1:6769] NA 0.1 0.8 0.8 NA 0.4 0.6 0.4 0.7 NA ...
+##  $ Jaarmutaties_3    : num [1:6769] NA NA NA NA NA 2.1 2.6 2.1 2.1 2.2 ...</code></pre>
+<p>Ja.</p>
+<p>Misschien toch handig om de <strong>jaar</strong> en <strong>kwartaal</strong> data te hebben? Standaard ingebouwde functies in R:</p>
+<div class="sourceCode" id="cb285"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb285-1"><a href="working-with-external-data.html#cb285-1" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(<span class="fu">months</span>(diensten_clean<span class="sc">$</span>Perioden))</span></code></pre></div>
+<pre><code>## [1] &quot;januari&quot; &quot;april&quot;   &quot;juli&quot;    &quot;oktober&quot; NA        &quot;januari&quot;</code></pre>
+<p>De enige relevante in dit geval</p>
+<div class="sourceCode" id="cb287"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb287-1"><a href="working-with-external-data.html#cb287-1" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(<span class="fu">quarters</span>(diensten_clean<span class="sc">$</span>Perioden))</span></code></pre></div>
+<pre><code>## [1] &quot;Q1&quot;  &quot;Q2&quot;  &quot;Q3&quot;  &quot;Q4&quot;  &quot;QNA&quot; &quot;Q1&quot;</code></pre>
+<p>Jaar gaat net iets anders:</p>
+<div class="sourceCode" id="cb289"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb289-1"><a href="working-with-external-data.html#cb289-1" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(<span class="fu">format</span>(<span class="fu">as.Date</span>(diensten_clean<span class="sc">$</span>Perioden), <span class="st">&quot;%Y&quot;</span>))</span></code></pre></div>
+<pre><code>## [1] &quot;2006&quot; &quot;2006&quot; &quot;2006&quot; &quot;2006&quot; NA     &quot;2007&quot;</code></pre>
+<p>We gaan onze pipeline weer aanpassen</p>
+<div class="sourceCode" id="cb291"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb291-1"><a href="working-with-external-data.html#cb291-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(dplyr)</span>
+<span id="cb291-2"><a href="working-with-external-data.html#cb291-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(zoo)</span>
+<span id="cb291-3"><a href="working-with-external-data.html#cb291-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb291-4"><a href="working-with-external-data.html#cb291-4" aria-hidden="true" tabindex="-1"></a>diensten <span class="ot">&lt;-</span> <span class="fu">read_delim</span>(<span class="st">&quot;data/diensten.csv&quot;</span>, <span class="st">&quot;;&quot;</span>, <span class="at">escape_double =</span> <span class="cn">FALSE</span>, <span class="at">trim_ws =</span> <span class="cn">TRUE</span>)</span></code></pre></div>
+<pre><code>## Rows: 10375 Columns: 6</code></pre>
+<pre><code>## ── Column specification ────────────────────────────────────────────────────────
+## Delimiter: &quot;;&quot;
+## chr (5): CPA2008, Perioden, Prijsindex_1, Kwartaalmutaties_2, Jaarmutaties_3
+## dbl (1): ID</code></pre>
+<pre><code>## 
+## ℹ Use `spec()` to retrieve the full column specification for this data.
+## ℹ Specify the column types or set `show_col_types = FALSE` to quiet this message.</code></pre>
+<div class="sourceCode" id="cb295"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb295-1"><a href="working-with-external-data.html#cb295-1" aria-hidden="true" tabindex="-1"></a>id_cols        <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">&quot;ID&quot;</span>)</span>
+<span id="cb295-2"><a href="working-with-external-data.html#cb295-2" aria-hidden="true" tabindex="-1"></a>character_cols <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">&quot;CPA2008&quot;</span>, <span class="st">&quot;Perioden&quot;</span>)</span>
+<span id="cb295-3"><a href="working-with-external-data.html#cb295-3" aria-hidden="true" tabindex="-1"></a>numeric_cols   <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">&quot;Prijsindex_1&quot;</span>, <span class="st">&quot;Kwartaalmutaties_2&quot;</span>, <span class="st">&quot;Jaarmutaties_3&quot;</span>) </span>
+<span id="cb295-4"><a href="working-with-external-data.html#cb295-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb295-5"><a href="working-with-external-data.html#cb295-5" aria-hidden="true" tabindex="-1"></a>diensten_clean <span class="ot">&lt;-</span> diensten <span class="sc">%&gt;%</span></span>
+<span id="cb295-6"><a href="working-with-external-data.html#cb295-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(id_cols, character_cols, numeric_cols) <span class="sc">%&gt;%</span>               </span>
+<span id="cb295-7"><a href="working-with-external-data.html#cb295-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate_at</span>(character_cols, <span class="fu">funs</span>(as.character)) <span class="sc">%&gt;%</span>              </span>
+<span id="cb295-8"><a href="working-with-external-data.html#cb295-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate_at</span>(numeric_cols, <span class="fu">funs</span>(as.character)) <span class="sc">%&gt;%</span>                </span>
+<span id="cb295-9"><a href="working-with-external-data.html#cb295-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate_at</span>(numeric_cols, <span class="fu">funs</span>(as.numeric)) <span class="sc">%&gt;%</span></span>
+<span id="cb295-10"><a href="working-with-external-data.html#cb295-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">Perioden =</span> <span class="fu">as.Date</span>(<span class="fu">as.yearqtr</span>(Perioden, <span class="at">format =</span> <span class="st">&quot;%YKW0%q&quot;</span>))) <span class="sc">%&gt;%</span></span>
+<span id="cb295-11"><a href="working-with-external-data.html#cb295-11" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">jaar =</span> <span class="fu">format</span>(<span class="fu">as.Date</span>(Perioden), <span class="st">&quot;%Y&quot;</span>)) <span class="sc">%&gt;%</span></span>
+<span id="cb295-12"><a href="working-with-external-data.html#cb295-12" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">kwartaal =</span> <span class="fu">quarters</span>(Perioden)) <span class="sc">%&gt;%</span></span>
+<span id="cb295-13"><a href="working-with-external-data.html#cb295-13" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(<span class="sc">!</span><span class="fu">is.na</span>(Prijsindex_1)) <span class="sc">%&gt;%</span></span>
+<span id="cb295-14"><a href="working-with-external-data.html#cb295-14" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(<span class="sc">!</span><span class="fu">is.na</span>(Perioden))</span></code></pre></div>
+<pre><code>## Warning in mask$eval_all_mutate(quo): NAs introduced by coercion
+
+## Warning in mask$eval_all_mutate(quo): NAs introduced by coercion
+
+## Warning in mask$eval_all_mutate(quo): NAs introduced by coercion</code></pre>
+<p>Dataset begint er al beter uit te zien. Nu nog de juiste titels van de functies.</p>
+<p>Staat beschreven in de metadata:</p>
+<div class="sourceCode" id="cb297"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb297-1"><a href="working-with-external-data.html#cb297-1" aria-hidden="true" tabindex="-1"></a>diensten_mapping <span class="ot">&lt;-</span> <span class="fu">read_delim</span>(<span class="st">&quot;data/metadata_diensten.csv&quot;</span>,  <span class="st">&quot;;&quot;</span>, <span class="at">escape_double =</span> <span class="cn">FALSE</span>, <span class="at">trim_ws =</span> <span class="cn">TRUE</span>, <span class="at">skip =</span> <span class="dv">11</span>)</span></code></pre></div>
+<pre><code>## Rows: 210 Columns: 3</code></pre>
+<pre><code>## ── Column specification ────────────────────────────────────────────────────────
+## Delimiter: &quot;;&quot;
+## chr (3): Key, Title, Description</code></pre>
+<pre><code>## 
+## ℹ Use `spec()` to retrieve the full column specification for this data.
+## ℹ Specify the column types or set `show_col_types = FALSE` to quiet this message.</code></pre>
+<p>Bekijken of ze bij elkaar voor komen</p>
+<div class="sourceCode" id="cb301"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb301-1"><a href="working-with-external-data.html#cb301-1" aria-hidden="true" tabindex="-1"></a>diensten_mapping<span class="sc">$</span>Key <span class="sc">%in%</span> diensten_clean<span class="sc">$</span>CPA2008</span></code></pre></div>
+<pre><code>## Warning: One or more parsing issues, see `problems()` for details</code></pre>
+<pre><code>##   [1]  TRUE  TRUE  TRUE  TRUE  TRUE  TRUE  TRUE  TRUE  TRUE  TRUE  TRUE  TRUE
+##  [13]  TRUE  TRUE  TRUE  TRUE  TRUE  TRUE  TRUE  TRUE  TRUE  TRUE FALSE  TRUE
+##  [25]  TRUE  TRUE  TRUE  TRUE  TRUE  TRUE FALSE  TRUE FALSE FALSE  TRUE  TRUE
+##  [37]  TRUE  TRUE  TRUE FALSE FALSE  TRUE FALSE FALSE FALSE FALSE FALSE FALSE
+##  [49]  TRUE FALSE FALSE  TRUE  TRUE  TRUE  TRUE  TRUE  TRUE  TRUE  TRUE  TRUE
+##  [61]  TRUE  TRUE  TRUE  TRUE  TRUE  TRUE  TRUE  TRUE  TRUE  TRUE  TRUE  TRUE
+##  [73]  TRUE  TRUE  TRUE  TRUE  TRUE  TRUE  TRUE  TRUE  TRUE  TRUE  TRUE  TRUE
+##  [85]  TRUE  TRUE  TRUE  TRUE  TRUE  TRUE  TRUE  TRUE  TRUE  TRUE  TRUE  TRUE
+##  [97]  TRUE  TRUE  TRUE  TRUE  TRUE  TRUE  TRUE  TRUE FALSE  TRUE  TRUE  TRUE
+## [109]  TRUE FALSE FALSE  TRUE  TRUE  TRUE  TRUE  TRUE  TRUE FALSE  TRUE  TRUE
+## [121]  TRUE FALSE  TRUE  TRUE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE
+## [133] FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE
+## [145] FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE
+## [157] FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE
+## [169] FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE
+## [181] FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE
+## [193] FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE
+## [205] FALSE FALSE FALSE FALSE FALSE FALSE</code></pre>
+<p>Hoeveel?</p>
+<div class="sourceCode" id="cb304"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb304-1"><a href="working-with-external-data.html#cb304-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sum</span>(diensten_mapping<span class="sc">$</span>Key <span class="sc">%in%</span> diensten_clean<span class="sc">$</span>CPA2008)</span></code></pre></div>
+<pre><code>## [1] 105</code></pre>
+<p>“Match” functie toepassen in R</p>
+<div class="sourceCode" id="cb306"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb306-1"><a href="working-with-external-data.html#cb306-1" aria-hidden="true" tabindex="-1"></a>diensten_clean<span class="sc">$</span>titel <span class="ot">&lt;-</span> diensten_mapping<span class="sc">$</span>Title[<span class="fu">match</span>(diensten_clean<span class="sc">$</span>CPA2008, diensten_mapping<span class="sc">$</span>Key)]</span></code></pre></div>
+<p>Nog niet zo heel netjes</p>
+<div class="sourceCode" id="cb307"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb307-1"><a href="working-with-external-data.html#cb307-1" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(diensten_clean<span class="sc">$</span>titel)</span></code></pre></div>
+<pre><code>## [1] &quot;Dienstenprijsindex (DPI)&quot; &quot;Dienstenprijsindex (DPI)&quot;
+## [3] &quot;Dienstenprijsindex (DPI)&quot; &quot;Dienstenprijsindex (DPI)&quot;
+## [5] &quot;Dienstenprijsindex (DPI)&quot; &quot;Dienstenprijsindex (DPI)&quot;</code></pre>
+<ol style="list-style-type: decimal">
+<li>“Dienstenprijsindex (DPI)” hebbenwe niet nodig –&gt; is een samenvatting.</li>
+<li>Code voor de titel willen we graag weghalen</li>
+</ol>
+<p>1 lossen we straks op in de pipeline met filteren
+2 Gaan we aan de hand van regular expressions en R eruit halen</p>
+<div class="sourceCode" id="cb309"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb309-1"><a href="working-with-external-data.html#cb309-1" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(<span class="fu">gsub</span>(<span class="st">&#39;[[:digit:]]+ &#39;</span>, <span class="st">&#39;&#39;</span>, diensten_clean<span class="sc">$</span>titel))</span></code></pre></div>
+<pre><code>## [1] &quot;Dienstenprijsindex (DPI)&quot; &quot;Dienstenprijsindex (DPI)&quot;
+## [3] &quot;Dienstenprijsindex (DPI)&quot; &quot;Dienstenprijsindex (DPI)&quot;
+## [5] &quot;Dienstenprijsindex (DPI)&quot; &quot;Dienstenprijsindex (DPI)&quot;</code></pre>
+<p>Tijd om onze pipeline weer bij te werken:</p>
+<p>We gaan de volgende blokken toevoegen:</p>
+<div class="sourceCode" id="cb311"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb311-1"><a href="working-with-external-data.html#cb311-1" aria-hidden="true" tabindex="-1"></a>diensten_mapping <span class="ot">&lt;-</span> <span class="fu">read_delim</span>(<span class="st">&quot;data/metadata_diensten.csv&quot;</span>,  <span class="st">&quot;;&quot;</span>, <span class="at">escape_double =</span> <span class="cn">FALSE</span>, <span class="at">trim_ws =</span> <span class="cn">TRUE</span>, <span class="at">skip =</span> <span class="dv">11</span>)</span></code></pre></div>
+<pre><code>## Rows: 210 Columns: 3</code></pre>
+<pre><code>## ── Column specification ────────────────────────────────────────────────────────
+## Delimiter: &quot;;&quot;
+## chr (3): Key, Title, Description</code></pre>
+<pre><code>## 
+## ℹ Use `spec()` to retrieve the full column specification for this data.
+## ℹ Specify the column types or set `show_col_types = FALSE` to quiet this message.</code></pre>
+<div class="sourceCode" id="cb315"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb315-1"><a href="working-with-external-data.html#cb315-1" aria-hidden="true" tabindex="-1"></a>diensten_clean<span class="sc">$</span>titel <span class="ot">&lt;-</span> diensten_mapping<span class="sc">$</span>Title[<span class="fu">match</span>(diensten_clean<span class="sc">$</span>CPA2008, diensten_mapping<span class="sc">$</span>Key)]</span></code></pre></div>
+<pre><code>## Warning: One or more parsing issues, see `problems()` for details</code></pre>
+<div class="sourceCode" id="cb317"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb317-1"><a href="working-with-external-data.html#cb317-1" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(<span class="fu">gsub</span>(<span class="st">&#39;[[:digit:]]+&#39;</span>, <span class="st">&#39;&#39;</span>, diensten_clean<span class="sc">$</span>titel))</span></code></pre></div>
+<pre><code>## [1] &quot;Dienstenprijsindex (DPI)&quot; &quot;Dienstenprijsindex (DPI)&quot;
+## [3] &quot;Dienstenprijsindex (DPI)&quot; &quot;Dienstenprijsindex (DPI)&quot;
+## [5] &quot;Dienstenprijsindex (DPI)&quot; &quot;Dienstenprijsindex (DPI)&quot;</code></pre>
+<div class="sourceCode" id="cb319"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb319-1"><a href="working-with-external-data.html#cb319-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(dplyr)</span>
+<span id="cb319-2"><a href="working-with-external-data.html#cb319-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(zoo)</span>
+<span id="cb319-3"><a href="working-with-external-data.html#cb319-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb319-4"><a href="working-with-external-data.html#cb319-4" aria-hidden="true" tabindex="-1"></a>diensten <span class="ot">&lt;-</span> <span class="fu">read_delim</span>(<span class="st">&quot;data/diensten.csv&quot;</span>, <span class="st">&quot;;&quot;</span>, <span class="at">escape_double =</span> <span class="cn">FALSE</span>, <span class="at">trim_ws =</span> <span class="cn">TRUE</span>)</span></code></pre></div>
+<pre><code>## Rows: 10375 Columns: 6</code></pre>
+<pre><code>## ── Column specification ────────────────────────────────────────────────────────
+## Delimiter: &quot;;&quot;
+## chr (5): CPA2008, Perioden, Prijsindex_1, Kwartaalmutaties_2, Jaarmutaties_3
+## dbl (1): ID</code></pre>
+<pre><code>## 
+## ℹ Use `spec()` to retrieve the full column specification for this data.
+## ℹ Specify the column types or set `show_col_types = FALSE` to quiet this message.</code></pre>
+<div class="sourceCode" id="cb323"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb323-1"><a href="working-with-external-data.html#cb323-1" aria-hidden="true" tabindex="-1"></a>diensten_mapping <span class="ot">&lt;-</span> <span class="fu">read_delim</span>(<span class="st">&quot;data/metadata_diensten.csv&quot;</span>,  <span class="st">&quot;;&quot;</span>, <span class="at">escape_double =</span> <span class="cn">FALSE</span>, <span class="at">trim_ws =</span> <span class="cn">TRUE</span>, <span class="at">skip =</span> <span class="dv">11</span>)</span></code></pre></div>
+<pre><code>## Rows: 210 Columns: 3</code></pre>
+<pre><code>## ── Column specification ────────────────────────────────────────────────────────
+## Delimiter: &quot;;&quot;
+## chr (3): Key, Title, Description</code></pre>
+<pre><code>## 
+## ℹ Use `spec()` to retrieve the full column specification for this data.
+## ℹ Specify the column types or set `show_col_types = FALSE` to quiet this message.</code></pre>
+<div class="sourceCode" id="cb327"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb327-1"><a href="working-with-external-data.html#cb327-1" aria-hidden="true" tabindex="-1"></a>id_cols        <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">&quot;ID&quot;</span>)</span>
+<span id="cb327-2"><a href="working-with-external-data.html#cb327-2" aria-hidden="true" tabindex="-1"></a>character_cols <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">&quot;CPA2008&quot;</span>, <span class="st">&quot;Perioden&quot;</span>)</span>
+<span id="cb327-3"><a href="working-with-external-data.html#cb327-3" aria-hidden="true" tabindex="-1"></a>numeric_cols   <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">&quot;Prijsindex_1&quot;</span>, <span class="st">&quot;Kwartaalmutaties_2&quot;</span>, <span class="st">&quot;Jaarmutaties_3&quot;</span>) </span>
+<span id="cb327-4"><a href="working-with-external-data.html#cb327-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb327-5"><a href="working-with-external-data.html#cb327-5" aria-hidden="true" tabindex="-1"></a>diensten_clean <span class="ot">&lt;-</span> diensten <span class="sc">%&gt;%</span></span>
+<span id="cb327-6"><a href="working-with-external-data.html#cb327-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(id_cols, character_cols, numeric_cols) <span class="sc">%&gt;%</span>               </span>
+<span id="cb327-7"><a href="working-with-external-data.html#cb327-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate_at</span>(character_cols, <span class="fu">funs</span>(as.character)) <span class="sc">%&gt;%</span>              </span>
+<span id="cb327-8"><a href="working-with-external-data.html#cb327-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate_at</span>(numeric_cols, <span class="fu">funs</span>(as.character)) <span class="sc">%&gt;%</span>                </span>
+<span id="cb327-9"><a href="working-with-external-data.html#cb327-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate_at</span>(numeric_cols, <span class="fu">funs</span>(as.numeric)) <span class="sc">%&gt;%</span></span>
+<span id="cb327-10"><a href="working-with-external-data.html#cb327-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">Perioden =</span> <span class="fu">as.Date</span>(<span class="fu">as.yearqtr</span>(Perioden, <span class="at">format =</span> <span class="st">&quot;%YKW0%q&quot;</span>))) <span class="sc">%&gt;%</span></span>
+<span id="cb327-11"><a href="working-with-external-data.html#cb327-11" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">jaar =</span> <span class="fu">format</span>(<span class="fu">as.Date</span>(Perioden), <span class="st">&quot;%Y&quot;</span>)) <span class="sc">%&gt;%</span></span>
+<span id="cb327-12"><a href="working-with-external-data.html#cb327-12" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">kwartaal =</span> <span class="fu">quarters</span>(Perioden)) <span class="sc">%&gt;%</span></span>
+<span id="cb327-13"><a href="working-with-external-data.html#cb327-13" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">titel =</span> diensten_mapping<span class="sc">$</span>Title[<span class="fu">match</span>(CPA2008, diensten_mapping<span class="sc">$</span>Key)]) <span class="sc">%&gt;%</span></span>
+<span id="cb327-14"><a href="working-with-external-data.html#cb327-14" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">titel =</span> <span class="fu">gsub</span>(<span class="st">&#39;[[:digit:]]+&#39;</span>, <span class="st">&#39;&#39;</span>, titel)) <span class="sc">%&gt;%</span></span>
+<span id="cb327-15"><a href="working-with-external-data.html#cb327-15" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(titel <span class="sc">!=</span> <span class="st">&quot;Dienstenprijsindex (DPI)&quot;</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb327-16"><a href="working-with-external-data.html#cb327-16" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(<span class="sc">!</span><span class="fu">is.na</span>(<span class="fu">c</span>(Prijsindex_1))) <span class="sc">%&gt;%</span></span>
+<span id="cb327-17"><a href="working-with-external-data.html#cb327-17" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(<span class="sc">!</span><span class="fu">is.na</span>(Perioden))</span></code></pre></div>
+<pre><code>## Warning in mask$eval_all_mutate(quo): NAs introduced by coercion
+
+## Warning in mask$eval_all_mutate(quo): NAs introduced by coercion
+
+## Warning in mask$eval_all_mutate(quo): NAs introduced by coercion</code></pre>
+<pre><code>## Warning: One or more parsing issues, see `problems()` for details</code></pre>
+<div class="sourceCode" id="cb330"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb330-1"><a href="working-with-external-data.html#cb330-1" aria-hidden="true" tabindex="-1"></a><span class="fu">write.csv</span>(diensten_clean, <span class="st">&quot;output_diensten.csv&quot;</span>)</span></code></pre></div>
+<p>Laten we de data een final touch geven:</p>
+<div class="sourceCode" id="cb331"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb331-1"><a href="working-with-external-data.html#cb331-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(dplyr)</span>
+<span id="cb331-2"><a href="working-with-external-data.html#cb331-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(zoo)</span>
+<span id="cb331-3"><a href="working-with-external-data.html#cb331-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb331-4"><a href="working-with-external-data.html#cb331-4" aria-hidden="true" tabindex="-1"></a>diensten <span class="ot">&lt;-</span> <span class="fu">read_delim</span>(<span class="st">&quot;data/diensten.csv&quot;</span>, <span class="st">&quot;;&quot;</span>, <span class="at">escape_double =</span> <span class="cn">FALSE</span>, <span class="at">trim_ws =</span> <span class="cn">TRUE</span>)</span></code></pre></div>
+<pre><code>## Rows: 10375 Columns: 6</code></pre>
+<pre><code>## ── Column specification ────────────────────────────────────────────────────────
+## Delimiter: &quot;;&quot;
+## chr (5): CPA2008, Perioden, Prijsindex_1, Kwartaalmutaties_2, Jaarmutaties_3
+## dbl (1): ID</code></pre>
+<pre><code>## 
+## ℹ Use `spec()` to retrieve the full column specification for this data.
+## ℹ Specify the column types or set `show_col_types = FALSE` to quiet this message.</code></pre>
+<div class="sourceCode" id="cb335"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb335-1"><a href="working-with-external-data.html#cb335-1" aria-hidden="true" tabindex="-1"></a>diensten_mapping <span class="ot">&lt;-</span> <span class="fu">read_delim</span>(<span class="st">&quot;data/metadata_diensten.csv&quot;</span>,  <span class="st">&quot;;&quot;</span>, <span class="at">escape_double =</span> <span class="cn">FALSE</span>, <span class="at">trim_ws =</span> <span class="cn">TRUE</span>, <span class="at">skip =</span> <span class="dv">11</span>)</span></code></pre></div>
+<pre><code>## Rows: 210 Columns: 3</code></pre>
+<pre><code>## ── Column specification ────────────────────────────────────────────────────────
+## Delimiter: &quot;;&quot;
+## chr (3): Key, Title, Description</code></pre>
+<pre><code>## 
+## ℹ Use `spec()` to retrieve the full column specification for this data.
+## ℹ Specify the column types or set `show_col_types = FALSE` to quiet this message.</code></pre>
+<div class="sourceCode" id="cb339"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb339-1"><a href="working-with-external-data.html#cb339-1" aria-hidden="true" tabindex="-1"></a>id_cols        <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">&quot;ID&quot;</span>)</span>
+<span id="cb339-2"><a href="working-with-external-data.html#cb339-2" aria-hidden="true" tabindex="-1"></a>character_cols <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">&quot;CPA2008&quot;</span>, <span class="st">&quot;Perioden&quot;</span>)</span>
+<span id="cb339-3"><a href="working-with-external-data.html#cb339-3" aria-hidden="true" tabindex="-1"></a>numeric_cols   <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">&quot;Prijsindex_1&quot;</span>, <span class="st">&quot;Kwartaalmutaties_2&quot;</span>, <span class="st">&quot;Jaarmutaties_3&quot;</span>) </span>
+<span id="cb339-4"><a href="working-with-external-data.html#cb339-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb339-5"><a href="working-with-external-data.html#cb339-5" aria-hidden="true" tabindex="-1"></a>diensten_clean <span class="ot">&lt;-</span> diensten <span class="sc">%&gt;%</span>             </span>
+<span id="cb339-6"><a href="working-with-external-data.html#cb339-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate_at</span>(character_cols, <span class="fu">funs</span>(as.character)) <span class="sc">%&gt;%</span>              </span>
+<span id="cb339-7"><a href="working-with-external-data.html#cb339-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate_at</span>(numeric_cols, <span class="fu">funs</span>(as.character)) <span class="sc">%&gt;%</span>                </span>
+<span id="cb339-8"><a href="working-with-external-data.html#cb339-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate_at</span>(numeric_cols, <span class="fu">funs</span>(as.numeric)) <span class="sc">%&gt;%</span></span>
+<span id="cb339-9"><a href="working-with-external-data.html#cb339-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">Perioden =</span> <span class="fu">as.Date</span>(<span class="fu">as.yearqtr</span>(Perioden, <span class="at">format =</span> <span class="st">&quot;%YKW0%q&quot;</span>))) <span class="sc">%&gt;%</span></span>
+<span id="cb339-10"><a href="working-with-external-data.html#cb339-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">jaar =</span> <span class="fu">format</span>(<span class="fu">as.Date</span>(Perioden), <span class="st">&quot;%Y&quot;</span>)) <span class="sc">%&gt;%</span></span>
+<span id="cb339-11"><a href="working-with-external-data.html#cb339-11" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">kwartaal =</span> <span class="fu">quarters</span>(Perioden)) <span class="sc">%&gt;%</span></span>
+<span id="cb339-12"><a href="working-with-external-data.html#cb339-12" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">titel =</span> diensten_mapping<span class="sc">$</span>Title[<span class="fu">match</span>(CPA2008, diensten_mapping<span class="sc">$</span>Key)]) <span class="sc">%&gt;%</span></span>
+<span id="cb339-13"><a href="working-with-external-data.html#cb339-13" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">titel =</span> <span class="fu">gsub</span>(<span class="st">&#39;[[:digit:]]+&#39;</span>, <span class="st">&#39;&#39;</span>, titel)) <span class="sc">%&gt;%</span></span>
+<span id="cb339-14"><a href="working-with-external-data.html#cb339-14" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(titel <span class="sc">!=</span> <span class="st">&quot;Dienstenprijsindex (DPI)&quot;</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb339-15"><a href="working-with-external-data.html#cb339-15" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(<span class="sc">!</span><span class="fu">is.na</span>(<span class="fu">c</span>(Prijsindex_1))) <span class="sc">%&gt;%</span></span>
+<span id="cb339-16"><a href="working-with-external-data.html#cb339-16" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(<span class="sc">!</span><span class="fu">is.na</span>(Perioden)) <span class="sc">%&gt;%</span></span>
+<span id="cb339-17"><a href="working-with-external-data.html#cb339-17" aria-hidden="true" tabindex="-1"></a>  <span class="fu">rename_all</span>(<span class="at">.funs =</span> <span class="fu">funs</span>(<span class="fu">tolower</span>(.))) <span class="sc">%&gt;%</span>                     <span class="co"># Alle kolommen naar lowercase</span></span>
+<span id="cb339-18"><a href="working-with-external-data.html#cb339-18" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(<span class="sc">-</span><span class="fu">c</span>(<span class="st">&quot;cpa2008&quot;</span>, <span class="st">&quot;jaarmutaties_3&quot;</span>)) <span class="sc">%&gt;%</span>                      <span class="co"># Kolommen verwijderen die niet meer van belang zijn</span></span>
+<span id="cb339-19"><a href="working-with-external-data.html#cb339-19" aria-hidden="true" tabindex="-1"></a>  <span class="fu">rename</span>(<span class="at">prijsindex =</span> prijsindex_1) <span class="sc">%&gt;%</span></span>
+<span id="cb339-20"><a href="working-with-external-data.html#cb339-20" aria-hidden="true" tabindex="-1"></a>  <span class="fu">rename</span>(<span class="at">kwartaalmutaties =</span> kwartaalmutaties_2) <span class="sc">%&gt;%</span></span>
+<span id="cb339-21"><a href="working-with-external-data.html#cb339-21" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(id, perioden, jaar, kwartaal, titel, prijsindex, kwartaalmutaties)</span></code></pre></div>
+<pre><code>## Warning in mask$eval_all_mutate(quo): NAs introduced by coercion
+
+## Warning in mask$eval_all_mutate(quo): NAs introduced by coercion
+
+## Warning in mask$eval_all_mutate(quo): NAs introduced by coercion</code></pre>
+<pre><code>## Warning: One or more parsing issues, see `problems()` for details</code></pre>
+<p>Basic visualiseren voor 1 type dienst</p>
+<p>Welke smaken zijn er allemaal</p>
+<div class="sourceCode" id="cb342"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb342-1"><a href="working-with-external-data.html#cb342-1" aria-hidden="true" tabindex="-1"></a><span class="fu">unique</span>(diensten_clean<span class="sc">$</span>titel)</span></code></pre></div>
+<pre><code>##  [1] &quot;H Vervoer en opslag&quot;                    
+##  [2] &quot; Vervoer te land en via pijpleidingen&quot;  
+##  [3] &quot; Goederenwegvervoer en verhuizingen&quot;    
+##  [4] &quot; Goederenvervoer over de weg&quot;           
+##  [5] &quot; Goederenvervoer met koelauto&#39;s&quot;        
+##  [6] &quot;A Goederenvervoer met tankauto&#39;s ..&quot;    
+##  [7] &quot; Goederenvervoer met containers..&quot;      
+##  [8] &quot; Goederenvervoer van droge bulk..&quot;      
+##  [9] &quot;B Ander vervoer over de weg&quot;            
+## [10] &quot; Verhuizingen&quot;                          
+## [11] &quot; Vervoer over water&quot;                    
+## [12] &quot; Zee- en kustvaart, personenvervoer&quot;    
+## [13] &quot; Zee- en kustvaart, goederenvervoer&quot;    
+## [14] &quot; Verhuur van zeevaartuigen&quot;             
+## [15] &quot; Binnenvaart, personenvervoer&quot;          
+## [16] &quot; Binnenvaart, goederenvervoer&quot;          
+## [17] &quot; Luchtvaart&quot;                            
+## [18] &quot; Personenvervoer door de lucht&quot;         
+## [19] &quot; Opslag en vervoerondersteuning&quot;        
+## [20] &quot; Opslag&quot;                                
+## [21] &quot; Opslag in koelhuizen&quot;                  
+## [22] &quot; Bulkopslag van vloeistoffen of..&quot;      
+## [23] &quot;A Andere opslag&quot;                        
+## [24] &quot; Vrachtbehandeling&quot;                     
+## [25] &quot; Andere post- en koeriersdiensten&quot;      
+## [26] &quot; Multimodale koeriers&quot;                  
+## [27] &quot;A Koeriers&quot;                             
+## [28] &quot;J Informatie en communicatie&quot;           
+## [29] &quot; Computeradvisering&quot;                    
+## [30] &quot;L Exploitatie en handel onroerend goed&quot; 
+## [31] &quot; Exploitatie en handel onroerend goed&quot;  
+## [32] &quot; Verhuur/exploitatie onroerend goed&quot;    
+## [33] &quot; Verhuur en exploitatie van eigen..&quot;    
+## [34] &quot; Verhuur en exploitatie van..&quot;          
+## [35] &quot; Bemiddeling in en beheer van..&quot;        
+## [36] &quot; Bemiddeling in onroerend goed..&quot;       
+## [37] &quot; Makelaarsdiensten in woningen..&quot;       
+## [38] &quot; Makelaarsdiensten bedrijfspanden&quot;      
+## [39] &quot; Taxatie van onroerend goed..&quot;          
+## [40] &quot;A Taxatie particulier vastgoed&quot;         
+## [41] &quot;B Taxatie bedrijfsmatig vastgoed&quot;       
+## [42] &quot;M Vrije beroepen en wetenschappelijke..&quot;
+## [43] &quot; Rechtskundige en boekhoudkundige..&quot;    
+## [44] &quot; Rechtskundige diensten&quot;                
+## [45] &quot;A Rechtskundige diensten advocatuur&quot;    
+## [46] &quot; Notariële diensten&quot;                    
+## [47] &quot;A Familiepraktijk&quot;                      
+## [48] &quot;B Onroerendgoedpraktijk&quot;                
+## [49] &quot;C Ondernemingspraktijk&quot;                 
+## [50] &quot; Accountants, boekhouders en..&quot;         
+## [51] &quot;A Financiële audits en advisering..&quot;    
+## [52] &quot;A Financiële audits door ..&quot;            
+## [53] &quot;A Financiële advisering door..&quot;         
+## [54] &quot; Boekhoudkundige diensten&quot;              
+## [55] &quot;A Financiële administratie&quot;             
+## [56] &quot; Andere boekhoudkundige diensten&quot;       
+## [57] &quot; Belastingconsulenten&quot;                  
+## [58] &quot; Advies inzake bedrijfsbeheer; ..&quot;      
+## [59] &quot; Advies inzake bedrijfsbeheer&quot;          
+## [60] &quot; Architecten en ingenieurs; ..&quot;         
+## [61] &quot; Architecten, ingenieurs ea ..&quot;         
+## [62] &quot; Architecten&quot;                           
+## [63] &quot; Architecten: gebouwen&quot;                 
+## [64] &quot; Architecten: woningen&quot;                 
+## [65] &quot; Architecten: andere gebouwen&quot;          
+## [66] &quot;A Stadsplanning, landinrichting ..&quot;     
+## [67] &quot;  Ingenieurs en aanverwante ..&quot;         
+## [68] &quot; Ingenieurs&quot;                            
+## [69] &quot; Ingenieurs: bouwprojecten&quot;             
+## [70] &quot; Ingenieurs: energieprojecten&quot;          
+## [71] &quot; Ingenieurs: vervoersprojecten&quot;         
+## [72] &quot; Ingenieurs: waterbouw-, ..&quot;            
+## [73] &quot; Ingenieurs: industrieprojecten&quot;        
+## [74] &quot; Projectbeheer bij bouwprojecten&quot;       
+## [75] &quot; Technische testen en toetsen&quot;          
+## [76] &quot; Reclame en marktonderzoek&quot;             
+## [77] &quot; Reclame&quot;                               
+## [78] &quot; Reclamebureaus&quot;                        
+## [79] &quot; Markt- en opinieonderzoek&quot;             
+## [80] &quot;N Administratieve en ondersteunende ..&quot; 
+## [81] &quot; Verhuur en lease&quot;                      
+## [82] &quot; Lease personen- en bestelauto&#39;s&quot;       
+## [83] &quot; Arbeidsbemiddeling en personeels- ..&quot;  
+## [84] &quot; Uitzendbureaus&quot;                        
+## [85] &quot; Beveiligings- en opsporingsdiensten&quot;   
+## [86] &quot; Particuliere beveiliging&quot;              
+## [87] &quot; Diensten in verband met beveiliging&quot;   
+## [88] &quot; Diensten in verband met gebouwen..&quot;    
+## [89] &quot; Reiniging&quot;</code></pre>
+<div class="sourceCode" id="cb344"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb344-1"><a href="working-with-external-data.html#cb344-1" aria-hidden="true" tabindex="-1"></a>diensten_fin <span class="ot">&lt;-</span> diensten_clean <span class="sc">%&gt;%</span></span>
+<span id="cb344-2"><a href="working-with-external-data.html#cb344-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(titel <span class="sc">==</span> <span class="st">&quot;A Financiële audits en advisering..&quot;</span>)</span></code></pre></div>
+<p>Plot een simpele barplot met ggplot</p>
+<div class="sourceCode" id="cb345"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb345-1"><a href="working-with-external-data.html#cb345-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(ggplot2)</span>
+<span id="cb345-2"><a href="working-with-external-data.html#cb345-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(plotly)</span>
+<span id="cb345-3"><a href="working-with-external-data.html#cb345-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb345-4"><a href="working-with-external-data.html#cb345-4" aria-hidden="true" tabindex="-1"></a>p <span class="ot">&lt;-</span> <span class="fu">ggplot</span>(<span class="at">data=</span>diensten_fin, <span class="fu">aes</span>(<span class="at">x=</span>perioden, <span class="at">y=</span>prijsindex)) <span class="sc">+</span></span>
+<span id="cb345-5"><a href="working-with-external-data.html#cb345-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_bar</span>(<span class="at">stat=</span><span class="st">&quot;identity&quot;</span>) </span>
+<span id="cb345-6"><a href="working-with-external-data.html#cb345-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb345-7"><a href="working-with-external-data.html#cb345-7" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplotly</span>(p)</span></code></pre></div>
+<div id="htmlwidget-a3ebedfbfc52d82635d9" style="width:672px;height:480px;" class="plotly html-widget"></div>
+<script type="application/json" data-for="htmlwidget-a3ebedfbfc52d82635d9">{"x":{"data":[{"orientation":"v","width":[81,81,81,81,81,81,81,81,81,81,81,81,81,81,81,81,81,81,81,81,81,81,81,81,81,81,81,81,81,81,81,81,81,81,81,81,81,81,81,81,81,81,81,81,81,81,81,81,81,81,81,81,81],"base":[0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0],"x":[13149,13239,13330,13422,13514,13604,13695,13787,13879,13970,14061,14153,14245,14335,14426,14518,14610,14700,14791,14883,14975,15065,15156,15248,15340,15431,15522,15614,15706,15796,15887,15979,16071,16161,16252,16344,16436,16526,16617,16709,16801,16892,16983,17075,17167,17257,17348,17440,17532,17622,17713,17805,17897],"y":[102.4,101.2,106.3,107.2,107,109.8,113.1,112.1,110,111.2,114.5,113,109.9,110.9,113.9,111.3,108.4,108.3,109.4,107.1,105.3,104.8,106.7,106.7,105.3,103.6,106.4,104.7,105.8,105.4,105.4,103.5,102.5,102.2,104.6,101.9,100.5,98.8,101,99.7,96,96.7,101.1,99.8,98.1,98.7,99.6,100,100.2,101.5,101.8,102.5,101.6],"text":["perioden: 2006-01-01<br />prijsindex: 102.4","perioden: 2006-04-01<br />prijsindex: 101.2","perioden: 2006-07-01<br />prijsindex: 106.3","perioden: 2006-10-01<br />prijsindex: 107.2","perioden: 2007-01-01<br />prijsindex: 107.0","perioden: 2007-04-01<br />prijsindex: 109.8","perioden: 2007-07-01<br />prijsindex: 113.1","perioden: 2007-10-01<br />prijsindex: 112.1","perioden: 2008-01-01<br />prijsindex: 110.0","perioden: 2008-04-01<br />prijsindex: 111.2","perioden: 2008-07-01<br />prijsindex: 114.5","perioden: 2008-10-01<br />prijsindex: 113.0","perioden: 2009-01-01<br />prijsindex: 109.9","perioden: 2009-04-01<br />prijsindex: 110.9","perioden: 2009-07-01<br />prijsindex: 113.9","perioden: 2009-10-01<br />prijsindex: 111.3","perioden: 2010-01-01<br />prijsindex: 108.4","perioden: 2010-04-01<br />prijsindex: 108.3","perioden: 2010-07-01<br />prijsindex: 109.4","perioden: 2010-10-01<br />prijsindex: 107.1","perioden: 2011-01-01<br />prijsindex: 105.3","perioden: 2011-04-01<br />prijsindex: 104.8","perioden: 2011-07-01<br />prijsindex: 106.7","perioden: 2011-10-01<br />prijsindex: 106.7","perioden: 2012-01-01<br />prijsindex: 105.3","perioden: 2012-04-01<br />prijsindex: 103.6","perioden: 2012-07-01<br />prijsindex: 106.4","perioden: 2012-10-01<br />prijsindex: 104.7","perioden: 2013-01-01<br />prijsindex: 105.8","perioden: 2013-04-01<br />prijsindex: 105.4","perioden: 2013-07-01<br />prijsindex: 105.4","perioden: 2013-10-01<br />prijsindex: 103.5","perioden: 2014-01-01<br />prijsindex: 102.5","perioden: 2014-04-01<br />prijsindex: 102.2","perioden: 2014-07-01<br />prijsindex: 104.6","perioden: 2014-10-01<br />prijsindex: 101.9","perioden: 2015-01-01<br />prijsindex: 100.5","perioden: 2015-04-01<br />prijsindex:  98.8","perioden: 2015-07-01<br />prijsindex: 101.0","perioden: 2015-10-01<br />prijsindex:  99.7","perioden: 2016-01-01<br />prijsindex:  96.0","perioden: 2016-04-01<br />prijsindex:  96.7","perioden: 2016-07-01<br />prijsindex: 101.1","perioden: 2016-10-01<br />prijsindex:  99.8","perioden: 2017-01-01<br />prijsindex:  98.1","perioden: 2017-04-01<br />prijsindex:  98.7","perioden: 2017-07-01<br />prijsindex:  99.6","perioden: 2017-10-01<br />prijsindex: 100.0","perioden: 2018-01-01<br />prijsindex: 100.2","perioden: 2018-04-01<br />prijsindex: 101.5","perioden: 2018-07-01<br />prijsindex: 101.8","perioden: 2018-10-01<br />prijsindex: 102.5","perioden: 2019-01-01<br />prijsindex: 101.6"],"type":"bar","marker":{"autocolorscale":false,"color":"rgba(89,89,89,1)","line":{"width":1.88976377952756,"color":"transparent"}},"showlegend":false,"xaxis":"x","yaxis":"y","hoverinfo":"text","frame":null}],"layout":{"margin":{"t":26.2283105022831,"r":7.30593607305936,"b":40.1826484018265,"l":43.1050228310502},"plot_bgcolor":"rgba(255,255,255,1)","paper_bgcolor":"rgba(255,255,255,1)","font":{"color":"rgba(0,0,0,1)","family":"","size":14.6118721461187},"xaxis":{"domain":[0,1],"automargin":true,"type":"linear","autorange":false,"range":[12867.05,18178.95],"tickmode":"array","ticktext":["2010","2015"],"tickvals":[14610,16436],"categoryorder":"array","categoryarray":["2010","2015"],"nticks":null,"ticks":"outside","tickcolor":"rgba(51,51,51,1)","ticklen":3.65296803652968,"tickwidth":0.66417600664176,"showticklabels":true,"tickfont":{"color":"rgba(77,77,77,1)","family":"","size":11.689497716895},"tickangle":-0,"showline":true,"linecolor":"rgba(0,0,0,1)","linewidth":0.66417600664176,"showgrid":false,"gridcolor":null,"gridwidth":0,"zeroline":false,"anchor":"y","title":{"text":"perioden","font":{"color":"rgba(0,0,0,1)","family":"","size":14.6118721461187}},"hoverformat":".2f"},"yaxis":{"domain":[0,1],"automargin":true,"type":"linear","autorange":false,"range":[-5.725,120.225],"tickmode":"array","ticktext":["0","30","60","90","120"],"tickvals":[0,30,60,90,120],"categoryorder":"array","categoryarray":["0","30","60","90","120"],"nticks":null,"ticks":"outside","tickcolor":"rgba(51,51,51,1)","ticklen":3.65296803652968,"tickwidth":0.66417600664176,"showticklabels":true,"tickfont":{"color":"rgba(77,77,77,1)","family":"","size":11.689497716895},"tickangle":-0,"showline":true,"linecolor":"rgba(0,0,0,1)","linewidth":0.66417600664176,"showgrid":false,"gridcolor":null,"gridwidth":0,"zeroline":false,"anchor":"x","title":{"text":"prijsindex","font":{"color":"rgba(0,0,0,1)","family":"","size":14.6118721461187}},"hoverformat":".2f"},"shapes":[{"type":"rect","fillcolor":null,"line":{"color":null,"width":0,"linetype":[]},"yref":"paper","xref":"paper","x0":0,"x1":1,"y0":0,"y1":1}],"showlegend":false,"legend":{"bgcolor":"rgba(255,255,255,1)","bordercolor":"transparent","borderwidth":1.88976377952756,"font":{"color":"rgba(0,0,0,1)","family":"","size":11.689497716895}},"hovermode":"closest","barmode":"relative"},"config":{"doubleClick":"reset","showSendToCloud":false},"source":"A","attrs":{"5f8656657cc9":{"x":{},"y":{},"type":"bar"}},"cur_data":"5f8656657cc9","visdat":{"5f8656657cc9":["function (y) ","x"]},"highlight":{"on":"plotly_click","persistent":false,"dynamic":false,"selectize":false,"opacityDim":0.2,"selected":{"opacity":1},"debounce":0},"shinyEvents":["plotly_hover","plotly_click","plotly_selected","plotly_relayout","plotly_brushed","plotly_brushing","plotly_clickannotation","plotly_doubleclick","plotly_deselect","plotly_afterplot","plotly_sunburstclick"],"base_url":"https://plot.ly"},"evals":[],"jsHooks":[]}</script>
+
+</div>
+</div>
+            </section>
+
+          </div>
+        </div>
+      </div>
+<a href="data-visualization-in-ggplot.html" class="navigation navigation-prev navigation-unique" aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+
+    </div>
+  </div>
+<script src="libs/gitbook-2.6.7/js/app.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/clipboard.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-search.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-sharing.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-fontsettings.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-bookdown.js"></script>
+<script src="libs/gitbook-2.6.7/js/jquery.highlight.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-clipboard.js"></script>
+<script>
+gitbook.require(["gitbook"], function(gitbook) {
+gitbook.start({
+"sharing": {
+"github": false,
+"facebook": true,
+"twitter": true,
+"linkedin": false,
+"weibo": false,
+"instapaper": false,
+"vk": false,
+"whatsapp": false,
+"all": ["facebook", "twitter", "linkedin", "weibo", "instapaper"]
+},
+"fontsettings": {
+"theme": "white",
+"family": "sans",
+"size": 2
+},
+"edit": {
+"link": null,
+"text": null
+},
+"history": {
+"link": null,
+"text": null
+},
+"view": {
+"link": null,
+"text": null
+},
+"download": null,
+"search": {
+"engine": "fuse",
+"options": null
+},
+"toc": {
+"collapse": "subsection"
+}
+});
+});
+</script>
+
+</body>
+
+</html>

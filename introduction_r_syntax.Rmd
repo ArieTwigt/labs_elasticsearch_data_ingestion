@@ -1,0 +1,415 @@
+# Introduction of the R syntax
+
+
+## Variable assignment in R
+
+
+With `<-` we can assign a value to a variable in R:
+
+
+```{r}
+a <- 10
+```
+
+
+By using the variable, the assigned value is returned:
+
+
+```{r}
+a
+```
+
+
+It is also possible to use `=` for a assining variables in R. 
+
+
+```{r}
+a = 10
+```
+
+```{r}
+a
+```
+
+> Both `<-` can be used interchangeably
+
+*Wy different possibilities?*
+> https://www.r-bloggers.com/difference-between-assignment-operators-in-r/
+
+
+By assigning a new value to an already existing variable, the previously assigned variable will be overwritten:
+
+
+```{r}
+a <- 10
+a <- 20
+a
+```
+
+
+```{r}
+a
+```
+
+
+The first assignment of "10" to the `a` is disappeared.
+
+
+
+### Vectors in R
+
+In R, it is also possible to assign multiple values to a variable. A variable that contains multiple values is called a *vector*. Even a variable with a single value is also a vector. Notice the notation R returns when we call the `a` variable.
+
+`[1] 20`
+
+The square brackets `[]` indicate the position, also called the *index*, of the value in the vector. Single value variables like our `a` variable are vectors that exists of a single value. This explains the `[1]` notation:
+
+
+It is important to notice the index in R starts with **1**. In other programming languages, like Python, the index starts at 0. 
+
+
+### Assigning multiple values to a variable with the `c()` function
+
+We can assign multiple values to a variable with the `c()` function. This way, we can create a vector that exists of multiple values.
+
+```{r}
+# assigning multiple values to a variable
+numbers <- c(4,5,2,9,8,3)
+```
+
+```{r}
+# showing the values of the variable
+numbers
+```
+
+
+### Getting values by indices in a vector in R
+
+Instead of returning all the values from our `numbers variable, we can select specific values by specifying the index.
+
+```{r}
+numbers[4]
+```
+
+
+It is also possible to select a specific range of values from a vector:
+
+
+```{r}
+# indices 3 to 6 (including 6)
+numbers[3:6]
+```
+
+
+Instead of ranges, it is also to select multiple specific indices:
+
+
+```{r}
+# indices 2 and 4
+numbers[c(2,4)]
+```
+
+
+Of course, it is also possible in combination: selecting a range of indices **and** specific indices.
+
+
+```{r}
+# indices 2, and 4 to 6 (including 6)
+numbers[c(2, 4:6)]
+```
+
+
+Another situation, is that you like to have all the values of a vector except for one specific index. In this case you can use the `setdiff` function:
+
+
+```{r}
+# all values of a vector, except the vector on position 3
+setdiff(numbers, numbers[3])
+```
+
+
+### Different data types in R
+
+| Name |  Example |
+|---|---|
+| numeric (float)| `3.0`  |
+| integer (int)| `3`  |
+| character (string) | "horse" |
+| logical (bool) | `TRUE`  |
+| `factor` (string with) | String values with levels/hierarchy| `high`, `medium`, `low` |
+
+
+** Description **:
+
+* `numeric`: Numerical values with decimals
+* `integer`: Numerical values without decimals
+* `character`: Textual, alphanumeric values
+* `logical`: Operators like `TRUE` of `FALSE`
+* `factor`: String values with levels/hierarchy
+
+
+> **Levels in a factor** *The levels in a factor vector can be manually constructed. In the latter chapters of this course we will elaboraty provide examples how to use the `factor` data type in R and when this data type comes in handy.
+
+
+### Converting to different data types in R
+
+
+Converting a variable with the `int` data type to a variable with the `character` data type with the `as.character()` function
+
+```{r}
+age <- as.character(29)
+age
+```
+
+
+In the same way we can use the `as.numeric()` and `as.integer()` functions to convert vectors to these data types.
+
+
+Creating a vector with "character" (string) values:
+
+
+```{r}
+currencies <- c("euro", "pond", "dollar", "yuan", "roebel")
+currencies
+```
+
+
+Indices work the same for vectors with `character` values
+
+```{r}
+currencies[4]
+```
+
+
+Converting a vector to a specific data type, like `as.character`, can also be applied on a vector with multiple values:
+
+
+```{r}
+# create a new vector with integer values
+ages <- c(17, 54, 81, 13, 27)
+print(ages)
+```
+
+
+
+```{r}
+# convert the 'ages' vector to the 'character' data type and print the results
+ages_chr <- as.character(ages)
+print(ages_chr)
+```
+
+
+
+### The `logical` data type in R
+
+
+Logical values do  **no** have parentheses ("):
+
+* wrong: `"TRUE"`  . This is a `character` value
+* right: `TRUE` . This is a `logical` value
+
+Logical values can come in handy in case of calculations or during processing data. For example by assigning values based on evaluations or for filtering data. Let's experiment with this data type with some examples:
+
+
+Assigning a `logical` value to a vector:
+
+```{r}
+# assigning a boolean value FALSE to the 'smokes' vector
+smokes <- FALSE
+smokes
+
+# showing the value of the 'smokes' vector
+class(smokes)
+```
+
+
+Evaluating values will result in a `logical` value:
+
+```{r}
+# evaluate if 4 is larger than 5
+4 > 5
+```
+
+
+```{r}
+# evaluate is 4 + 4 is larger than 7
+4 + 4 > 7
+```
+
+
+```{r}
+# evalueren of 4 + 4 en 3 + 5 allebei gelijk aan 8 zijn
+4 + 4 & 3 + 5 == 8 
+```
+
+
+```{r}
+# evaluate if 4 + 4 of 2 + 5 is equal to 8
+4 + 4 | 2 + 5 == 8
+```
+
+
+```{r}
+# evaulate if FALSE, FALSE is TRUE 
+FALSE == FALSE | TRUE
+```
+
+
+
+> *An article on R-bloggers provides a few handy examples with the logical data type: **[2]** [**Logical operators in R**, *(R-bloggers, 2010)*]('http://www.r-bloggers.com/logical-operators-in-r/')
+
+
+
+
+
+## Calculations with R
+
+
+Just like in many other programming languages, the basic arithmetic operations are possible in R:
+
+
+**Operator**   | **Function**
+---------------|------------
+`+`            | Addition
+`-`            | Subtraction
+`/`            | Division
+`*`            | Multiplication
+`^`            | Power
+`sqrt()`       | Square root
+
+
+```{r}
+4 + 4
+```
+
+
+```{r}
+4 * 4
+```
+
+
+```{r}
+4 * 4 + 4
+```
+
+```{r}
+4 * (4 + 4)
+```
+
+```{r}
+4 ^ 2
+```
+
+```{r}
+4 ^ 3
+```
+
+For some operations, R has specific functions. For example, the `sqrt()` function can be used to calculate the square root.
+
+```{r}
+sqrt(16)
+```
+
+
+In R it is possible to apply the `sum()` function to a vector. This will calculate all the values in the vector:
+
+
+```{r}
+numbers <- c(3,5,2,6,6,7,2,11)
+sum(numbers)
+
+```
+
+
+
+## Statistical functions in R
+
+
+Since R is originally a *Statistical programming language*, functions that contain statistical calculations and formulas are also available.
+
+To experiment with these functions, we will first generate some random numbers:
+
+```{r}
+set.seed(123)
+numbers <- sample(1:100, 100, replace=TRUE)
+numbers
+```
+
+> The `set.seed()` function is used to make sure you get the same random numbers as in the example.
+
+
+### Exploring the data
+
+
+We can use the `head()` function to get the first number of values from a vector. By default, the `head()` function will return the first 6 values. 
+
+```{r}
+head(numbers)
+```
+
+We can add an additional parameter to the `head()` function to indicate how many from the first values we would like to get:
+
+```{r}
+head(numbers, 2)
+```
+
+
+With the `tail()` function, we can get the *last* values from a vector. It works the same as the `head()` function: 
+
+```{r}
+tail(numbers)
+```
+
+
+### Statistical functions for data exploration in R
+
+
+We can get a statistical summary of the vector with the `summary()` function.
+
+
+```{r}
+summary(numbers)
+```
+
+
+Calculating the *mean* of a vector:
+
+```{r}
+mean(numbers)
+```
+
+Calculating the minimum or maximum of a vector with `min()` and `max()`
+
+
+```{r}
+min(numbers)
+```
+
+```{r}
+max(numbers)
+```
+
+We can even get the value of *pi* with the `pi` variable which is by default available:
+
+```{r}
+pi
+```
+
+Standard deviation:
+
+```{r}
+sd(numbers)
+```
+
+Variance:
+
+```{r}
+var(numbers)
+```
+
+
+
+We will dive deeper into the statistical possibilities of R in the latter chapters, for example Linear Regression models, t-tests and ANOVA.
+
+
+

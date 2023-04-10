@@ -1,6 +1,10 @@
 ---
+<<<<<<< HEAD
 title: "Elasticsearch Fundamentals"
 author: "Arie Twigt"
+=======
+title: "Programming and analyzing data with R"
+>>>>>>> 11df9209b85116874a085dfb27c708001037f353
 site: bookdown::bookdown_site
 output:
   bookdown::gitbook: default

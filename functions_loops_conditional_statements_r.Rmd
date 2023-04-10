@@ -1,0 +1,107 @@
+# Functions, loops and conditional statements in R
+
+## Writing functions in R
+
+
+```{r}
+number <- 10
+number_increased <- number ^2
+print(paste0("The result is: ", number_increased))
+```
+
+```{r}
+myFun <- function(){
+  number <- 10
+  number_increased <- number ^2
+  return(print(paste0("The result is: ", number_increased)))
+}
+```
+
+```{r}
+myFun()
+```
+
+```{r}
+myFunVar <- function(x){
+  number <- x
+  number_increased <- number ^2
+  return(print(paste0("The result is: ", number_increased)))
+}
+```
+
+
+```{r}
+myFunVar(5)
+```
+
+```{r}
+myFunVarMulti <- function(x,y){
+  number <- x
+  number_increased <- number ^y
+  return(print(paste0("The result is: ", number_increased)))
+}
+```
+
+
+```{r}
+myFunVarMulti(5, 3)
+```
+
+
+Character-function
+
+```{r}
+greetName <- function(name){
+  return(print(paste0("Hello ", name)))
+}
+```
+
+```{r}
+greetName("Arie")
+```
+
+## Loops
+
+
+```{r}
+for(i in 1:5){
+  print("Hello")
+}
+```
+
+```{r}
+for(i in 1:10){
+  print(2 * i)
+}
+```
+
+
+## Conditional statements in R
+
+```{r}
+a = 10
+b = 20
+```
+
+
+
+```{r}
+if (a > b){
+  print("A is larger than B")
+} else {
+  print("That is not true")
+}
+```
+
+
+```{r}
+
+
+if (a > b){
+  print("A is larger than B")
+} else if (a < b) {
+  print("A is smaller than B")
+} else {
+  print("That is not true")
+}
+```

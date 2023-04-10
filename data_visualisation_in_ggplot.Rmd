@@ -1,0 +1,267 @@
+# Data visualization in ggplot
+
+
+## Installing and loading the required packages
+
+```{r, eval=FALSE}
+install.package("ggplot2")
+install.package("plotly")
+```
+
+
+```{r}
+library(dplyr)
+library(readr)
+library(ggplot2)
+library(plotly)
+```
+
+Disable the scientific notation
+
+```{r}
+options(scipen = 999)
+```
+
+
+
+
+Import the German dataset
+
+```{r}
+german_data_clean <- read_csv("data/german_data_clean.csv")
+```
+
+
+## Normal plots vs ggplot in R
+
+```{r}
+#R
+plot(german_data_clean$age_years, german_data_clean$credit_amount)
+```
+
+```{r}
+plot_1 <- ggplot(data = german_data_clean,
+                 aes(x = age_years, y = credit_amount)) +
+          geom_point()
+```
+
+```{r}
+plot_1
+```
+
+```{r}
+plot_1 + geom_point()
+```
+
+```{r}
+plot_1 + geom_smooth(model = lm)
+```
+
+
+
+```{r}
+plot_1 + geom_rug(sides = "bl")
+```
+
+
+## Different types of visualizations with ggplot
+
+10 bins
+
+```{r}
+plot_2 <- ggplot(german_data_clean, aes(credit_amount))
+plot_2 + geom_histogram(bins = 10)  
+```
+
+Bin width of 1000
+
+```{r}
+plot_2 + geom_histogram(binwidth  = 1000)
+```
+
+
+Customizing the colours of your plot
+
+```{r}
+plot_2 + geom_histogram(binwidth = 1000, 
+                        color="orange", 
+                        fill="darkblue")
+```
+
+
+Add fixed vertical lines to show add information about the distribution
+
+```{r}
+plot_2 + geom_density(kernel = "gaussian", fill = "gray") +
+  geom_vline(aes(xintercept=mean(credit_amount)),
+            color="blue", size=1, alpha = 0.4) +
+  geom_vline(aes(xintercept=mean(credit_amount) + sd(credit_amount)),
+            color="red", size=0.5, alpha = 0.4) +
+  geom_vline(aes(xintercept=mean(credit_amount) - sd(credit_amount)),
+            color="red", size=0.5, alpha = 0.4) +
+  geom_vline(aes(xintercept=median(credit_amount)),
+            color="green", size=4, alpha = 0.4) 
+```
+
+Scatterplots with multiple dimensions
+
+
+```{r}
+plot_3 <- ggplot(german_data_clean, aes(x = purpose, y = age_years))
+plot_3 + geom_boxplot() 
+```
+
+```{r}
+plot_3 + geom_violin()
+```
+
+```{r}
+plot_3 + geom_jitter()
+```
+
+
+```{r}
+plot_4 <- ggplot(german_data_clean, aes(x = personal_status_sex, y = credit_amount))
+plot_4 + geom_dotplot(binaxis = "y", stackdir = "center", binwidth = 250)
+```
+
+```{r}
+plot_4 <- ggplot(german_data_clean, aes(x = personal_status_sex, y = credit_amount))
+plot_4 + geom_boxplot()
+```
+
+
+
+```{r}
+plot_5 <- ggplot(german_data_clean, aes(x = age_years, y = credit_amount)) 
+plot_5 + geom_point()
+```
+
+
+## Using multiple dimensions in ggplot
+
+
+```{r}
+plot_5 <- ggplot(german_data_clean, aes(x = age_years, y = credit_amount)) 
+plot_5 + geom_point(aes(size = duration_months, colour = purpose, shape = personal_status_sex))
+```
+
+
+Finalizing the visualisation with titles
+
+
+```{r}
+plot_5 <- plot_5 + geom_point(aes(size = duration_months, colour = purpose, shape = personal_status_sex)) +
+        ggtitle("Purposes for loans?") +
+        xlab("Age") +
+        ylab("Amount") +
+        theme_minimal()
+        
+```
+
+
+## Making visualisations interactive with plotly
+
+
+```{r}
+library(plotly)
+ggplotly(plot_5)
+```
+
+
+
+Another example
+
+```{r}
+plot_6 <- ggplot(german_data_clean, aes(purpose, credit_amount)) +    
+  geom_bar(aes(fill = personal_status_sex), position = "dodge", stat="identity")
+
+ggplotly(plot_6)
+```
+
+
+Adding more customization
+
+
+```{r}
+plotly_plot_6 <- plot_6 + geom_bar(aes(fill = personal_status_sex), position = "dodge", stat="identity")
+ggplotly(plotly_plot_6)
+```
+
+```{r}
+plotly_plot_5 <- plot_5 + geom_point(aes(size = duration_months, colour = purpose, shape = personal_status_sex)) +
+        ggtitle("Purposes for loans") +
+        xlab("Age") +
+        ylab("Amount") +
+        theme(
+        panel.grid.major.x = element_line(colour = "#eeeeee"),
+        panel.grid.minor.x = element_line(colour = "#000000"),
+        panel.background = element_rect(fill = NA)
+        )
+
+ggplotly(plotly_plot_5)
+```
+
+
+## Experimenting multiple ways to display your data
+
+```{r}
+plot <- ggplot(german_data_clean, aes(x = savings, y = purpose))  + 
+               geom_jitter(aes(color = factor(response), shape = personal_status_sex, size = credit_amount), alpha = 0.6) + 
+  theme(axis.text.x = element_text(angle = 45, hjust = 1)) #+
+  theme_minimal()
+
+ggplotly(plot)
+
+```
+
+Credit history vs. credit amount
+
+
+```{r}
+ggplot() + 
+  geom_density(data=german_data_clean, 
+               aes(x=credit_amount, group=job, fill=job),alpha=0.5, adjust=2) 
+```
+
+
+### Using different themes
+
+```{r}
+library(ggplot2)
+theme_set(theme_classic())
+
+# Histogram on a Categorical variable
+plot <- ggplot(german_data_clean, aes(purpose))
+plot + geom_bar(aes(fill=job), width = 0.5) + 
+  theme(axis.text.x = element_text(angle=65, vjust=0.6)) + 
+  labs(title="Purpose per job")
+```
+
+
+
+```{r}
+german_data_clean <- german_data_clean %>%
+  mutate(geslacht = ifelse(personal_status_sex != "female : divorced/separated/married", "man", "vrouw"))
+
+library(ggthemes)
+g <- ggplot(german_data_clean, aes(purpose, credit_amount))
+g + geom_boxplot(aes(fill=factor(geslacht))) + 
+  theme(axis.text.x = element_text(angle=65, vjust=0.6)) 
+```
+
+```{r}
+german_data_clean <- german_data_clean %>%
+  mutate(geslacht = ifelse(personal_status_sex != "female : divorced/separated/married", "man", "vrouw"))
+
+library(ggthemes)
+g <- ggplot(german_data_clean, aes(purpose, credit_amount))
+g + geom_boxplot(aes(fill=factor(savings))) + 
+  theme(axis.text.x = element_text(angle=65, vjust=0.6)) 
+```
+
+
+
+
+
+

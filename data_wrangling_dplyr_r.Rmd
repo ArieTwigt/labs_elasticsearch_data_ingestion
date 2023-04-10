@@ -1,0 +1,174 @@
+# Using the dplyr package in R for data wrangling
+
+
+## Installing and loading the `dplyr` package
+
+
+Installing the dplyr package:
+
+```{r, eval = FALSE}
+install.packages('dplyr')
+```
+
+
+Using the `library()` to open our package
+
+```{r}
+library(dplyr)
+```
+
+## Creating subsets of a data frame with dplyr
+
+Base R:
+
+```{r}
+older_30 <- data[data$age_years >= 30,]
+older_30 <- older_30[, c("age_years", "personal_status_sex", "credit_amount")]
+older_30 <- older_30[sort(older_30$age_years),]
+```
+
+dplyr:
+
+```{r}
+older_30_2 <- data %>%
+  filter(age_years >= 30) %>%
+  select(age_years, personal_status_sex, credit_amount) %>%
+  arrange(age_years)
+
+head(older_30_2)
+```
+
+Examples:
+
+* Only **divorsed** men 
+* Minimum age of 18
+* Loans for: `"car (new)"`, `"radio/television"` or `"furniture/equipment"` :
+* Only select the following columns:
+  * `"age_years"`
+  * `"duration_months"`
+  * `"credit_amount"`
+  * `"purpose"`
+  * `"response"`
+* Sorted on `"credit_amount"` from high to low (descending)
+
+Let's see how we can create this subset with using the `dplyr` functionality:
+
+```{r}
+selected_purposes <- c("car (new)", "radio/television", "furniture/equipment")
+
+subset_1 <- data %>%
+  select(age_years, duration_months, credit_amount, purpose, personal_status_sex, response) %>%
+  filter(personal_status_sex == "male   : divorced/separated") %>%
+  filter(age_years >= 18) %>%
+  filter(purpose %in% selected_purposes) %>%
+  arrange(desc(credit_amount))
+```
+
+
+Check out the subset:
+
+```{r}
+subset_1
+```
+
+## Combining dplyr for creating visualisations for specific subsets
+
+
+```{r}
+hist(subset_1$credit_amount, breaks = 30)
+```
+
+```{r}
+pie(subset_1$credit_amount, labels = subset_1$purpose)
+```
+
+Now, let's show a pie chart for our subset:
+
+```{r}
+subset_1_grouped <- subset_1 %>% 
+  group_by(purpose) %>%
+  summarize(total_amount = sum(credit_amount))
+```
+
+```{r}
+pie(subset_1_grouped$total_amount, labels = subset_1_grouped$purpose, main = "Loans and purposes.")
+```
+
+
+Challenge:
+
+
+We will try to create the following subset: 
+* Only women (divorced, married, single)
+* All ages
+* Only loans for `"education"`, `"retraining"` `"business"`, `"other"`:
+* Only the following columns:
+  * `"age_years"`
+  * `"personal_status_sex"`
+  * `"credit_amount"`
+  * `"purpose"`
+  * `"response"`
+* Sorted on `"age_years"` descending
+
+
+* Visualizing the proportion of women that paid back the loan (`"response"`).
+
+
+```{r}
+selected_purposes <- c("education", "retraining", "business", "other")
+
+subset_2 <- data %>%
+  filter(personal_status_sex == "female : divorced/separated/married") %>%
+  filter(purpose %in% selected_purposes) %>%
+  select(age_years, duration_months, credit_amount, purpose, response) %>%
+  arrange(desc(age_years))
+```
+
+
+Check out our subset:
+
+```{r}
+head(subset_2)
+```
+
+```{r}
+barplot(table(subset_2$response))
+```
+
+## Creating subsets and aggregations in dplyr
+
+
+Challange: We want to create two bar charts, one for men and one for women, that show the avarage (mean) loan aount grouped by each different purpose:
+
+
+
+```{r}
+men_woman <- data %>%
+  mutate(gender = ifelse(personal_status_sex != "female : divorced/separated/married", "man", "vrouw")) %>%
+  select(gender, purpose, credit_amount) %>%
+  group_by(gender, purpose) %>%
+  summarise(mean_amount = mean(credit_amount)) 
+  
+men_woman
+```
+
+
+```{r}
+men_set <- men_woman %>% filter(gender=="man") 
+women_set <- men_woman %>% filter(gender=="vrouw") 
+
+men_amounts <- men_set$mean_amount
+names(men_amounts) <- men_set$purpose
+
+women_amounts <- women_set$mean_amount
+names(women_amounts) <- women_set$purpose
+```
+
+
+```{r}
+barplot(men_amounts, las=2, col="blue")
+```
+
+```{r}
+barplot(women_amounts, las=2, col="pink")
+```

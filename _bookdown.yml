@@ -1,1 +1,5 @@
+<<<<<<< HEAD
 rmd_files: ["index.Rmd", "setup.Rmd", "setup_8.Rmd", "crud_elasticsearch.Rmd", "searching_for_data.Rmd", "elasticsearch_queries.Rmd", "aggregations.Rmd", "nodes_and_shards.Rmd", "monitoring_troubleshooting.Rmd"]
+=======
+rmd_files: ["index.Rmd", "introduction_r_syntax.Rmd", "working_with_data_frames_in_r.Rmd", "data_wrangling_dplyr_r.Rmd", "functions_loops_conditional_statements_r.Rmd", "data_visualisation_in_ggplot.Rmd", "working_with_external_data.Rmd"]
+>>>>>>> 11df9209b85116874a085dfb27c708001037f353
