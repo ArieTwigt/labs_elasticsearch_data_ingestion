@@ -4,11 +4,11 @@
 
   <meta charset="utf-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  <title>4 Winlogbeat | Elastic Data Ingestion</title>
-  <meta name="description" content="4 Winlogbeat | Elastic Data Ingestion" />
-  <meta name="generator" content="bookdown 0.21 and GitBook 2.6.7" />
+  <title>4 Winlogbeat | Elasticsearch Data Fundamentals</title>
+  <meta name="description" content="4 Winlogbeat | Elasticsearch Data Fundamentals" />
+  <meta name="generator" content="bookdown 0.21.7 and GitBook 2.6.7" />
 
-  <meta property="og:title" content="4 Winlogbeat | Elastic Data Ingestion" />
+  <meta property="og:title" content="4 Winlogbeat | Elasticsearch Data Fundamentals" />
   <meta property="og:type" content="book" />
   
   
@@ -16,11 +16,12 @@
   
 
   <meta name="twitter:card" content="summary" />
-  <meta name="twitter:title" content="4 Winlogbeat | Elastic Data Ingestion" />
+  <meta name="twitter:title" content="4 Winlogbeat | Elasticsearch Data Fundamentals" />
   
   
   
 
+<meta name="author" content="Arie Twigt" />
 
 
 
@@ -48,6 +49,8 @@
 
 
 
+<link href="libs/anchor-sections-1.0.1/anchor-sections.css" rel="stylesheet" />
+<script src="libs/anchor-sections-1.0.1/anchor-sections.js"></script>
 
 
 <style type="text/css">
@@ -113,6 +116,7 @@ code span.vs { color: #4070a0; } /* VerbatimString */
 code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
 </style>
 
+
 </head>
 
 <body>
@@ -126,10 +130,12 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 
 <ul class="summary">
 <li class="chapter" data-level="1" data-path="setup.html"><a href="setup.html"><i class="fa fa-check"></i><b>1</b> Setup</a><ul>
-<li class="chapter" data-level="1.1" data-path="setup.html"><a href="setup.html#software."><i class="fa fa-check"></i><b>1.1</b> Software.</a><ul>
-<li class="chapter" data-level="1.1.1" data-path="setup.html"><a href="setup.html#download-and-extract-the-software-in-your-home-directory"><i class="fa fa-check"></i><b>1.1.1</b> Download and extract the software in your Home Directory</a></li>
+<li class="chapter" data-level="1.1" data-path="setup.html"><a href="setup.html#download-elasticsearch"><i class="fa fa-check"></i><b>1.1</b> Download Elasticsearch</a><ul>
+<li class="chapter" data-level="1.1.1" data-path="setup.html"><a href="setup.html#download-and-unzip-the-elasticsearch-installation-in-your-home-directory"><i class="fa fa-check"></i><b>1.1.1</b> Download and unzip the Elasticsearch installation in your Home Directory</a></li>
+<li class="chapter" data-level="1.1.2" data-path="setup.html"><a href="setup.html#start-elasticsearch-from-the-command-line"><i class="fa fa-check"></i><b>1.1.2</b> Start Elasticsearch from the Command Line</a></li>
+<li class="chapter" data-level="1.1.3" data-path="setup.html"><a href="setup.html#changing-basic-settings-in-the-elasticsearch-configuration"><i class="fa fa-check"></i><b>1.1.3</b> Changing basic settings in the Elasticsearch configuration</a></li>
 </ul></li>
-<li class="chapter" data-level="1.2" data-path="setup.html"><a href="setup.html#starting-elasticsearch-from-the-command-line"><i class="fa fa-check"></i><b>1.2</b> Starting Elasticsearch from the Command Line</a></li>
+<li class="chapter" data-level="1.2" data-path="setup.html"><a href="setup.html#getting-started-with-kibana"><i class="fa fa-check"></i><b>1.2</b> Getting started with Kibana</a></li>
 </ul></li>
 <li class="chapter" data-level="2" data-path="elasticsearch-and-kibana.html"><a href="elasticsearch-and-kibana.html"><i class="fa fa-check"></i><b>2</b> Elasticsearch and Kibana</a><ul>
 <li class="chapter" data-level="2.1" data-path="elasticsearch-and-kibana.html"><a href="elasticsearch-and-kibana.html#start-elasticsearch"><i class="fa fa-check"></i><b>2.1</b> Start Elasticsearch</a></li>
@@ -177,7 +183,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
       <div class="body-inner">
         <div class="book-header" role="navigation">
           <h1>
-            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">Elastic Data Ingestion</a>
+            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">Elasticsearch Data Fundamentals</a>
           </h1>
         </div>
 
@@ -251,7 +257,7 @@ cd winlogbeat-7.11.2-windows-x86_64</code></pre>
 <p>Congratulations, we are now presented with our Windows logs files in the dashboard. Make sure the filters are properly set. You can also scroll down the page in order to view all the visualisations.</p>
 <p><img src="img/winlogbeat_siem_app_empty.PNG" alt="Dashboard Windows logs" />
 <img src="img/winlogbeat_screenshot_siem_scroll_naar_beneden_events.PNG" alt="Dashboard Windows logs when scrolling down" /></p>
-<p>When we drill down the different visualisations we also get different tables that show our Windows logs.</p>
+<p>When we drill down the different visualisations we also get different tables that show our Windows logs. For example, you can click <strong>View Events</strong>.</p>
 <div class="figure">
 <img src="img/screenshot_winlogbeat_host_selecteerd_2_visualisaties.PNG" alt="Windows logs" />
 <p class="caption">Windows logs</p>
@@ -261,15 +267,15 @@ cd winlogbeat-7.11.2-windows-x86_64</code></pre>
 <h2><span class="header-section-number">4.3</span> Check out the Windows logs in the Elasticsearch index</h2>
 <p>Let’s checkout the raw Windows logs in our Elasticsearch index. In the Kibana menu, navigate to Dev Tools.</p>
 <p>In the Editor, execute the Elasticsearch request to get an overview of our current indices.</p>
-<div class="sourceCode" id="cb17"><pre class="sourceCode json"><code class="sourceCode json"><a class="sourceLine" id="cb17-1" data-line-number="1"><span class="er">GET</span> <span class="er">_cat/indices?v</span></a></code></pre></div>
+<div class="sourceCode" id="cb15"><pre class="sourceCode json"><code class="sourceCode json"><a class="sourceLine" id="cb15-1" data-line-number="1"><span class="er">GET</span> <span class="er">_cat/indices?v</span></a></code></pre></div>
 <p>The list with indices contains an index staring with <code>winlogbeat</code> (followed by the timestamp of the initation of the Winlogbeat instance).</p>
 <p>Let’s checkout what a Window log line indexed in Elasticsearch looks like</p>
-<div class="sourceCode" id="cb18"><pre class="sourceCode json"><code class="sourceCode json"><a class="sourceLine" id="cb18-1" data-line-number="1"><span class="er">GET</span> <span class="er">winlogbeat-*/_search</span></a>
-<a class="sourceLine" id="cb18-2" data-line-number="2"><span class="fu">{</span></a>
-<a class="sourceLine" id="cb18-3" data-line-number="3">  <span class="dt">&quot;query&quot;</span><span class="fu">:</span> <span class="fu">{</span></a>
-<a class="sourceLine" id="cb18-4" data-line-number="4">    <span class="dt">&quot;match_all&quot;</span><span class="fu">:</span> <span class="fu">{}</span></a>
-<a class="sourceLine" id="cb18-5" data-line-number="5">  <span class="fu">}</span></a>
-<a class="sourceLine" id="cb18-6" data-line-number="6"><span class="fu">}</span></a></code></pre></div>
+<div class="sourceCode" id="cb16"><pre class="sourceCode json"><code class="sourceCode json"><a class="sourceLine" id="cb16-1" data-line-number="1"><span class="er">GET</span> <span class="er">winlogbeat-*/_search</span></a>
+<a class="sourceLine" id="cb16-2" data-line-number="2"><span class="fu">{</span></a>
+<a class="sourceLine" id="cb16-3" data-line-number="3">  <span class="dt">&quot;query&quot;</span><span class="fu">:</span> <span class="fu">{</span></a>
+<a class="sourceLine" id="cb16-4" data-line-number="4">    <span class="dt">&quot;match_all&quot;</span><span class="fu">:</span> <span class="fu">{}</span></a>
+<a class="sourceLine" id="cb16-5" data-line-number="5">  <span class="fu">}</span></a>
+<a class="sourceLine" id="cb16-6" data-line-number="6"><span class="fu">}</span></a></code></pre></div>
 <div class="figure">
 <img src="img/screenshot_voorbeeld_output_winlogbeat_document_bekijken.PNG" alt="A Windows log indexed in Elasticsearch" />
 <p class="caption">A Windows log indexed in Elasticsearch</p>

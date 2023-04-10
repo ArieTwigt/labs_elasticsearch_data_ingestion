@@ -1,0 +1,252 @@
+<!DOCTYPE html>
+<html lang="" xml:lang="">
+<head>
+
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <title>8 Monitoring | Elasticsearch Fundamentals</title>
+  <meta name="description" content="8 Monitoring | Elasticsearch Fundamentals" />
+  <meta name="generator" content="bookdown 0.21.7 and GitBook 2.6.7" />
+
+  <meta property="og:title" content="8 Monitoring | Elasticsearch Fundamentals" />
+  <meta property="og:type" content="book" />
+  
+  
+  
+  
+
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content="8 Monitoring | Elasticsearch Fundamentals" />
+  
+  
+  
+
+<meta name="author" content="Arie Twigt" />
+
+
+
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+  
+  
+<link rel="prev" href="troubleshooting-and-monitoring.html"/>
+
+<script src="libs/jquery-2.2.3/jquery.min.js"></script>
+<link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-highlight.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-search.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-fontsettings.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-clipboard.css" rel="stylesheet" />
+
+
+
+
+
+
+
+
+
+<link href="libs/anchor-sections-1.0.1/anchor-sections.css" rel="stylesheet" />
+<script src="libs/anchor-sections-1.0.1/anchor-sections.js"></script>
+
+
+
+
+</head>
+
+<body>
+
+
+
+  <div class="book without-animation with-summary font-size-2 font-family-1" data-basepath=".">
+
+    <div class="book-summary">
+      <nav role="navigation">
+
+<ul class="summary">
+<li class="chapter" data-level="1" data-path="setup.html"><a href="setup.html"><i class="fa fa-check"></i><b>1</b> Setup</a><ul>
+<li class="chapter" data-level="1.1" data-path="setup.html"><a href="setup.html#download-elasticsearch"><i class="fa fa-check"></i><b>1.1</b> Download Elasticsearch</a><ul>
+<li class="chapter" data-level="1.1.1" data-path="setup.html"><a href="setup.html#download-and-unzip-the-elasticsearch-installation-in-your-home-directory"><i class="fa fa-check"></i><b>1.1.1</b> Download and unzip the Elasticsearch installation in your Home Directory</a></li>
+<li class="chapter" data-level="1.1.2" data-path="setup.html"><a href="setup.html#start-elasticsearch-from-the-command-line"><i class="fa fa-check"></i><b>1.1.2</b> Start Elasticsearch from the Command Line</a></li>
+<li class="chapter" data-level="1.1.3" data-path="setup.html"><a href="setup.html#changing-basic-settings-in-the-elasticsearch-configuration"><i class="fa fa-check"></i><b>1.1.3</b> Changing basic settings in the Elasticsearch configuration</a></li>
+</ul></li>
+<li class="chapter" data-level="1.2" data-path="setup.html"><a href="setup.html#getting-started-with-kibana"><i class="fa fa-check"></i><b>1.2</b> Getting started with Kibana</a><ul>
+<li class="chapter" data-level="1.2.1" data-path="setup.html"><a href="setup.html#interacting-with-elasticsearch"><i class="fa fa-check"></i><b>1.2.1</b> Interacting with Elasticsearch</a></li>
+<li class="chapter" data-level="1.2.2" data-path="setup.html"><a href="setup.html#managing-elasticsearch-in-kibana"><i class="fa fa-check"></i><b>1.2.2</b> Managing Elasticsearch in Kibana</a></li>
+<li class="chapter" data-level="1.2.3" data-path="setup.html"><a href="setup.html#downloading-and-extracting-kibana"><i class="fa fa-check"></i><b>1.2.3</b> Downloading and extracting Kibana</a></li>
+<li class="chapter" data-level="1.2.4" data-path="setup.html"><a href="setup.html#launching-kibana"><i class="fa fa-check"></i><b>1.2.4</b> Launching Kibana</a></li>
+<li class="chapter" data-level="1.2.5" data-path="setup.html"><a href="setup.html#using-dev-tools-for-crud-operations-in-kibana"><i class="fa fa-check"></i><b>1.2.5</b> Using Dev Tools for CRUD-operations in Kibana</a></li>
+</ul></li>
+<li class="chapter" data-level="1.3" data-path="setup.html"><a href="setup.html#setting-up-basic-security-for-elasticsearch-and-kibana"><i class="fa fa-check"></i><b>1.3</b> Setting up basic security for Elasticsearch and Kibana</a><ul>
+<li class="chapter" data-level="1.3.1" data-path="setup.html"><a href="setup.html#enabling-x-pack-security"><i class="fa fa-check"></i><b>1.3.1</b> Enabling X-pack security</a></li>
+<li class="chapter" data-level="1.3.2" data-path="setup.html"><a href="setup.html#setting-up-passwords"><i class="fa fa-check"></i><b>1.3.2</b> Setting up passwords</a></li>
+<li class="chapter" data-level="1.3.3" data-path="setup.html"><a href="setup.html#changing-the-security-configuration-in-kibana"><i class="fa fa-check"></i><b>1.3.3</b> Changing the security configuration in Kibana</a></li>
+<li class="chapter" data-level="1.3.4" data-path="setup.html"><a href="setup.html#open-kibana-with-the-new-security-settings"><i class="fa fa-check"></i><b>1.3.4</b> Open Kibana with the new security settings</a></li>
+<li class="chapter" data-level="1.3.5" data-path="setup.html"><a href="setup.html#overview-of-the-setup"><i class="fa fa-check"></i><b>1.3.5</b> Overview of the setup</a></li>
+<li class="chapter" data-level="1.3.6" data-path="setup.html"><a href="setup.html#get-an-overview-of-the-users-and-change-the-password"><i class="fa fa-check"></i><b>1.3.6</b> Get an overview of the users and change the password</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="2" data-path="crud-operations-in-elasticsearch.html"><a href="crud-operations-in-elasticsearch.html"><i class="fa fa-check"></i><b>2</b> CRUD operations in Elasticsearch</a><ul>
+<li class="chapter" data-level="2.0.1" data-path="crud-operations-in-elasticsearch.html"><a href="crud-operations-in-elasticsearch.html#adding-a-new-document"><i class="fa fa-check"></i><b>2.0.1</b> Adding a new document</a></li>
+<li class="chapter" data-level="2.0.2" data-path="crud-operations-in-elasticsearch.html"><a href="crud-operations-in-elasticsearch.html#updating-an-existing-document"><i class="fa fa-check"></i><b>2.0.2</b> Updating an existing document</a></li>
+<li class="chapter" data-level="2.0.3" data-path="crud-operations-in-elasticsearch.html"><a href="crud-operations-in-elasticsearch.html#deleting-a-document"><i class="fa fa-check"></i><b>2.0.3</b> Deleting a document</a></li>
+</ul></li>
+<li class="chapter" data-level="3" data-path="searching-for-data.html"><a href="searching-for-data.html"><i class="fa fa-check"></i><b>3</b> Searching for data</a><ul>
+<li class="chapter" data-level="3.1" data-path="searching-for-data.html"><a href="searching-for-data.html#loading-the-dynamic-dataset"><i class="fa fa-check"></i><b>3.1</b> Loading the Dynamic Dataset</a></li>
+<li class="chapter" data-level="3.2" data-path="searching-for-data.html"><a href="searching-for-data.html#loading-the-static-dataset"><i class="fa fa-check"></i><b>3.2</b> Loading the Static Dataset</a></li>
+<li class="chapter" data-level="3.3" data-path="searching-for-data.html"><a href="searching-for-data.html#search-in-elasticsearch"><i class="fa fa-check"></i><b>3.3</b> Search in Elasticsearch</a><ul>
+<li class="chapter" data-level="3.3.1" data-path="searching-for-data.html"><a href="searching-for-data.html#search-in-static-datasets"><i class="fa fa-check"></i><b>3.3.1</b> Search in Static Datasets</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="4" data-path="elasticsearch-queries.html"><a href="elasticsearch-queries.html"><i class="fa fa-check"></i><b>4</b> Elasticsearch queries</a><ul>
+<li class="chapter" data-level="4.1" data-path="elasticsearch-queries.html"><a href="elasticsearch-queries.html#relevance"><i class="fa fa-check"></i><b>4.1</b> Relevance</a></li>
+<li class="chapter" data-level="4.2" data-path="elasticsearch-queries.html"><a href="elasticsearch-queries.html#full-text-queries"><i class="fa fa-check"></i><b>4.2</b> Full text queries</a></li>
+<li class="chapter" data-level="4.3" data-path="elasticsearch-queries.html"><a href="elasticsearch-queries.html#combining-queries"><i class="fa fa-check"></i><b>4.3</b> Combining queries</a></li>
+</ul></li>
+<li class="chapter" data-level="5" data-path="aggregations.html"><a href="aggregations.html"><i class="fa fa-check"></i><b>5</b> Aggregations</a><ul>
+<li class="chapter" data-level="5.1" data-path="aggregations.html"><a href="aggregations.html#metrics"><i class="fa fa-check"></i><b>5.1</b> Metrics</a></li>
+<li class="chapter" data-level="5.2" data-path="aggregations.html"><a href="aggregations.html#buckets"><i class="fa fa-check"></i><b>5.2</b> Buckets</a></li>
+<li class="chapter" data-level="5.3" data-path="aggregations.html"><a href="aggregations.html#combined-aggregations"><i class="fa fa-check"></i><b>5.3</b> Combined Aggregations</a></li>
+<li class="chapter" data-level="5.4" data-path="aggregations.html"><a href="aggregations.html#pagination-and-pipeline-aggregations"><i class="fa fa-check"></i><b>5.4</b> Pagination and Pipeline Aggregations</a></li>
+</ul></li>
+<li class="chapter" data-level="6" data-path="nodes-and-shards.html"><a href="nodes-and-shards.html"><i class="fa fa-check"></i><b>6</b> Nodes and Shards</a><ul>
+<li class="chapter" data-level="6.1" data-path="nodes-and-shards.html"><a href="nodes-and-shards.html#running-a-multi-node-cluster"><i class="fa fa-check"></i><b>6.1</b> Running a multi-node cluster</a></li>
+<li class="chapter" data-level="6.2" data-path="nodes-and-shards.html"><a href="nodes-and-shards.html#adding-a-second-elasticsearch-node-locally"><i class="fa fa-check"></i><b>6.2</b> Adding a second Elasticsearch node locally</a></li>
+<li class="chapter" data-level="6.3" data-path="nodes-and-shards.html"><a href="nodes-and-shards.html#configure-the-elasticsearch-nodes-for-the-multi-node-cluster"><i class="fa fa-check"></i><b>6.3</b> Configure the Elasticsearch nodes for the multi-node cluster</a></li>
+<li class="chapter" data-level="6.4" data-path="nodes-and-shards.html"><a href="nodes-and-shards.html#configure-the-cluster-value-and-set-the-names-of-the-nodes"><i class="fa fa-check"></i><b>6.4</b> Configure the cluster value and set the names of the nodes</a></li>
+<li class="chapter" data-level="6.5" data-path="nodes-and-shards.html"><a href="nodes-and-shards.html#specify-the-network-settings-and-indicate-which-node-is-the-master"><i class="fa fa-check"></i><b>6.5</b> Specify the network settings and indicate which node is the master</a></li>
+<li class="chapter" data-level="6.6" data-path="nodes-and-shards.html"><a href="nodes-and-shards.html#change-the-security-settings"><i class="fa fa-check"></i><b>6.6</b> Change the security settings</a></li>
+<li class="chapter" data-level="6.7" data-path="nodes-and-shards.html"><a href="nodes-and-shards.html#start-the-multi-node-cluster"><i class="fa fa-check"></i><b>6.7</b> Start the multi-node cluster</a></li>
+<li class="chapter" data-level="6.8" data-path="nodes-and-shards.html"><a href="nodes-and-shards.html#check-out-our-cluster-in-kibana"><i class="fa fa-check"></i><b>6.8</b> Check out our cluster in Kibana</a></li>
+<li class="chapter" data-level="6.9" data-path="nodes-and-shards.html"><a href="nodes-and-shards.html#cluster-roles"><i class="fa fa-check"></i><b>6.9</b> Cluster roles</a></li>
+</ul></li>
+<li class="chapter" data-level="7" data-path="troubleshooting-and-monitoring.html"><a href="troubleshooting-and-monitoring.html"><i class="fa fa-check"></i><b>7</b> Troubleshooting and Monitoring</a><ul>
+<li class="chapter" data-level="7.1" data-path="troubleshooting-and-monitoring.html"><a href="troubleshooting-and-monitoring.html#responses-and-allocation"><i class="fa fa-check"></i><b>7.1</b> Responses and Allocation</a></li>
+</ul></li>
+<li class="chapter" data-level="8" data-path="monitoring.html"><a href="monitoring.html"><i class="fa fa-check"></i><b>8</b> Monitoring</a><ul>
+<li class="chapter" data-level="8.1" data-path="monitoring.html"><a href="monitoring.html#diagnosing-performance-issues"><i class="fa fa-check"></i><b>8.1</b> Diagnosing Performance Issues</a></li>
+</ul></li>
+</ul>
+
+      </nav>
+    </div>
+
+    <div class="book-body">
+      <div class="body-inner">
+        <div class="book-header" role="navigation">
+          <h1>
+            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">Elasticsearch Fundamentals</a>
+          </h1>
+        </div>
+
+        <div class="page-wrapper" tabindex="-1" role="main">
+          <div class="page-inner">
+
+            <section class="normal" id="section-">
+<div id="monitoring" class="section level1">
+<h1><span class="header-section-number">8</span> Monitoring</h1>
+<p>Monitoring pane:</p>
+<p><img src="img/6_2_kibana_setup_monitoring.PNG" /></p>
+<p>Monitoring pane indicates no monitoring setup yet</p>
+<p><img src="img/6_2_monitoring_instructions_setup_metricbeat.PNG" /></p>
+<p>Download Metricbeat <a href="https://www.elastic.co/downloads/beats/metricbeat">https://www.elastic.co/downloads/beats/metricbeat</a></p>
+<p><img src="img/6_2_download_metricbeat.PNG" /></p>
+<p>Extract Metricbeat in the Home Directory</p>
+<p><img src="img/6_2_extract_metricbeat.PNG" /></p>
+<p>We first change the configuration of Metricbeat</p>
+<p><img src="img/6_2_configuration_metricbeat.PNG" /></p>
+<p>Open Powershell tab:</p>
+<p><img src="img/6_2_powershell_run_administrator.png" /></p>
+<p>In Powershell, we will install Metricbeat</p>
+<p><img src="img/6_2_metricbeat_install_service_metricbeat.PNG" /></p>
+<p>Install the <code>x-pack</code> module</p>
+<p><img src="img/6_2_metricbeat_enable_xpack.PNG" /></p>
+<p>Start Metricbeat</p>
+<p><img src="img/6_2_start_metricbeat.PNG" /></p>
+<p>Once Metricbeat starts working for the current instance, we will get the message in Kibana:</p>
+<p><img src="img/6_2_metricbeat_installed.PNG" /></p>
+<p>Metricbeat open Stack Monitoring</p>
+<p><img src="img/6_2_stack_monitoring.PNG" /></p>
+<p>Metricbeat node 1</p>
+<p><img src="img/6_2_monitoring_elasticsearch_node_1.PNG" /></p>
+<p>Metricbeat multiple indices</p>
+<p><img src="img/6_2_monitoring_elasticsearch_indices.PNG" /></p>
+<div id="diagnosing-performance-issues" class="section level2">
+<h2><span class="header-section-number">8.1</span> Diagnosing Performance Issues</h2>
+<p>First we will change the index by adding an extra replica</p>
+<p><img src="img/4_1_change_replicas_index.PNG" /></p>
+<p>Find out the thread pool:</p>
+<p><img src="img/6_3_get_threadpool.PNG" /></p>
+<p>Check out the status for the thread pools:</p>
+<p><img src="img/6_3_get_stats_threadpool.PNG" /></p>
+<p>Pretty print thread pool:</p>
+<p><img src="img/6_3_thread_pool_pretty.PNG" /></p>
+<p>Get current tasks:</p>
+<p><img src="img/6_3_get_tasks.PNG" /></p>
+<p>Get the specific nodes:</p>
+<p><img src="img/6_3_get_cat_nodes_specific.PNG" /></p>
+
+</div>
+</div>
+            </section>
+
+          </div>
+        </div>
+      </div>
+<a href="troubleshooting-and-monitoring.html" class="navigation navigation-prev navigation-unique" aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+
+    </div>
+  </div>
+<script src="libs/gitbook-2.6.7/js/app.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/lunr.js"></script>
+<script src="libs/gitbook-2.6.7/js/clipboard.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-search.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-sharing.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-fontsettings.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-bookdown.js"></script>
+<script src="libs/gitbook-2.6.7/js/jquery.highlight.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-clipboard.js"></script>
+<script>
+gitbook.require(["gitbook"], function(gitbook) {
+gitbook.start({
+"sharing": {
+"github": false,
+"facebook": true,
+"twitter": true,
+"linkedin": false,
+"weibo": false,
+"instapaper": false,
+"vk": false,
+"all": ["facebook", "twitter", "linkedin", "weibo", "instapaper"]
+},
+"fontsettings": {
+"theme": "white",
+"family": "sans",
+"size": 2
+},
+"edit": {
+"link": null,
+"text": null
+},
+"history": {
+"link": null,
+"text": null
+},
+"view": {
+"link": null,
+"text": null
+},
+"download": null,
+"toc": {
+"collapse": "subsection"
+}
+});
+});
+</script>
+
+</body>
+
+</html>

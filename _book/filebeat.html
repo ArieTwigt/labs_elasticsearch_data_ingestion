@@ -4,11 +4,11 @@
 
   <meta charset="utf-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  <title>5 Filebeat | Elastic Data Ingestion</title>
-  <meta name="description" content="5 Filebeat | Elastic Data Ingestion" />
-  <meta name="generator" content="bookdown 0.21 and GitBook 2.6.7" />
+  <title>5 Filebeat | Elasticsearch Data Fundamentals</title>
+  <meta name="description" content="5 Filebeat | Elasticsearch Data Fundamentals" />
+  <meta name="generator" content="bookdown 0.21.7 and GitBook 2.6.7" />
 
-  <meta property="og:title" content="5 Filebeat | Elastic Data Ingestion" />
+  <meta property="og:title" content="5 Filebeat | Elasticsearch Data Fundamentals" />
   <meta property="og:type" content="book" />
   
   
@@ -16,11 +16,12 @@
   
 
   <meta name="twitter:card" content="summary" />
-  <meta name="twitter:title" content="5 Filebeat | Elastic Data Ingestion" />
+  <meta name="twitter:title" content="5 Filebeat | Elasticsearch Data Fundamentals" />
   
   
   
 
+<meta name="author" content="Arie Twigt" />
 
 
 
@@ -48,6 +49,8 @@
 
 
 
+<link href="libs/anchor-sections-1.0.1/anchor-sections.css" rel="stylesheet" />
+<script src="libs/anchor-sections-1.0.1/anchor-sections.js"></script>
 
 
 <style type="text/css">
@@ -113,6 +116,7 @@ code span.vs { color: #4070a0; } /* VerbatimString */
 code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
 </style>
 
+
 </head>
 
 <body>
@@ -126,10 +130,12 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 
 <ul class="summary">
 <li class="chapter" data-level="1" data-path="setup.html"><a href="setup.html"><i class="fa fa-check"></i><b>1</b> Setup</a><ul>
-<li class="chapter" data-level="1.1" data-path="setup.html"><a href="setup.html#software."><i class="fa fa-check"></i><b>1.1</b> Software.</a><ul>
-<li class="chapter" data-level="1.1.1" data-path="setup.html"><a href="setup.html#download-and-extract-the-software-in-your-home-directory"><i class="fa fa-check"></i><b>1.1.1</b> Download and extract the software in your Home Directory</a></li>
+<li class="chapter" data-level="1.1" data-path="setup.html"><a href="setup.html#download-elasticsearch"><i class="fa fa-check"></i><b>1.1</b> Download Elasticsearch</a><ul>
+<li class="chapter" data-level="1.1.1" data-path="setup.html"><a href="setup.html#download-and-unzip-the-elasticsearch-installation-in-your-home-directory"><i class="fa fa-check"></i><b>1.1.1</b> Download and unzip the Elasticsearch installation in your Home Directory</a></li>
+<li class="chapter" data-level="1.1.2" data-path="setup.html"><a href="setup.html#start-elasticsearch-from-the-command-line"><i class="fa fa-check"></i><b>1.1.2</b> Start Elasticsearch from the Command Line</a></li>
+<li class="chapter" data-level="1.1.3" data-path="setup.html"><a href="setup.html#changing-basic-settings-in-the-elasticsearch-configuration"><i class="fa fa-check"></i><b>1.1.3</b> Changing basic settings in the Elasticsearch configuration</a></li>
 </ul></li>
-<li class="chapter" data-level="1.2" data-path="setup.html"><a href="setup.html#starting-elasticsearch-from-the-command-line"><i class="fa fa-check"></i><b>1.2</b> Starting Elasticsearch from the Command Line</a></li>
+<li class="chapter" data-level="1.2" data-path="setup.html"><a href="setup.html#getting-started-with-kibana"><i class="fa fa-check"></i><b>1.2</b> Getting started with Kibana</a></li>
 </ul></li>
 <li class="chapter" data-level="2" data-path="elasticsearch-and-kibana.html"><a href="elasticsearch-and-kibana.html"><i class="fa fa-check"></i><b>2</b> Elasticsearch and Kibana</a><ul>
 <li class="chapter" data-level="2.1" data-path="elasticsearch-and-kibana.html"><a href="elasticsearch-and-kibana.html#start-elasticsearch"><i class="fa fa-check"></i><b>2.1</b> Start Elasticsearch</a></li>
@@ -177,7 +183,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
       <div class="body-inner">
         <div class="book-header" role="navigation">
           <h1>
-            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">Elastic Data Ingestion</a>
+            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">Elasticsearch Data Fundamentals</a>
           </h1>
         </div>
 
@@ -218,16 +224,26 @@ Our running Elasticsearch instance is also logged. These logs are written to a f
 <p>Next to these parameters, there are some other parameters like <code>exclude_files</code> in which we can specify which files to exclude when we specify an entire directory in the <code>paths</code> parameter. For now, we are all set with the current parameters.</p>
 <p>We will specify/uncomment some additonal important parameters:</p>
 <ul>
-<li><code>index</code>
+<li><code>output.elasticsearch</code>
 <ul>
-<li><code>index</code>: <code>index: &quot;%{[fields.log_type]}-%{[agent.version]}-%{+yyyy.MM.dd}&quot;</code></li>
+<li><code>index: &quot;%{[fields.log_type]}-%{[agent.version]}-%{+yyyy.MM.dd}&quot;</code></li>
 </ul></li>
-<li><code>templates</code>
+</ul>
+<div class="figure">
+<img src="img/screenshot_filebeat_yml_output_elasticsearch.PNG" alt="Filebeat output to Elasticsearch" />
+<p class="caption"><em>Filebeat output to Elasticsearch</em></p>
+</div>
+<ul>
+<li><code>==== Elasticsearch template setting</code>
 <ul>
 <li><code>setup.template.name</code>: “filebeat”</li>
 <li><code>setup.template.pattern</code>: &quot;filebeat-*&quot;</li>
 </ul></li>
 </ul>
+<div class="figure">
+<img src="img/screenshot_filebeat_template_name.PNG" alt="Filebeat specify template" />
+<p class="caption"><em>Filebeat specify template</em></p>
+</div>
 </div>
 <div id="run-filebeat" class="section level2">
 <h2><span class="header-section-number">5.2</span> Run filebeat</h2>
@@ -240,7 +256,7 @@ Our running Elasticsearch instance is also logged. These logs are written to a f
 <p>Now filebeat is running, we must wait for some Elasticsearch log lines which can be found by Filebeat and indexed in Elasticsearch. But waiting can sometimes take a lot of time, so we will make sure Elasticsearch will genereate some logs.</p>
 <p>In Kibana open Dev Tools to access the editor. Lets put and delete an index. This will be logged by Elasticsearch.</p>
 <p>Add an index</p>
-<div class="sourceCode" id="cb21"><pre class="sourceCode json"><code class="sourceCode json"><a class="sourceLine" id="cb21-1" data-line-number="1"><span class="er">PUT</span> <span class="er">test_for_filebeat</span></a></code></pre></div>
+<div class="sourceCode" id="cb19"><pre class="sourceCode json"><code class="sourceCode json"><a class="sourceLine" id="cb19-1" data-line-number="1"><span class="er">PUT</span> <span class="er">test_for_filebeat</span></a></code></pre></div>
 <p>Delete tha index again</p>
 <pre><code>DELETE test_for_filebeat</code></pre>
 <p>Let’s look at our Command Line in which Elasticsearch is running. The creating and deletion of the index should be logged.</p>
@@ -250,7 +266,7 @@ Our running Elasticsearch instance is also logged. These logs are written to a f
 </div>
 <p>In a little while, these logs will be indexed in the index we specified in our <code>filebeat.yml</code> file.</p>
 <p>Our index starts with <code>filebeat</code></p>
-<div class="sourceCode" id="cb23"><pre class="sourceCode json"><code class="sourceCode json"><a class="sourceLine" id="cb23-1" data-line-number="1"><span class="er">GET</span> <span class="er">_cat/indices?v</span></a></code></pre></div>
+<div class="sourceCode" id="cb21"><pre class="sourceCode json"><code class="sourceCode json"><a class="sourceLine" id="cb21-1" data-line-number="1"><span class="er">GET</span> <span class="er">_cat/indices?v</span></a></code></pre></div>
 <blockquote>
 <p>The logs will nog immediately be visible since the logs are not logged realtime are fetched by Filebeat for a specific time interval. Execute the command a few times until you see the new index. If it does not appear, there might be something wrong with the configuration.</p>
 </blockquote>

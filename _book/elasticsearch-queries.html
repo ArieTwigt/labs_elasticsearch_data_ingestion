@@ -1,0 +1,358 @@
+<!DOCTYPE html>
+<html lang="" xml:lang="">
+<head>
+
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <title>5 Elasticsearch queries | Elasticsearch Fundamentals</title>
+  <meta name="description" content="5 Elasticsearch queries | Elasticsearch Fundamentals" />
+  <meta name="generator" content="bookdown 0.21.7 and GitBook 2.6.7" />
+
+  <meta property="og:title" content="5 Elasticsearch queries | Elasticsearch Fundamentals" />
+  <meta property="og:type" content="book" />
+  
+  
+  
+  
+
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content="5 Elasticsearch queries | Elasticsearch Fundamentals" />
+  
+  
+  
+
+<meta name="author" content="Arie Twigt" />
+
+
+
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+  
+  
+<link rel="prev" href="searching-for-data.html"/>
+<link rel="next" href="aggregations.html"/>
+<script src="libs/jquery-2.2.3/jquery.min.js"></script>
+<link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-highlight.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-search.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-fontsettings.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-clipboard.css" rel="stylesheet" />
+
+
+
+
+
+
+
+
+
+<link href="libs/anchor-sections-1.0.1/anchor-sections.css" rel="stylesheet" />
+<script src="libs/anchor-sections-1.0.1/anchor-sections.js"></script>
+
+
+<style type="text/css">
+a.sourceLine { display: inline-block; line-height: 1.25; }
+a.sourceLine { pointer-events: none; color: inherit; text-decoration: inherit; }
+a.sourceLine:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode { white-space: pre; position: relative; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+code.sourceCode { white-space: pre-wrap; }
+a.sourceLine { text-indent: -1em; padding-left: 1em; }
+}
+pre.numberSource a.sourceLine
+  { position: relative; left: -4em; }
+pre.numberSource a.sourceLine::before
+  { content: attr(data-line-number);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; pointer-events: all; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {  }
+@media screen {
+a.sourceLine::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+</style>
+
+
+</head>
+
+<body>
+
+
+
+  <div class="book without-animation with-summary font-size-2 font-family-1" data-basepath=".">
+
+    <div class="book-summary">
+      <nav role="navigation">
+
+<ul class="summary">
+<li class="chapter" data-level="1" data-path="setup-for-elasticsearch-version-7.html"><a href="setup-for-elasticsearch-version-7.html"><i class="fa fa-check"></i><b>1</b> Setup for Elasticsearch version 7</a><ul>
+<li class="chapter" data-level="1.1" data-path="setup-for-elasticsearch-version-7.html"><a href="setup-for-elasticsearch-version-7.html#download-elasticsearch"><i class="fa fa-check"></i><b>1.1</b> Download Elasticsearch</a><ul>
+<li class="chapter" data-level="1.1.1" data-path="setup-for-elasticsearch-version-7.html"><a href="setup-for-elasticsearch-version-7.html#download-and-unzip-the-elasticsearch-installation-in-your-home-directory"><i class="fa fa-check"></i><b>1.1.1</b> Download and unzip the Elasticsearch installation in your Home Directory</a></li>
+<li class="chapter" data-level="1.1.2" data-path="setup-for-elasticsearch-version-7.html"><a href="setup-for-elasticsearch-version-7.html#start-elasticsearch-from-the-command-line"><i class="fa fa-check"></i><b>1.1.2</b> Start Elasticsearch from the Command Line</a></li>
+<li class="chapter" data-level="1.1.3" data-path="setup-for-elasticsearch-version-7.html"><a href="setup-for-elasticsearch-version-7.html#changing-basic-settings-in-the-elasticsearch-configuration"><i class="fa fa-check"></i><b>1.1.3</b> Changing basic settings in the Elasticsearch configuration</a></li>
+</ul></li>
+<li class="chapter" data-level="1.2" data-path="setup-for-elasticsearch-version-7.html"><a href="setup-for-elasticsearch-version-7.html#getting-started-with-kibana"><i class="fa fa-check"></i><b>1.2</b> Getting started with Kibana</a><ul>
+<li class="chapter" data-level="1.2.1" data-path="setup-for-elasticsearch-version-7.html"><a href="setup-for-elasticsearch-version-7.html#interacting-with-elasticsearch"><i class="fa fa-check"></i><b>1.2.1</b> Interacting with Elasticsearch</a></li>
+<li class="chapter" data-level="1.2.2" data-path="setup-for-elasticsearch-version-7.html"><a href="setup-for-elasticsearch-version-7.html#managing-elasticsearch-in-kibana"><i class="fa fa-check"></i><b>1.2.2</b> Managing Elasticsearch in Kibana</a></li>
+<li class="chapter" data-level="1.2.3" data-path="setup-for-elasticsearch-version-7.html"><a href="setup-for-elasticsearch-version-7.html#downloading-and-extracting-kibana"><i class="fa fa-check"></i><b>1.2.3</b> Downloading and extracting Kibana</a></li>
+<li class="chapter" data-level="1.2.4" data-path="setup-for-elasticsearch-version-7.html"><a href="setup-for-elasticsearch-version-7.html#launching-kibana"><i class="fa fa-check"></i><b>1.2.4</b> Launching Kibana</a></li>
+<li class="chapter" data-level="1.2.5" data-path="setup-for-elasticsearch-version-7.html"><a href="setup-for-elasticsearch-version-7.html#using-dev-tools-for-crud-operations-in-kibana"><i class="fa fa-check"></i><b>1.2.5</b> Using Dev Tools for CRUD-operations in Kibana</a></li>
+</ul></li>
+<li class="chapter" data-level="1.3" data-path="setup-for-elasticsearch-version-7.html"><a href="setup-for-elasticsearch-version-7.html#setting-up-basic-security-for-elasticsearch-and-kibana"><i class="fa fa-check"></i><b>1.3</b> Setting up basic security for Elasticsearch and Kibana</a><ul>
+<li class="chapter" data-level="1.3.1" data-path="setup-for-elasticsearch-version-7.html"><a href="setup-for-elasticsearch-version-7.html#enabling-x-pack-security"><i class="fa fa-check"></i><b>1.3.1</b> Enabling X-pack security</a></li>
+<li class="chapter" data-level="1.3.2" data-path="setup-for-elasticsearch-version-7.html"><a href="setup-for-elasticsearch-version-7.html#setting-up-passwords"><i class="fa fa-check"></i><b>1.3.2</b> Setting up passwords</a></li>
+<li class="chapter" data-level="1.3.3" data-path="setup-for-elasticsearch-version-7.html"><a href="setup-for-elasticsearch-version-7.html#changing-the-security-configuration-in-kibana"><i class="fa fa-check"></i><b>1.3.3</b> Changing the security configuration in Kibana</a></li>
+<li class="chapter" data-level="1.3.4" data-path="setup-for-elasticsearch-version-7.html"><a href="setup-for-elasticsearch-version-7.html#open-kibana-with-the-new-security-settings"><i class="fa fa-check"></i><b>1.3.4</b> Open Kibana with the new security settings</a></li>
+<li class="chapter" data-level="1.3.5" data-path="setup-for-elasticsearch-version-7.html"><a href="setup-for-elasticsearch-version-7.html#overview-of-the-setup"><i class="fa fa-check"></i><b>1.3.5</b> Overview of the setup</a></li>
+<li class="chapter" data-level="1.3.6" data-path="setup-for-elasticsearch-version-7.html"><a href="setup-for-elasticsearch-version-7.html#get-an-overview-of-the-users-and-change-the-password"><i class="fa fa-check"></i><b>1.3.6</b> Get an overview of the users and change the password</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="2" data-path="setup-for-elasticsearch-version-8.html"><a href="setup-for-elasticsearch-version-8.html"><i class="fa fa-check"></i><b>2</b> Setup for Elasticsearch version 8</a><ul>
+<li class="chapter" data-level="2.1" data-path="setup-for-elasticsearch-version-8.html"><a href="setup-for-elasticsearch-version-8.html#download-visual-studio-code"><i class="fa fa-check"></i><b>2.1</b> Download Visual Studio Code</a></li>
+<li class="chapter" data-level="2.2" data-path="setup-for-elasticsearch-version-8.html"><a href="setup-for-elasticsearch-version-8.html#java"><i class="fa fa-check"></i><b>2.2</b> Java</a></li>
+<li class="chapter" data-level="2.3" data-path="setup-for-elasticsearch-version-8.html"><a href="setup-for-elasticsearch-version-8.html#running-elasticsearch"><i class="fa fa-check"></i><b>2.3</b> Running Elasticsearch</a><ul>
+<li class="chapter" data-level="2.3.1" data-path="setup-for-elasticsearch-version-8.html"><a href="setup-for-elasticsearch-version-8.html#download-the-elasticsearch-installer"><i class="fa fa-check"></i><b>2.3.1</b> Download the Elasticsearch installer</a></li>
+<li class="chapter" data-level="2.3.2" data-path="setup-for-elasticsearch-version-8.html"><a href="setup-for-elasticsearch-version-8.html#move-and-extract-the-file-in-the-home-directory"><i class="fa fa-check"></i><b>2.3.2</b> Move and extract the file in the Home Directory</a></li>
+<li class="chapter" data-level="2.3.3" data-path="setup-for-elasticsearch-version-8.html"><a href="setup-for-elasticsearch-version-8.html#opening-elasticsearch-in-visual-studio-code"><i class="fa fa-check"></i><b>2.3.3</b> Opening Elasticsearch in Visual Studio Code</a></li>
+<li class="chapter" data-level="2.3.4" data-path="setup-for-elasticsearch-version-8.html"><a href="setup-for-elasticsearch-version-8.html#change-the-java-heap"><i class="fa fa-check"></i><b>2.3.4</b> Change the Java heap</a></li>
+<li class="chapter" data-level="2.3.5" data-path="setup-for-elasticsearch-version-8.html"><a href="setup-for-elasticsearch-version-8.html#running-elasticsearch-from-the-command-line"><i class="fa fa-check"></i><b>2.3.5</b> Running Elasticsearch from the command line</a></li>
+<li class="chapter" data-level="2.3.6" data-path="setup-for-elasticsearch-version-8.html"><a href="setup-for-elasticsearch-version-8.html#copy-ing-important-information-when-startin-elasticsearch-for-the-first-time"><i class="fa fa-check"></i><b>2.3.6</b> Copy-ing important information when startin Elasticsearch for the first time</a></li>
+<li class="chapter" data-level="2.3.7" data-path="setup-for-elasticsearch-version-8.html"><a href="setup-for-elasticsearch-version-8.html#setting-the-es_home-environment-variable"><i class="fa fa-check"></i><b>2.3.7</b> Setting the <code>ES_HOME</code> environment variable</a></li>
+<li class="chapter" data-level="2.3.8" data-path="setup-for-elasticsearch-version-8.html"><a href="setup-for-elasticsearch-version-8.html#check-if-elasticsearch-is-reachable-with-curl-and-a-certificate"><i class="fa fa-check"></i><b>2.3.8</b> Check if Elasticsearch is reachable with curl and a certificate</a></li>
+<li class="chapter" data-level="2.3.9" data-path="setup-for-elasticsearch-version-8.html"><a href="setup-for-elasticsearch-version-8.html#starting-elasticsearch-as-a-windows-service"><i class="fa fa-check"></i><b>2.3.9</b> Starting Elasticsearch as a Windows Service</a></li>
+<li class="chapter" data-level="2.3.10" data-path="setup-for-elasticsearch-version-8.html"><a href="setup-for-elasticsearch-version-8.html#open-elasticsearch-in-windows-services"><i class="fa fa-check"></i><b>2.3.10</b> Open Elasticsearch in Windows Services</a></li>
+</ul></li>
+<li class="chapter" data-level="2.4" data-path="setup-for-elasticsearch-version-8.html"><a href="setup-for-elasticsearch-version-8.html#running-kibana"><i class="fa fa-check"></i><b>2.4</b> Running Kibana</a><ul>
+<li class="chapter" data-level="2.4.1" data-path="setup-for-elasticsearch-version-8.html"><a href="setup-for-elasticsearch-version-8.html#download-and-extract-the-kibana-zip-files"><i class="fa fa-check"></i><b>2.4.1</b> Download and extract the Kibana zip files</a></li>
+<li class="chapter" data-level="2.4.2" data-path="setup-for-elasticsearch-version-8.html"><a href="setup-for-elasticsearch-version-8.html#add-the-kibana-folder-to-the-visual-studio-code-workspace"><i class="fa fa-check"></i><b>2.4.2</b> Add the Kibana folder to the Visual Studio Code Workspace</a></li>
+<li class="chapter" data-level="2.4.3" data-path="setup-for-elasticsearch-version-8.html"><a href="setup-for-elasticsearch-version-8.html#running-kibana-1"><i class="fa fa-check"></i><b>2.4.3</b> Running Kibana</a></li>
+<li class="chapter" data-level="2.4.4" data-path="setup-for-elasticsearch-version-8.html"><a href="setup-for-elasticsearch-version-8.html#open-kibana-in-the-browser"><i class="fa fa-check"></i><b>2.4.4</b> Open Kibana in the browser</a></li>
+<li class="chapter" data-level="2.4.5" data-path="setup-for-elasticsearch-version-8.html"><a href="setup-for-elasticsearch-version-8.html#create-a-new-enrollment-token-for-kibana"><i class="fa fa-check"></i><b>2.4.5</b> Create a new enrollment token for Kibana</a></li>
+<li class="chapter" data-level="2.4.6" data-path="setup-for-elasticsearch-version-8.html"><a href="setup-for-elasticsearch-version-8.html#change-password-of-elastic-user-in-kibana"><i class="fa fa-check"></i><b>2.4.6</b> Change password of <code>elastic</code> user in Kibana</a></li>
+<li class="chapter" data-level="2.4.7" data-path="setup-for-elasticsearch-version-8.html"><a href="setup-for-elasticsearch-version-8.html#experiment-with-kibana-dashboards"><i class="fa fa-check"></i><b>2.4.7</b> Experiment with Kibana Dashboards</a></li>
+<li class="chapter" data-level="2.4.8" data-path="setup-for-elasticsearch-version-8.html"><a href="setup-for-elasticsearch-version-8.html#experiment-with-elasticsearch-commands-in-kibana-dev-tools"><i class="fa fa-check"></i><b>2.4.8</b> Experiment with Elasticsearch commands in Kibana (Dev Tools)</a></li>
+</ul></li>
+<li class="chapter" data-level="2.5" data-path="setup-for-elasticsearch-version-8.html"><a href="setup-for-elasticsearch-version-8.html#wrap-up"><i class="fa fa-check"></i><b>2.5</b> Wrap up</a></li>
+</ul></li>
+<li class="chapter" data-level="3" data-path="crud-operations-in-elasticsearch.html"><a href="crud-operations-in-elasticsearch.html"><i class="fa fa-check"></i><b>3</b> CRUD operations in Elasticsearch</a><ul>
+<li class="chapter" data-level="3.0.1" data-path="crud-operations-in-elasticsearch.html"><a href="crud-operations-in-elasticsearch.html#adding-a-new-document"><i class="fa fa-check"></i><b>3.0.1</b> Adding a new document</a></li>
+<li class="chapter" data-level="3.0.2" data-path="crud-operations-in-elasticsearch.html"><a href="crud-operations-in-elasticsearch.html#updating-an-existing-document"><i class="fa fa-check"></i><b>3.0.2</b> Updating an existing document</a></li>
+<li class="chapter" data-level="3.0.3" data-path="crud-operations-in-elasticsearch.html"><a href="crud-operations-in-elasticsearch.html#deleting-a-document"><i class="fa fa-check"></i><b>3.0.3</b> Deleting a document</a></li>
+</ul></li>
+<li class="chapter" data-level="4" data-path="searching-for-data.html"><a href="searching-for-data.html"><i class="fa fa-check"></i><b>4</b> Searching for data</a><ul>
+<li class="chapter" data-level="4.1" data-path="searching-for-data.html"><a href="searching-for-data.html#loading-the-dynamic-dataset"><i class="fa fa-check"></i><b>4.1</b> Loading the Dynamic Dataset</a></li>
+<li class="chapter" data-level="4.2" data-path="searching-for-data.html"><a href="searching-for-data.html#loading-the-static-dataset"><i class="fa fa-check"></i><b>4.2</b> Loading the Static Dataset</a></li>
+<li class="chapter" data-level="4.3" data-path="searching-for-data.html"><a href="searching-for-data.html#search-in-elasticsearch"><i class="fa fa-check"></i><b>4.3</b> Search in Elasticsearch</a><ul>
+<li class="chapter" data-level="4.3.1" data-path="searching-for-data.html"><a href="searching-for-data.html#search-in-static-datasets"><i class="fa fa-check"></i><b>4.3.1</b> Search in Static Datasets</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="5" data-path="elasticsearch-queries.html"><a href="elasticsearch-queries.html"><i class="fa fa-check"></i><b>5</b> Elasticsearch queries</a><ul>
+<li class="chapter" data-level="5.1" data-path="elasticsearch-queries.html"><a href="elasticsearch-queries.html#relevance"><i class="fa fa-check"></i><b>5.1</b> Relevance</a></li>
+<li class="chapter" data-level="5.2" data-path="elasticsearch-queries.html"><a href="elasticsearch-queries.html#full-text-queries"><i class="fa fa-check"></i><b>5.2</b> Full text queries</a></li>
+<li class="chapter" data-level="5.3" data-path="elasticsearch-queries.html"><a href="elasticsearch-queries.html#combining-queries"><i class="fa fa-check"></i><b>5.3</b> Combining queries</a></li>
+</ul></li>
+<li class="chapter" data-level="6" data-path="aggregations.html"><a href="aggregations.html"><i class="fa fa-check"></i><b>6</b> Aggregations</a><ul>
+<li class="chapter" data-level="6.1" data-path="aggregations.html"><a href="aggregations.html#metrics"><i class="fa fa-check"></i><b>6.1</b> Metrics</a></li>
+<li class="chapter" data-level="6.2" data-path="aggregations.html"><a href="aggregations.html#buckets"><i class="fa fa-check"></i><b>6.2</b> Buckets</a></li>
+<li class="chapter" data-level="6.3" data-path="aggregations.html"><a href="aggregations.html#combined-aggregations"><i class="fa fa-check"></i><b>6.3</b> Combined Aggregations</a></li>
+<li class="chapter" data-level="6.4" data-path="aggregations.html"><a href="aggregations.html#pagination-and-pipeline-aggregations"><i class="fa fa-check"></i><b>6.4</b> Pagination and Pipeline Aggregations</a></li>
+</ul></li>
+<li class="chapter" data-level="7" data-path="nodes-and-shards.html"><a href="nodes-and-shards.html"><i class="fa fa-check"></i><b>7</b> Nodes and Shards</a><ul>
+<li class="chapter" data-level="7.1" data-path="nodes-and-shards.html"><a href="nodes-and-shards.html#running-a-multi-node-cluster"><i class="fa fa-check"></i><b>7.1</b> Running a multi-node cluster</a></li>
+<li class="chapter" data-level="7.2" data-path="nodes-and-shards.html"><a href="nodes-and-shards.html#adding-a-second-elasticsearch-node-locally"><i class="fa fa-check"></i><b>7.2</b> Adding a second Elasticsearch node locally</a></li>
+<li class="chapter" data-level="7.3" data-path="nodes-and-shards.html"><a href="nodes-and-shards.html#configure-the-elasticsearch-nodes-for-the-multi-node-cluster"><i class="fa fa-check"></i><b>7.3</b> Configure the Elasticsearch nodes for the multi-node cluster</a></li>
+<li class="chapter" data-level="7.4" data-path="nodes-and-shards.html"><a href="nodes-and-shards.html#configure-the-cluster-value-and-set-the-names-of-the-nodes"><i class="fa fa-check"></i><b>7.4</b> Configure the cluster value and set the names of the nodes</a></li>
+<li class="chapter" data-level="7.5" data-path="nodes-and-shards.html"><a href="nodes-and-shards.html#specify-the-network-settings-and-indicate-which-node-is-the-master"><i class="fa fa-check"></i><b>7.5</b> Specify the network settings and indicate which node is the master</a></li>
+<li class="chapter" data-level="7.6" data-path="nodes-and-shards.html"><a href="nodes-and-shards.html#change-the-security-settings"><i class="fa fa-check"></i><b>7.6</b> Change the security settings</a></li>
+<li class="chapter" data-level="7.7" data-path="nodes-and-shards.html"><a href="nodes-and-shards.html#start-the-multi-node-cluster"><i class="fa fa-check"></i><b>7.7</b> Start the multi-node cluster</a></li>
+<li class="chapter" data-level="7.8" data-path="nodes-and-shards.html"><a href="nodes-and-shards.html#check-out-our-cluster-in-kibana"><i class="fa fa-check"></i><b>7.8</b> Check out our cluster in Kibana</a></li>
+<li class="chapter" data-level="7.9" data-path="nodes-and-shards.html"><a href="nodes-and-shards.html#cluster-roles"><i class="fa fa-check"></i><b>7.9</b> Cluster roles</a></li>
+</ul></li>
+<li class="chapter" data-level="8" data-path="troubleshooting-and-monitoring.html"><a href="troubleshooting-and-monitoring.html"><i class="fa fa-check"></i><b>8</b> Troubleshooting and Monitoring</a><ul>
+<li class="chapter" data-level="8.1" data-path="troubleshooting-and-monitoring.html"><a href="troubleshooting-and-monitoring.html#responses-and-allocation"><i class="fa fa-check"></i><b>8.1</b> Responses and Allocation</a><ul>
+<li class="chapter" data-level="8.1.1" data-path="troubleshooting-and-monitoring.html"><a href="troubleshooting-and-monitoring.html#checking-the-healthstatus"><i class="fa fa-check"></i><b>8.1.1</b> Checking the health/status</a></li>
+</ul></li>
+<li class="chapter" data-level="8.2" data-path="troubleshooting-and-monitoring.html"><a href="troubleshooting-and-monitoring.html#enabling-monitoring"><i class="fa fa-check"></i><b>8.2</b> Enabling monitoring</a></li>
+<li class="chapter" data-level="8.3" data-path="troubleshooting-and-monitoring.html"><a href="troubleshooting-and-monitoring.html#stack-monitoring"><i class="fa fa-check"></i><b>8.3</b> Stack Monitoring</a></li>
+<li class="chapter" data-level="8.4" data-path="troubleshooting-and-monitoring.html"><a href="troubleshooting-and-monitoring.html#diagnosing-performance-issues"><i class="fa fa-check"></i><b>8.4</b> Diagnosing Performance Issues</a></li>
+</ul></li>
+</ul>
+
+      </nav>
+    </div>
+
+    <div class="book-body">
+      <div class="body-inner">
+        <div class="book-header" role="navigation">
+          <h1>
+            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">Elasticsearch Fundamentals</a>
+          </h1>
+        </div>
+
+        <div class="page-wrapper" tabindex="-1" role="main">
+          <div class="page-inner">
+
+            <section class="normal" id="section-">
+<div id="elasticsearch-queries" class="section level1">
+<h1><span class="header-section-number">5</span> Elasticsearch queries</h1>
+<div id="relevance" class="section level2">
+<h2><span class="header-section-number">5.1</span> Relevance</h2>
+<p>Let’s experiment with a few search queries to experiment with the relevance:</p>
+<ul>
+<li>Search for documents that have <code>king</code> or <code>queen</code> in the <code>text_entry</code> field:</li>
+</ul>
+<p><img src="img/2_1_elasticserach_king_or_queen.PNG" /></p>
+<ul>
+<li>Search for documents that have <code>king</code> and <code>queen</code> in the <code>text_entry</code> field</li>
+</ul>
+<p><img src="img/2_1_elasticsearch_king_and_queen.PNG" /></p>
+<ul>
+<li>Search for documents that have eat least 2 of the following terms in the <code>text_entry</code> field: <code>king</code>, <code>queen</code>, <code>kill</code>:</li>
+</ul>
+<p><img src="img/2_1_elasticsearch_minimum_should_match.PNG" /></p>
+</div>
+<div id="full-text-queries" class="section level2">
+<h2><span class="header-section-number">5.2</span> Full text queries</h2>
+<p>Let’s experiment with some Full Text queries:</p>
+<ul>
+<li>Search for documents that include the phrase “king and queen”:</li>
+</ul>
+<p><img src="img/2_2_elasticsearch_match_phrase_king_queen.PNG" /></p>
+<ul>
+<li>Search for documents that include the phrase “king and queen” but that are allowed to have a maximum of two other terms between this phrase:</li>
+</ul>
+<p><img src="img/2_2_elasticsearch_king_queen_slop_2.PNG" /></p>
+<ul>
+<li>In the documents search for the term “Antony” in the play_name, speaker and <code>text_entry</code> fields:</li>
+</ul>
+<p><img src="img/2_2_elasticsearch_multi_match_antony.PNG" /></p>
+<ul>
+<li>Execute the same search, but increase score of hits found in the <code>text_entry</code> by multiplying it with 4:</li>
+</ul>
+<p><img src="img/2_3_boost_query.png" /></p>
+<ul>
+<li>Create a search query for the term “king” in which a spelling error of 1 letter is allowed:</li>
+</ul>
+<p><img src="img/2_2_elasticsearch_fuzzyness_kin.PNG" /></p>
+</div>
+<div id="combining-queries" class="section level2">
+<h2><span class="header-section-number">5.3</span> Combining queries</h2>
+<p>Let’s experiment with some combination of queries:</p>
+<ul>
+<li>Execute a search for documents that must include the term <code>king</code> and and are ranked higher if they either contain the terms <code>queen</code>, <code>fight</code>, or <code>hail</code>.</li>
+</ul>
+<p><img src="img/2_3_elastic_king_should_match_1.PNG" /></p>
+<ul>
+<li>Execute the same search but make sure the search results eigher must contain at least of the terms <code>queen</code>, <code>fight</code> or <code>hail</code>.</li>
+</ul>
+<p><img src="img/2_3_elastic_minimum_should_match_2.PNG" /></p>
+<ul>
+<li>Create a search query for documents that contain the term king but do not contain the term <code>queen</code>.</li>
+</ul>
+<p><img src="img/2_3_bool_should_not.PNG" /></p>
+
+</div>
+</div>
+            </section>
+
+          </div>
+        </div>
+      </div>
+<a href="searching-for-data.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="aggregations.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+    </div>
+  </div>
+<script src="libs/gitbook-2.6.7/js/app.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/lunr.js"></script>
+<script src="libs/gitbook-2.6.7/js/clipboard.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-search.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-sharing.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-fontsettings.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-bookdown.js"></script>
+<script src="libs/gitbook-2.6.7/js/jquery.highlight.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-clipboard.js"></script>
+<script>
+gitbook.require(["gitbook"], function(gitbook) {
+gitbook.start({
+"sharing": {
+"github": false,
+"facebook": true,
+"twitter": true,
+"linkedin": false,
+"weibo": false,
+"instapaper": false,
+"vk": false,
+"all": ["facebook", "twitter", "linkedin", "weibo", "instapaper"]
+},
+"fontsettings": {
+"theme": "white",
+"family": "sans",
+"size": 2
+},
+"edit": {
+"link": null,
+"text": null
+},
+"history": {
+"link": null,
+"text": null
+},
+"view": {
+"link": null,
+"text": null
+},
+"download": null,
+"toc": {
+"collapse": "subsection"
+}
+});
+});
+</script>
+
+</body>
+
+</html>

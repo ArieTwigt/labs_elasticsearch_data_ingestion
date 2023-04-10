@@ -1,5 +1,6 @@
 ---
-title: "Elastic Data Ingestion"
+title: "Elasticsearch Fundamentals"
+author: "Arie Twigt"
 site: bookdown::bookdown_site
 output:
   bookdown::gitbook: default

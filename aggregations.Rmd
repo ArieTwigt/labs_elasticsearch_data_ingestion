@@ -1,0 +1,128 @@
+# Aggregations
+
+
+## Metrics
+
+For this lab we will use the other index `kibana_sample_data_logs`, which is in this course referred to as the "dynamic" dataset. This index consists of dynamic data, which are in this case logs of website:
+
+* To get an idea of what a document in this looks like, we can execute a match_all search:
+
+![](img/3_1_match_all_kibana_logs.PNG)
+
+
+*	Find out the total number of `bytes`, which is a field in the index, for all the log-documents combined in this index:
+
+![](img/3_1_average_byte_size_with_examples.PNG)
+
+
+*	Find out the total number of `bytes` that only come from Windows 8 requests
+
+![](img/3_1_elastic_sum_bytes_filter_win_8.PNG)
+
+
+*	Find out the average number of `bytes`. Get both the aggregation and some examples of logs:
+
+![](img/3_1_average_byte_size_with_examples.PNG)
+
+
+*	Get the percentiles of the `bytes` field:
+
+![](img/3_1_percentiles_bytes.PNG)
+
+
+* How many different operating systems do we have in our logs?
+
+![](img/3_1_number_of_operating_systems.PNG)
+
+
+## Buckets
+
+
+Aggregations:
+
+
+*	Aggregate the number of total bytes per month. You can use the `timestamp` field, which is the default for aggregating with datetime-related keys
+
+
+![](img/3_2_buckets_logs_by_month.PNG)
+
+
+* Aggregate the total number of `bytes` by creating buckets of `2000`
+
+
+![](img/3_2_bytes_histogram.PNG)
+
+
+*	Again, aggregate the total number of `bytes` by creating ranges of:
+  *	0 – 3000
+  *	3000. – 8000
+  *	8000 – 12000
+  *	12000 or higher
+
+
+![](img/3_2_bytes_ranges.PNG)
+
+
+*	Aggregate the number of `bytes` per operating system:
+
+
+![](img/3_2_counts_by_operating_system.PNG)
+
+
+*	Aggregate the number of `bytes` per day and sort it on the largest number of bytes served on a day. 
+
+
+![](img/3_2_sort_bytes_per_day_count.PNG)
+
+
+*	Execute the same aggregation, but now, sort it on the`date instead of the count
+
+
+
+## Combined Aggregations
+
+Combined aggregations:
+
+
+*	Create an aggregation for counting the number of `bytes` per day. Order the results from the largest number of `bytes` in a day, descending order
+
+
+![](img/3_3_buckets_sum_bytes_order.PNG)
+
+
+*	In the same aggregation, divide the results in percentiles of 20, 50 and 75
+
+
+![](img/3_3_buckets_sum_bytes_percentiles.PNG)
+
+
+*	Create an aggregation that counts the number of log files per month. In each bucket, divide the results over the different operating systems.
+
+
+![](img/3_3_buckets_logs_per_month_os.PNG)
+
+
+
+## Pagination and Pipeline Aggregations
+
+
+Pagination and Pipeline Aggregations
+
+*	Create a composite aggregation in which we have an interval of 1 hour
+
+
+![](img/3_4_composite_aggregation.PNG)
+
+
+*	Create a Pipeline Aggregation which gives us the total number of bytes per month also the max month
+
+
+![](img/3_4_pipeline_aggregation_logs_by_month.PNG)
+
+
+*	Create a Pipeline Aggregation in which we show the total number of bytes per month including the cumulative sum for each bucket
+
+
+![](img/3_4_pipeline_aggregation_logs_by_month_cumulative.PNG)
+
+

@@ -1,0 +1,694 @@
+<!DOCTYPE html>
+<html lang="" xml:lang="">
+<head>
+
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <title>2 Setup for Elasticsearch version 8 | Elasticsearch Fundamentals</title>
+  <meta name="description" content="2 Setup for Elasticsearch version 8 | Elasticsearch Fundamentals" />
+  <meta name="generator" content="bookdown 0.21.7 and GitBook 2.6.7" />
+
+  <meta property="og:title" content="2 Setup for Elasticsearch version 8 | Elasticsearch Fundamentals" />
+  <meta property="og:type" content="book" />
+  
+  
+  
+  
+
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content="2 Setup for Elasticsearch version 8 | Elasticsearch Fundamentals" />
+  
+  
+  
+
+<meta name="author" content="Arie Twigt" />
+
+
+
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+  
+  
+<link rel="prev" href="setup-for-elasticsearch-version-7.html"/>
+<link rel="next" href="crud-operations-in-elasticsearch.html"/>
+<script src="libs/jquery-2.2.3/jquery.min.js"></script>
+<link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-highlight.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-search.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-fontsettings.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-clipboard.css" rel="stylesheet" />
+
+
+
+
+
+
+
+
+
+<link href="libs/anchor-sections-1.0.1/anchor-sections.css" rel="stylesheet" />
+<script src="libs/anchor-sections-1.0.1/anchor-sections.js"></script>
+
+
+<style type="text/css">
+a.sourceLine { display: inline-block; line-height: 1.25; }
+a.sourceLine { pointer-events: none; color: inherit; text-decoration: inherit; }
+a.sourceLine:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode { white-space: pre; position: relative; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+code.sourceCode { white-space: pre-wrap; }
+a.sourceLine { text-indent: -1em; padding-left: 1em; }
+}
+pre.numberSource a.sourceLine
+  { position: relative; left: -4em; }
+pre.numberSource a.sourceLine::before
+  { content: attr(data-line-number);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; pointer-events: all; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {  }
+@media screen {
+a.sourceLine::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+</style>
+
+
+</head>
+
+<body>
+
+
+
+  <div class="book without-animation with-summary font-size-2 font-family-1" data-basepath=".">
+
+    <div class="book-summary">
+      <nav role="navigation">
+
+<ul class="summary">
+<li class="chapter" data-level="1" data-path="setup-for-elasticsearch-version-7.html"><a href="setup-for-elasticsearch-version-7.html"><i class="fa fa-check"></i><b>1</b> Setup for Elasticsearch version 7</a><ul>
+<li class="chapter" data-level="1.1" data-path="setup-for-elasticsearch-version-7.html"><a href="setup-for-elasticsearch-version-7.html#download-elasticsearch"><i class="fa fa-check"></i><b>1.1</b> Download Elasticsearch</a><ul>
+<li class="chapter" data-level="1.1.1" data-path="setup-for-elasticsearch-version-7.html"><a href="setup-for-elasticsearch-version-7.html#download-and-unzip-the-elasticsearch-installation-in-your-home-directory"><i class="fa fa-check"></i><b>1.1.1</b> Download and unzip the Elasticsearch installation in your Home Directory</a></li>
+<li class="chapter" data-level="1.1.2" data-path="setup-for-elasticsearch-version-7.html"><a href="setup-for-elasticsearch-version-7.html#start-elasticsearch-from-the-command-line"><i class="fa fa-check"></i><b>1.1.2</b> Start Elasticsearch from the Command Line</a></li>
+<li class="chapter" data-level="1.1.3" data-path="setup-for-elasticsearch-version-7.html"><a href="setup-for-elasticsearch-version-7.html#changing-basic-settings-in-the-elasticsearch-configuration"><i class="fa fa-check"></i><b>1.1.3</b> Changing basic settings in the Elasticsearch configuration</a></li>
+</ul></li>
+<li class="chapter" data-level="1.2" data-path="setup-for-elasticsearch-version-7.html"><a href="setup-for-elasticsearch-version-7.html#getting-started-with-kibana"><i class="fa fa-check"></i><b>1.2</b> Getting started with Kibana</a><ul>
+<li class="chapter" data-level="1.2.1" data-path="setup-for-elasticsearch-version-7.html"><a href="setup-for-elasticsearch-version-7.html#interacting-with-elasticsearch"><i class="fa fa-check"></i><b>1.2.1</b> Interacting with Elasticsearch</a></li>
+<li class="chapter" data-level="1.2.2" data-path="setup-for-elasticsearch-version-7.html"><a href="setup-for-elasticsearch-version-7.html#managing-elasticsearch-in-kibana"><i class="fa fa-check"></i><b>1.2.2</b> Managing Elasticsearch in Kibana</a></li>
+<li class="chapter" data-level="1.2.3" data-path="setup-for-elasticsearch-version-7.html"><a href="setup-for-elasticsearch-version-7.html#downloading-and-extracting-kibana"><i class="fa fa-check"></i><b>1.2.3</b> Downloading and extracting Kibana</a></li>
+<li class="chapter" data-level="1.2.4" data-path="setup-for-elasticsearch-version-7.html"><a href="setup-for-elasticsearch-version-7.html#launching-kibana"><i class="fa fa-check"></i><b>1.2.4</b> Launching Kibana</a></li>
+<li class="chapter" data-level="1.2.5" data-path="setup-for-elasticsearch-version-7.html"><a href="setup-for-elasticsearch-version-7.html#using-dev-tools-for-crud-operations-in-kibana"><i class="fa fa-check"></i><b>1.2.5</b> Using Dev Tools for CRUD-operations in Kibana</a></li>
+</ul></li>
+<li class="chapter" data-level="1.3" data-path="setup-for-elasticsearch-version-7.html"><a href="setup-for-elasticsearch-version-7.html#setting-up-basic-security-for-elasticsearch-and-kibana"><i class="fa fa-check"></i><b>1.3</b> Setting up basic security for Elasticsearch and Kibana</a><ul>
+<li class="chapter" data-level="1.3.1" data-path="setup-for-elasticsearch-version-7.html"><a href="setup-for-elasticsearch-version-7.html#enabling-x-pack-security"><i class="fa fa-check"></i><b>1.3.1</b> Enabling X-pack security</a></li>
+<li class="chapter" data-level="1.3.2" data-path="setup-for-elasticsearch-version-7.html"><a href="setup-for-elasticsearch-version-7.html#setting-up-passwords"><i class="fa fa-check"></i><b>1.3.2</b> Setting up passwords</a></li>
+<li class="chapter" data-level="1.3.3" data-path="setup-for-elasticsearch-version-7.html"><a href="setup-for-elasticsearch-version-7.html#changing-the-security-configuration-in-kibana"><i class="fa fa-check"></i><b>1.3.3</b> Changing the security configuration in Kibana</a></li>
+<li class="chapter" data-level="1.3.4" data-path="setup-for-elasticsearch-version-7.html"><a href="setup-for-elasticsearch-version-7.html#open-kibana-with-the-new-security-settings"><i class="fa fa-check"></i><b>1.3.4</b> Open Kibana with the new security settings</a></li>
+<li class="chapter" data-level="1.3.5" data-path="setup-for-elasticsearch-version-7.html"><a href="setup-for-elasticsearch-version-7.html#overview-of-the-setup"><i class="fa fa-check"></i><b>1.3.5</b> Overview of the setup</a></li>
+<li class="chapter" data-level="1.3.6" data-path="setup-for-elasticsearch-version-7.html"><a href="setup-for-elasticsearch-version-7.html#get-an-overview-of-the-users-and-change-the-password"><i class="fa fa-check"></i><b>1.3.6</b> Get an overview of the users and change the password</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="2" data-path="setup-for-elasticsearch-version-8.html"><a href="setup-for-elasticsearch-version-8.html"><i class="fa fa-check"></i><b>2</b> Setup for Elasticsearch version 8</a><ul>
+<li class="chapter" data-level="2.1" data-path="setup-for-elasticsearch-version-8.html"><a href="setup-for-elasticsearch-version-8.html#download-visual-studio-code"><i class="fa fa-check"></i><b>2.1</b> Download Visual Studio Code</a></li>
+<li class="chapter" data-level="2.2" data-path="setup-for-elasticsearch-version-8.html"><a href="setup-for-elasticsearch-version-8.html#java"><i class="fa fa-check"></i><b>2.2</b> Java</a></li>
+<li class="chapter" data-level="2.3" data-path="setup-for-elasticsearch-version-8.html"><a href="setup-for-elasticsearch-version-8.html#running-elasticsearch"><i class="fa fa-check"></i><b>2.3</b> Running Elasticsearch</a><ul>
+<li class="chapter" data-level="2.3.1" data-path="setup-for-elasticsearch-version-8.html"><a href="setup-for-elasticsearch-version-8.html#download-the-elasticsearch-installer"><i class="fa fa-check"></i><b>2.3.1</b> Download the Elasticsearch installer</a></li>
+<li class="chapter" data-level="2.3.2" data-path="setup-for-elasticsearch-version-8.html"><a href="setup-for-elasticsearch-version-8.html#move-and-extract-the-file-in-the-home-directory"><i class="fa fa-check"></i><b>2.3.2</b> Move and extract the file in the Home Directory</a></li>
+<li class="chapter" data-level="2.3.3" data-path="setup-for-elasticsearch-version-8.html"><a href="setup-for-elasticsearch-version-8.html#opening-elasticsearch-in-visual-studio-code"><i class="fa fa-check"></i><b>2.3.3</b> Opening Elasticsearch in Visual Studio Code</a></li>
+<li class="chapter" data-level="2.3.4" data-path="setup-for-elasticsearch-version-8.html"><a href="setup-for-elasticsearch-version-8.html#change-the-java-heap"><i class="fa fa-check"></i><b>2.3.4</b> Change the Java heap</a></li>
+<li class="chapter" data-level="2.3.5" data-path="setup-for-elasticsearch-version-8.html"><a href="setup-for-elasticsearch-version-8.html#running-elasticsearch-from-the-command-line"><i class="fa fa-check"></i><b>2.3.5</b> Running Elasticsearch from the command line</a></li>
+<li class="chapter" data-level="2.3.6" data-path="setup-for-elasticsearch-version-8.html"><a href="setup-for-elasticsearch-version-8.html#copy-ing-important-information-when-startin-elasticsearch-for-the-first-time"><i class="fa fa-check"></i><b>2.3.6</b> Copy-ing important information when startin Elasticsearch for the first time</a></li>
+<li class="chapter" data-level="2.3.7" data-path="setup-for-elasticsearch-version-8.html"><a href="setup-for-elasticsearch-version-8.html#setting-the-es_home-environment-variable"><i class="fa fa-check"></i><b>2.3.7</b> Setting the <code>ES_HOME</code> environment variable</a></li>
+<li class="chapter" data-level="2.3.8" data-path="setup-for-elasticsearch-version-8.html"><a href="setup-for-elasticsearch-version-8.html#check-if-elasticsearch-is-reachable-with-curl-and-a-certificate"><i class="fa fa-check"></i><b>2.3.8</b> Check if Elasticsearch is reachable with curl and a certificate</a></li>
+<li class="chapter" data-level="2.3.9" data-path="setup-for-elasticsearch-version-8.html"><a href="setup-for-elasticsearch-version-8.html#starting-elasticsearch-as-a-windows-service"><i class="fa fa-check"></i><b>2.3.9</b> Starting Elasticsearch as a Windows Service</a></li>
+<li class="chapter" data-level="2.3.10" data-path="setup-for-elasticsearch-version-8.html"><a href="setup-for-elasticsearch-version-8.html#open-elasticsearch-in-windows-services"><i class="fa fa-check"></i><b>2.3.10</b> Open Elasticsearch in Windows Services</a></li>
+</ul></li>
+<li class="chapter" data-level="2.4" data-path="setup-for-elasticsearch-version-8.html"><a href="setup-for-elasticsearch-version-8.html#running-kibana"><i class="fa fa-check"></i><b>2.4</b> Running Kibana</a><ul>
+<li class="chapter" data-level="2.4.1" data-path="setup-for-elasticsearch-version-8.html"><a href="setup-for-elasticsearch-version-8.html#download-and-extract-the-kibana-zip-files"><i class="fa fa-check"></i><b>2.4.1</b> Download and extract the Kibana zip files</a></li>
+<li class="chapter" data-level="2.4.2" data-path="setup-for-elasticsearch-version-8.html"><a href="setup-for-elasticsearch-version-8.html#add-the-kibana-folder-to-the-visual-studio-code-workspace"><i class="fa fa-check"></i><b>2.4.2</b> Add the Kibana folder to the Visual Studio Code Workspace</a></li>
+<li class="chapter" data-level="2.4.3" data-path="setup-for-elasticsearch-version-8.html"><a href="setup-for-elasticsearch-version-8.html#running-kibana-1"><i class="fa fa-check"></i><b>2.4.3</b> Running Kibana</a></li>
+<li class="chapter" data-level="2.4.4" data-path="setup-for-elasticsearch-version-8.html"><a href="setup-for-elasticsearch-version-8.html#open-kibana-in-the-browser"><i class="fa fa-check"></i><b>2.4.4</b> Open Kibana in the browser</a></li>
+<li class="chapter" data-level="2.4.5" data-path="setup-for-elasticsearch-version-8.html"><a href="setup-for-elasticsearch-version-8.html#create-a-new-enrollment-token-for-kibana"><i class="fa fa-check"></i><b>2.4.5</b> Create a new enrollment token for Kibana</a></li>
+<li class="chapter" data-level="2.4.6" data-path="setup-for-elasticsearch-version-8.html"><a href="setup-for-elasticsearch-version-8.html#change-password-of-elastic-user-in-kibana"><i class="fa fa-check"></i><b>2.4.6</b> Change password of <code>elastic</code> user in Kibana</a></li>
+<li class="chapter" data-level="2.4.7" data-path="setup-for-elasticsearch-version-8.html"><a href="setup-for-elasticsearch-version-8.html#experiment-with-kibana-dashboards"><i class="fa fa-check"></i><b>2.4.7</b> Experiment with Kibana Dashboards</a></li>
+<li class="chapter" data-level="2.4.8" data-path="setup-for-elasticsearch-version-8.html"><a href="setup-for-elasticsearch-version-8.html#experiment-with-elasticsearch-commands-in-kibana-dev-tools"><i class="fa fa-check"></i><b>2.4.8</b> Experiment with Elasticsearch commands in Kibana (Dev Tools)</a></li>
+</ul></li>
+<li class="chapter" data-level="2.5" data-path="setup-for-elasticsearch-version-8.html"><a href="setup-for-elasticsearch-version-8.html#wrap-up"><i class="fa fa-check"></i><b>2.5</b> Wrap up</a></li>
+</ul></li>
+<li class="chapter" data-level="3" data-path="crud-operations-in-elasticsearch.html"><a href="crud-operations-in-elasticsearch.html"><i class="fa fa-check"></i><b>3</b> CRUD operations in Elasticsearch</a><ul>
+<li class="chapter" data-level="3.0.1" data-path="crud-operations-in-elasticsearch.html"><a href="crud-operations-in-elasticsearch.html#adding-a-new-document"><i class="fa fa-check"></i><b>3.0.1</b> Adding a new document</a></li>
+<li class="chapter" data-level="3.0.2" data-path="crud-operations-in-elasticsearch.html"><a href="crud-operations-in-elasticsearch.html#updating-an-existing-document"><i class="fa fa-check"></i><b>3.0.2</b> Updating an existing document</a></li>
+<li class="chapter" data-level="3.0.3" data-path="crud-operations-in-elasticsearch.html"><a href="crud-operations-in-elasticsearch.html#deleting-a-document"><i class="fa fa-check"></i><b>3.0.3</b> Deleting a document</a></li>
+</ul></li>
+<li class="chapter" data-level="4" data-path="searching-for-data.html"><a href="searching-for-data.html"><i class="fa fa-check"></i><b>4</b> Searching for data</a><ul>
+<li class="chapter" data-level="4.1" data-path="searching-for-data.html"><a href="searching-for-data.html#loading-the-dynamic-dataset"><i class="fa fa-check"></i><b>4.1</b> Loading the Dynamic Dataset</a></li>
+<li class="chapter" data-level="4.2" data-path="searching-for-data.html"><a href="searching-for-data.html#loading-the-static-dataset"><i class="fa fa-check"></i><b>4.2</b> Loading the Static Dataset</a></li>
+<li class="chapter" data-level="4.3" data-path="searching-for-data.html"><a href="searching-for-data.html#search-in-elasticsearch"><i class="fa fa-check"></i><b>4.3</b> Search in Elasticsearch</a><ul>
+<li class="chapter" data-level="4.3.1" data-path="searching-for-data.html"><a href="searching-for-data.html#search-in-static-datasets"><i class="fa fa-check"></i><b>4.3.1</b> Search in Static Datasets</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="5" data-path="elasticsearch-queries.html"><a href="elasticsearch-queries.html"><i class="fa fa-check"></i><b>5</b> Elasticsearch queries</a><ul>
+<li class="chapter" data-level="5.1" data-path="elasticsearch-queries.html"><a href="elasticsearch-queries.html#relevance"><i class="fa fa-check"></i><b>5.1</b> Relevance</a></li>
+<li class="chapter" data-level="5.2" data-path="elasticsearch-queries.html"><a href="elasticsearch-queries.html#full-text-queries"><i class="fa fa-check"></i><b>5.2</b> Full text queries</a></li>
+<li class="chapter" data-level="5.3" data-path="elasticsearch-queries.html"><a href="elasticsearch-queries.html#combining-queries"><i class="fa fa-check"></i><b>5.3</b> Combining queries</a></li>
+</ul></li>
+<li class="chapter" data-level="6" data-path="aggregations.html"><a href="aggregations.html"><i class="fa fa-check"></i><b>6</b> Aggregations</a><ul>
+<li class="chapter" data-level="6.1" data-path="aggregations.html"><a href="aggregations.html#metrics"><i class="fa fa-check"></i><b>6.1</b> Metrics</a></li>
+<li class="chapter" data-level="6.2" data-path="aggregations.html"><a href="aggregations.html#buckets"><i class="fa fa-check"></i><b>6.2</b> Buckets</a></li>
+<li class="chapter" data-level="6.3" data-path="aggregations.html"><a href="aggregations.html#combined-aggregations"><i class="fa fa-check"></i><b>6.3</b> Combined Aggregations</a></li>
+<li class="chapter" data-level="6.4" data-path="aggregations.html"><a href="aggregations.html#pagination-and-pipeline-aggregations"><i class="fa fa-check"></i><b>6.4</b> Pagination and Pipeline Aggregations</a></li>
+</ul></li>
+<li class="chapter" data-level="7" data-path="nodes-and-shards.html"><a href="nodes-and-shards.html"><i class="fa fa-check"></i><b>7</b> Nodes and Shards</a><ul>
+<li class="chapter" data-level="7.1" data-path="nodes-and-shards.html"><a href="nodes-and-shards.html#running-a-multi-node-cluster"><i class="fa fa-check"></i><b>7.1</b> Running a multi-node cluster</a></li>
+<li class="chapter" data-level="7.2" data-path="nodes-and-shards.html"><a href="nodes-and-shards.html#adding-a-second-elasticsearch-node-locally"><i class="fa fa-check"></i><b>7.2</b> Adding a second Elasticsearch node locally</a></li>
+<li class="chapter" data-level="7.3" data-path="nodes-and-shards.html"><a href="nodes-and-shards.html#configure-the-elasticsearch-nodes-for-the-multi-node-cluster"><i class="fa fa-check"></i><b>7.3</b> Configure the Elasticsearch nodes for the multi-node cluster</a></li>
+<li class="chapter" data-level="7.4" data-path="nodes-and-shards.html"><a href="nodes-and-shards.html#configure-the-cluster-value-and-set-the-names-of-the-nodes"><i class="fa fa-check"></i><b>7.4</b> Configure the cluster value and set the names of the nodes</a></li>
+<li class="chapter" data-level="7.5" data-path="nodes-and-shards.html"><a href="nodes-and-shards.html#specify-the-network-settings-and-indicate-which-node-is-the-master"><i class="fa fa-check"></i><b>7.5</b> Specify the network settings and indicate which node is the master</a></li>
+<li class="chapter" data-level="7.6" data-path="nodes-and-shards.html"><a href="nodes-and-shards.html#change-the-security-settings"><i class="fa fa-check"></i><b>7.6</b> Change the security settings</a></li>
+<li class="chapter" data-level="7.7" data-path="nodes-and-shards.html"><a href="nodes-and-shards.html#start-the-multi-node-cluster"><i class="fa fa-check"></i><b>7.7</b> Start the multi-node cluster</a></li>
+<li class="chapter" data-level="7.8" data-path="nodes-and-shards.html"><a href="nodes-and-shards.html#check-out-our-cluster-in-kibana"><i class="fa fa-check"></i><b>7.8</b> Check out our cluster in Kibana</a></li>
+<li class="chapter" data-level="7.9" data-path="nodes-and-shards.html"><a href="nodes-and-shards.html#cluster-roles"><i class="fa fa-check"></i><b>7.9</b> Cluster roles</a></li>
+</ul></li>
+<li class="chapter" data-level="8" data-path="troubleshooting-and-monitoring.html"><a href="troubleshooting-and-monitoring.html"><i class="fa fa-check"></i><b>8</b> Troubleshooting and Monitoring</a><ul>
+<li class="chapter" data-level="8.1" data-path="troubleshooting-and-monitoring.html"><a href="troubleshooting-and-monitoring.html#responses-and-allocation"><i class="fa fa-check"></i><b>8.1</b> Responses and Allocation</a><ul>
+<li class="chapter" data-level="8.1.1" data-path="troubleshooting-and-monitoring.html"><a href="troubleshooting-and-monitoring.html#checking-the-healthstatus"><i class="fa fa-check"></i><b>8.1.1</b> Checking the health/status</a></li>
+</ul></li>
+<li class="chapter" data-level="8.2" data-path="troubleshooting-and-monitoring.html"><a href="troubleshooting-and-monitoring.html#enabling-monitoring"><i class="fa fa-check"></i><b>8.2</b> Enabling monitoring</a></li>
+<li class="chapter" data-level="8.3" data-path="troubleshooting-and-monitoring.html"><a href="troubleshooting-and-monitoring.html#stack-monitoring"><i class="fa fa-check"></i><b>8.3</b> Stack Monitoring</a></li>
+<li class="chapter" data-level="8.4" data-path="troubleshooting-and-monitoring.html"><a href="troubleshooting-and-monitoring.html#diagnosing-performance-issues"><i class="fa fa-check"></i><b>8.4</b> Diagnosing Performance Issues</a></li>
+</ul></li>
+</ul>
+
+      </nav>
+    </div>
+
+    <div class="book-body">
+      <div class="body-inner">
+        <div class="book-header" role="navigation">
+          <h1>
+            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">Elasticsearch Fundamentals</a>
+          </h1>
+        </div>
+
+        <div class="page-wrapper" tabindex="-1" role="main">
+          <div class="page-inner">
+
+            <section class="normal" id="section-">
+<div id="setup-for-elasticsearch-version-8" class="section level1">
+<h1><span class="header-section-number">2</span> Setup for Elasticsearch version 8</h1>
+<div id="download-visual-studio-code" class="section level2">
+<h2><span class="header-section-number">2.1</span> Download Visual Studio Code</h2>
+<p>Visual Studio Code can be used for almost any programming language or framework. We will mainly use it for the integrated terminal and browse trough several configuration files of Elasticsearch and Kibana.</p>
+<p>Visual Studo Code can be downloaded for free at:</p>
+<ul>
+<li><a href="https://code.visualstudio.com/download" class="uri">https://code.visualstudio.com/download</a></li>
+</ul>
+<div class="figure">
+<img src="img/n1_50_download_visual_studio_code.png" alt="Download Visual Studio Code" />
+<p class="caption">Download Visual Studio Code</p>
+</div>
+<p>For now, you just have to check if Visual Studio Code opens succesfully. We will later used it when we have downloaded Elasticsearch.</p>
+</div>
+<div id="java" class="section level2">
+<h2><span class="header-section-number">2.2</span> Java</h2>
+<p>Java can be downloaded from the following link:</p>
+<ul>
+<li><a href="https://www.java.com/download/ie_manual.jsp" class="uri">https://www.java.com/download/ie_manual.jsp</a></li>
+</ul>
+<p>After downloading the Java installer, you can run it and follow the installation process.</p>
+<div class="figure">
+<img src="img/n1_1_download_java.png" alt="Download Java" />
+<p class="caption">Download Java</p>
+</div>
+</div>
+<div id="running-elasticsearch" class="section level2">
+<h2><span class="header-section-number">2.3</span> Running Elasticsearch</h2>
+<div id="download-the-elasticsearch-installer" class="section level3">
+<h3><span class="header-section-number">2.3.1</span> Download the Elasticsearch installer</h3>
+<p>After Java is installed, we can download and run Elasticsearch. Download Elasticsearch in the following link:</p>
+<ul>
+<li><a href="https://www.elastic.co/downloads/elasticsearch" class="uri">https://www.elastic.co/downloads/elasticsearch</a></li>
+</ul>
+<p>Since we will follow this tutorial in a Windows environment, we select <strong>Windows</strong> in the “Choose platform” dropdown menu:</p>
+<div class="figure">
+<img src="img/n1_2_download_elasticsearch.png" alt="Download Elasticsearch" />
+<p class="caption">Download Elasticsearch</p>
+</div>
+</div>
+<div id="move-and-extract-the-file-in-the-home-directory" class="section level3">
+<h3><span class="header-section-number">2.3.2</span> Move and extract the file in the Home Directory</h3>
+<p>Once downloaded, move it to your home directory.</p>
+<blockquote>
+<p>Your Home Directory is for example: <em>This PC &gt; Windows (C:) &gt; Users &gt; jim</em> . This is the folder in which you typically can find folders like <em>My Documents</em>, <em>Downloads</em>, <em>Dropbox</em> etc.</p>
+</blockquote>
+<div class="figure">
+<img src="img/n1_3_extract_elasticsearch.png" alt="Elasticsearch to Home Directory" />
+<p class="caption">Elasticsearch to Home Directory</p>
+</div>
+<p>Extract the <code>.zip</code>.</p>
+</div>
+<div id="opening-elasticsearch-in-visual-studio-code" class="section level3">
+<h3><span class="header-section-number">2.3.3</span> Opening Elasticsearch in Visual Studio Code</h3>
+<p>We will open the contents of the elasticsearch folder in Visual Studio Code:</p>
+<ul>
+<li>Open Visual Studio Code if you did not open it yet. Choose <code>File &gt; Open Folder</code></li>
+</ul>
+<div class="figure">
+<img src="img/n1_4vs_code_open_folder.png" alt="Visual Studio Code open folder" />
+<p class="caption">Visual Studio Code open folder</p>
+</div>
+<ul>
+<li>Navigate to the elasticsearch folder:</li>
+</ul>
+<div class="figure">
+<img src="img/n1_5_open_folder_vscode.png" alt="Open folder in Elasticsearch" />
+<p class="caption">Open folder in Elasticsearch</p>
+</div>
+</div>
+<div id="change-the-java-heap" class="section level3">
+<h3><span class="header-section-number">2.3.4</span> Change the Java heap</h3>
+<p>By default, Java will use the full available RAM of your computer as heap. This is an overkill for this tutorial and will make Elasticsearch boot very slowly. Therefore, as a first use case for changing the Elasticsearch configuration, we can change the Java heap:</p>
+<ul>
+<li>In the <code>config</code> folder, open the file <code>jvm.options</code></li>
+<li>Remove the <code>#</code> (comments). That contain <code>-Xms4g</code> and <code>Xmx4</code> . This will make these lines active</li>
+</ul>
+<div class="figure">
+<img src="img/n1_6_change_java_heap.png" alt="Uncomment Java heap options" />
+<p class="caption">Uncomment Java heap options</p>
+</div>
+</div>
+<div id="running-elasticsearch-from-the-command-line" class="section level3">
+<h3><span class="header-section-number">2.3.5</span> Running Elasticsearch from the command line</h3>
+<p>Now, in the command line, we can run elasticsearch.</p>
+<ul>
+<li>Navigate to the right folder:
+<ul>
+<li><code>cd elasticsearch-8.7.0</code></li>
+</ul></li>
+<li>Run Elasticsearch:
+<ul>
+<li><code>.\bin\elasticsearch</code></li>
+</ul></li>
+</ul>
+<p>Especially for the first time, it might take some time before Elasticsearch returns output to the command line and starts running.</p>
+<div class="figure">
+<img src="img/n1_7_output_elasticsearch_running.png" alt="Elasticsearch running and showing output" />
+<p class="caption">Elasticsearch running and showing output</p>
+</div>
+</div>
+<div id="copy-ing-important-information-when-startin-elasticsearch-for-the-first-time" class="section level3">
+<h3><span class="header-section-number">2.3.6</span> Copy-ing important information when startin Elasticsearch for the first time</h3>
+<p>After a while, we see some output about passwords and enrollment tokens. Make sure you copy this information and save it to a temporary text file. We will need this information later in the installation and configuration process.</p>
+<div class="figure">
+<img src="img/n1_8_save_passwords_elasticsearch.png" alt="Copy important information" />
+<p class="caption">Copy important information</p>
+</div>
+</div>
+<div id="setting-the-es_home-environment-variable" class="section level3">
+<h3><span class="header-section-number">2.3.7</span> Setting the <code>ES_HOME</code> environment variable</h3>
+<p>Now Elasticsearch is running. We want to verify if it is reachable. By default, Elasticsearch runs over port <code>9200</code>. Since we enabled the security settings for Elasticsearch, traffic is encrypted over <strong>https</strong>. Therefore we should use <code>https://localhost:9200</code> instead of the regular <code>http:localhost:9200</code> that is available when we do not use the security features.</p>
+<p>Instead of using the browser to verify that Elasticsearch is reachable, we will use <code>curl</code> and specify the certificate when executing the request.</p>
+<p>First we will set the environment variable <code>ES_HOME</code> that we can use in our request. By setting this environment variable, we do not have to specify the full path of the Elasticsearch installation in each request. In the next step, we need the path to specify the certificate to execute the request.</p>
+<p>Open your Explorer. Navigate into the <code>elasticsearch-8.7.0-windows-x86_64\elasticsearch-8.7.0</code> folder. Copy the path of your current location like in the screenshot below:</p>
+<div class="figure">
+<img src="img/n1_9_copy_path_for_set_es_home.png" alt="Copy path Elasticsearch home" />
+<p class="caption">Copy path Elasticsearch home</p>
+</div>
+<p>Back in VS Code, execute the following command to set the <code>ES_HOME</code> environment variable:</p>
+<div class="sourceCode" id="cb1"><pre class="sourceCode powershell"><code class="sourceCode powershell"><a class="sourceLine" id="cb1-1" data-line-number="1"><span class="fu">set</span> ES_HOME=C:\Users\yourname\elasticsearch-8.<span class="fu">7</span>.<span class="fu">0</span>-windows-x86_64\elasticsearch-8.<span class="fu">7</span>.<span class="fu">0</span></a></code></pre></div>
+<blockquote>
+<p>Apply it for your own part. For example, change <code>yourname</code> to the actual name of your home directory.</p>
+</blockquote>
+<p>Check if the environment variable is succesfully set:</p>
+<div class="sourceCode" id="cb2"><pre class="sourceCode powershell"><code class="sourceCode powershell"><a class="sourceLine" id="cb2-1" data-line-number="1"><span class="fu">echo</span> %ES_HOME%</a></code></pre></div>
+<p>If returns the path of the elasticsearch folder, the environment variable is succesfully set.</p>
+<div class="figure">
+<img src="img/n1_10_set_es_home.png" alt="Set ES_HOME environment variable" />
+<p class="caption">Set ES_HOME environment variable</p>
+</div>
+</div>
+<div id="check-if-elasticsearch-is-reachable-with-curl-and-a-certificate" class="section level3">
+<h3><span class="header-section-number">2.3.8</span> Check if Elasticsearch is reachable with curl and a certificate</h3>
+<p>Insert the following command to check if Elasticsearch is reachable:</p>
+<div class="sourceCode" id="cb3"><pre class="sourceCode powershell"><code class="sourceCode powershell"><a class="sourceLine" id="cb3-1" data-line-number="1"><span class="fu">curl</span> --cacert %ES_HOME%\config\certs\http_ca.<span class="fu">crt</span> -u elastic https://localhost:9200 -k</a></code></pre></div>
+<blockquote>
+<p>The <code>-k</code> option specifies the certificate does not have to be varified. For a production environment it is recommended to obtain a certificate from a Certificate Authority (CA). For this tutorial we can use this option since we only want to specify that the request should use the certificate to encrypt the traffic and send it over https.</p>
+</blockquote>
+<div class="figure">
+<img src="img/n1_11_command_insert_password_elastic.png" alt="Check Elasticsearch is reachable" />
+<p class="caption">Check Elasticsearch is reachable</p>
+</div>
+<p>Insert the password that we have stored in the text file. We get the response of Elasticsearch and can verify it is running and reachable:</p>
+<div class="figure">
+<img src="img/n1_12_response_elasticsearch_is_running.png" alt="Elasticsearch Reachable" />
+<p class="caption">Elasticsearch Reachable</p>
+</div>
+</div>
+<div id="starting-elasticsearch-as-a-windows-service" class="section level3">
+<h3><span class="header-section-number">2.3.9</span> Starting Elasticsearch as a Windows Service</h3>
+<p>Elasticsearch is succesfully running in the foreground. Only when we keep the command line window open, it will keep running. Elasticsearch can also be installed as a service so it can also run in the background.</p>
+<p>Open the command line window that runs Elasticsearch. Stop the process with <code>CTRL + C</code> (on the keyboard). Confirm to stop the process by pressing <code>Y</code> (Yes).</p>
+<p>Elasticsearch is now stopped. We will make it run again, but this time as a service. Specify the command to <em>install</em> the Elasticsearch service. This is only needed the first time you want to use Elasticsearch as a service:</p>
+<div class="sourceCode" id="cb4"><pre class="sourceCode powershell"><code class="sourceCode powershell"><a class="sourceLine" id="cb4-1" data-line-number="1">.\bin\elasticsearch\service.<span class="fu">bat</span> install</a></code></pre></div>
+<p>Next, start the service:</p>
+<div class="sourceCode" id="cb5"><pre class="sourceCode powershell"><code class="sourceCode powershell"><a class="sourceLine" id="cb5-1" data-line-number="1">.\bin\elasticsearch\service.<span class="fu">bat</span> <span class="fu">start</span></a></code></pre></div>
+<div class="figure">
+<img src="img/n1_13_start_elasticsearch_as_service.png" alt="Install and start Elasticsearch as a service" />
+<p class="caption">Install and start Elasticsearch as a service</p>
+</div>
+<div class="figure">
+<img src="img/n1_13_start_elasticsearch_as_service.png" alt="Install Elasticsearch as a service" />
+<p class="caption">Install Elasticsearch as a service</p>
+</div>
+<p>Elasticsearch is succesfully started. Let’s take al ook at it.</p>
+<p>We can open the manager pane:</p>
+<div class="sourceCode" id="cb6"><pre class="sourceCode powershell"><code class="sourceCode powershell"><a class="sourceLine" id="cb6-1" data-line-number="1">.\bin\elasticsearch\service.<span class="fu">bat</span> manager</a></code></pre></div>
+<div class="figure">
+<img src="img/n1_14_elasticsearch_manager.png" alt="Elasticsearch service manager" />
+<p class="caption">Elasticsearch service manager</p>
+</div>
+<p>This will show the Elasticsearch service window:</p>
+<div class="figure">
+<img src="img/n1_15_window_elasticsearch_manager.png" alt="Window Elasticsearch service manager" />
+<p class="caption">Window Elasticsearch service manager</p>
+</div>
+</div>
+<div id="open-elasticsearch-in-windows-services" class="section level3">
+<h3><span class="header-section-number">2.3.10</span> Open Elasticsearch in Windows Services</h3>
+<p>Now Elasticsearch is installed as a service, we can stop and start Elasticsearch from the <strong>Services</strong> pane in Windows. Open Services:</p>
+<div class="figure">
+<img src="img/n1_16_show_elasticsearch_service.png" alt="Open Services Windows" />
+<p class="caption">Open Services Windows</p>
+</div>
+<p>Look for the `elasticsearch 8.7.0 service. It should be running because in the previous step we started the service. Right-click and select <strong>Stop</strong>:</p>
+<div class="figure">
+<img src="img/n1_17_stop_elasticsearch_service.png" alt="Stopping the Elasticsearch service" />
+<p class="caption">Stopping the Elasticsearch service</p>
+</div>
+<p>Back in VS Code, when we want to verify if Elasticsearch is reachable, it will indicate Elasticsearch is not reachable. That is what we expected since we stopped the service:</p>
+<div class="figure">
+<img src="img/n1_18_stopped_service_no_response.png" alt="VS Code verify Elasticsearch is not reachable" />
+<p class="caption">VS Code verify Elasticsearch is not reachable</p>
+</div>
+<p>In Windows services, start Elasticsearch again:</p>
+<div class="figure">
+<img src="img/n1_19_start_elasticsearch_service.png" alt="Windows services start Elasticsearch" />
+<p class="caption">Windows services start Elasticsearch</p>
+</div>
+<p>Wait a few moments for Elasticsearch to boot. There is some time between starting Elasticsearch and when Elasticsearch if fully booted. Then, execute the same command again to verify if Elasticsearch is running and reachable:</p>
+<div class="figure">
+<img src="img/n1_20_started_elasticsearch_service_response.png" alt="Elasticsearch reachable again" />
+<p class="caption">Elasticsearch reachable again</p>
+</div>
+</div>
+</div>
+<div id="running-kibana" class="section level2">
+<h2><span class="header-section-number">2.4</span> Running Kibana</h2>
+<p>When Elasticsearch is up and running, in our case as a service, we can take al look at Kibana. Kibana needs a running Elasticsearch instance, so we can only make Kibana work if we succesfully started Elasticsearch.</p>
+<div id="download-and-extract-the-kibana-zip-files" class="section level3">
+<h3><span class="header-section-number">2.4.1</span> Download and extract the Kibana zip files</h3>
+<p>We can download Kibana zip files from the following link:</p>
+<ul>
+<li><a href="https://www.elastic.co/downloads/kibana" class="uri">https://www.elastic.co/downloads/kibana</a></li>
+</ul>
+<div class="figure">
+<img src="img/n1_21_download_kibana.png" alt="Download Kibana" />
+<p class="caption">Download Kibana</p>
+</div>
+<p>Just like Elasticsearch, we will add the the folder in our Home Directory. This is where we extract the zip file:</p>
+<div class="figure">
+<img src="img/n1_22_extract_kibana.png" alt="Extract Kibana" />
+<p class="caption">Extract Kibana</p>
+</div>
+</div>
+<div id="add-the-kibana-folder-to-the-visual-studio-code-workspace" class="section level3">
+<h3><span class="header-section-number">2.4.2</span> Add the Kibana folder to the Visual Studio Code Workspace</h3>
+<p>We will add the Kibana to the Visual Studio Workspace so we have both the Elasticsearch and Kibana folder in one VS Code window:</p>
+<div class="figure">
+<img src="img/n1_23_vscode_add_kibana_workspace.png" alt="Add Kibana to workspace" />
+<p class="caption">Add Kibana to workspace</p>
+</div>
+<div class="figure">
+<img src="img/n1_24_vscode_select_kibana_workspace.png" alt="Specify Kibana folder" />
+<p class="caption">Specify Kibana folder</p>
+</div>
+</div>
+<div id="running-kibana-1" class="section level3">
+<h3><span class="header-section-number">2.4.3</span> Running Kibana</h3>
+<p>Open a new Terminal window in Visual Studio Code. We specify it should start in the directory of Kibana:</p>
+<div class="figure">
+<img src="img/n1_25_open_new_terminal_folder.png" alt="New Terminal" />
+<p class="caption">New Terminal</p>
+</div>
+<div class="figure">
+<img src="img/n1_26_specify_kibana.png" alt="Specify Kibana for Terminal" />
+<p class="caption">Specify Kibana for Terminal</p>
+</div>
+<p>In the command line, we will start Kibana</p>
+<div class="figure">
+<img src="img/n1_27_start_kibana_command.png" alt="Start Kibana" />
+<p class="caption">Start Kibana</p>
+</div>
+<p>Especially for the first time, it might take a while before Kibana is started.</p>
+<div class="figure">
+<img src="img/n1_28_kibana_started.png" alt="Kibana started" />
+<p class="caption">Kibana started</p>
+</div>
+</div>
+<div id="open-kibana-in-the-browser" class="section level3">
+<h3><span class="header-section-number">2.4.4</span> Open Kibana in the browser</h3>
+<p>Now Kibana is started, we can navigate to it in the browser:</p>
+<div class="figure">
+<img src="img/n1_29_kibana_browser.png" alt="Kibana in browser" />
+<p class="caption">Kibana in browser</p>
+</div>
+<p>When starting Elasticsearch, we obtained an enrollment token for Kibana. This is the moment we need to use this token to “enroll” Kibana to our running Elasticsearch instance.</p>
+<div class="figure">
+<img src="img/n1_30_attempt_old_enrollment_token.png" alt="Specify enrollment token" />
+<p class="caption">Specify enrollment token</p>
+</div>
+<p>Since the token is only available for 30 minutes after generation, it might be expired.</p>
+<div class="figure">
+<img src="img/n1_31_old_enrollment_token_not_working.png" alt="Enrollmment token not working" />
+<p class="caption">Enrollmment token not working</p>
+</div>
+</div>
+<div id="create-a-new-enrollment-token-for-kibana" class="section level3">
+<h3><span class="header-section-number">2.4.5</span> Create a new enrollment token for Kibana</h3>
+<p>We will create a new enrollment token for Kibana. In a new Terminal window in Elasticsearch, runn the following command.</p>
+<div class="sourceCode" id="cb7"><pre class="sourceCode powershell"><code class="sourceCode powershell"><a class="sourceLine" id="cb7-1" data-line-number="1">.\bin\elasticsearch-create-enrollment-token -s kibana --url <span class="st">&quot;https://localhost:9200&quot;</span></a></code></pre></div>
+<blockquote>
+<p>Note that Elasticsearch is still running even we do not see it in the Terminal anymore. Elasticsearch runs in the back as a service.</p>
+</blockquote>
+<div class="figure">
+<img src="img/n1_32_create_new_enrollment_token_kibana.png" alt="New enrollment token for Kibana" />
+<p class="caption">New enrollment token for Kibana</p>
+</div>
+<p>Copy the new enrollment token en go back to the browser. Paste the new enrollment token:</p>
+<div class="figure">
+<img src="img/n1_32_paste_new_enrollment_token.png" alt="New enrollment token" />
+<p class="caption">New enrollment token</p>
+</div>
+<p>Kibana will now start properly.</p>
+<div class="figure">
+<img src="img/n1_33_kibana_starting_properly.png" alt="Kibana starting properly" />
+<p class="caption">Kibana starting properly</p>
+</div>
+<p>Log in with the <code>elastic</code> user and use the password we have in our text file:</p>
+<div class="figure">
+<img src="img/n1_34_copy_elastic_user_password.png" alt="Copy password" />
+<p class="caption">Copy password</p>
+</div>
+<div class="figure">
+<img src="img/n1_35_log_in_elastic_user.png" alt="Log in with elastic user" />
+<p class="caption">Log in with elastic user</p>
+</div>
+<p>You are now succesfully, and securely, logged into Kibana!</p>
+</div>
+<div id="change-password-of-elastic-user-in-kibana" class="section level3">
+<h3><span class="header-section-number">2.4.6</span> Change password of <code>elastic</code> user in Kibana</h3>
+<p>We will change the password of the <code>elastic</code> user for something we will remember more properly.</p>
+<p>In Kibana open the hamburger menu and scroll down. Select <strong>Stack Management</strong></p>
+<div class="figure">
+<img src="img/n1_36_specify_stack_management.png" alt="Kibana specify Stack Management" />
+<p class="caption">Kibana specify Stack Management</p>
+</div>
+<p>In the menu select <em>Users</em> below the <strong>Security</strong> header:</p>
+<div class="figure">
+<img src="img/n1_37_select_users.png" alt="Select users" />
+<p class="caption">Select users</p>
+</div>
+<p>Next, select the <code>elastic</code> user:</p>
+<div class="figure">
+<img src="img/n1_38_select_elastic_user.png" alt="Select elastic user" />
+<p class="caption">Select elastic user</p>
+</div>
+<p>Change the password:</p>
+<div class="figure">
+<img src="img/n1_39_selected_elastic_user.png" alt="Change passs" />
+<p class="caption">Change passs</p>
+</div>
+<div class="figure">
+<img src="img/n1_40_change_password_elastic_user.png" alt="User" />
+<p class="caption">User</p>
+</div>
+<p>Now, let’s check if it works. We will log out from Kibana.</p>
+<div class="figure">
+<img src="img/n1_41_log_out_user.png" alt="Log out Kibana" />
+<p class="caption">Log out Kibana</p>
+</div>
+<p>Log in with the new password:</p>
+<div class="figure">
+<img src="img/n1_43_log_in_with_new_password.png" alt="Log in with new password" />
+<p class="caption">Log in with new password</p>
+</div>
+<p>We succesfully logged in with our new password!</p>
+</div>
+<div id="experiment-with-kibana-dashboards" class="section level3">
+<h3><span class="header-section-number">2.4.7</span> Experiment with Kibana Dashboards</h3>
+<p>At the home page of Kibana, we can select <em>Try sample data</em> to see some Kibana dashboards in action.</p>
+<div class="figure">
+<img src="img/n1_44_try_sample_data.png" alt="Try sample data" />
+<p class="caption">Try sample data</p>
+</div>
+<p>Choose the “Sample web logs” Dashboard:</p>
+<div class="figure">
+<img src="img/n1_45_select_sample_data_logs_dashboard.png" alt="Sample web logs Dashboard" />
+<p class="caption">Sample web logs Dashboard</p>
+</div>
+<p>Take a look at the Dashboard:</p>
+<div class="figure">
+<img src="img/n1_46_check_sample_logs_dashboard.png" alt="Dashboard opened" />
+<p class="caption">Dashboard opened</p>
+</div>
+</div>
+<div id="experiment-with-elasticsearch-commands-in-kibana-dev-tools" class="section level3">
+<h3><span class="header-section-number">2.4.8</span> Experiment with Elasticsearch commands in Kibana (Dev Tools)</h3>
+<p>Next, we can experiment with some Elasticsearch commands, we will soon learn more about these commands. These commands are referred as <strong>Query DSL</strong> which is the <em>Domain Specific Language</em> of Elasticsearch. It is a large collection of JSON bodies of API requests that can be used for Elasticsearch.</p>
+<p>Open the hamburger menu and select Dev Tools:</p>
+<div class="figure">
+<img src="img/n1_47_select_dev_tools.png" alt="Dev Tools" />
+<p class="caption">Dev Tools</p>
+</div>
+<p>In the following command we will show all available Elasticsearch indices available in our currently running Elasticsearch instance:</p>
+<div class="sourceCode" id="cb8"><pre class="sourceCode json"><code class="sourceCode json"><a class="sourceLine" id="cb8-1" data-line-number="1"><span class="er">GET</span> <span class="er">_cat/indices?v</span></a></code></pre></div>
+<div class="figure">
+<img src="img/n1_48_command_show_indices.png" alt="Show indices" />
+<p class="caption">Show indices</p>
+</div>
+<p>To see the contents of a specific Elasticsearch index, we can use the following DSL query:</p>
+<div class="sourceCode" id="cb9"><pre class="sourceCode json"><code class="sourceCode json"><a class="sourceLine" id="cb9-1" data-line-number="1"><span class="er">GET</span> <span class="er">kibana_sample_data_logs/_search</span></a></code></pre></div>
+<div class="figure">
+<img src="img/n1_49_command_see_document.png" alt="Show document in index" />
+<p class="caption">Show document in index</p>
+</div>
+</div>
+</div>
+<div id="wrap-up" class="section level2">
+<h2><span class="header-section-number">2.5</span> Wrap up</h2>
+<p>We have now succesfully downloaded, configured and installed Elasticsearch as a service. Kibana can be used as a visual interface to visualize our data our manage our Elasticsearch instance.</p>
+
+</div>
+</div>
+            </section>
+
+          </div>
+        </div>
+      </div>
+<a href="setup-for-elasticsearch-version-7.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="crud-operations-in-elasticsearch.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+    </div>
+  </div>
+<script src="libs/gitbook-2.6.7/js/app.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/lunr.js"></script>
+<script src="libs/gitbook-2.6.7/js/clipboard.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-search.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-sharing.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-fontsettings.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-bookdown.js"></script>
+<script src="libs/gitbook-2.6.7/js/jquery.highlight.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-clipboard.js"></script>
+<script>
+gitbook.require(["gitbook"], function(gitbook) {
+gitbook.start({
+"sharing": {
+"github": false,
+"facebook": true,
+"twitter": true,
+"linkedin": false,
+"weibo": false,
+"instapaper": false,
+"vk": false,
+"all": ["facebook", "twitter", "linkedin", "weibo", "instapaper"]
+},
+"fontsettings": {
+"theme": "white",
+"family": "sans",
+"size": 2
+},
+"edit": {
+"link": null,
+"text": null
+},
+"history": {
+"link": null,
+"text": null
+},
+"view": {
+"link": null,
+"text": null
+},
+"download": null,
+"toc": {
+"collapse": "subsection"
+}
+});
+});
+</script>
+
+</body>
+
+</html>

@@ -1,0 +1,428 @@
+# Setup for Elasticsearch version 8
+
+## Download Visual Studio Code
+
+
+Visual Studio Code can be used for almost any programming language or framework. We will mainly use it for the integrated terminal and browse trough several configuration files of Elasticsearch and Kibana. 
+
+Visual Studo Code can be downloaded for free at:
+
+
+* https://code.visualstudio.com/download
+
+
+![Download Visual Studio Code](img/n1_50_download_visual_studio_code.png)
+
+
+For now, you just have to check if Visual Studio Code opens succesfully. We will later used it when we have downloaded Elasticsearch.
+
+
+## Java
+
+Java can be downloaded from the following link:
+
+* https://www.java.com/download/ie_manual.jsp
+
+
+After downloading the Java installer, you can run it and follow the installation process.
+
+![Download Java](img/n1_1_download_java.png)
+
+
+
+
+## Running Elasticsearch
+
+
+
+### Download the Elasticsearch installer
+
+
+After Java is installed, we can download and run Elasticsearch. Download Elasticsearch in the following link:
+
+* https://www.elastic.co/downloads/elasticsearch
+
+
+Since we will follow this tutorial in a Windows environment, we select **Windows** in the "Choose platform" dropdown menu:
+
+![Download Elasticsearch](img/n1_2_download_elasticsearch.png)
+
+
+
+### Move and extract the file in the Home Directory
+
+Once downloaded, move it to your home directory.
+
+> Your Home Directory is for example: *This PC > Windows (C:) > Users > jim* . This is the folder in which you typically can find folders like *My Documents*, *Downloads*, *Dropbox* etc.
+
+
+
+![Elasticsearch to Home Directory](img/n1_3_extract_elasticsearch.png)
+
+Extract the `.zip`.
+
+
+### Opening Elasticsearch in Visual Studio Code
+
+
+We will open the contents of the elasticsearch folder in Visual Studio Code:
+
+* Open Visual Studio Code if you did not open it yet. Choose `File > Open Folder`
+
+![Visual Studio Code open folder](img/n1_4vs_code_open_folder.png)
+
+
+* Navigate to the elasticsearch folder:
+
+![Open folder in Elasticsearch](img/n1_5_open_folder_vscode.png)
+
+
+### Change the Java heap
+
+
+By default, Java will use the full available RAM of your computer as heap. This is an overkill for this tutorial and will make Elasticsearch boot very slowly. Therefore, as a first use case for changing the Elasticsearch configuration, we can change the Java heap:
+
+* In the `config` folder, open the file `jvm.options`
+* Remove the `#` (comments). That contain `-Xms4g` and `Xmx4` . This will make these lines active
+
+![Uncomment Java heap options](img/n1_6_change_java_heap.png)
+
+
+### Running Elasticsearch from the command line
+
+Now, in the command line, we can run elasticsearch.
+
+* Navigate to the right folder: 
+  * `cd elasticsearch-8.7.0`
+* Run Elasticsearch:
+  * `.\bin\elasticsearch`
+ 
+ 
+
+Especially for the first time, it might take some time before Elasticsearch returns output to the command line and starts running.
+
+
+![Elasticsearch running and showing output](img/n1_7_output_elasticsearch_running.png)
+
+
+### Copy-ing important information when startin Elasticsearch for the first time
+
+ After a while, we see some output about passwords and enrollment tokens. Make sure you copy this information and save it to a temporary text file. We will need this information later in the installation and configuration process.
+
+
+![Copy important information](img/n1_8_save_passwords_elasticsearch.png)
+
+
+
+### Setting the `ES_HOME` environment variable
+
+
+Now Elasticsearch is running. We want to verify if it is reachable. By default, Elasticsearch runs over port `9200`. Since we enabled the security settings for Elasticsearch, traffic is encrypted over **https**. Therefore we should use `https://localhost:9200` instead of the regular `http:localhost:9200` that is available when we do not use the security features.
+
+Instead of using the browser to verify that Elasticsearch is reachable, we will use `curl` and specify the certificate when executing the request.
+
+
+First we will set the environment variable `ES_HOME` that we can use in our request. By setting this environment variable, we do not have to specify the full path of the Elasticsearch installation in each request. In the next step, we need the path to specify the certificate to execute the request.
+
+Open your Explorer. Navigate into the `elasticsearch-8.7.0-windows-x86_64\elasticsearch-8.7.0` folder. Copy the path of your current location like in the screenshot below:
+
+![Copy path Elasticsearch home](img/n1_9_copy_path_for_set_es_home.png)
+
+
+Back in VS Code, execute the following command to set the `ES_HOME` environment variable:
+
+```{powershell}
+set ES_HOME=C:\Users\yourname\elasticsearch-8.7.0-windows-x86_64\elasticsearch-8.7.0
+```
+
+> Apply it for your own part. For example, change `yourname` to the actual name of your home directory.
+
+Check if the environment variable is succesfully set:
+
+```{powershell}
+echo %ES_HOME%
+```
+
+If returns the path of the elasticsearch folder, the environment variable is succesfully set.
+
+
+![Set ES_HOME environment variable](img/n1_10_set_es_home.png)
+
+
+### Check if Elasticsearch is reachable with curl and a certificate
+
+
+Insert the following command to check if Elasticsearch is reachable:
+
+```{powershell}
+curl --cacert %ES_HOME%\config\certs\http_ca.crt -u elastic https://localhost:9200 -k
+```
+
+> The `-k` option specifies the certificate does not have to be varified. For a production environment it is recommended to obtain a certificate from a Certificate Authority (CA). For this tutorial we can use this option since we only want to specify that the request should use the certificate to encrypt the traffic and send it over https.
+
+
+![Check Elasticsearch is reachable](img/n1_11_command_insert_password_elastic.png)
+
+Insert the password that we have stored in the text file. We get the response of Elasticsearch and can verify it is running and reachable:
+
+![Elasticsearch Reachable](img/n1_12_response_elasticsearch_is_running.png)
+
+
+### Starting Elasticsearch as a Windows Service
+
+
+Elasticsearch is succesfully running in the foreground. Only when we keep the command line window open, it will keep running. Elasticsearch can also be installed as a service so it can also run in the background.
+
+Open the command line window that runs Elasticsearch. Stop the process with `CTRL + C` (on the keyboard). Confirm to stop the process by pressing `Y` (Yes).
+
+Elasticsearch is now stopped. We will make it run again, but this time as a service. Specify the command to *install* the Elasticsearch service. This is only needed the first time you want to use Elasticsearch as a service:
+
+```{powershell}
+.\bin\elasticsearch\service.bat install
+```
+
+Next, start the service:
+
+```{powershell}
+.\bin\elasticsearch\service.bat start
+```
+
+![Install and start Elasticsearch as a service](img/n1_13_start_elasticsearch_as_service.png)
+
+
+
+![Install Elasticsearch as a service](img/n1_13_start_elasticsearch_as_service.png)
+
+Elasticsearch is succesfully started. Let's take al ook at it.
+
+
+We can open the manager pane:
+
+```{powershell}
+.\bin\elasticsearch\service.bat manager
+```
+
+![Elasticsearch service manager](img/n1_14_elasticsearch_manager.png)
+
+This will show the Elasticsearch service window:
+
+![Window Elasticsearch service manager](img/n1_15_window_elasticsearch_manager.png)
+
+
+### Open Elasticsearch in Windows Services
+
+Now Elasticsearch is installed as a service, we can stop and start Elasticsearch from the **Services** pane in Windows. Open Services:
+
+![Open Services Windows](img/n1_16_show_elasticsearch_service.png)
+
+
+Look for the `elasticsearch 8.7.0 service. It should be running because in the previous step we started the service. Right-click and select **Stop**:
+
+![Stopping the Elasticsearch service](img/n1_17_stop_elasticsearch_service.png)
+
+
+Back in VS Code, when we want to verify if Elasticsearch is reachable, it will indicate Elasticsearch is not reachable. That is what we expected since we stopped the service:
+
+![VS Code verify Elasticsearch is not reachable](img/n1_18_stopped_service_no_response.png)
+
+In Windows services, start Elasticsearch again:
+
+![Windows services start Elasticsearch](img/n1_19_start_elasticsearch_service.png)
+
+Wait a few moments for Elasticsearch to boot. There is some time between starting Elasticsearch and when Elasticsearch if fully booted. Then, execute the same command again to verify if Elasticsearch is running and reachable:
+
+![Elasticsearch reachable again](img/n1_20_started_elasticsearch_service_response.png)
+
+
+
+## Running Kibana
+
+
+When Elasticsearch is up and running, in our case as a service, we can take al look at Kibana. Kibana needs a running Elasticsearch instance, so we can only make Kibana work if we succesfully started Elasticsearch.
+
+### Download and extract the Kibana zip files
+
+
+We can download Kibana zip files from the following link:
+
+* https://www.elastic.co/downloads/kibana
+
+
+![Download Kibana](img/n1_21_download_kibana.png)
+
+
+Just like Elasticsearch, we will add the the folder in our Home Directory. This is where we extract the zip file:
+
+![Extract Kibana](img/n1_22_extract_kibana.png)
+
+
+### Add the Kibana folder to the Visual Studio Code Workspace
+
+We will add the Kibana to the Visual Studio Workspace so we have both the Elasticsearch and Kibana folder in one VS Code window:
+
+![Add Kibana to workspace](img/n1_23_vscode_add_kibana_workspace.png)
+
+![Specify Kibana folder](img/n1_24_vscode_select_kibana_workspace.png)
+
+
+### Running Kibana
+
+Open a new Terminal window in Visual Studio Code. We specify it should start in the directory of Kibana:
+
+![New Terminal](img/n1_25_open_new_terminal_folder.png)
+
+![Specify Kibana for Terminal](img/n1_26_specify_kibana.png)
+
+
+In the command line, we will start Kibana
+
+![Start Kibana](img/n1_27_start_kibana_command.png)
+
+Especially for the first time, it might take a while before Kibana is started.
+
+![Kibana started](img/n1_28_kibana_started.png)
+
+
+### Open Kibana in the browser
+
+Now Kibana is started, we can navigate to it in the browser:
+
+![Kibana in browser](img/n1_29_kibana_browser.png)
+
+
+When starting Elasticsearch, we obtained an enrollment token for Kibana. This is the moment we need to use this token to "enroll" Kibana to our running Elasticsearch instance.
+
+![Specify enrollment token](img/n1_30_attempt_old_enrollment_token.png)
+
+
+Since the token is only available for 30 minutes after generation, it might be expired.
+
+
+![Enrollmment token not working](img/n1_31_old_enrollment_token_not_working.png)
+
+
+### Create a new enrollment token for Kibana
+
+We will create a new enrollment token for Kibana. In a new Terminal window in Elasticsearch, runn the following command. 
+
+```{powershell}
+.\bin\elasticsearch-create-enrollment-token -s kibana --url "https://localhost:9200"
+```
+
+
+> Note that Elasticsearch is still running even we do not see it in the Terminal anymore. Elasticsearch runs in the back as a service.
+
+
+![New enrollment token for Kibana](img/n1_32_create_new_enrollment_token_kibana.png)
+
+
+Copy the new enrollment token en go back to the browser. Paste the new enrollment token:
+
+![New enrollment token](img/n1_32_paste_new_enrollment_token.png)
+
+
+Kibana will now start properly.
+
+![Kibana starting properly](img/n1_33_kibana_starting_properly.png)
+
+
+Log in with the `elastic` user and use the password we have in our text file:
+
+![Copy password](img/n1_34_copy_elastic_user_password.png)
+
+![Log in with elastic user](img/n1_35_log_in_elastic_user.png)
+
+
+You are now succesfully, and securely, logged into Kibana!
+
+
+### Change password of `elastic` user in Kibana
+
+We will change the password of the `elastic` user for something we will remember more properly.
+
+In Kibana open the hamburger menu and scroll down. Select **Stack Management**
+
+
+![Kibana specify Stack Management](img/n1_36_specify_stack_management.png)
+
+
+In the menu select *Users* below the **Security** header:
+
+![Select users](img/n1_37_select_users.png)
+
+
+Next, select the `elastic` user:
+
+![Select elastic user](img/n1_38_select_elastic_user.png)
+
+Change the password:
+
+![Change passs](img/n1_39_selected_elastic_user.png)
+
+![User](img/n1_40_change_password_elastic_user.png)
+
+
+Now, let's check if it works. We will log out from Kibana.
+
+
+![Log out Kibana](img/n1_41_log_out_user.png)
+
+Log in with the new password:
+
+![Log in with new password](img/n1_43_log_in_with_new_password.png)
+
+
+We succesfully logged in with our new password!
+
+
+
+### Experiment with Kibana Dashboards
+
+At the home page of Kibana, we can select *Try sample data* to see some Kibana dashboards in action.
+
+![Try sample data](img/n1_44_try_sample_data.png)
+
+
+
+Choose the "Sample web logs" Dashboard:
+
+![Sample web logs Dashboard](img/n1_45_select_sample_data_logs_dashboard.png)
+
+Take a look at the Dashboard:
+
+![Dashboard opened](img/n1_46_check_sample_logs_dashboard.png)
+
+
+### Experiment with Elasticsearch commands in Kibana (Dev Tools)
+
+Next, we can experiment with some Elasticsearch commands, we will soon learn more about these commands. These commands are referred as **Query DSL** which is the *Domain Specific Language* of Elasticsearch. It is a large collection of JSON bodies of API requests that can be used for Elasticsearch.
+
+
+Open the hamburger menu and select Dev Tools:
+
+![Dev Tools](img/n1_47_select_dev_tools.png)
+
+
+In the following command we will show all available Elasticsearch indices available in our currently running Elasticsearch instance:
+
+
+```{json}
+GET _cat/indices?v
+```
+
+![Show indices](img/n1_48_command_show_indices.png)
+
+
+To see the contents of a specific Elasticsearch index, we can use the following DSL query:
+
+```{json}
+GET kibana_sample_data_logs/_search
+```
+
+![Show document in index](img/n1_49_command_see_document.png)
+
+
+
+## Wrap up
+
+We have now succesfully downloaded, configured and installed Elasticsearch as a service. Kibana can be used as a visual interface to visualize our data our manage our Elasticsearch instance.

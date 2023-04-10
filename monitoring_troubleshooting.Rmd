@@ -1,0 +1,145 @@
+# Troubleshooting and Monitoring
+
+## Responses and Allocation
+
+### Checking the health/status
+
+
+Check the health status of the cluster:
+
+
+![](img/5_1_get_cluster_health.PNG)
+
+
+Check the health status at an index level:
+
+![](img/6_1_es_health_index_level.PNG)
+
+
+Check the health status of the kibana_sample_data_logs index
+
+
+![](img/6_1_es_health_specific_index.PNG)
+
+
+Get an overview of the health status on a shards-level
+
+
+![](img/6_1_es_health_shards_level.PNG)
+
+
+Check the shards allocation
+
+
+![](img/6_1_change_check_allocation.PNG)
+
+
+## Enabling monitoring
+
+
+Monitoring pane:
+
+![](img/6_2_kibana_setup_monitoring.PNG)
+
+
+Monitoring pane indicates no monitoring setup yet
+
+![](img/6_2_monitoring_instructions_setup_metricbeat.PNG)
+
+
+Download Metricbeat [https://www.elastic.co/downloads/beats/metricbeat](https://www.elastic.co/downloads/beats/metricbeat)
+
+![](img/6_2_download_metricbeat.PNG)
+
+
+Extract Metricbeat in the Home Directory
+
+![](img/6_2_extract_metricbeat.PNG)
+
+
+We first change the configuration of Metricbeat
+
+![](img/6_2_configuration_metricbeat.PNG)
+
+
+Open Powershell tab:
+
+![](img/6_2_powershell_run_administrator.png)
+
+
+
+In Powershell, we will install Metricbeat
+
+
+![](img/6_2_metricbeat_install_service_metricbeat.PNG)
+
+
+Install the `x-pack` module
+
+![](img/6_2_metricbeat_enable_xpack.PNG)
+
+
+Start Metricbeat
+
+![](img/6_2_start_metricbeat.PNG)
+
+
+Once Metricbeat starts working for the current instance, we will get the message in Kibana:
+
+
+![](img/6_2_metricbeat_installed.PNG)
+
+
+## Stack Monitoring
+
+
+Metricbeat open Stack Monitoring
+
+![](img/6_2_stack_monitoring.PNG)
+
+
+Metricbeat node 1
+
+![](img/6_2_monitoring_elasticsearch_node_1.PNG)
+
+
+Metricbeat multiple indices
+
+![](img/6_2_monitoring_elasticsearch_indices.PNG)
+
+
+## Diagnosing Performance Issues
+
+First we will change the index by adding an extra replica
+
+![](img/4_1_change_replicas_index.PNG)
+
+Find out the thread pool:
+
+![](img/6_3_get_threadpool.PNG)
+
+
+
+
+Check out the status for the thread pools:
+
+![](img/6_3_get_stats_threadpool.PNG)
+
+
+Pretty print thread pool:
+
+![](img/6_3_thread_pool_pretty.PNG)
+
+
+Get current tasks:
+
+![](img/6_3_get_tasks.PNG)
+
+
+Get the specific nodes:
+
+
+![](img/6_3_get_cat_nodes_specific.PNG)
+
+
+

@@ -1,0 +1,595 @@
+<!DOCTYPE html>
+<html lang="" xml:lang="">
+<head>
+
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <title>Elasticsearch Fundamentals</title>
+  <meta name="description" content="Elasticsearch Fundamentals" />
+  <meta name="generator" content="bookdown 0.21.7 and GitBook 2.6.7" />
+
+  <meta property="og:title" content="Elasticsearch Fundamentals" />
+  <meta property="og:type" content="book" />
+  
+  
+  
+  
+
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content="Elasticsearch Fundamentals" />
+  
+  
+  
+
+<meta name="author" content="Arie Twigt" />
+
+
+
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+  
+  
+
+<link rel="next" href="setup-for-elasticsearch-version-8.html"/>
+<script src="libs/jquery-2.2.3/jquery.min.js"></script>
+<link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-highlight.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-search.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-fontsettings.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-clipboard.css" rel="stylesheet" />
+
+
+
+
+
+
+
+
+
+<link href="libs/anchor-sections-1.0.1/anchor-sections.css" rel="stylesheet" />
+<script src="libs/anchor-sections-1.0.1/anchor-sections.js"></script>
+
+
+<style type="text/css">
+a.sourceLine { display: inline-block; line-height: 1.25; }
+a.sourceLine { pointer-events: none; color: inherit; text-decoration: inherit; }
+a.sourceLine:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode { white-space: pre; position: relative; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+code.sourceCode { white-space: pre-wrap; }
+a.sourceLine { text-indent: -1em; padding-left: 1em; }
+}
+pre.numberSource a.sourceLine
+  { position: relative; left: -4em; }
+pre.numberSource a.sourceLine::before
+  { content: attr(data-line-number);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; pointer-events: all; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {  }
+@media screen {
+a.sourceLine::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+</style>
+
+
+</head>
+
+<body>
+
+
+
+  <div class="book without-animation with-summary font-size-2 font-family-1" data-basepath=".">
+
+    <div class="book-summary">
+      <nav role="navigation">
+
+<ul class="summary">
+<li class="chapter" data-level="1" data-path="setup-for-elasticsearch-version-7.html"><a href="setup-for-elasticsearch-version-7.html"><i class="fa fa-check"></i><b>1</b> Setup for Elasticsearch version 7</a><ul>
+<li class="chapter" data-level="1.1" data-path="setup-for-elasticsearch-version-7.html"><a href="setup-for-elasticsearch-version-7.html#download-elasticsearch"><i class="fa fa-check"></i><b>1.1</b> Download Elasticsearch</a><ul>
+<li class="chapter" data-level="1.1.1" data-path="setup-for-elasticsearch-version-7.html"><a href="setup-for-elasticsearch-version-7.html#download-and-unzip-the-elasticsearch-installation-in-your-home-directory"><i class="fa fa-check"></i><b>1.1.1</b> Download and unzip the Elasticsearch installation in your Home Directory</a></li>
+<li class="chapter" data-level="1.1.2" data-path="setup-for-elasticsearch-version-7.html"><a href="setup-for-elasticsearch-version-7.html#start-elasticsearch-from-the-command-line"><i class="fa fa-check"></i><b>1.1.2</b> Start Elasticsearch from the Command Line</a></li>
+<li class="chapter" data-level="1.1.3" data-path="setup-for-elasticsearch-version-7.html"><a href="setup-for-elasticsearch-version-7.html#changing-basic-settings-in-the-elasticsearch-configuration"><i class="fa fa-check"></i><b>1.1.3</b> Changing basic settings in the Elasticsearch configuration</a></li>
+</ul></li>
+<li class="chapter" data-level="1.2" data-path="setup-for-elasticsearch-version-7.html"><a href="setup-for-elasticsearch-version-7.html#getting-started-with-kibana"><i class="fa fa-check"></i><b>1.2</b> Getting started with Kibana</a><ul>
+<li class="chapter" data-level="1.2.1" data-path="setup-for-elasticsearch-version-7.html"><a href="setup-for-elasticsearch-version-7.html#interacting-with-elasticsearch"><i class="fa fa-check"></i><b>1.2.1</b> Interacting with Elasticsearch</a></li>
+<li class="chapter" data-level="1.2.2" data-path="setup-for-elasticsearch-version-7.html"><a href="setup-for-elasticsearch-version-7.html#managing-elasticsearch-in-kibana"><i class="fa fa-check"></i><b>1.2.2</b> Managing Elasticsearch in Kibana</a></li>
+<li class="chapter" data-level="1.2.3" data-path="setup-for-elasticsearch-version-7.html"><a href="setup-for-elasticsearch-version-7.html#downloading-and-extracting-kibana"><i class="fa fa-check"></i><b>1.2.3</b> Downloading and extracting Kibana</a></li>
+<li class="chapter" data-level="1.2.4" data-path="setup-for-elasticsearch-version-7.html"><a href="setup-for-elasticsearch-version-7.html#launching-kibana"><i class="fa fa-check"></i><b>1.2.4</b> Launching Kibana</a></li>
+<li class="chapter" data-level="1.2.5" data-path="setup-for-elasticsearch-version-7.html"><a href="setup-for-elasticsearch-version-7.html#using-dev-tools-for-crud-operations-in-kibana"><i class="fa fa-check"></i><b>1.2.5</b> Using Dev Tools for CRUD-operations in Kibana</a></li>
+</ul></li>
+<li class="chapter" data-level="1.3" data-path="setup-for-elasticsearch-version-7.html"><a href="setup-for-elasticsearch-version-7.html#setting-up-basic-security-for-elasticsearch-and-kibana"><i class="fa fa-check"></i><b>1.3</b> Setting up basic security for Elasticsearch and Kibana</a><ul>
+<li class="chapter" data-level="1.3.1" data-path="setup-for-elasticsearch-version-7.html"><a href="setup-for-elasticsearch-version-7.html#enabling-x-pack-security"><i class="fa fa-check"></i><b>1.3.1</b> Enabling X-pack security</a></li>
+<li class="chapter" data-level="1.3.2" data-path="setup-for-elasticsearch-version-7.html"><a href="setup-for-elasticsearch-version-7.html#setting-up-passwords"><i class="fa fa-check"></i><b>1.3.2</b> Setting up passwords</a></li>
+<li class="chapter" data-level="1.3.3" data-path="setup-for-elasticsearch-version-7.html"><a href="setup-for-elasticsearch-version-7.html#changing-the-security-configuration-in-kibana"><i class="fa fa-check"></i><b>1.3.3</b> Changing the security configuration in Kibana</a></li>
+<li class="chapter" data-level="1.3.4" data-path="setup-for-elasticsearch-version-7.html"><a href="setup-for-elasticsearch-version-7.html#open-kibana-with-the-new-security-settings"><i class="fa fa-check"></i><b>1.3.4</b> Open Kibana with the new security settings</a></li>
+<li class="chapter" data-level="1.3.5" data-path="setup-for-elasticsearch-version-7.html"><a href="setup-for-elasticsearch-version-7.html#overview-of-the-setup"><i class="fa fa-check"></i><b>1.3.5</b> Overview of the setup</a></li>
+<li class="chapter" data-level="1.3.6" data-path="setup-for-elasticsearch-version-7.html"><a href="setup-for-elasticsearch-version-7.html#get-an-overview-of-the-users-and-change-the-password"><i class="fa fa-check"></i><b>1.3.6</b> Get an overview of the users and change the password</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="2" data-path="setup-for-elasticsearch-version-8.html"><a href="setup-for-elasticsearch-version-8.html"><i class="fa fa-check"></i><b>2</b> Setup for Elasticsearch version 8</a><ul>
+<li class="chapter" data-level="2.1" data-path="setup-for-elasticsearch-version-8.html"><a href="setup-for-elasticsearch-version-8.html#download-visual-studio-code"><i class="fa fa-check"></i><b>2.1</b> Download Visual Studio Code</a></li>
+<li class="chapter" data-level="2.2" data-path="setup-for-elasticsearch-version-8.html"><a href="setup-for-elasticsearch-version-8.html#java"><i class="fa fa-check"></i><b>2.2</b> Java</a></li>
+<li class="chapter" data-level="2.3" data-path="setup-for-elasticsearch-version-8.html"><a href="setup-for-elasticsearch-version-8.html#running-elasticsearch"><i class="fa fa-check"></i><b>2.3</b> Running Elasticsearch</a><ul>
+<li class="chapter" data-level="2.3.1" data-path="setup-for-elasticsearch-version-8.html"><a href="setup-for-elasticsearch-version-8.html#download-the-elasticsearch-installer"><i class="fa fa-check"></i><b>2.3.1</b> Download the Elasticsearch installer</a></li>
+<li class="chapter" data-level="2.3.2" data-path="setup-for-elasticsearch-version-8.html"><a href="setup-for-elasticsearch-version-8.html#move-and-extract-the-file-in-the-home-directory"><i class="fa fa-check"></i><b>2.3.2</b> Move and extract the file in the Home Directory</a></li>
+<li class="chapter" data-level="2.3.3" data-path="setup-for-elasticsearch-version-8.html"><a href="setup-for-elasticsearch-version-8.html#opening-elasticsearch-in-visual-studio-code"><i class="fa fa-check"></i><b>2.3.3</b> Opening Elasticsearch in Visual Studio Code</a></li>
+<li class="chapter" data-level="2.3.4" data-path="setup-for-elasticsearch-version-8.html"><a href="setup-for-elasticsearch-version-8.html#change-the-java-heap"><i class="fa fa-check"></i><b>2.3.4</b> Change the Java heap</a></li>
+<li class="chapter" data-level="2.3.5" data-path="setup-for-elasticsearch-version-8.html"><a href="setup-for-elasticsearch-version-8.html#running-elasticsearch-from-the-command-line"><i class="fa fa-check"></i><b>2.3.5</b> Running Elasticsearch from the command line</a></li>
+<li class="chapter" data-level="2.3.6" data-path="setup-for-elasticsearch-version-8.html"><a href="setup-for-elasticsearch-version-8.html#copy-ing-important-information-when-startin-elasticsearch-for-the-first-time"><i class="fa fa-check"></i><b>2.3.6</b> Copy-ing important information when startin Elasticsearch for the first time</a></li>
+<li class="chapter" data-level="2.3.7" data-path="setup-for-elasticsearch-version-8.html"><a href="setup-for-elasticsearch-version-8.html#setting-the-es_home-environment-variable"><i class="fa fa-check"></i><b>2.3.7</b> Setting the <code>ES_HOME</code> environment variable</a></li>
+<li class="chapter" data-level="2.3.8" data-path="setup-for-elasticsearch-version-8.html"><a href="setup-for-elasticsearch-version-8.html#check-if-elasticsearch-is-reachable-with-curl-and-a-certificate"><i class="fa fa-check"></i><b>2.3.8</b> Check if Elasticsearch is reachable with curl and a certificate</a></li>
+<li class="chapter" data-level="2.3.9" data-path="setup-for-elasticsearch-version-8.html"><a href="setup-for-elasticsearch-version-8.html#starting-elasticsearch-as-a-windows-service"><i class="fa fa-check"></i><b>2.3.9</b> Starting Elasticsearch as a Windows Service</a></li>
+<li class="chapter" data-level="2.3.10" data-path="setup-for-elasticsearch-version-8.html"><a href="setup-for-elasticsearch-version-8.html#open-elasticsearch-in-windows-services"><i class="fa fa-check"></i><b>2.3.10</b> Open Elasticsearch in Windows Services</a></li>
+</ul></li>
+<li class="chapter" data-level="2.4" data-path="setup-for-elasticsearch-version-8.html"><a href="setup-for-elasticsearch-version-8.html#running-kibana"><i class="fa fa-check"></i><b>2.4</b> Running Kibana</a><ul>
+<li class="chapter" data-level="2.4.1" data-path="setup-for-elasticsearch-version-8.html"><a href="setup-for-elasticsearch-version-8.html#download-and-extract-the-kibana-zip-files"><i class="fa fa-check"></i><b>2.4.1</b> Download and extract the Kibana zip files</a></li>
+<li class="chapter" data-level="2.4.2" data-path="setup-for-elasticsearch-version-8.html"><a href="setup-for-elasticsearch-version-8.html#add-the-kibana-folder-to-the-visual-studio-code-workspace"><i class="fa fa-check"></i><b>2.4.2</b> Add the Kibana folder to the Visual Studio Code Workspace</a></li>
+<li class="chapter" data-level="2.4.3" data-path="setup-for-elasticsearch-version-8.html"><a href="setup-for-elasticsearch-version-8.html#running-kibana-1"><i class="fa fa-check"></i><b>2.4.3</b> Running Kibana</a></li>
+<li class="chapter" data-level="2.4.4" data-path="setup-for-elasticsearch-version-8.html"><a href="setup-for-elasticsearch-version-8.html#open-kibana-in-the-browser"><i class="fa fa-check"></i><b>2.4.4</b> Open Kibana in the browser</a></li>
+<li class="chapter" data-level="2.4.5" data-path="setup-for-elasticsearch-version-8.html"><a href="setup-for-elasticsearch-version-8.html#create-a-new-enrollment-token-for-kibana"><i class="fa fa-check"></i><b>2.4.5</b> Create a new enrollment token for Kibana</a></li>
+<li class="chapter" data-level="2.4.6" data-path="setup-for-elasticsearch-version-8.html"><a href="setup-for-elasticsearch-version-8.html#change-password-of-elastic-user-in-kibana"><i class="fa fa-check"></i><b>2.4.6</b> Change password of <code>elastic</code> user in Kibana</a></li>
+<li class="chapter" data-level="2.4.7" data-path="setup-for-elasticsearch-version-8.html"><a href="setup-for-elasticsearch-version-8.html#experiment-with-kibana-dashboards"><i class="fa fa-check"></i><b>2.4.7</b> Experiment with Kibana Dashboards</a></li>
+<li class="chapter" data-level="2.4.8" data-path="setup-for-elasticsearch-version-8.html"><a href="setup-for-elasticsearch-version-8.html#experiment-with-elasticsearch-commands-in-kibana-dev-tools"><i class="fa fa-check"></i><b>2.4.8</b> Experiment with Elasticsearch commands in Kibana (Dev Tools)</a></li>
+</ul></li>
+<li class="chapter" data-level="2.5" data-path="setup-for-elasticsearch-version-8.html"><a href="setup-for-elasticsearch-version-8.html#wrap-up"><i class="fa fa-check"></i><b>2.5</b> Wrap up</a></li>
+</ul></li>
+<li class="chapter" data-level="3" data-path="crud-operations-in-elasticsearch.html"><a href="crud-operations-in-elasticsearch.html"><i class="fa fa-check"></i><b>3</b> CRUD operations in Elasticsearch</a><ul>
+<li class="chapter" data-level="3.0.1" data-path="crud-operations-in-elasticsearch.html"><a href="crud-operations-in-elasticsearch.html#adding-a-new-document"><i class="fa fa-check"></i><b>3.0.1</b> Adding a new document</a></li>
+<li class="chapter" data-level="3.0.2" data-path="crud-operations-in-elasticsearch.html"><a href="crud-operations-in-elasticsearch.html#updating-an-existing-document"><i class="fa fa-check"></i><b>3.0.2</b> Updating an existing document</a></li>
+<li class="chapter" data-level="3.0.3" data-path="crud-operations-in-elasticsearch.html"><a href="crud-operations-in-elasticsearch.html#deleting-a-document"><i class="fa fa-check"></i><b>3.0.3</b> Deleting a document</a></li>
+</ul></li>
+<li class="chapter" data-level="4" data-path="searching-for-data.html"><a href="searching-for-data.html"><i class="fa fa-check"></i><b>4</b> Searching for data</a><ul>
+<li class="chapter" data-level="4.1" data-path="searching-for-data.html"><a href="searching-for-data.html#loading-the-dynamic-dataset"><i class="fa fa-check"></i><b>4.1</b> Loading the Dynamic Dataset</a></li>
+<li class="chapter" data-level="4.2" data-path="searching-for-data.html"><a href="searching-for-data.html#loading-the-static-dataset"><i class="fa fa-check"></i><b>4.2</b> Loading the Static Dataset</a></li>
+<li class="chapter" data-level="4.3" data-path="searching-for-data.html"><a href="searching-for-data.html#search-in-elasticsearch"><i class="fa fa-check"></i><b>4.3</b> Search in Elasticsearch</a><ul>
+<li class="chapter" data-level="4.3.1" data-path="searching-for-data.html"><a href="searching-for-data.html#search-in-static-datasets"><i class="fa fa-check"></i><b>4.3.1</b> Search in Static Datasets</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="5" data-path="elasticsearch-queries.html"><a href="elasticsearch-queries.html"><i class="fa fa-check"></i><b>5</b> Elasticsearch queries</a><ul>
+<li class="chapter" data-level="5.1" data-path="elasticsearch-queries.html"><a href="elasticsearch-queries.html#relevance"><i class="fa fa-check"></i><b>5.1</b> Relevance</a></li>
+<li class="chapter" data-level="5.2" data-path="elasticsearch-queries.html"><a href="elasticsearch-queries.html#full-text-queries"><i class="fa fa-check"></i><b>5.2</b> Full text queries</a></li>
+<li class="chapter" data-level="5.3" data-path="elasticsearch-queries.html"><a href="elasticsearch-queries.html#combining-queries"><i class="fa fa-check"></i><b>5.3</b> Combining queries</a></li>
+</ul></li>
+<li class="chapter" data-level="6" data-path="aggregations.html"><a href="aggregations.html"><i class="fa fa-check"></i><b>6</b> Aggregations</a><ul>
+<li class="chapter" data-level="6.1" data-path="aggregations.html"><a href="aggregations.html#metrics"><i class="fa fa-check"></i><b>6.1</b> Metrics</a></li>
+<li class="chapter" data-level="6.2" data-path="aggregations.html"><a href="aggregations.html#buckets"><i class="fa fa-check"></i><b>6.2</b> Buckets</a></li>
+<li class="chapter" data-level="6.3" data-path="aggregations.html"><a href="aggregations.html#combined-aggregations"><i class="fa fa-check"></i><b>6.3</b> Combined Aggregations</a></li>
+<li class="chapter" data-level="6.4" data-path="aggregations.html"><a href="aggregations.html#pagination-and-pipeline-aggregations"><i class="fa fa-check"></i><b>6.4</b> Pagination and Pipeline Aggregations</a></li>
+</ul></li>
+<li class="chapter" data-level="7" data-path="nodes-and-shards.html"><a href="nodes-and-shards.html"><i class="fa fa-check"></i><b>7</b> Nodes and Shards</a><ul>
+<li class="chapter" data-level="7.1" data-path="nodes-and-shards.html"><a href="nodes-and-shards.html#running-a-multi-node-cluster"><i class="fa fa-check"></i><b>7.1</b> Running a multi-node cluster</a></li>
+<li class="chapter" data-level="7.2" data-path="nodes-and-shards.html"><a href="nodes-and-shards.html#adding-a-second-elasticsearch-node-locally"><i class="fa fa-check"></i><b>7.2</b> Adding a second Elasticsearch node locally</a></li>
+<li class="chapter" data-level="7.3" data-path="nodes-and-shards.html"><a href="nodes-and-shards.html#configure-the-elasticsearch-nodes-for-the-multi-node-cluster"><i class="fa fa-check"></i><b>7.3</b> Configure the Elasticsearch nodes for the multi-node cluster</a></li>
+<li class="chapter" data-level="7.4" data-path="nodes-and-shards.html"><a href="nodes-and-shards.html#configure-the-cluster-value-and-set-the-names-of-the-nodes"><i class="fa fa-check"></i><b>7.4</b> Configure the cluster value and set the names of the nodes</a></li>
+<li class="chapter" data-level="7.5" data-path="nodes-and-shards.html"><a href="nodes-and-shards.html#specify-the-network-settings-and-indicate-which-node-is-the-master"><i class="fa fa-check"></i><b>7.5</b> Specify the network settings and indicate which node is the master</a></li>
+<li class="chapter" data-level="7.6" data-path="nodes-and-shards.html"><a href="nodes-and-shards.html#change-the-security-settings"><i class="fa fa-check"></i><b>7.6</b> Change the security settings</a></li>
+<li class="chapter" data-level="7.7" data-path="nodes-and-shards.html"><a href="nodes-and-shards.html#start-the-multi-node-cluster"><i class="fa fa-check"></i><b>7.7</b> Start the multi-node cluster</a></li>
+<li class="chapter" data-level="7.8" data-path="nodes-and-shards.html"><a href="nodes-and-shards.html#check-out-our-cluster-in-kibana"><i class="fa fa-check"></i><b>7.8</b> Check out our cluster in Kibana</a></li>
+<li class="chapter" data-level="7.9" data-path="nodes-and-shards.html"><a href="nodes-and-shards.html#cluster-roles"><i class="fa fa-check"></i><b>7.9</b> Cluster roles</a></li>
+</ul></li>
+<li class="chapter" data-level="8" data-path="troubleshooting-and-monitoring.html"><a href="troubleshooting-and-monitoring.html"><i class="fa fa-check"></i><b>8</b> Troubleshooting and Monitoring</a><ul>
+<li class="chapter" data-level="8.1" data-path="troubleshooting-and-monitoring.html"><a href="troubleshooting-and-monitoring.html#responses-and-allocation"><i class="fa fa-check"></i><b>8.1</b> Responses and Allocation</a><ul>
+<li class="chapter" data-level="8.1.1" data-path="troubleshooting-and-monitoring.html"><a href="troubleshooting-and-monitoring.html#checking-the-healthstatus"><i class="fa fa-check"></i><b>8.1.1</b> Checking the health/status</a></li>
+</ul></li>
+<li class="chapter" data-level="8.2" data-path="troubleshooting-and-monitoring.html"><a href="troubleshooting-and-monitoring.html#enabling-monitoring"><i class="fa fa-check"></i><b>8.2</b> Enabling monitoring</a></li>
+<li class="chapter" data-level="8.3" data-path="troubleshooting-and-monitoring.html"><a href="troubleshooting-and-monitoring.html#stack-monitoring"><i class="fa fa-check"></i><b>8.3</b> Stack Monitoring</a></li>
+<li class="chapter" data-level="8.4" data-path="troubleshooting-and-monitoring.html"><a href="troubleshooting-and-monitoring.html#diagnosing-performance-issues"><i class="fa fa-check"></i><b>8.4</b> Diagnosing Performance Issues</a></li>
+</ul></li>
+</ul>
+
+      </nav>
+    </div>
+
+    <div class="book-body">
+      <div class="body-inner">
+        <div class="book-header" role="navigation">
+          <h1>
+            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">Elasticsearch Fundamentals</a>
+          </h1>
+        </div>
+
+        <div class="page-wrapper" tabindex="-1" role="main">
+          <div class="page-inner">
+
+            <section class="normal" id="section-">
+<div id="header">
+<h1 class="title">Elasticsearch Fundamentals</h1>
+<p class="author"><em>Arie Twigt</em></p>
+</div>
+<div id="setup-for-elasticsearch-version-7" class="section level1">
+<h1><span class="header-section-number">1</span> Setup for Elasticsearch version 7</h1>
+<div id="download-elasticsearch" class="section level2">
+<h2><span class="header-section-number">1.1</span> Download Elasticsearch</h2>
+<div id="download-and-unzip-the-elasticsearch-installation-in-your-home-directory" class="section level3">
+<h3><span class="header-section-number">1.1.1</span> Download and unzip the Elasticsearch installation in your Home Directory</h3>
+<p>Download Elasticsearch by visiting the following url:</p>
+<p><a href="https://www.elastic.co/downloads/elasticsearch">https://www.elastic.co/downloads/elasticsearch</a></p>
+<p><img src="img/1_2_download_elasticsearch.PNG" /></p>
+<p>Choose for <strong>Windows</strong> rather than for the MSI. We are going to place and extract the file in our <em>Home Directory</em>:
+&gt; Your Home Directory is for example: <em>This PC &gt; Windows (C:) &gt; Users &gt; arie</em> . This is the folder in which you typically can find folders like <em>My Documents</em>, <em>Downloads</em>, <em>Dropbox</em> etc.</p>
+<p><img src="img/1_2_place_elasticsearch_home_directory.PNG" /></p>
+<p>Unzip the folder and extract it in the same directory. This is most likely the default option for unzipping the file:</p>
+<p><img src="img/1_2_elasticsearch_extracted.PNG" /></p>
+</div>
+<div id="start-elasticsearch-from-the-command-line" class="section level3">
+<h3><span class="header-section-number">1.1.2</span> Start Elasticsearch from the Command Line</h3>
+<p>Now we have downloaded and extracte Elasticsearch, we can launch it from the command line:</p>
+<ul>
+<li>Open a new command line. This can be for example <strong>Command Prompt</strong> or <strong>Powershell</strong></li>
+<li>In the command line, navigate to your Home Directory where your Elasticsearch instance is stored</li>
+</ul>
+<p><img src="img/1_2_command_line_dir_show_elasticsearch_is_present.PNG" /></p>
+<ul>
+<li>If the Elasticsearch directory is present, navigate into it. In the following example, we have downloaded Elasticsearch <strong>7.14.0</strong>, so the commands would be:
+<ul>
+<li>Navigate into the Elasticsearch directory <code>cd elasticsearch-7.14.0</code></li>
+<li>Start Elasticsearch <code>bin\elasticsearch</code></li>
+</ul></li>
+<li>The <code>bin\elasticsearch</code>, if in the right folder, will launch the Elasticsearch instance</li>
+</ul>
+<p><img src="img/1_2_elasticsearch_getting_started.PNG" /></p>
+<ul>
+<li>We need to wait a minute or so before Elasticsearch is fully booted. To find out if Elasticsearch is succesfully booted, we can open a browser and navigate to <a href="localhost:9200">localhost:9200</a>.</li>
+</ul>
+<p><img src="img/1_2_elasticsearch_started_browser.PNG" /></p>
+<p>Checkout the output and the name of your cluster. By default this will similar to the name of your computer.</p>
+</div>
+<div id="changing-basic-settings-in-the-elasticsearch-configuration" class="section level3">
+<h3><span class="header-section-number">1.1.3</span> Changing basic settings in the Elasticsearch configuration</h3>
+<p>Later in this course, we will change the configuration of the Elasticsearch instance. In this section, we will start with modifiying some basic settings in te configuration. We will start by chaning the name of the cluster.</p>
+<blockquote>
+<p>An Elasticsearch “cluster” is a collection of hardware that is operates as one Elasticsearch instance. Elasticsearch instances that consist of only one Node (machine) are also referred to as a “cluster”. Later in this course we will run a cluster that runs on multiple nodes.</p>
+</blockquote>
+<p>Change the default name of the Elasticsearch cluster:</p>
+<ul>
+<li>In the Command Line, close the running Elasticsearch instance</li>
+<li>Run Elasticsearch with a different node name and cluster name:
+<ul>
+<li><code>bin\elasticsearch -E node.name=my_node -E cluster.name=my_cluster</code></li>
+</ul></li>
+<li>Wait until Elasticsearch is fully started</li>
+<li>Check the output of the browser</li>
+</ul>
+<p><img src="img/1_2_elasticsearch_getting_started_different_names.PNG" /></p>
+<p>There is another, more sustainable, way of specifying the configuration of an Elasticsearch instance:</p>
+<ul>
+<li>Open your Explorer and navigate to the <code>config</code> directory which can be found in the Elasticsearch directory
+<ul>
+<li>In this screenshot, for Elasticsearch version 7.14.0 this is <em>Elasticsearch-7.14.0 &gt; config &gt; elasticsearch.yml</em></li>
+</ul></li>
+</ul>
+<p><img src="img/1_2_open_config_elasticsearch_change_name.PNG" /></p>
+<ul>
+<li>You can open the <code>elasticsearch.yml</code> file with Notepad. Uncomment, which is removing the <code>#</code>, in the line in which the <code>cluster.name</code> property is defined. Change the default name to descriptive name you desire. In The case of this example, we have named it <code>es-training-cluster</code>.</li>
+</ul>
+<p><img src="img/1_2_change_cluster_name_elasticsearch.PNG" /></p>
+<ul>
+<li>Save the <code>elasticsearch.yml</code> file</li>
+<li>If you did not have already done this, stop the running Elasticsearch instance in the command line.</li>
+<li>Start Elasticsearch again just with the regular command <code>bin\elasticsearch</code></li>
+</ul>
+<p><img src="img/1_2_elasticsearch_in_browser_changed_name.PNG" /></p>
+<blockquote>
+<p>Keep in mind that in a real-world environment, the running Elasticsearch instance can be set as a service. It keeps on running this way. In this training we will simulate this by keeping, sometime multiple, instances of the Command Line open.</p>
+</blockquote>
+</div>
+</div>
+<div id="getting-started-with-kibana" class="section level2">
+<h2><span class="header-section-number">1.2</span> Getting started with Kibana</h2>
+<div id="interacting-with-elasticsearch" class="section level3">
+<h3><span class="header-section-number">1.2.1</span> Interacting with Elasticsearch</h3>
+<p>There are several ways to interact with our running Elasticsearch instance:</p>
+<ul>
+<li>Using curl operations from the Command Line</li>
+<li>Sending HTTP requests using the Elasticsearch API in a tool like Postman</li>
+<li>Using the Dev Tools in Kibana</li>
+</ul>
+</div>
+<div id="managing-elasticsearch-in-kibana" class="section level3">
+<h3><span class="header-section-number">1.2.2</span> Managing Elasticsearch in Kibana</h3>
+<p>In this course we choose for the last option since we will be able to execute other actions in Kibana as well. Therefore, we first need to download Kibana</p>
+<p><a href="https://www.elastic.co/downloads/kibana">https://www.elastic.co/downloads/kibana</a></p>
+<p><img src="img/1_3_download_kibana.PNG" /></p>
+</div>
+<div id="downloading-and-extracting-kibana" class="section level3">
+<h3><span class="header-section-number">1.2.3</span> Downloading and extracting Kibana</h3>
+<p>Downloading and setting up Kibana is similar to the steps we executed for Elasticsearch:</p>
+<ul>
+<li>Choose for your operating system, which is in the case of our examples Windows.</li>
+<li>Just as with Elasticsearch, make sure to move the download from your Downloads folder to your Home Directory.</li>
+<li>Also, just like Elasticsearch, extract the contents of the zip-file</li>
+</ul>
+<p><img src="img/1_3_kibana_extracted_home_directory.PNG" /></p>
+</div>
+<div id="launching-kibana" class="section level3">
+<h3><span class="header-section-number">1.2.4</span> Launching Kibana</h3>
+<ul>
+<li>Open a new Command Line and navigate to the Kibana directory.</li>
+<li><code>cd kibana-7.14-windows-x86_64</code></li>
+</ul>
+<blockquote>
+<p>For convenience you can change the name of the directory by removing the <code>windows</code>part</p>
+</blockquote>
+<ul>
+<li>Start Kibana</li>
+<li><p><code>bin\kibana</code></p></li>
+<li><p>After a minute or so, Kibana is started. You can use Kibana by navigating to <a href="localhost:5601">localhost:5601</a> in your browser.</p></li>
+</ul>
+<p><img src="img/1_3_navigate_to_kibana.PNG" /></p>
+</div>
+<div id="using-dev-tools-for-crud-operations-in-kibana" class="section level3">
+<h3><span class="header-section-number">1.2.5</span> Using Dev Tools for CRUD-operations in Kibana</h3>
+<p>Now we have started Kibana, we can use the Dev Tools to execute CRUD-actions to Elasticsearch:</p>
+<ul>
+<li>In the Left Pane scroll down to find the <code>Dev Tools</code> tab</li>
+</ul>
+<p><img src="img/1_3_navigate_devtools_kibana.PNG" /></p>
+<p>In the Dev Tools tab we can execute several operations in Kibana, also CRUD-operations. First we will use a command that lists all the current indices in Elasticsearch:</p>
+<ul>
+<li><code>GET _cat/indices?v</code></li>
+<li>Press the play button to execute the command</li>
+</ul>
+<p>We will get a list of <em>indices</em> in Elasticsearch. These indices are available by default. These are default indices that have mostly to do with logging and administration.</p>
+<p>We also notice a message about setting up security. This will be our next step.</p>
+<p>Kibana is working now, however, it is not secure yet. When you are following these labs on your local machine, this is not quite a big deal. However, when you are planning to configure Elasticsearch on a server that is reachable for other users, you do want to have at least the basic security setup. Otherwise, just anybody can log into your Elasticsearch cluster and Kibana and even modify settings or documents.</p>
+<p>In the next step, we are going to setup basic security for Elasticsearch and Kibana.</p>
+</div>
+</div>
+<div id="setting-up-basic-security-for-elasticsearch-and-kibana" class="section level2">
+<h2><span class="header-section-number">1.3</span> Setting up basic security for Elasticsearch and Kibana</h2>
+<p>Setting up the basic security settings for Elasticsearch and Kibana is a combination of command line operations and settings in the configuration files of both Elasticsearch in Kibana:</p>
+<div id="enabling-x-pack-security" class="section level3">
+<h3><span class="header-section-number">1.3.1</span> Enabling X-pack security</h3>
+<ul>
+<li>Stop the currently running processes of Kibana and Elasticsearch</li>
+<li>In the configuration file of Elasticearch,</li>
+<li>We are going to add two settings to our Elasticsearch configuration</li>
+<li><code>xpack.security.enabled: true</code></li>
+<li><code>discovery.type: single-node</code></li>
+</ul>
+<p><img src="img/1_3_adding_security_elasticsearch_kibana.PNG" /></p>
+<ul>
+<li>Save the configuration file</li>
+</ul>
+</div>
+<div id="setting-up-passwords" class="section level3">
+<h3><span class="header-section-number">1.3.2</span> Setting up passwords</h3>
+<p>We are now going to open 3 Command Line Windows:</p>
+<ol style="list-style-type: decimal">
+<li>One for running Elasticsearch</li>
+<li>Another one for running the password setter in Elasticsearch</li>
+<li>The third for the password settings in Kibana. This third command line will be opened in the next session.</li>
+</ol>
+<ul>
+<li><ol style="list-style-type: decimal">
+<li>Running Elasticsearch:</li>
+</ol>
+<ul>
+<li>Open a new Command Line</li>
+<li>Navigate to the Elasticsearch folder and start Elasticsearch:
+<ul>
+<li><code>bin\elasticsearch</code></li>
+</ul></li>
+</ul></li>
+<li><ol start="2" style="list-style-type: decimal">
+<li>Running the Elasticsearch password setup</li>
+</ol>
+<ul>
+<li>It might be needed to wait a little while until Elasticsearch is fully started</li>
+<li>Open a new, second, Command Line while keeping the other Command Line with Elasticsearch running open.</li>
+<li>Navigate to the Elasticsearch folder and start the password setup:</li>
+<li><code>bin/elasticsearch-setup-passwords auto</code></li>
+<li>We choose for the auto option which automatically generates a random, strong, password that will be stored in our installation.</li>
+<li><strong>! Important</strong>: Make sure you remember the password for both kibana_system and elastic. Save these credentials in a temporary text file like in the following screenshot. Get rid of this text file later when you have changed it to a password you can remember</li>
+</ul></li>
+</ul>
+<p><img src="img/1_3_save_kibana_creds.PNG" /></p>
+<ul>
+<li>Confirm your selection by inserting <code>y</code></li>
+</ul>
+<p><img src="img/1_3_elasticsearch_set_password.PNG" /></p>
+<ul>
+<li>We are going to need these login credentials, both the username and password, for the next step during configuring the security for Kibana.</li>
+</ul>
+<p>As you can see, for the different roles/user names, passwords are created. Later in Kibana, we can access these user roles and changed the passwords if we would like to.</p>
+</div>
+<div id="changing-the-security-configuration-in-kibana" class="section level3">
+<h3><span class="header-section-number">1.3.3</span> Changing the security configuration in Kibana</h3>
+<p>To make the security settings effective for Kibana, we will add an additional setting to the Kibana configuration as well:</p>
+<ul>
+<li>Open the configuration file of Kibana</li>
+<li>The path to the configuration file of Kibana can be found in:</li>
+<li><em>Kibana-7.14.0-windows-x86-64 &gt; config &gt; kibana.yml</em></li>
+</ul>
+<p><img src="img/1_3_open_kibana_settings.PNG" /></p>
+<ul>
+<li>Add the following setting
+<ul>
+<li><code>elasticsearch.username: &quot;kibana_system&quot;</code></li>
+</ul></li>
+</ul>
+<p><img src="img/1_3_change_kibana_username.PNG" /></p>
+<blockquote>
+<p>It could be that the name is already set to “kibana_username” in the configuration. In that case, also make sure this is changed to <code>kibana_system</code>. You only have to uncomment the line, which is done by removing # from the particular line.</p>
+</blockquote>
+<ol start="3" style="list-style-type: decimal">
+<li>Open another, a third, Command Line in which we are going to start Kibana</li>
+</ol>
+<ul>
+<li>Navigate to the Kibana directory and run the following command:</li>
+<li><code>bin\kibana-keystore create</code></li>
+</ul>
+<p><img src="img/1_3_kibana_keystore_create.png" /></p>
+<ul>
+<li>Next, we add the username to the keystore</li>
+<li><code>bin\kibana-keystore add elasticsearch.password</code></li>
+<li>We are now prompted to choose a password for our user <code>kibana_system</code>. You will not see this in the prompt, but this is what we have configured in the previous step.</li>
+<li>We will be prompted to insert the password. Here, we need to enter the password that is created for the kibana_system user in our previous step. Insert that password and press enter.</li>
+<li>The password is now saved in the keystore</li>
+</ul>
+<p>Stop Kibana if it was still running:</p>
+<ul>
+<li>Close the Browser tab with the Kibana interface open</li>
+<li>Stop the process in the Command Prompt that is running Kibana</li>
+</ul>
+</div>
+<div id="open-kibana-with-the-new-security-settings" class="section level3">
+<h3><span class="header-section-number">1.3.4</span> Open Kibana with the new security settings</h3>
+<p>Make sure you close all the previous Command Line windows. It might be the case that a fresh Command Line window is required for the changes having effect.</p>
+<p>Start Elasticsearch:</p>
+<ul>
+<li>Open the Command Line</li>
+<li>Navigate to the folder containing Elasticsearch</li>
+<li><code>bin\elasticsearch</code></li>
+</ul>
+<p>Start Kibana:</p>
+<ul>
+<li>Open the Command Line</li>
+<li>Navigate to the folder containing Kibana</li>
+<li><code>bin\kibana</code></li>
+</ul>
+<p>After Elasticsearch is started, let’s navigate to Elasticsearch:</p>
+<ul>
+<li><a href="localhost:9200">localhost:9200</a></li>
+<li>We cannot access the cluster, since it is now protected:</li>
+</ul>
+<p><img src="img/1_3_localhost_cant_access_cluster.PNG" /></p>
+<ul>
+<li>This is not a problem for now, we can leave it for now. We will be able to pick a username from the created Elasticsearch users in the settings that can be found in the Kibana interface</li>
+<li>When Kibana is also fully started, navigate to the Kibana interface in the browser:</li>
+<li><p><a href="localhost:5601">localhost:5601</a></p></li>
+<li><p>Also for Kibana, we are presented with the Login page. Insert the login credentials for the elastic the password</p></li>
+</ul>
+<p><img src="img/1_3_elastic_login_screen_creds.PNG" /></p>
+</div>
+<div id="overview-of-the-setup" class="section level3">
+<h3><span class="header-section-number">1.3.5</span> Overview of the setup</h3>
+<p>Have enabled the basic security for our Elastic-cluster and Kibana interface. The kibana_system user is used to “log into” our Elasticsearch cluster. Therefore we needed to configure the kibana_system credentials. When Kibana is able to connect with our Elasticsearch cluster, we are able to use Kibana as an interface to our Elasticsearch cluster. Since the kibana_system username, which is reserved, is not able to use in our Kibana interface, we use our elastic username. This is the “master” account that we can use in Kibana to navigate through our Elasticsearch cluster. This user has enough rights to make major modifications to our Elasticsearch cluster.</p>
+</div>
+<div id="get-an-overview-of-the-users-and-change-the-password" class="section level3">
+<h3><span class="header-section-number">1.3.6</span> Get an overview of the users and change the password</h3>
+<p>Once we have logged in with our elastic user, we can get an overview of our current users. These are the users that are automatically created in the previous step.
+In the sidebar menu of Kibana, select <strong>Management &gt; Stack Management</strong></p>
+<p><img src="img/1_3_kibana_use_stack_management.PNG" /></p>
+<p>In Stack Management, select: <strong>Security &gt; Users</strong></p>
+<p>On this page we can see all the, default, users that we have created. Notice the reserved label which indicated that the values of those usernames are reserved by Elasticsearch. We can add any other username except these reserved usernames.</p>
+<p>On this page it is also possible to change permissions for specific usernames. It is also possible to change information of a certain username, for example the password. This is exactly what we are going to do for our elastic user:</p>
+<ul>
+<li>In the page with usernames, select the <code>elastic</code> user.</li>
+<li>Select Change password</li>
+</ul>
+<p><img src="img/1_3_kibana_change_password_elastic.PNG" /></p>
+<ul>
+<li>Follow the instructions for changing the password, which involves inserting the old, current, password.</li>
+<li>Choose a strong password you can remember. This way don’t need a separate file in which you have saved this password. This is quite sensitive information.</li>
+<li>When you have changed the password, you will be able to login with the <code>elastic</code> user with your new password.</li>
+</ul>
+<p>Now we have setup our basic security for Elasticsearch and Kibana and are able to login with our <code>elastic</code> user. We are going to use this user for all the operations during the labs.</p>
+
+</div>
+</div>
+</div>
+            </section>
+
+          </div>
+        </div>
+      </div>
+
+<a href="setup-for-elasticsearch-version-8.html" class="navigation navigation-next navigation-unique" aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+    </div>
+  </div>
+<script src="libs/gitbook-2.6.7/js/app.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/lunr.js"></script>
+<script src="libs/gitbook-2.6.7/js/clipboard.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-search.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-sharing.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-fontsettings.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-bookdown.js"></script>
+<script src="libs/gitbook-2.6.7/js/jquery.highlight.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-clipboard.js"></script>
+<script>
+gitbook.require(["gitbook"], function(gitbook) {
+gitbook.start({
+"sharing": {
+"github": false,
+"facebook": true,
+"twitter": true,
+"linkedin": false,
+"weibo": false,
+"instapaper": false,
+"vk": false,
+"all": ["facebook", "twitter", "linkedin", "weibo", "instapaper"]
+},
+"fontsettings": {
+"theme": "white",
+"family": "sans",
+"size": 2
+},
+"edit": {
+"link": null,
+"text": null
+},
+"history": {
+"link": null,
+"text": null
+},
+"view": {
+"link": null,
+"text": null
+},
+"download": null,
+"toc": {
+"collapse": "subsection"
+}
+});
+});
+</script>
+
+</body>
+
+</html>

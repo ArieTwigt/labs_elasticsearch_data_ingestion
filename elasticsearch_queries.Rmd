@@ -1,0 +1,70 @@
+# Elasticsearch queries
+
+
+## Relevance
+
+Let's experiment with a few search queries to experiment with the relevance:
+
+* Search for documents that have `king` or `queen` in the `text_entry` field:
+
+![](img/2_1_elasticserach_king_or_queen.PNG)
+
+
+* Search for documents that have `king` and `queen` in the `text_entry` field
+
+![](img/2_1_elasticsearch_king_and_queen.PNG)
+
+
+* Search for documents that have eat least 2 of the following terms in the `text_entry` field: `king`, `queen`, `kill`:
+
+![](img/2_1_elasticsearch_minimum_should_match.PNG)
+
+
+## Full text queries
+
+Let's experiment with some Full Text queries:
+
+*	Search for documents that include the phrase “king and queen”:
+
+![](img/2_2_elasticsearch_match_phrase_king_queen.PNG)
+
+
+*	Search for documents that include the phrase “king and queen” but that are allowed to have a maximum of two other terms between this phrase:
+
+![](img/2_2_elasticsearch_king_queen_slop_2.PNG)
+
+*	In the documents search for the term “Antony” in the play_name, speaker and `text_entry` fields:
+
+![](img/2_2_elasticsearch_multi_match_antony.PNG)
+
+* Execute the same search, but increase score of hits found in the `text_entry` by multiplying it with 4:
+
+![](img/2_3_boost_query.png)
+
+* Create a search query for the term “king” in which a spelling error of 1 letter is allowed:
+
+![](img/2_2_elasticsearch_fuzzyness_kin.PNG)
+
+
+## Combining queries
+
+
+Let's experiment with some combination of queries:
+
+*	Execute a search for documents that must include the term `king` and and are ranked higher if they either contain the terms `queen`, `fight`, or `hail`.
+
+
+![](img/2_3_elastic_king_should_match_1.PNG)
+
+
+* Execute the same search but make sure the search results eigher must contain at least of the terms `queen`, `fight` or `hail`.
+
+
+![](img/2_3_elastic_minimum_should_match_2.PNG)
+
+
+* Create a search query for documents that contain the term king but do not contain the term `queen`. 
+
+![](img/2_3_bool_should_not.PNG)
+
+

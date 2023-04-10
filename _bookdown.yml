@@ -1,1 +1,1 @@
-rmd_files: ["index.Rmd", "setup.Rmd", "elasticsearch_kibana.Rmd", "metricbeat.Rmd", "winlogbeat.Rmd", "filebeat.Rmd", "logstash.Rmd", "visualisation.Rmd"]
+rmd_files: ["index.Rmd", "setup.Rmd", "setup_8.Rmd", "crud_elasticsearch.Rmd", "searching_for_data.Rmd", "elasticsearch_queries.Rmd", "aggregations.Rmd", "nodes_and_shards.Rmd", "monitoring_troubleshooting.Rmd"]
